@@ -93,11 +93,11 @@
         "title": "Networking",
         "ipcalc4": {
           "title": "IPv4 Calculator",
-          "description": "Description"
+          "description": "Perform calculations with IPv4 addresses"
         },
         "ipcalc6": {
           "title": "IPv6 Calculator",
-          "description": "Description"
+          "description": "Perform calculations with IPv6 addresses"
         }
       }
     }
@@ -149,7 +149,6 @@
     "network": {
       "ipcalc4": {
         "title": "IPv4 Calculator",
-        "description": "Description",
         "inputAddress": "Network / CIDR",
         "resultNetmask": "Netmask",
         "resultWildcard": "Wildcard mask",
@@ -161,7 +160,6 @@
       },
       "ipcalc6": {
         "title": "IPv6 Calculator",
-        "description": "Description",
         "inputAddress": "Network / CIDR",
         "compress": "Compress addresses",
         "resultNetwork": "Network",

@@ -88,6 +88,17 @@
           "title": "PDFs Teilen",
           "description": "Teilt eine PDF in mehrere Dateien"
         }
+      },
+      "network": {
+        "title": "Networking",
+        "ipcalc4": {
+          "title": "IPv4-Rechner",
+          "description": "Führt Rechnungen mit IPv4-Adressen durch"
+        },
+        "ipcalc6": {
+          "title": "IPv6-Rechner",
+          "description": "Führt Rechnungen mit IPv6-Adressen durch"
+        }
       }
     }
   },
@@ -133,6 +144,28 @@
           "downloadAll": "Alle geteilten Seiten herunterladen",
           "dropFiles": "Dateien hierhin ziehen und ablegen oder klicken, um auszuwählen"
         }
+      }
+    },
+    "network": {
+      "ipcalc4": {
+        "title": "IPv4-Rechner",
+        "inputAddress": "Netzwerk / CIDR",
+        "resultNetmask": "Netzmaske",
+        "resultWildcard": "Wildcardmaske",
+        "resultNetwork": "Netzwerk",
+        "resultFirstHost": "Erster Host",
+        "resultLastHost": "Letzter Host",
+        "resultBroadcast": "Broadcast",
+        "resultAmountHost": "Anzahl an Hosts"
+      },
+      "ipcalc6": {
+        "title": "IPv6-Rechner",
+        "inputAddress": "Netzwerk / CIDR",
+        "compress": "Adressen komprimieren",
+        "resultNetwork": "Netzwerk",
+        "resultFirstHost": "Erster Host",
+        "resultLastHost": "Letzter Host",
+        "resultAmountHost": "Anzahl an Hosts"
       }
     }
   },
