@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { GraphContext } from "./Graph";
 import { isEdgeDropValid } from "@/lib/graph/isEdgeDropValid";
 import { cn } from "@/lib/utils";
+import React, { useContext } from "react";
+import { GraphContext } from "./GraphContextProvider";
 
 export type NodeIOIdentifier = {
     nodeId: string;
     nodeIOName: string;
-}
+};
 
 type NodeIOProps = {
     type: "input" | "output";
@@ -16,8 +16,9 @@ type NodeIOProps = {
     ioName: string;
 };
 
-
-export const NodeIO: React.FC<NodeIOProps> = ({ type, onConnectNodes, nodeId, ioName, data_type }) => {
+export const NodeIO: React.FC<NodeIOProps> = (
+    { type, onConnectNodes, nodeId, ioName, data_type },
+) => {
     const {
         nodes,
         setPreviewEdge,
@@ -26,15 +27,15 @@ export const NodeIO: React.FC<NodeIOProps> = ({ type, onConnectNodes, nodeId, io
     const node_IO_identifier: NodeIOIdentifier = {
         nodeId,
         nodeIOName: ioName,
-    }
+    };
 
     const handleDragStart = (e: React.DragEvent) => {
         console.log(`Dragging ${type} with nodeId: ${nodeId}`);
 
-        setPreviewEdge?.({
+        /*setPreviewEdge?.({ // TODO: add previews
             fromIO: node_IO_identifier,
             toIO: undefined,
-        });
+        });*/
 
         e.dataTransfer.setData("fromIO", JSON.stringify(node_IO_identifier));
     };
@@ -46,26 +47,30 @@ export const NodeIO: React.FC<NodeIOProps> = ({ type, onConnectNodes, nodeId, io
         e.dataTransfer.dropEffect = "move";
 
         const fromIoJSON = e.dataTransfer.getData("fromIO");
-        if(fromIoJSON == undefined || fromIoJSON.length == 0)
+        if (fromIoJSON == undefined || fromIoJSON.length == 0) {
             return;
+        }
 
         const fromIO = JSON.parse(fromIoJSON) as NodeIOIdentifier;
         console.log({ fromIO, node_IO_identifier });
 
-        setPreviewEdge?.({
+        /*setPreviewEdge?.({
             fromIO,
             toIO: node_IO_identifier,
-        });
+        });*/
     };
 
     const handleDrop = (e: React.DragEvent) => {
         if (e.dataTransfer && e.dataTransfer.getData("fromIO")) {
             e.preventDefault();
             e.stopPropagation();
-            const fromIO = JSON.parse(e.dataTransfer.getData("fromIO")) as NodeIOIdentifier;
+            const fromIO = JSON.parse(
+                e.dataTransfer.getData("fromIO"),
+            ) as NodeIOIdentifier;
 
-            if (!fromIO)
+            if (!fromIO) {
                 return;
+            }
 
             const isValid = isEdgeDropValid(
                 fromIO,
@@ -85,8 +90,6 @@ export const NodeIO: React.FC<NodeIOProps> = ({ type, onConnectNodes, nodeId, io
             }
         }
     };
-
-
 
     if (type === "input") {
         return (
@@ -115,12 +118,23 @@ export const NodeIO: React.FC<NodeIOProps> = ({ type, onConnectNodes, nodeId, io
     );
 };
 
-const NodeIODot = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & { type: "input" | "output", data_type: string }>((props, ref) => {
+const NodeIODot = React.forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement> & {
+        type: "input" | "output";
+        data_type: string;
+    }
+>((props, ref) => {
     const { color, style, type, data_type, ...rest } = props;
     return (
         <div
             ref={ref}
-            className={cn("node-io", type, data_type.replaceAll(".", "-"), props.className)}
+            className={cn(
+                "node-io",
+                type,
+                data_type.replaceAll(".", "-"),
+                props.className,
+            )}
             {...rest}
         />
     );

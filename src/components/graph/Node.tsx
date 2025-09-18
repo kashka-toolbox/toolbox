@@ -1,13 +1,13 @@
 import { NodeState } from "@/lib/graph/NodeState";
 import { MouseEventHandler, useContext, useTransition } from "react";
 import { NodeIO } from "./NodeIO";
-import { GraphContext } from "./Graph";
 import "@/styles/node.css";
 import { cn } from "@/lib/utils";
 import { NodeIOLabel } from "./NodeIOLabel";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { useTranslations } from "next-intl";
 import { Separator } from "@radix-ui/react-separator";
+import { GraphContext } from "./GraphContextProvider";
 
 export function Node({
     nodeState,

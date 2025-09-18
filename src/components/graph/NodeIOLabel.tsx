@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
-import { GraphContext } from "./Graph";
-import { isEdgeDropValid } from "@/lib/graph/isEdgeDropValid";
-import { NodeIOIdentifier } from "./NodeIO";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import React from "react";
+import { NodeIOIdentifier } from "./NodeIO";
 
 
 type NodeIOLabelProps = {
@@ -16,10 +14,6 @@ type NodeIOLabelProps = {
 
 
 export const NodeIOLabel: React.FC<NodeIOLabelProps> = ({ children, type, data_type, nodeIOIdentifier, ioTranslationKey }) => {
-    const {
-        nodes,
-        setPreviewEdge,
-    } = useContext(GraphContext);
     const t = useTranslations("graph");
 
     return (

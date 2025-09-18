@@ -1,58 +1,31 @@
-import { NodeState } from "@/lib/graph/NodeState";
 
 import { Node } from "@/components/graph/Node";
 import { Position } from "@/lib/graph/Position.type";
-import { PreviewEdge } from "@/lib/graph/PreviewEdge.type";
 import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
 import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
 import { cn } from "@/lib/utils";
-import { createContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { executeGraph } from "../../lib/graph/executeGraph";
 import { Button } from "../ui/button";
-import { NodeIOIdentifier } from "./NodeIO";
+import { GraphContext } from "./GraphContextProvider";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
 
-export const GraphContext = createContext<{
-    nodes: NodeState<any, any>[];
-    /**
-     * Sets the preview edge for the graph, that the user can see while dragging an edge.
-     */
-    setPreviewEdge?: (edge: PreviewEdge | null) => void;
-    addEdge?: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
-    currentlyDraggingNode?: {
-        nodeId: string;
-        startPosition: Position;
-        offset: Position;
-    } | null;
-}>({
-    nodes: [],
-    currentlyDraggingNode: null,
-});
-
-export function Graph({
-    initialNodeStates,
-}: {
-    initialNodeStates: NodeState<any, any>[];
-}) {
-    const [nodes, setNodes] = useState<NodeState<any, any>[]>(
-        initialNodeStates,
-    );
-
-    const [edges, setEdges] = useState<{
-        fromIO: NodeIOIdentifier;
-        toIO?: NodeIOIdentifier;
-    }[]>([]);
-
-    const [currentlyDraggingNode, setCurrentlyDraggingNode] = useState<
-        { nodeId: string; startPosition: Position; offset: Position } | null
-    >(null);
-
-    const [previewEdge, setPreviewEdge] = useState<PreviewEdge | null>(null);
-
+export function Graph({}: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
     const dragRef = useRef<{ current: HTMLDivElement | null }>({
         current: null,
     });
+
+    const {
+        nodes,
+        edges,
+        previewEdge,
+        currentlyDraggingNode,
+        setNodePosition,
+        setPreviewEdge,
+        setCurrentlyDraggingNode,
+        updateNodeState,
+    } = useContext(GraphContext);
 
     const {
         onStartDragCanvas,
@@ -67,29 +40,6 @@ export function Graph({
             e.stopPropagation();
             onStartDragCanvas(e);
         }
-    };
-
-    /**
-     * Adds an edge between two node IOs.
-     *
-     * Edges are always directed from the source node IO to the target node IO.
-     *
-     * @param fromIO The source node IO.
-     * @param toIO The target node IO.
-     */
-    const addEdge = (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => {
-        setEdges((prevEdges) => [...prevEdges, { fromIO, toIO }]);
-    };
-
-    const setNodePosition = (
-        id: string,
-        position: { x: number; y: number },
-    ) => {
-        setNodes((prevNodes) =>
-            prevNodes.map((node) =>
-                node.id === id ? { ...node, position } : node
-            )
-        );
     };
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -129,24 +79,11 @@ export function Graph({
 
     const renderedEdges = useEdgeRenderer(nodes, graphRef, edges);
 
-    const updatenodeState = (
-        nodeId: string,
-        newState: Partial<NodeState<any, any>>,
-    ) => {
-        setNodes((prevNodes) =>
-            prevNodes.map((node) =>
-                node.id === nodeId ? { ...node, ...newState } : node
-            )
-        );
-    };
-
     return (
-        <GraphContext.Provider
-            value={{ nodes, setPreviewEdge, addEdge, currentlyDraggingNode }}
-        >
+        <>
             <Button
                 onClick={() => {
-                    executeGraph(nodes, edges, updatenodeState);
+                    executeGraph(nodes, edges, updateNodeState);
                 }}
             >
                 Execute
@@ -199,6 +136,6 @@ export function Graph({
                     />
                 ))}
             </div>
-        </GraphContext.Provider>
+        </>
     );
 }
