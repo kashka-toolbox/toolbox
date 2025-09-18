@@ -2,22 +2,27 @@ import { NodeState } from "@/lib/graph/NodeState";
 
 import { Node } from "@/components/graph/Node";
 import { Position } from "@/lib/graph/Position.type";
+import { PreviewEdge } from "@/lib/graph/PreviewEdge.type";
+import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
+import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
 import { cn } from "@/lib/utils";
 import { createContext, useEffect, useRef, useState } from "react";
+import { executeGraph } from "../../lib/graph/executeGraph";
 import { Button } from "../ui/button";
 import { NodeIOIdentifier } from "./NodeIO";
-import { cva } from "class-variance-authority";
-import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
-import { executeGraph } from "../../lib/graph/executeGraph";
 
 export const GraphContext = createContext<{
     nodes: NodeState<any, any>[];
     /**
      * Sets the preview edge for the graph, that the user can see while dragging an edge.
      */
-    setPreviewEdge?: (edge: { fromIO: NodeIOIdentifier; toIO?: NodeIOIdentifier } | null) => void;
+    setPreviewEdge?: (edge: PreviewEdge | null) => void;
     addEdge?: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
-    currentlyDraggingNode?: { nodeId: string; startPosition: Position, offset: Position } | null;
+    currentlyDraggingNode?: {
+        nodeId: string;
+        startPosition: Position;
+        offset: Position;
+    } | null;
 }>({
     nodes: [],
     currentlyDraggingNode: null,
@@ -37,67 +42,43 @@ export function Graph({
         toIO?: NodeIOIdentifier;
     }[]>([]);
 
-    const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
-    const [scrollStart, setScrollStart] = useState<{ x: number; y: number } | null>(null);
+    const [currentlyDraggingNode, setCurrentlyDraggingNode] = useState<
+        { nodeId: string; startPosition: Position; offset: Position } | null
+    >(null);
 
-    const startDragging = (e: React.MouseEvent<HTMLDivElement>) => {
-        setDragStart({ x: e.clientX, y: e.clientY });
-        setScrollStart({
-            x: graphRef.current?.scrollLeft || 0,
-            y: graphRef.current?.scrollTop || 0
-        });
-    };
+    const [previewEdge, setPreviewEdge] = useState<PreviewEdge | null>(null);
 
-    const doDragging = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (dragStart && scrollStart) {
-            const currentX = e.clientX;
-            const currentY = e.clientY;
-            const deltaX = currentX - dragStart.x;
-            const deltaY = currentY - dragStart.y;
-            if (graphRef.current) {
-                graphRef.current.scrollLeft = scrollStart.x - deltaX;
-                graphRef.current.scrollTop = scrollStart.y - deltaY;
-            }
-        }
-    };
+    const graphRef = useRef<HTMLDivElement>(null);
+    const dragRef = useRef<{ current: HTMLDivElement | null }>({
+        current: null,
+    });
 
-    const stopDragging = () => {
-        setDragStart(null);
-        setScrollStart(null);
-    };
+    const {
+        onStartDragCanvas,
+        onMouseMoveDragCanvas,
+        onEndDraggingCanvas,
+        isCurrentlyDragging,
+    } = useCanvasDrag(graphRef);
 
     const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === graphRef.current) {
             e.preventDefault();
             e.stopPropagation();
-            startDragging(e);
+            onStartDragCanvas(e);
         }
     };
 
-
     /**
      * Adds an edge between two node IOs.
-     * 
+     *
      * Edges are always directed from the source node IO to the target node IO.
-     * 
+     *
      * @param fromIO The source node IO.
      * @param toIO The target node IO.
      */
     const addEdge = (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => {
         setEdges((prevEdges) => [...prevEdges, { fromIO, toIO }]);
     };
-
-    const [currentlyDraggingNode, setCurrentlyDraggingNode] = useState<
-        { nodeId: string; startPosition: Position, offset: Position } | null
-    >(null);
-
-    const [previewEdge, setPreviewEdge] = useState<{
-        fromIO: NodeIOIdentifier;
-        toIO?: NodeIOIdentifier;
-    } | null>(null);
-
-    const graphRef = useRef<HTMLDivElement>(null);
-    const dragRef = useRef<{ current: HTMLDivElement | null }>({ current: null });
 
     const setNodePosition = (
         id: string,
@@ -111,27 +92,26 @@ export function Graph({
     };
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        doDragging(e);
+        onMouseMoveDragCanvas(e);
 
         if (currentlyDraggingNode) {
             const newPosition = {
-                x: e.clientX - (graphRef.current?.offsetLeft || 0) + currentlyDraggingNode.offset.x,
-                y: e.clientY - (graphRef.current?.offsetTop || 0) + currentlyDraggingNode.offset.y,
+                x: e.clientX - (graphRef.current?.offsetLeft || 0) +
+                    currentlyDraggingNode.offset.x,
+                y: e.clientY - (graphRef.current?.offsetTop || 0) +
+                    currentlyDraggingNode.offset.y,
             };
             setNodePosition(currentlyDraggingNode.nodeId, newPosition);
         }
 
         if (previewEdge) {
-            const currentPosition = {
+            const currentPosition: Position = {
                 x: e.clientX - (graphRef.current?.offsetLeft || 0),
                 y: e.clientY - (graphRef.current?.offsetTop || 0),
             };
             setPreviewEdge({
                 ...previewEdge,
-                toIO: {
-                    nodeId: previewEdge.fromIO.nodeId,
-                    nodeIOName: previewEdge.fromIO.nodeIOName,
-                },
+                currentDragPosition: currentPosition,
             });
         }
     };
@@ -139,7 +119,7 @@ export function Graph({
         e.preventDefault();
         e.stopPropagation();
 
-        stopDragging();
+        onEndDraggingCanvas(e);
 
         if (currentlyDraggingNode) {
             setCurrentlyDraggingNode(null);
@@ -148,7 +128,10 @@ export function Graph({
 
     const renderedEdges = useEdgeRenderer(nodes, graphRef, edges);
 
-    const updatenodeState = (nodeId: string, newState: Partial<NodeState<any, any>>) => {
+    const updatenodeState = (
+        nodeId: string,
+        newState: Partial<NodeState<any, any>>,
+    ) => {
         setNodes((prevNodes) =>
             prevNodes.map((node) =>
                 node.id === nodeId ? { ...node, ...newState } : node
@@ -156,51 +139,79 @@ export function Graph({
         );
     };
 
-
     const sizeRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const resizeScrollArea = () => {
-            if (!sizeRef.current)
+            if (!sizeRef.current) {
                 return;
+            }
 
-            const parentScrollLeft = (sizeRef.current.parentElement?.clientWidth ?? 0) + (sizeRef.current.parentElement?.scrollLeft ?? 0);
-            const parentScrollHeight = (sizeRef.current.parentElement?.clientHeight ?? 0) + (sizeRef.current.parentElement?.scrollTop ?? 0);
-            sizeRef.current.style.minHeight = (parentScrollHeight + (sizeRef.current.parentElement?.clientHeight ?? 0)) + "px";
-            sizeRef.current.style.minWidth = (parentScrollLeft + (sizeRef.current.parentElement?.clientWidth ?? 0)) + "px";
-        }
+            const parentScrollLeft =
+                (sizeRef.current.parentElement?.clientWidth ?? 0) +
+                (sizeRef.current.parentElement?.scrollLeft ?? 0);
+            const parentScrollHeight =
+                (sizeRef.current.parentElement?.clientHeight ?? 0) +
+                (sizeRef.current.parentElement?.scrollTop ?? 0);
+            sizeRef.current.style.minHeight = (parentScrollHeight +
+                (sizeRef.current.parentElement?.clientHeight ?? 0)) + "px";
+            sizeRef.current.style.minWidth = (parentScrollLeft +
+                (sizeRef.current.parentElement?.clientWidth ?? 0)) + "px";
+        };
 
         resizeScrollArea();
         const resizeObserver = new ResizeObserver(resizeScrollArea);
-        if (sizeRef.current?.parentElement)
+        if (sizeRef.current?.parentElement) {
             resizeObserver.observe(sizeRef.current.parentElement);
+        }
 
-        sizeRef.current?.parentElement?.addEventListener("scroll", resizeScrollArea);
+        sizeRef.current?.parentElement?.addEventListener(
+            "scroll",
+            resizeScrollArea,
+        );
 
         return () => {
             resizeObserver.disconnect();
-            sizeRef.current?.parentElement?.removeEventListener("scroll", resizeScrollArea);
+            sizeRef.current?.parentElement?.removeEventListener(
+                "scroll",
+                resizeScrollArea,
+            );
         };
-    }, [sizeRef.current?.parentElement?.scrollLeft, sizeRef.current?.parentElement?.clientWidth, sizeRef.current?.parentElement?.scrollTop, sizeRef.current?.parentElement?.clientHeight, sizeRef.current?.parentElement]);
+    }, [
+        sizeRef.current?.parentElement?.scrollLeft,
+        sizeRef.current?.parentElement?.clientWidth,
+        sizeRef.current?.parentElement?.scrollTop,
+        sizeRef.current?.parentElement?.clientHeight,
+        sizeRef.current?.parentElement,
+    ]);
 
     return (
-        <GraphContext.Provider value={{ nodes, setPreviewEdge, addEdge, currentlyDraggingNode }}>
-            <Button onClick={() => {
-                executeGraph(nodes, edges, updatenodeState);
-            }}>Execute</Button>
+        <GraphContext.Provider
+            value={{ nodes, setPreviewEdge, addEdge, currentlyDraggingNode }}
+        >
+            <Button
+                onClick={() => {
+                    executeGraph(nodes, edges, updatenodeState);
+                }}
+            >
+                Execute
+            </Button>
             <div
                 ref={graphRef}
-                className={cn("relative rounded bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video",
+                className={cn(
+                    "relative rounded bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video",
                     currentlyDraggingNode ? "cursor-grabbing" : undefined,
-                    dragStart != null ? "cursor-grab" : undefined)}
+                    isCurrentlyDragging ? "cursor-grab" : undefined,
+                )}
                 onMouseMove={onMouseMove}
                 onMouseUp={onMouseUp}
                 onMouseDown={onMouseDown}
-                onMouseLeave={stopDragging}
+                onMouseLeave={onStartDragCanvas}
             >
-                <div className="w-full h-full pointer-events-none" ref={sizeRef} />
-                <svg
-                    className="sticky inset-0 w-full h-full pointer-events-none z-20"
-                >
+                <div
+                    className="w-full h-full pointer-events-none"
+                    ref={sizeRef}
+                />
+                <svg className="sticky inset-0 w-full h-full pointer-events-none z-20">
                     {renderedEdges}
                 </svg>
                 {nodes.map((nodeState) => (
@@ -213,12 +224,19 @@ export function Graph({
                             setCurrentlyDraggingNode({
                                 nodeId: nodeState.id,
                                 startPosition: {
-                                    x: e.clientX - (graphRef.current?.offsetLeft || 0),
-                                    y: e.clientY - (graphRef.current?.offsetTop || 0),
+                                    x: e.clientX -
+                                        (graphRef.current?.offsetLeft || 0),
+                                    y: e.clientY -
+                                        (graphRef.current?.offsetTop || 0),
                                 },
                                 offset: {
-                                    x: nodeState.position.x - (e.clientX - (graphRef.current?.offsetLeft || 0)),
-                                    y: nodeState.position.y - (e.clientY - (graphRef.current?.offsetTop || 0)),
+                                    x: nodeState.position.x -
+                                        (e.clientX -
+                                            (graphRef.current?.offsetLeft ||
+                                                0)),
+                                    y: nodeState.position.y -
+                                        (e.clientY -
+                                            (graphRef.current?.offsetTop || 0)),
                                 },
                             });
                             dragRef.current.current = e.currentTarget;
@@ -231,5 +249,3 @@ export function Graph({
         </GraphContext.Provider>
     );
 }
-
-
