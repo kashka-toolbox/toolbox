@@ -75,6 +75,13 @@
           "description": "Kodiert oder dekodiert Text als Base64"
         }
       },
+      "conversion": {
+        "title": "Umrechnung",
+        "CelciusToFahrenheit": {
+          "title": "Celcius zu Fahrenheit",
+          "description": "Temperaturumrechner"
+        }
+      },
       "color": {
         "title": "Farbe",
         "hexToHSL": {
@@ -121,7 +128,7 @@
         "title": "Hex zu HSL",
         "description": "Konvertiert eine Hex-Farbe in das HSL-Format.",
         "options": {
-            "valuesOnly": "In hsl(...) einfügen"
+          "valuesOnly": "In hsl(...) einfügen"
         }
       }
     },
@@ -132,6 +139,17 @@
         "actions": {
           "downloadAll": "Alle geteilten Seiten herunterladen",
           "dropFiles": "Dateien hierhin ziehen und ablegen oder klicken, um auszuwählen"
+        }
+      }
+    },
+    "conversion": {
+      "CelciusToFahrenheit": {
+        "title": "Fahrenheit ⇄ Celsius Rechner",
+        "fahrenheit": "Fahrenheit",
+        "celcius": "Celcius",
+        "description": {
+          "title": "Was macht dieser Converter?",
+          "text": "Dieser Converter rechnet Temperaturen zwischen Fahrenheit und Celsius um. Gib einen Wert ein und erhalte sofort das Ergebnis in der anderen Einheit."
         }
       }
     }

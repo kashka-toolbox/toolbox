@@ -36,6 +36,7 @@ export default function PDFSplit() {
     (async () => {
       const newPdfFile = await PDFDocument.load(await file.arrayBuffer());
 
+
       setPdfFile(newPdfFile);
       setFileNameWithoutExtension(file.name.split(".").slice(0, -1).join("."));
 
@@ -81,7 +82,7 @@ export default function PDFSplit() {
     for (let i = 0; i < splittedPDFs.length; i++) {
       const pdf = splittedPDFs[i];
       const pdfBytes = await pdf.save();
-      const pdfReader = new BlobReader(new Blob([pdfBytes]));
+      const pdfReader = new BlobReader(new Blob([pdfBytes as BlobPart]));
       await zipWriter.add(`${fileNameWithoutExtension}-${i + 1}.pdf`, pdfReader);
     }
 

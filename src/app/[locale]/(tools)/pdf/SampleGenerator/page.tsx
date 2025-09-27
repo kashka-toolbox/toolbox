@@ -50,7 +50,7 @@ export default function PDFSampleGenerator() {
 
     const pdfBytes = await pdfDoc.save()
 
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const blob = new Blob([pdfBytes as BlobPart], { type: 'application/pdf' });
 
     await saveBlobToFileWithDialog(blob);
   }

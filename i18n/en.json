@@ -79,6 +79,13 @@
           "description": "Encode or decode text as Unicode Binary"
         }
       },
+      "conversion": {
+        "title": "Conversion",
+        "CelciusToFahrenheit": {
+          "title": "Celcius To Fahrenheit",
+          "description": "Temperature Converter"
+        }
+      },
       "color": {
         "title": "Color",
         "hexToHSL": {
@@ -131,7 +138,7 @@
         "title": "Hex to HSL",
         "description": "Converts a hex color to HSL format.",
         "options": {
-            "valuesOnly": "Include in hsl(...)"
+          "valuesOnly": "Include in hsl(...)"
         }
       }
     },
@@ -142,6 +149,17 @@
         "actions": {
           "downloadAll": "Download all split pages",
           "dropFiles": "Drag & drop files here, or click to select"
+        }
+      }
+    },
+    "conversion": {
+      "CelciusToFahrenheit": {
+        "title": "Fahrenheit ⇄ Celsius converter",
+        "fahrenheit": "Fahrenheit",
+        "celcius": "Celcius",
+        "description": {
+          "title": "What does this converter do?",
+          "text": "This converter converts temperatures between Fahrenheit and Celsius. Enter a value and get the result in the other unit instantly."
         }
       }
     }

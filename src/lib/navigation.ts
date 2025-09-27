@@ -138,6 +138,18 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
       ],
     },
     {
+        translationKey: "tools.conversion",
+      displayInMenu: true,
+      items: [
+        {
+          translationKey: "CelciusToFahrenheit",
+          href: "/conversion/celcius-to-fahrenheit",
+          displayInMenu: true,
+          icon: UpdateIcon,
+        }
+      ]
+    },
+    {
       translationKey: "tools.color",
       displayInMenu: true,
       items: [
