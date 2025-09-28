@@ -1,4 +1,5 @@
 import Header from "@/components/header";
+import IntlErrorHandlingProvider from "@/components/intl-error-handling-client-provider";
 import Providers from "@/components/providers";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -7,18 +8,19 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 
 const hostGrotesk = localFont({
   src: [
     {
-      path: '../../../public/fonts/HostGrotesk/HostGrotesk-Italic-VariableFont_wght.ttf',
-      weight: '300 700',
+      path:
+        "../../../public/fonts/HostGrotesk/HostGrotesk-Italic-VariableFont_wght.ttf",
+      weight: "300 700",
     },
   ],
-  variable: '--font-HostGroteskItalic',
-})
+  variable: "--font-HostGroteskItalic",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,7 +33,7 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   readonly children: React.ReactNode;
   readonly params: Promise<{ locale: string }>;
@@ -47,24 +49,47 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={hostGrotesk.variable}>
       <head>
-        <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-48x48.png"
+          sizes="48x48"
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link rel="manifest" href="/manifest.webmanifest" />
       </head>
 
       <body className={cn("transition-colors")}>
         <NextIntlClientProvider>
-          <Providers>
-            <Header />
-            {children}
-            <footer className="container border-t border-border pt-8 pb-8 flex flex-col">
-              <h1 className="text-xs font-bold tracking-tight scroll-m-20 mb-4">Copyright © 2024-2025 Morten Renner. Licensed under AGPL-3.0.</h1>
-              <Link href="/privacy" className="text-xs font-normal tracking-tight">Privacy Policy</Link>
-              <Link href="/imprint" className="text-xs font-normal tracking-tight">Impressum - Legal Notice</Link>
-            </footer>
-          </Providers>
+          <IntlErrorHandlingProvider locale={locale}>
+            <Providers>
+              <Header />
+              {children}
+              <footer className="container border-t border-border pt-8 pb-8 flex flex-col">
+                <h1 className="text-xs font-bold tracking-tight scroll-m-20 mb-4">
+                  Copyright © 2024-2025 Morten Renner. Licensed under AGPL-3.0.
+                </h1>
+                <Link
+                  href="/privacy"
+                  className="text-xs font-normal tracking-tight"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/imprint"
+                  className="text-xs font-normal tracking-tight"
+                >
+                  Impressum - Legal Notice
+                </Link>
+              </footer>
+            </Providers>
+          </IntlErrorHandlingProvider>
         </NextIntlClientProvider>
       </body>
     </html>

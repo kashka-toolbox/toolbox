@@ -15,7 +15,7 @@ const withPWA = withPWAInit({
     },
 });
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin({requestConfig: "./src/i18n/request.ts"});
 
 
 /** @type {import('next').NextConfig} */

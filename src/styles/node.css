@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@property --rainbow-rotation-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@layer base {
+  :root {
+    --edge-foreground: #222222AA;
+    --edge-type-warning-foreground: #d69920AA;
+    --edge-type-error-foreground: #cb231cAA;
+  }
+
+  .dark {
+    --edge-foreground: #ffe9c4AA;
+    --edge-type-warning-foreground: #ffe600aa;
+    --edge-type-error-foreground: #ff0800aa;
+  }
+}
+
+
+
+@keyframes rotatingRainbowGradient {
+    0% {
+        --rainbow-rotation-angle: 0deg;
+    }
+
+    100% {
+        --rainbow-rotation-angle: 360deg;
+    }
+
+}
+
+/* Node component styling */
+.node {
+    @apply absolute rounded bg-primary text-primary-foreground p-2 shadow-md;
+
+    &.operation {
+        @apply border border-primary bg-background text-foreground; /** TODO: Improve color scheme */
+    }
+
+    transform-style: preserve-3d; /* used for z-layering of ::before */
+
+    &::before {
+        content: "";
+        @apply absolute top-0 left-0 w-full h-full pointer-events-none opacity-0 hidden;
+        background: conic-gradient(from var(--rainbow-rotation-angle), #458588, #cb231c, #d69920, #679d69);
+        animation: rotatingRainbowGradient 3s linear infinite;
+        filter: blur(8px) saturate(1.5);
+        z-index: -1;
+
+        transition: opacity 0.3s ease-in-out, display 0s 0.3s;
+        transform: translateZ(-1px);
+    }
+
+    &.is-processing {
+        &::before {
+            @apply block opacity-100;
+        }
+    }
+
+    &.node-dragging {
+        @apply transform scale-105 shadow-lg;
+    }
+}
+
+.node-io {
+    @apply absolute w-2.5 h-2.5 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center;
+
+    &.input {
+        @apply left-0 -translate-x-[5px] border-gray-300;
+    }
+
+    &.output {
+        @apply right-0 translate-x-[5px] border-primary-foreground;
+    }
+
+    &.node-types-generic {
+        @apply bg-gray-500;
+    }
+}
+
+
+.node-io-label {
+    @apply flex items-center;
+
+    &.input {
+        @apply pl-1 pr-4;
+    }
+
+    &.output {
+        @apply pr-1 pl-4;
+
+        .node-io-label-text {
+            @apply w-full text-right;
+        }
+    }
+}
+
+
+
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

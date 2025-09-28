@@ -131,7 +131,7 @@
         "title": "Hex to HSL",
         "description": "Converts a hex color to HSL format.",
         "options": {
-            "valuesOnly": "Include in hsl(...)"
+          "valuesOnly": "Include in hsl(...)"
         }
       }
     },
@@ -153,5 +153,39 @@
     "input": "Input:",
     "swapSides": "Swap sides",
     "clearInput": "Clear input"
+  },
+  "graph": {
+    "types": {
+      "any": "any",
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)"
+      }
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Input"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Output"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Wait and Forward"
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text to Base64"
+          },
+          "concatenateStrings": {
+            "name": "Concatenate Strings"
+          }
+        }
+      }
+    }
   }
 }
