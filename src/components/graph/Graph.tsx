@@ -1,10 +1,9 @@
-
 import { Node } from "@/components/graph/Node";
 import { Position } from "@/lib/graph/Position.type";
 import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
 import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
 import { cn } from "@/lib/utils";
-import { useContext, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { executeGraph } from "../../lib/graph/executeGraph";
 import { Button } from "../ui/button";
 import { GraphContext } from "./GraphContextProvider";
@@ -21,6 +20,7 @@ export function Graph({}: {}) {
         edges,
         previewEdge,
         currentlyDraggingNode,
+        addEdge,
         setNodePosition,
         setPreviewEdge,
         setCurrentlyDraggingNode,
@@ -34,22 +34,30 @@ export function Graph({}: {}) {
         isCurrentlyDragging,
     } = useCanvasDrag(graphRef);
 
-    const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const graphRefOffsets = useRef({left: 0, top: 0});
+    useEffect(() => {
+        graphRefOffsets.current.left = (graphRef.current?.offsetLeft ?? 0);
+    }, [graphRef.current?.offsetLeft]);
+    useEffect(() => {
+         graphRefOffsets.current.top = (graphRef.current?.offsetTop ?? 0);
+    }, [graphRef.current?.offsetTop]);
+
+    const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === graphRef.current) {
             e.preventDefault();
             e.stopPropagation();
             onStartDragCanvas(e);
         }
-    };
+    }, [graphRef]);
 
-    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         onMouseMoveDragCanvas(e);
 
         if (currentlyDraggingNode) {
             const newPosition = {
-                x: e.clientX - (graphRef.current?.offsetLeft || 0) +
+                x: e.clientX - graphRefOffsets.current.left +
                     currentlyDraggingNode.offset.x,
-                y: e.clientY - (graphRef.current?.offsetTop || 0) +
+                y: e.clientY - graphRefOffsets.current.top +
                     currentlyDraggingNode.offset.y,
             };
             setNodePosition(currentlyDraggingNode.nodeId, newPosition);
@@ -57,16 +65,16 @@ export function Graph({}: {}) {
 
         if (previewEdge) {
             const currentPosition: Position = {
-                x: e.clientX - (graphRef.current?.offsetLeft || 0),
-                y: e.clientY - (graphRef.current?.offsetTop || 0),
+                x: e.clientX - graphRefOffsets.current.left,
+                y: e.clientY - graphRefOffsets.current.top,
             };
             setPreviewEdge({
                 ...previewEdge,
                 currentDragPosition: currentPosition,
             });
         }
-    };
-    const onMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+    }, [graphRefOffsets, onMouseMoveDragCanvas, setNodePosition, setPreviewEdge]);
+    const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -75,7 +83,9 @@ export function Graph({}: {}) {
         if (currentlyDraggingNode) {
             setCurrentlyDraggingNode(null);
         }
-    };
+    }, [onEndDraggingCanvas, setCurrentlyDraggingNode, currentlyDraggingNode]);
+
+  
 
     const renderedEdges = useEdgeRenderer(nodes, graphRef, edges);
 
@@ -98,7 +108,7 @@ export function Graph({}: {}) {
                 onMouseMove={onMouseMove}
                 onMouseUp={onMouseUp}
                 onMouseDown={onMouseDown}
-                onMouseLeave={onStartDragCanvas}
+                onMouseLeave={onEndDraggingCanvas}
             >
                 <GraphInfiniteCanvasScroll />
                 <svg className="sticky inset-0 w-full h-full pointer-events-none z-20">
@@ -108,6 +118,8 @@ export function Graph({}: {}) {
                     <Node
                         key={nodeState.id}
                         nodeState={nodeState}
+                        isBeingDragged={nodeState.id == currentlyDraggingNode?.nodeId}
+                        addEdge={addEdge}
                         onMouseDown={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -115,18 +127,17 @@ export function Graph({}: {}) {
                                 nodeId: nodeState.id,
                                 startPosition: {
                                     x: e.clientX -
-                                        (graphRef.current?.offsetLeft || 0),
+                                        graphRefOffsets.current.left,
                                     y: e.clientY -
-                                        (graphRef.current?.offsetTop || 0),
+                                        graphRefOffsets.current.top,
                                 },
                                 offset: {
                                     x: nodeState.position.x -
                                         (e.clientX -
-                                            (graphRef.current?.offsetLeft ||
-                                                0)),
+                                            graphRefOffsets.current.left),
                                     y: nodeState.position.y -
                                         (e.clientY -
-                                            (graphRef.current?.offsetTop || 0)),
+                                            graphRefOffsets.current.top),
                                 },
                             });
                             dragRef.current.current = e.currentTarget;

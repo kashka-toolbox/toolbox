@@ -1,7 +1,7 @@
 import { NodeState } from "@/lib/graph/NodeState";
 import { Position } from "@/lib/graph/Position.type";
 import { PreviewEdge } from "@/lib/graph/PreviewEdge.type";
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useCallback, useMemo, useState } from "react";
 import { NodeIOIdentifier } from "./NodeIO";
 
 const notYetImplemented = () => {
@@ -82,9 +82,9 @@ export function GraphContextProvider(
      * @param fromIO The source node IO.
      * @param toIO The target node IO.
      */
-    const addEdge = (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => {
+    const addEdge = useCallback((fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => {
         setEdges((prevEdges) => [...prevEdges, { fromIO, toIO }]);
-    };
+    }, [setEdges]);
 
     const setNodePosition = (
         id: string,

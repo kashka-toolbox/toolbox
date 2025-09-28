@@ -16,7 +16,7 @@ export const useEdgeRenderer = (
 ) => {
     const [renderedEdges, setRenderedEdges] = useState<JSX.Element[]>([]);
 
-    const recaculateEdges = () => {
+    const recalculateEdges = () => {
         if (graphRef.current === null) {
             console.warn("Graph ref is null, cannot recalculate edges.");
             setRenderedEdges([]);
@@ -66,16 +66,16 @@ export const useEdgeRenderer = (
     };
 
     useEffect(() => {
-        graphRef.current?.addEventListener("transitionend", recaculateEdges);
-        graphRef.current?.addEventListener("scroll", recaculateEdges);
+        graphRef.current?.addEventListener("transitionend", recalculateEdges);
+        graphRef.current?.addEventListener("scroll", recalculateEdges);
         return () => {
-            graphRef.current?.removeEventListener("transitionend", recaculateEdges);
-            graphRef.current?.removeEventListener("scroll", recaculateEdges);
+            graphRef.current?.removeEventListener("transitionend", recalculateEdges);
+            graphRef.current?.removeEventListener("scroll", recalculateEdges);
         };
     }, [graphRef, graphRef.current, edges, nodes, setRenderedEdges]);
 
     useLayoutEffect(() => {
-        recaculateEdges();
+        recalculateEdges();
     }, [edges, nodes]);
 
     return renderedEdges;

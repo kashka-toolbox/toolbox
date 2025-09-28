@@ -1,30 +1,28 @@
 import { NodeState } from "@/lib/graph/NodeState";
-import { MouseEventHandler, useContext, useTransition } from "react";
-import { NodeIO } from "./NodeIO";
-import "@/styles/node.css";
 import { cn } from "@/lib/utils";
-import { NodeIOLabel } from "./NodeIOLabel";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { useTranslations } from "next-intl";
+import "@/styles/node.css";
 import { Separator } from "@radix-ui/react-separator";
-import { GraphContext } from "./GraphContextProvider";
+import { useTranslations } from "next-intl";
+import { MouseEventHandler } from "react";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { NodeIO, NodeIOIdentifier } from "./NodeIO";
+import { NodeIOLabel } from "./NodeIOLabel";
 
 export function Node({
     nodeState,
     onMouseDown,
     onMouseMove,
     onMouseUp,
+    isBeingDragged,
+    addEdge,
 }: {
     nodeState: NodeState<any, any>;
     onMouseDown: MouseEventHandler<HTMLDivElement>;
     onMouseMove: MouseEventHandler<HTMLDivElement>;
     onMouseUp: MouseEventHandler<HTMLDivElement>;
+    addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
+    isBeingDragged: boolean;
 }) {
-    const {
-        addEdge,
-        currentlyDraggingNode,
-    } = useContext(GraphContext);
-
     const t = useTranslations("graph");
 
     const inputs = nodeState.inputs.map((input, index) => (
@@ -33,7 +31,8 @@ export function Node({
             type="input"
             data_type={input.type}
             ioTranslationKey={input.translationKey}
-            nodeIOIdentifier={{ nodeId: nodeState.id, nodeIOName: input.name }}>
+            nodeIOIdentifier={{ nodeId: nodeState.id, nodeIOName: input.name }}
+        >
             <NodeIO
                 key={input.name}
                 type="input"
@@ -48,7 +47,6 @@ export function Node({
                 ioName={input.name}
             />
         </NodeIOLabel>
-
     ));
 
     const outputs = nodeState.outputs.map((output, index) => (
@@ -57,7 +55,8 @@ export function Node({
             type="output"
             data_type={output.type}
             ioTranslationKey={output.translationKey}
-            nodeIOIdentifier={{ nodeId: nodeState.id, nodeIOName: output.name }}>
+            nodeIOIdentifier={{ nodeId: nodeState.id, nodeIOName: output.name }}
+        >
             <NodeIO
                 key={output.name}
                 type="output"
@@ -76,13 +75,12 @@ export function Node({
 
     return (
         <div
-            className={
-                cn("node",
-                    nodeState.type,
-                    currentlyDraggingNode?.nodeId === nodeState.id ? "node-dragging" : undefined,
-                    nodeState.isProcessing ? "is-processing" : undefined
-                )
-            }
+            className={cn(
+                "node",
+                nodeState.type,
+                isBeingDragged ? "node-dragging" : undefined,
+                nodeState.isProcessing ? "is-processing" : undefined,
+            )}
             style={{
                 left: nodeState.position.x,
                 top: nodeState.position.y,
@@ -90,25 +88,31 @@ export function Node({
             }}
             onMouseMove={onMouseMove}
             onMouseUp={onMouseUp}
-            onMouseDown={e => {
-                // Only call onMouseDown if data-node-dragable-handle is true
+            onMouseDown={(e) => {
                 const target = e.target as HTMLElement;
 
-                if (target.getAttribute("data-node-dragable-handle") === "true") {
+                if (
+                    target.getAttribute("data-node-dragable-handle") === "true"
+                ) {
                     onMouseDown(e);
                 }
             }}
             data-node-dragable-handle="true"
         >
-            <div data-node-dragable-handle="true" className="p-1 bg-primary-foreground text-primary rounded">{t("nodes." + nodeState.name + ".name")}</div>
-            {
-                nodeState.error && <Alert variant={"destructive"} className="mt-2">
+            <div
+                data-node-dragable-handle="true"
+                className="p-1 bg-primary-foreground text-primary rounded"
+            >
+                {t("nodes." + nodeState.name + ".name")}
+            </div>
+            {nodeState.error && (
+                <Alert variant={"destructive"} className="mt-2">
                     <AlertTitle>Error</AlertTitle>
                     <AlertDescription>
                         {nodeState.error}
                     </AlertDescription>
                 </Alert>
-            }
+            )}
             <div className="flex flex-col gap-1 mt-2">
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-col gap-1">
@@ -116,7 +120,10 @@ export function Node({
                     </div>
                 </div>
 
-                <Separator className="my-px h-px bg-primary-foreground" orientation="horizontal" />
+                <Separator
+                    className="my-px h-px bg-primary-foreground"
+                    orientation="horizontal"
+                />
 
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-col gap-1">

@@ -7,6 +7,7 @@ import { createNode } from "@/lib/graph/CreateNode.factory";
 
 export default function Home() {
     return (
+        <>
         <Section className="flex flex-col gap-4">
             <h1 className="header-section-1">Graph based tools Debug</h1>
 
@@ -24,5 +25,21 @@ export default function Home() {
                 <Graph />
             </GraphContextProvider>
         </Section>
+        <Section className="flex flex-col gap-4">
+            <h1 className="header-section-1">STRESS</h1>
+
+            <GraphContextProvider
+                initialNodeStates={[
+                    createNode("input", "1", { x: 50, y: 50 }),
+                    ...(Array.from({length: 100}).map((_, i) => {
+                        return createNode("textToBase64", (i + 10).toString(), { x: 50 * (i % 100), y: 50 * Math.floor(i / 100) })
+                    })),
+                    createNode("concatenateStrings", "1011", { x: 350, y: 200 }),
+                ]}
+            >
+                <Graph />
+            </GraphContextProvider>
+        </Section>
+        </>
     );
 }

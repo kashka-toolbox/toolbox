@@ -1,40 +1,95 @@
-import { RefObject, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { Position } from "./Position.type";
 
 export const useCanvasDrag = (graphRef: RefObject<HTMLDivElement>) => {
-    const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(
-        null,
+    const dragStartRef = useRef<Position | null>(null);
+    const scrollStartRef = useRef<Position | null>(null);
+    const [isCurrentlyDragging, setCurrentlyDragging] = useState<boolean>(
+        false,
     );
-    const [scrollStart, setScrollStart] = useState<
-        { x: number; y: number } | null
-    >(null);
 
-    const onStartDragCanvas = (e: React.MouseEvent<HTMLDivElement>) => {
-        setDragStart({ x: e.clientX, y: e.clientY });
-        setScrollStart({
-            x: graphRef.current?.scrollLeft || 0,
-            y: graphRef.current?.scrollTop || 0,
-        });
-    };
+    const graphRefOffsets = useRef({ left: 0, top: 0 });
 
-    const onMouseMoveDragCanvas = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (dragStart && scrollStart) {
-            const currentX = e.clientX;
-            const currentY = e.clientY;
-            const deltaX = currentX - dragStart.x;
-            const deltaY = currentY - dragStart.y;
-            if (graphRef.current) {
-                graphRef.current.scrollLeft = scrollStart.x - deltaX;
-                graphRef.current.scrollTop = scrollStart.y - deltaY;
+    useEffect(() => {
+        graphRefOffsets.current.left = graphRef.current?.offsetLeft ?? 0;
+    }, [graphRef.current?.offsetLeft]);
+    useEffect(() => {
+        graphRefOffsets.current.top = graphRef.current?.offsetTop ?? 0;
+    }, [graphRef.current?.offsetTop]);
+
+    const onStartDragCanvas = useCallback(
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            dragStartRef.current = { x: e.clientX, y: e.clientY };
+            scrollStartRef.current = {
+                x: graphRefOffsets.current.left || 0,
+                y: graphRefOffsets.current.top || 0,
+            };
+            setCurrentlyDragging(true);
+        },
+        [],
+    );
+
+    const onMouseMoveDragCanvas = useCallback(
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            if (
+                dragStartRef.current != null && scrollStartRef.current != null
+            ) {
+                console.log({
+                    dragStartRef: dragStartRef.current,
+                    scrollStartRef: scrollStartRef.current,
+                    currentX: e.clientX,
+                    currentY: e.clientY,
+                    deltaX: e.clientX - dragStartRef.current.x,
+                    deltaY: e.clientY - dragStartRef.current.y,
+                });
+                const currentX = e.clientX;
+                const currentY = e.clientY;
+                const deltaX = currentX - dragStartRef.current.x;
+                const deltaY = currentY - dragStartRef.current.y;
+                if (graphRef.current) {
+                    graphRef.current.scrollTo({
+                        left: scrollStartRef.current.x - deltaX,
+                        top: scrollStartRef.current.y - deltaY,
+                        behavior: "instant",
+                    });
+                }
             }
-        }
+        },
+        [graphRef],
+    );
+
+    const onEndDraggingCanvas = useCallback(
+        (_: React.MouseEvent<HTMLDivElement>) => {
+            dragStartRef.current = null;
+            scrollStartRef.current = null;
+            setCurrentlyDragging(false);
+        },
+        [],
+    );
+
+    useEffect(() => {
+        console.log("onEndDraggingCanvas");
+        return () => {
+            console.log("cleanup onEndDraggingCanvas");
+        };
+    }, [onEndDraggingCanvas]);
+    useEffect(() => {
+        console.log("setCurrentlyDraggingNode");
+        return () => {
+            console.log("cleanup setCurrentlyDraggingNode");
+        };
+    }, [onEndDraggingCanvas]);
+    useEffect(() => {
+        console.log("onMouseMoveDragCanvas");
+        return () => {
+            console.log("cleanup onMouseMoveDragCanvas");
+        };
+    }, [onEndDraggingCanvas]);
+
+    return {
+        onStartDragCanvas,
+        onMouseMoveDragCanvas,
+        onEndDraggingCanvas,
+        isCurrentlyDragging,
     };
-
-    const onEndDraggingCanvas = (_: React.MouseEvent<HTMLDivElement>) => {
-        setDragStart(null);
-        setScrollStart(null);
-    };
-
-    const isCurrentlyDragging = dragStart != null;
-
-    return { onStartDragCanvas, onMouseMoveDragCanvas, onEndDraggingCanvas, isCurrentlyDragging };
 };

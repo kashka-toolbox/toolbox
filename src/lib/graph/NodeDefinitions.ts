@@ -12,17 +12,17 @@ export type NODE_TYPE =
 export const NODE_DEFINITIONS: {
     [key in NODE_TYPE]: NodeDefinition<any, any>;
 } = {
-    input: createNodeDefinition<[], ["input.any.input"]>({
+    input: createNodeDefinition<[], ["fromUi"]>({
         type: "input",
         name: "input.any",
         inputs: [],
         outputs: [{
-            name: "input.any.input",
+            name: "fromUi",
             translationKey: "types.any",
             type: "any",
         }],
         execute: async () => {
-            return { "input.any.input": "TODO: INPUT THIS VALUE USING UI" };
+            return { "fromUi": "TODO: INPUT THIS VALUE USING UI" };
         },
     }),
     inputNumeric: createNodeDefinition<[], ["input.numeric.input"]>({
@@ -38,11 +38,11 @@ export const NODE_DEFINITIONS: {
             return { "input.numeric.input": 12.3456789 };
         },
     }),
-    output: createNodeDefinition<["output.any.output"], []>({
+    output: createNodeDefinition<["toUi"], []>({
         type: "output",
         name: "output.any",
         inputs: [{
-            name: "output.any.output",
+            name: "toUi",
             translationKey: "types.any",
             type: "any",
         }],

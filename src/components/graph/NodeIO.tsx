@@ -16,7 +16,7 @@ type NodeIOProps = {
     ioName: string;
 };
 
-export const NodeIO: React.FC<NodeIOProps> = (
+const NodeIO: React.FC<NodeIOProps> = (
     { type, onConnectNodes, nodeId, ioName, data_type },
 ) => {
     const {
@@ -117,6 +117,7 @@ export const NodeIO: React.FC<NodeIOProps> = (
         />
     );
 };
+NodeIO.displayName = "GraphNodeIO";
 
 const NodeIODot = React.forwardRef<
     HTMLDivElement,
@@ -139,3 +140,5 @@ const NodeIODot = React.forwardRef<
         />
     );
 });
+
+export { NodeIO };
