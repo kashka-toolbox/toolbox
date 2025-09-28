@@ -25,10 +25,10 @@ export const isEdgeDropValid: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier,
         };
     }
 
-    const formNodeIO = fromNode?.getAllIO().find(io => io.name === fromIO.nodeIOName);
+    const fromNodeIO = fromNode?.getAllIO().find(io => io.name === fromIO.nodeIOName);
     const toNodeIO = toNode?.getAllIO().find(io => io.name === toIO.nodeIOName);
 
-    if (!formNodeIO || !toNodeIO) {
+    if (!fromNodeIO || !toNodeIO) {
         return {
             valid: false,
             reason: "graph.nodeIO.connect.ioNotFound",
@@ -38,7 +38,7 @@ export const isEdgeDropValid: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier,
     const isFromIoOutput = fromNode.outputs.some(output => output.name === fromIO.nodeIOName);
     const isToIoInput = toNode.inputs.some(input => input.name === toIO.nodeIOName);
 
-    if(isFromIoOutput !== isToIoInput) { // only input to outpot or output to input is valid
+    if(isFromIoOutput !== isToIoInput) { // only input to output or output to input is valid
         return {
             valid: false,
             reason: "graph.nodeIO.connect.invalidDirection",

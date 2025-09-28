@@ -66,11 +66,12 @@ export const useEdgeRenderer = (
     };
 
     useEffect(() => {
-        graphRef.current?.addEventListener("transitionend", recalculateEdges);
-        graphRef.current?.addEventListener("scroll", recalculateEdges);
+        const graphCurrent = graphRef.current;
+        graphCurrent?.addEventListener("transitionend", recalculateEdges);
+        graphCurrent?.addEventListener("scroll", recalculateEdges);
         return () => {
-            graphRef.current?.removeEventListener("transitionend", recalculateEdges);
-            graphRef.current?.removeEventListener("scroll", recalculateEdges);
+            graphCurrent?.removeEventListener("transitionend", recalculateEdges);
+            graphCurrent?.removeEventListener("scroll", recalculateEdges);
         };
     }, [graphRef, graphRef.current, edges, nodes, setRenderedEdges]);
 

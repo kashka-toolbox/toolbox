@@ -67,25 +67,6 @@ export const useCanvasDrag = (graphRef: RefObject<HTMLDivElement>) => {
         [],
     );
 
-    useEffect(() => {
-        console.log("onEndDraggingCanvas");
-        return () => {
-            console.log("cleanup onEndDraggingCanvas");
-        };
-    }, [onEndDraggingCanvas]);
-    useEffect(() => {
-        console.log("setCurrentlyDraggingNode");
-        return () => {
-            console.log("cleanup setCurrentlyDraggingNode");
-        };
-    }, [onEndDraggingCanvas]);
-    useEffect(() => {
-        console.log("onMouseMoveDragCanvas");
-        return () => {
-            console.log("cleanup onMouseMoveDragCanvas");
-        };
-    }, [onEndDraggingCanvas]);
-
     return {
         onStartDragCanvas,
         onMouseMoveDragCanvas,

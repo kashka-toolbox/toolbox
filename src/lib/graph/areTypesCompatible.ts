@@ -65,6 +65,5 @@ export function areTypesCompatible(sourceType: string, targetType: string): Comp
     }
 
     areTypesCompatibleCache[cacheKey] = variant;
-    console.log(areTypesCompatibleCache);
     return variant;
 }
