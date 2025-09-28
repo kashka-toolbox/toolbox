@@ -140,5 +140,6 @@ const NodeIODot = React.forwardRef<
         />
     );
 });
+NodeIODot.displayName = "GraphNodeIODot";
 
 export { NodeIO };
