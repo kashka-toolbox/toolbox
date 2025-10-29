@@ -8,23 +8,22 @@ export const useCanvasDrag = (graphRef: RefObject<HTMLDivElement>) => {
         false,
     );
 
-    const graphRefOffsets = useRef({ left: 0, top: 0 });
-
-    useEffect(() => {
-        graphRefOffsets.current.left = graphRef.current?.offsetLeft ?? 0;
-    }, [graphRef.current?.offsetLeft]);
-    useEffect(() => {
-        graphRefOffsets.current.top = graphRef.current?.offsetTop ?? 0;
-    }, [graphRef.current?.offsetTop]);
-
     const onStartDragCanvas = useCallback(
         (e: React.MouseEvent<HTMLDivElement>) => {
-            dragStartRef.current = { x: e.clientX, y: e.clientY };
+            dragStartRef.current = {
+                x: e.clientX,
+                y: e.clientY
+            };
             scrollStartRef.current = {
-                x: graphRefOffsets.current.left || 0,
-                y: graphRefOffsets.current.top || 0,
+                x: graphRef.current?.scrollLeft || 0,
+                y: graphRef.current?.scrollTop || 0,
             };
             setCurrentlyDragging(true);
+            console.log({
+                dragStartRef: dragStartRef.current,
+                scrollStartRef: scrollStartRef.current,
+            });
+
         },
         [],
     );
@@ -42,20 +41,20 @@ export const useCanvasDrag = (graphRef: RefObject<HTMLDivElement>) => {
                     deltaX: e.clientX - dragStartRef.current.x,
                     deltaY: e.clientY - dragStartRef.current.y,
                 });
-                const currentX = e.clientX;
-                const currentY = e.clientY;
-                const deltaX = currentX - dragStartRef.current.x;
-                const deltaY = currentY - dragStartRef.current.y;
+                const deltaX = e.clientX - dragStartRef.current.x;
+                const deltaY = e.clientY - dragStartRef.current.y;
                 if (graphRef.current) {
-                    graphRef.current.scrollTo({
+                    /*graphRef.current.scrollTo({
                         left: scrollStartRef.current.x - deltaX,
                         top: scrollStartRef.current.y - deltaY,
                         behavior: "instant",
-                    });
+                    });*/
+                    graphRef.current.scrollLeft = scrollStartRef.current.x - deltaX;
+                    graphRef.current.scrollTop = scrollStartRef.current.y - deltaY;
                 }
             }
         },
-        [graphRef],
+        [],
     );
 
     const onEndDraggingCanvas = useCallback(
