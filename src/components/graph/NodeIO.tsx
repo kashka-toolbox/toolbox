@@ -1,7 +1,7 @@
 import { isEdgeDropValid } from "@/lib/graph/isEdgeDropValid";
 import { cn } from "@/lib/utils";
-import React, { useContext } from "react";
-import { GraphContext } from "./GraphContextProvider";
+import React from "react";
+import { useGraphStore } from "./GraphContextProvider";
 
 export type NodeIOIdentifier = {
     nodeId: string;
@@ -19,10 +19,7 @@ type NodeIOProps = {
 const NodeIO: React.FC<NodeIOProps> = (
     { type, onConnectNodes, nodeId, ioName, data_type },
 ) => {
-    const {
-        nodes,
-        setPreviewEdge,
-    } = useContext(GraphContext);
+    const nodes = useGraphStore((store) => store.nodes);
 
     const node_IO_identifier: NodeIOIdentifier = {
         nodeId,

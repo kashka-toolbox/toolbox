@@ -1,29 +1,37 @@
-import { NodeState } from "@/lib/graph/NodeState";
+"use client";
+
+import { Position } from "@/lib/graph/Position.type";
 import { cn } from "@/lib/utils";
 import "@/styles/node.css";
 import { Separator } from "@radix-ui/react-separator";
 import { useTranslations } from "next-intl";
-import { MouseEventHandler } from "react";
+import { MutableRefObject, useEffect, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { NodeIO, NodeIOIdentifier } from "./NodeIO";
+import { useGraphStore, useNodeState } from "./GraphContextProvider";
+import { NodeIO } from "./NodeIO";
 import { NodeIOLabel } from "./NodeIOLabel";
 
 export function Node({
-    nodeState,
-    onMouseDown,
-    onMouseMove,
-    onMouseUp,
-    isBeingDragged,
-    addEdge,
+    nodeId,
+    graphRefOffsets
 }: {
-    nodeState: NodeState<any, any>;
-    onMouseDown: MouseEventHandler<HTMLDivElement>;
-    onMouseMove: MouseEventHandler<HTMLDivElement>;
-    onMouseUp: MouseEventHandler<HTMLDivElement>;
-    addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
-    isBeingDragged: boolean;
+    nodeId: string;
+    graphRefOffsets: MutableRefObject<{
+        left: number;
+        top: number;
+    }>
 }) {
     const t = useTranslations("graph");
+
+    const addEdge = useGraphStore((store) => store.addEdge);
+    const setNodePosition = useGraphStore((store) => store.setNodePosition);
+
+    const [isBeingDragged, setBeingDragged] = useState<boolean>(false);
+
+    const [dragStartPosition, setDragStartPosition] = useState<Position>({ x: 0, y: 0 });
+    const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
+
+    const nodeState = useNodeState(nodeId)!;
 
     const inputs = nodeState.inputs.map((input, index) => (
         <NodeIOLabel
@@ -73,6 +81,39 @@ export function Node({
         </NodeIOLabel>
     ));
 
+    useEffect(() => {
+        const handleMouseUp = () => {
+            if (isBeingDragged) {
+                setBeingDragged(false);
+            }
+        };
+
+        document.addEventListener("mouseup", handleMouseUp);
+
+        return () => {
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isBeingDragged]);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (isBeingDragged) {
+                const newPosition = {
+                    x: e.clientX - graphRefOffsets.current.left +
+                        dragOffset.x,
+                    y: e.clientY - graphRefOffsets.current.top +
+                        dragOffset.y,
+                };
+                setNodePosition(nodeState.id, newPosition);
+            }
+        }
+        document.addEventListener("mousemove", handleMouseMove);
+
+        return () => {
+            document.removeEventListener("mousemove", handleMouseMove);
+        };
+    }, [isBeingDragged, dragOffset, graphRefOffsets, setNodePosition, nodeState.id]);
+
     return (
         <div
             className={cn(
@@ -80,21 +121,33 @@ export function Node({
                 nodeState.type,
                 isBeingDragged ? "node-dragging" : undefined,
                 nodeState.isProcessing ? "is-processing" : undefined,
+                isBeingDragged ? "cursor-grabbing" : "cursor-grab",
+                "text-nowrap",
             )}
             style={{
                 left: nodeState.position.x,
                 top: nodeState.position.y,
                 transition: "transform 0.1s ease-out",
             }}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
             onMouseDown={(e) => {
                 const target = e.target as HTMLElement;
 
                 if (
                     target.getAttribute("data-node-dragable-handle") === "true"
                 ) {
-                    onMouseDown(e);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setBeingDragged(true);
+                    setDragStartPosition({
+                        x: e.clientX - graphRefOffsets.current.left,
+                        y: e.clientY - graphRefOffsets.current.top,
+                    });
+                    setDragOffset({
+                        x: nodeState.position.x -
+                            (e.clientX - graphRefOffsets.current.left),
+                        y: nodeState.position.y -
+                            (e.clientY - graphRefOffsets.current.top),
+                    });
                 }
             }}
             data-node-dragable-handle="true"

@@ -1,129 +1,85 @@
+"use client";
+
 import { NodeState } from "@/lib/graph/NodeState";
 import { Position } from "@/lib/graph/Position.type";
 import { PreviewEdge } from "@/lib/graph/PreviewEdge.type";
-import { createContext, Dispatch, SetStateAction, useCallback, useMemo, useState } from "react";
+import { create, StoreApi, useStore } from "zustand";
 import { NodeIOIdentifier } from "./NodeIO";
+import { createContext, useContext } from "react";
+import { subscribeWithSelector } from 'zustand/middleware';
 
-const notYetImplemented = () => {
-    throw new Error("Not yet implemented");
+type Edge = {
+    fromIO: NodeIOIdentifier;
+    toIO?: NodeIOIdentifier;
 };
 
-export const GraphContext = createContext<{
+
+
+export type GraphState = {
     nodes: NodeState<any, any>[];
-    edges: {
-        fromIO: NodeIOIdentifier;
-        toIO?: NodeIOIdentifier;
-    }[];
-    setNodes: Dispatch<SetStateAction<NodeState<any, any>[]>>;
-    setCurrentlyDraggingNode: Dispatch<
-        SetStateAction<
-            {
-                nodeId: string;
-                startPosition: Position;
-                offset: Position;
-            } | null
-        >
-    >;
-    /**
-     * Sets the preview edge for the graph, that the user can see while dragging an edge.
-     */
-    setPreviewEdge: (edge: PreviewEdge | null) => void;
-    addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
-    setNodePosition: (id: string, position: {
-        x: number;
-        y: number;
-    }) => void;
-    updateNodeState: (nodeId: string, newState: Partial<NodeState<any, any>>) => void
-    currentlyDraggingNode?: {
-        nodeId: string;
-        startPosition: Position;
-        offset: Position;
-    } | null;
+    edges: Edge[];
     previewEdge: PreviewEdge | null;
-}>({
-    nodes: [],
-    edges: [],
-    previewEdge: null,
-    currentlyDraggingNode: null,
-    setNodes: notYetImplemented,
-    setNodePosition: notYetImplemented,
-    addEdge: notYetImplemented,
-    setPreviewEdge: notYetImplemented,
-    setCurrentlyDraggingNode: notYetImplemented,
-    updateNodeState: notYetImplemented
-});
 
-export function GraphContextProvider(
-    { children, initialNodeStates }: {
-        children: React.ReactNode;
-        initialNodeStates: NodeState<any, any>[];
-    },
-) {
-    const [nodes, setNodes] = useState<NodeState<any, any>[]>(
-        initialNodeStates,
-    );
+    // actions
+    setNodes: (nodes: NodeState<any, any>[]) => void;
+    addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
+    setPreviewEdge: (edge: PreviewEdge | null) => void;
+    setNodePosition: (id: string, position: Position) => void;
+    updateNodeState: (nodeId: string, newState: Partial<NodeState<any, any>>) => void;
+    initialize: (initialNodeStates: NodeState<any, any>[], initialEdges: Edge[]) => void;
+};
 
-    const [edges, setEdges] = useState<{
-        fromIO: NodeIOIdentifier;
-        toIO?: NodeIOIdentifier;
-    }[]>([]);
+// Create a factory function that returns a NEW store instance each time it's called
+export const createGraphStore = (): StoreApi<GraphState> => 
+    create<GraphState>()(subscribeWithSelector((set, get) => ({
+        nodes: [],
+        edges: [],
+        previewEdge: null,
+        currentlyDraggingNode: null,
 
-    const [currentlyDraggingNode, setCurrentlyDraggingNode] = useState<
-        { nodeId: string; startPosition: Position; offset: Position } | null
-    >(null);
+        setNodes: (nodes) => set({ nodes }),
+        addEdge: (fromIO, toIO) =>
+            set((s) => ({ edges: [...s.edges, { fromIO, toIO }] })),
+        setPreviewEdge: (edge) => set({ previewEdge: edge }),
+        setNodePosition: (id, position) =>
+            set((s) => ({
+                nodes: s.nodes.map((n) => (n.id === id ? { ...n, position } : n)),
+            })),
+        updateNodeState: (nodeId, newState) =>
+            set((s) => ({
+                nodes: s.nodes.map((n) => (n.id === nodeId ? { ...n, ...newState } : n)),
+            })),
+        initialize: (initialNodeStates, initialEdges) => set({ nodes: initialNodeStates, edges: initialEdges }),
+    })));
 
-    const [previewEdge, setPreviewEdge] = useState<PreviewEdge | null>(null);
+// GraphStoreContext
+export const GraphStoreContext = createContext<StoreApi<GraphState> | null>(null);
 
-    /**
-     * Adds an edge between two node IOs.
-     *
-     * Edges are always directed from the source node IO to the target node IO.
-     *
-     * @param fromIO The source node IO.
-     * @param toIO The target node IO.
-     */
-    const addEdge = useCallback((fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => {
-        setEdges((prevEdges) => [...prevEdges, { fromIO, toIO }]);
-    }, [setEdges]);
+type UseGraphSelect<Selector> = Selector extends (state: GraphState) => infer R ? R : never;
 
-    const setNodePosition = (
-        id: string,
-        position: { x: number; y: number },
-    ) => {
-        setNodes((prevNodes) =>
-            prevNodes.map((node) =>
-                node.id === id ? { ...node, position } : node
-            )
-        );
-    };
+export const useGraphStore = <Selector extends (state: GraphState) => any>(selector: Selector): UseGraphSelect<Selector> => {
+  const store = useContext(GraphStoreContext);
+  if (!store) {
+    throw new Error('Missing GraphStoreContext');
+  }
+  return useStore(store, selector);
+};
 
-    const updateNodeState = (
-        nodeId: string,
-        newState: Partial<NodeState<any, any>>,
-    ) => {
-        setNodes((prevNodes) =>
-            prevNodes.map((node) =>
-                node.id === nodeId ? { ...node, ...newState } : node
-            )
-        );
-    };
-
-    return (
-        <GraphContext.Provider
-            value={{
-                nodes,
-                edges,
-                setNodes,
-                setPreviewEdge,
-                addEdge,
-                setCurrentlyDraggingNode,
-                currentlyDraggingNode,
-                setNodePosition,
-                previewEdge,
-                updateNodeState,
-            }}
-        >
-            {children}
-        </GraphContext.Provider>
-    );
+export const useCurrentGraphStore = (): StoreApi<GraphState> => {
+    const store = useContext(GraphStoreContext);
+    if (!store) {
+      throw new Error('Missing GraphStoreContext');
+    }
+    return store;
 }
+
+
+export const useNodeState = <R = NodeState<any, any> | undefined>(
+  nodeId: string,
+  selector: (node: NodeState<any, any> | undefined) => R = (node) => node as unknown as R
+): R => {
+  return useGraphStore((state) => {
+    const node = state.nodes.find((n) => n.id === nodeId) as NodeState<any, any> | undefined;
+    return selector(node);
+  });
+};
