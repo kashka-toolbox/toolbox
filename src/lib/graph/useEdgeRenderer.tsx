@@ -1,20 +1,18 @@
+"use client";
+
 import { Edge } from "@/components/graph/Edge";
-import { NodeIOIdentifier } from "@/components/graph/NodeIO";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useGraphStore } from "@/components/graph/GraphContextProvider";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { areTypesCompatible } from "./areTypesCompatible";
-import { NodeState } from "./NodeState";
 import { Position } from "./Position.type";
 
 
 export const useEdgeRenderer = (
-    nodes: NodeState<any, any>[],
     graphRef: React.RefObject<HTMLDivElement>,
-    edges: {
-        fromIO: NodeIOIdentifier;
-        toIO?: NodeIOIdentifier;
-    }[]
 ) => {
     const [renderedEdges, setRenderedEdges] = useState<JSX.Element[]>([]);
+    const nodes = useGraphStore((store) => store.nodes);
+    const edges = useGraphStore((store) => store.edges);
 
     const recalculateEdges = () => {
         if (graphRef.current === null) {
