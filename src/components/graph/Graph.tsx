@@ -5,27 +5,18 @@ import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
 import { cn } from "@/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ExecuteGraphButton } from "./ExecuteGraphButton";
-import { useCurrentGraphStore, useGraphStore } from "./GraphContextProvider";
+import { useCurrentGraphStore, useGraphStore, useNodeIds } from "./GraphContextProvider";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
+import { GraphEdges } from "./GraphEdges";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
 
-    const [nodeIDs, setNodeIDs] = useState<string[]>(useCurrentGraphStore().getState().nodes.map((n) => n.id));
+    const nodeIDs = useNodeIds();
 
-    const unsubscribeIDs = useCurrentGraphStore().subscribe(
-        (store) => setNodeIDs(store.nodes.map((n) => n.id))
-    );
-
-    useEffect(() => {
-        return () => {
-            unsubscribeIDs();
-        };
-    }, [unsubscribeIDs]);
-
-    const previewEdge = useGraphStore((store) => store.previewEdge);
-    const setPreviewEdge = useGraphStore((store) => store.setPreviewEdge);
-    const setNodePosition = useGraphStore((store) => store.setNodePosition);
+    //const previewEdge = useGraphStore((store) => store.previewEdge);
+    //const setPreviewEdge = useGraphStore((store) => store.setPreviewEdge);
+    //const setNodePosition = useGraphStore((store) => store.setNodePosition);
 
     const {
         onStartDragCanvas,
@@ -53,7 +44,7 @@ export function Graph({ }: {}) {
     const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         onMouseMoveDragCanvas(e);
 
-        if (previewEdge) {
+        /*if (previewEdge) {
             const currentPosition: Position = {
                 x: e.clientX - graphRefOffsets.current.left,
                 y: e.clientY - graphRefOffsets.current.top,
@@ -62,8 +53,9 @@ export function Graph({ }: {}) {
                 ...previewEdge,
                 currentDragPosition: currentPosition,
             });
-        }
-    }, [graphRefOffsets, onMouseMoveDragCanvas, setNodePosition, setPreviewEdge]);
+        }*/
+    }, [graphRefOffsets, onMouseMoveDragCanvas]);
+
     const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
@@ -71,9 +63,9 @@ export function Graph({ }: {}) {
         onEndDraggingCanvas(e);
     }, [onEndDraggingCanvas]);
 
-
-
-    const renderedEdges = useEdgeRenderer(graphRef);
+    console.log("Render Graph", Date.now());
+    
+    //const renderedEdges = useEdgeRenderer(graphRef);
 
     return (
         <>
@@ -90,9 +82,7 @@ export function Graph({ }: {}) {
                 onMouseLeave={onEndDraggingCanvas}
             >
                 <GraphInfiniteCanvasScroll />
-                <svg className="sticky inset-0 w-full h-full pointer-events-none z-20">
-                    {renderedEdges}
-                </svg>
+                <GraphEdges graphRef={graphRef} />
                 {nodeIDs.map((nodeId) => (
                     <Node
                         key={nodeId}
