@@ -67,6 +67,10 @@ export const useEdgeRenderer = (
         const graphCurrent = graphRef.current;
         graphCurrent?.addEventListener("transitionend", recalculateEdges);
         graphCurrent?.addEventListener("scroll", recalculateEdges);
+
+        if (graphCurrent !== null)
+            recalculateEdges();
+
         return () => {
             graphCurrent?.removeEventListener("transitionend", recalculateEdges);
             graphCurrent?.removeEventListener("scroll", recalculateEdges);

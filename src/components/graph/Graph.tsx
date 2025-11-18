@@ -1,13 +1,11 @@
 import { Node } from "@/components/graph/Node";
-import { Position } from "@/lib/graph/Position.type";
 import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
-import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
 import { cn } from "@/lib/utils";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { ExecuteGraphButton } from "./ExecuteGraphButton";
-import { useCurrentGraphStore, useGraphStore, useNodeIds } from "./GraphContextProvider";
-import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
+import { useNodeIds } from "./GraphContextProvider";
 import { GraphEdges } from "./GraphEdges";
+import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
@@ -64,8 +62,6 @@ export function Graph({ }: {}) {
     }, [onEndDraggingCanvas]);
 
     console.log("Render Graph", Date.now());
-    
-    //const renderedEdges = useEdgeRenderer(graphRef);
 
     return (
         <>
