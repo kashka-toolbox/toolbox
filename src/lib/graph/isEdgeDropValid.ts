@@ -4,7 +4,7 @@ import { NodeState } from "./NodeState";
 /**
  * Determines whether dropping an edge between two node IOs is valid within the graph.
  */
-export const isEdgeDropValid: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier, nodes: NodeState<any, any>[]) => {
+export const isEdgeDropValid: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier, nodes: Map<string, NodeState<any, any>>) => {
     valid: boolean;
     reason: string;
     direction?: "input-to-output" | "output-to-input";
@@ -15,8 +15,8 @@ export const isEdgeDropValid: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier,
             reason: "graph.nodeIO.connect.selfDropError",
         };
     }
-    const fromNode = nodes.find(node => node.id === fromIO.nodeId);
-    const toNode = nodes.find(node => node.id === toIO.nodeId);
+    const fromNode = nodes.get(fromIO.nodeId);
+    const toNode = nodes.get(toIO.nodeId);
 
     if (!fromNode || !toNode) {
         return {

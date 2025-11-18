@@ -2,7 +2,7 @@ import { NodeState } from "@/lib/graph/NodeState";
 import { NodeIOIdentifier } from "../../components/graph/NodeIO";
 
 export async function executeGraph(
-    nodes: NodeState<any, any>[],
+    nodes: Map<string, NodeState<any, any>>,
     edges: {
         fromIO: NodeIOIdentifier;
         toIO?: NodeIOIdentifier;
@@ -15,14 +15,14 @@ export async function executeGraph(
     const originalSetNodeState = setNodeState;
     setNodeState = (nodeId: string, newState: Partial<NodeState<any, any>>) => {
         originalSetNodeState(nodeId, newState);
-        const nodeIndex = nodes.findIndex(node => node.id === nodeId);
-        if (nodeIndex !== -1) {
-            nodes[nodeIndex] = { ...nodes[nodeIndex], ...newState };
+        const node = nodes.get(nodeId);
+        if (node) {
+            nodes.set(nodeId, { ...node, ...newState });
         }
     };
 
     // STEP B: find all output nodes and build a execution order
-    const outputNodes = nodes.filter(node => node.type === "output");
+    const outputNodes = Array.from(nodes.values()).filter(node => node.type === "output");
     if (outputNodes.length === 0) {
         console.warn("No output nodes found in the graph.");
         return;
@@ -38,7 +38,7 @@ export async function executeGraph(
         // Visit all connected input nodes
         const inputEdges = edges.filter(edge => edge.toIO?.nodeId === node.id);
         inputEdges.forEach(edge => {
-            const inputNode = nodes.find(n => n.id === edge.fromIO.nodeId);
+            const inputNode = nodes.get(edge.fromIO.nodeId);
             if (inputNode) {
                 visitNode(inputNode);
             }
@@ -65,7 +65,7 @@ export async function executeGraph(
             const inputEdges = edges.filter(edge => edge.toIO?.nodeId === node.id);
             const previousStates: Record<string, any> = {};
             inputEdges.forEach(edge => {
-                const inputNode = nodes.find(n => n.id === edge.fromIO.nodeId);
+                const inputNode = nodes.get(edge.fromIO.nodeId);
                 if (inputNode) {
                     previousStates[edge.fromIO.nodeIOName] = inputNode.state;
                 }
@@ -81,7 +81,7 @@ export async function executeGraph(
         node.inputs.forEach(input => {
             const inputEdge = edges.find(edge => edge.toIO?.nodeId === node.id && edge.toIO.nodeIOName === input.name);
             if (inputEdge) {
-                const inputNode = nodes.find(n => n.id === inputEdge.fromIO.nodeId);
+                const inputNode = nodes.get(inputEdge.fromIO.nodeId);
                 if (inputNode) {
                     parameters[input.name] = inputNode.state[inputEdge.fromIO.nodeIOName];
                 }

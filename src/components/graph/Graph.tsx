@@ -41,17 +41,6 @@ export function Graph({ }: {}) {
 
     const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         onMouseMoveDragCanvas(e);
-
-        /*if (previewEdge) {
-            const currentPosition: Position = {
-                x: e.clientX - graphRefOffsets.current.left,
-                y: e.clientY - graphRefOffsets.current.top,
-            };
-            setPreviewEdge({
-                ...previewEdge,
-                currentDragPosition: currentPosition,
-            });
-        }*/
     }, [graphRefOffsets, onMouseMoveDragCanvas]);
 
     const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -61,7 +50,7 @@ export function Graph({ }: {}) {
         onEndDraggingCanvas(e);
     }, [onEndDraggingCanvas]);
 
-    console.log("Render Graph", Date.now());
+    console.info("Render Graph", Date.now());
 
     return (
         <>

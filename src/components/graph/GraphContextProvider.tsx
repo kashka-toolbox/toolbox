@@ -14,13 +14,13 @@ type Edge = {
 };
 
 export type GraphState = {
-  nodes: NodeState<any, any>[];
+  nodes: Map<string, NodeState<any, any>>;
   nodeIds: string[];
   edges: Edge[];
   previewEdge: PreviewEdge | null;
 
   // actions
-  setNodes: (nodes: NodeState<any, any>[]) => void;
+  // setNodes: (nodes: NodeState<any, any>[]) => void;
   addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
   setPreviewEdge: (edge: PreviewEdge | null) => void;
   setNodePosition: (id: string, position: Position) => void;
@@ -37,31 +37,45 @@ export type GraphState = {
 // Create a factory function that returns a NEW store instance each time it's called
 export const createGraphStore = (): StoreApi<GraphState> =>
   create<GraphState>()(subscribeWithSelector((set, get) => ({
-    nodes: [],
+    nodes: new Map<string, NodeState<any, any>>(),
     nodeIds: [],
     edges: [],
     previewEdge: null,
     currentlyDraggingNode: null,
 
-    setNodes: (nodes) =>
-      set({ nodes, nodeIds: nodes.map((node) => node.id).toSorted() }),
     addEdge: (fromIO, toIO) =>
       set((s) => ({ edges: [...s.edges, { fromIO, toIO }] })),
     setPreviewEdge: (edge) => set({ previewEdge: edge }),
-    setNodePosition: (id, position) =>
+    setNodePosition: (id, position) => {
+      const node = get().nodes.get(id);
+      if (!node) {
+        throw new ReferenceError(
+          `Node with id ${id} not found in setNodePosition`,
+        );
+      }
       set((s) => ({
-        nodes: s.nodes.map((n) => (n.id === id ? { ...n, position } : n)),
-      })),
+        nodes: new Map(s.nodes).set(id, { ...node, position }),
+      }));
+    },
     updateNodeState: (nodeId, newState) =>
-      set((s) => ({
-        nodes: s.nodes.map((
-          n,
-        ) => (n.id === nodeId ? { ...n, ...newState } : n)),
-      })),
+      set((s) => {
+        const node = s.nodes.get(nodeId);
+        if (!node) {
+          throw new ReferenceError(
+            `Node with id ${nodeId} not found in updateNodeState`,
+          );
+        }
+        const updatedNode = { ...node, ...newState };
+        return {
+          nodes: new Map(s.nodes).set(nodeId, updatedNode),
+        };
+      }),
     initialize: (initialNodeStates, initialEdges) =>
-      set({ nodes: initialNodeStates, 
+      set({
+        nodes: new Map(initialNodeStates.map((node) => [node.id, node])),
         nodeIds: initialNodeStates.map((node) => node.id).toSorted(),
-        edges: initialEdges }),
+        edges: initialEdges,
+      }),
   })));
 
 // GraphStoreContext
@@ -97,13 +111,11 @@ export const useNodeState = <R = NodeState<any, any> | undefined>(
     node as unknown as R,
 ): R => {
   return useGraphStore((state) => {
-    const node = state.nodes.find((n) => n.id === nodeId) as
-      | NodeState<any, any>
-      | undefined;
+    const node = state.nodes.get(nodeId);
     return selector(node);
   });
 };
 
-export const useNodeIds: (() => string[]) = () => {
+export const useNodeIds: () => string[] = () => {
   return useGraphStore((state) => state.nodeIds);
 };

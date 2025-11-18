@@ -43,8 +43,8 @@ export const useEdgeRenderer = (
             };
 
             const compatibility = areTypesCompatible(
-                nodes.find(n => n.id === edge.fromIO.nodeId)?.getAllIO().find(io => io.name === edge.fromIO.nodeIOName)?.type || "any",
-                nodes.find(n => n.id === edge.toIO?.nodeId)?.getAllIO().find(io => io.name === edge.toIO?.nodeIOName)?.type || "any"
+                nodes.get(edge.fromIO.nodeId)?.getAllIO().find(io => io.name === edge.fromIO.nodeIOName)?.type || "any",
+                nodes.get(edge.toIO?.nodeId)?.getAllIO().find(io => io.name === edge.toIO?.nodeIOName)?.type || "any"
             );
 
             const edgeVariant = compatibility === "compatible" ? "default" : (compatibility === "warning" ? "typewarning" : "typeerror");
