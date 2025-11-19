@@ -49,6 +49,10 @@ export function GraphInfiniteCanvasScroll() {
     return (
         <div
             className="w-full h-full pointer-events-none"
+            style={{
+                backgroundImage: "radial-gradient(hsl(var(--border)) 1px, transparent 0)",
+                backgroundSize: "40px 40px"
+            }}  
             ref={sizeRef}
         />
     );
