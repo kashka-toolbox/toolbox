@@ -41,7 +41,7 @@ export function Graph({}: {}) {
     }, [graphRef.current?.offsetTop]);
 
     const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === graphRef.current) {
+        if (e.button === 0 && e.target === graphRef.current) {
             e.preventDefault();
             e.stopPropagation();
             onStartDragCanvas(e);
@@ -173,14 +173,12 @@ export function GraphOutputs({}: {}) {
 
 export function GraphUiOutput({ nodeId }: { nodeId: string }) {
     const node = useNodeState(nodeId);
-    const updateNodeState = useCurrentGraphStore().getState().updateNodeState;
 
     if (!node) {
         console.error("Node not found:", nodeId);
         return (
             <div>
-                This is a bug. Node not found:{" "}
-                {nodeId}. Please report it on GitHub.
+                This is a bug. Node not found: {nodeId}. Please report it on GitHub.
             </div>
         );
     }
