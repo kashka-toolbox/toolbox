@@ -90,7 +90,7 @@ export async function executeGraph(
             }
         });
 
-        await node.execute(parameters).then((result) => {
+        await node.execute(parameters, node).then((result) => {
             console.info(`Node ${node.id} executed successfully with result:`, result, "and parameters:", parameters);
 
             setNodeState(node.id, { state: { ...node.state, ...result } });

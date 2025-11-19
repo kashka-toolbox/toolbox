@@ -1,6 +1,9 @@
 import { NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { createNodeDefinition } from "./CreateNodeDefinition.factory";
 
+export const NODE_INPUT_IO_NAME = "fromUi";
+export const NODE_OUTPUT_IO_NAME = "toUi";
+
 export type NODE_TYPE =
     | "input"
     | "inputNumeric"
@@ -17,39 +20,39 @@ export const NODE_DEFINITIONS: {
         name: "input.any",
         inputs: [],
         outputs: [{
-            name: "fromUi",
+            name: NODE_INPUT_IO_NAME,
             translationKey: "types.any",
             type: "any",
         }],
-        execute: async () => {
-            return { "fromUi": "TODO: INPUT THIS VALUE USING UI" };
+        execute: async (_, self) => {
+            return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? "" };
         },
     }),
-    inputNumeric: createNodeDefinition<[], ["input.numeric.input"]>({
+    inputNumeric: createNodeDefinition<[], ["fromUi"]>({
         type: "input",
         name: "input.numeric",
         inputs: [],
         outputs: [{
-            name: "input.numeric.input",
+            name: NODE_INPUT_IO_NAME,
             translationKey: "types.numeric",
             type: "numeric",
         }],
-        execute: async () => {
-            return { "input.numeric.input": 12.3456789 };
+        execute: async (_, self) => {
+            return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? 0};
         },
     }),
     output: createNodeDefinition<["toUi"], []>({
         type: "output",
         name: "output.any",
         inputs: [{
-            name: "toUi",
+            name: NODE_OUTPUT_IO_NAME,
             translationKey: "types.any",
             type: "any",
         }],
         outputs: [],
         execute: async (stateOfInputs) => {
             console.warn("TODO: output to ui", stateOfInputs);
-            return {};
+            return stateOfInputs;
         },
     }),
     textToBase64: createNodeDefinition<
@@ -75,7 +78,7 @@ export const NODE_DEFINITIONS: {
 
             console.info(parameters[inputkey]);
 
-            if (!parameters[inputkey]) {
+            if (parameters[inputkey] === undefined) {
                 throw new Error(`Input ${inputkey} is required`);
             }
 
@@ -88,63 +91,63 @@ export const NODE_DEFINITIONS: {
     }),
     concatenateStrings: createNodeDefinition<
         [
-            "operation.text.concatenateStrings.inputs.stringA",
-            "operation.text.concatenateStrings.inputs.stringB",
+            "stringA",
+            "stringB",
         ],
-        ["operation.text.concatenateStrings.outputs.concatenated"]
+        ["concatenated"]
     >({
         type: "operation",
         name: "operation.text.concatenateStrings",
         inputs: [{
-            name: "operation.text.concatenateStrings.inputs.stringA",
+            name: "stringA",
             translationKey: "types.text.any",
             type: "text.any",
         }, {
-            name: "operation.text.concatenateStrings.inputs.stringB",
+            name: "stringB",
             translationKey: "types.text.any",
             type: "text.any",
         }],
         outputs: [{
-            name: "operation.text.concatenateStrings.outputs.concatenated",
+            name: "concatenated",
             translationKey: "types.text.any",
             type: "text.any",
         }],
         execute: async (
             parameters: {
-                "operation.text.concatenateStrings.inputs.stringA": string;
-                "operation.text.concatenateStrings.inputs.stringB": string;
+                "stringA": string;
+                "stringB": string;
             },
         ) => {
             const inputA =
-                parameters["operation.text.concatenateStrings.inputs.stringA"];
+                parameters["stringA"];
             const inputB =
-                parameters["operation.text.concatenateStrings.inputs.stringB"];
+                parameters["stringB"];
             return {
-                "operation.text.concatenateStrings.outputs.concatenated":
+                "concatenated":
                     inputA + inputB,
             };
         },
     }),
     waitAndForward: createNodeDefinition<
-        ["operation.waitAndForward.inputs.input"],
-        ["operation.waitAndForward.outputs.output"]
+        ["input"],
+        ["output"]
     >({
         type: "operation",
         name: "operation.waitAndForward",
         inputs: [{
-            name: "operation.waitAndForward.inputs.input",
+            name: "input",
             translationKey: "types.any",
             type: "any",
         }],
         outputs: [{
-            name: "operation.waitAndForward.outputs.output",
+            name: "output",
             translationKey: "types.any",
             type: "any",
         }],
-        execute: async ({ "operation.waitAndForward.inputs.input": input }) => {
+        execute: async ({ "input": input }) => {
             console.info("Waiting for 2 seconds before forwarding:", input);
             await new Promise((resolve) => setTimeout(resolve, 2000));
-            return { "operation.waitAndForward.outputs.output": input };
+            return { "output": input };
         },
     }),
 };

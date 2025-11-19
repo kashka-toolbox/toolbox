@@ -16,6 +16,8 @@ type Edge = {
 export type GraphState = {
   nodes: Map<string, NodeState<any, any>>;
   nodeIds: string[];
+  inputNodeIds: string[];
+  outputNodeIds: string[];
   edges: Edge[];
   previewEdge: PreviewEdge | null;
 
@@ -39,6 +41,8 @@ export const createGraphStore = (): StoreApi<GraphState> =>
   create<GraphState>()(subscribeWithSelector((set, get) => ({
     nodes: new Map<string, NodeState<any, any>>(),
     nodeIds: [],
+    inputNodeIds: [],
+    outputNodeIds: [],
     edges: [],
     previewEdge: null,
     currentlyDraggingNode: null,
@@ -74,6 +78,14 @@ export const createGraphStore = (): StoreApi<GraphState> =>
       set({
         nodes: new Map(initialNodeStates.map((node) => [node.id, node])),
         nodeIds: initialNodeStates.map((node) => node.id).toSorted(),
+        inputNodeIds: initialNodeStates
+          .filter((node) => node.type === "input")
+          .map((node) => node.id)
+          .toSorted(),
+        outputNodeIds: initialNodeStates
+          .filter((node) => node.type === "output")
+          .map((node) => node.id)
+          .toSorted(),
         edges: initialEdges,
       }),
   })));
@@ -118,4 +130,12 @@ export const useNodeState = <R = NodeState<any, any> | undefined>(
 
 export const useNodeIds: () => string[] = () => {
   return useGraphStore((state) => state.nodeIds);
+};
+
+export const useInputNodeIds: () => string[] = () => {
+  return useGraphStore((state) => state.inputNodeIds);
+};
+
+export const useOutputNodeIds: () => string[] = () => {
+  return useGraphStore((state) => state.outputNodeIds);
 };

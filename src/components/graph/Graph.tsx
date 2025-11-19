@@ -1,13 +1,15 @@
 import { Node } from "@/components/graph/Node";
 import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
 import { cn } from "@/lib/utils";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ExecuteGraphButton } from "./ExecuteGraphButton";
-import { useNodeIds } from "./GraphContextProvider";
+import { useCurrentGraphStore, useInputNodeIds, useNodeIds, useNodeState } from "./GraphContextProvider";
 import { GraphEdges } from "./GraphEdges";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
+import { Input } from "../ui/input";
+import { NODE_INPUT_IO_NAME } from "@/lib/graph/NodeDefinitions";
 
-export function Graph({ }: {}) {
+export function Graph({}: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
 
     const nodeIDs = useNodeIds();
@@ -25,10 +27,10 @@ export function Graph({ }: {}) {
 
     const graphRefOffsets = useRef({ left: 0, top: 0 });
     useEffect(() => {
-        graphRefOffsets.current.left = (graphRef.current?.offsetLeft ?? 0);
+        graphRefOffsets.current.left = graphRef.current?.offsetLeft ?? 0;
     }, [graphRef.current?.offsetLeft]);
     useEffect(() => {
-        graphRefOffsets.current.top = (graphRef.current?.offsetTop ?? 0);
+        graphRefOffsets.current.top = graphRef.current?.offsetTop ?? 0;
     }, [graphRef.current?.offsetTop]);
 
     const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -53,29 +55,85 @@ export function Graph({ }: {}) {
     console.info("Render Graph", Date.now());
 
     return (
-        <>
-            <ExecuteGraphButton />
-            <div
-                ref={graphRef}
-                className={cn(
-                    "relative rounded bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video",
-                    isCurrentlyDragging ? "cursor-grab" : undefined,
-                )}
-                onMouseMove={onMouseMove}
-                onMouseUp={onMouseUp}
-                onMouseDown={onMouseDown}
-                onMouseLeave={onEndDraggingCanvas}
-            >
-                <GraphInfiniteCanvasScroll />
-                <GraphEdges graphRef={graphRef} />
-                {nodeIDs.map((nodeId) => (
-                    <Node
-                        key={nodeId}
-                        nodeId={nodeId}
-                        graphRefOffsets={graphRefOffsets}
-                    />
-                ))}
-            </div>
-        </>
+        <div
+            ref={graphRef}
+            className={cn(
+                "relative rounded bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video",
+                isCurrentlyDragging ? "cursor-grab" : undefined,
+            )}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseDown={onMouseDown}
+            onMouseLeave={onEndDraggingCanvas}
+        >
+            <GraphInfiniteCanvasScroll />
+            <GraphEdges graphRef={graphRef} />
+            {nodeIDs.map((nodeId) => (
+                <Node
+                    key={nodeId}
+                    nodeId={nodeId}
+                    graphRefOffsets={graphRefOffsets}
+                />
+            ))}
+        </div>
     );
+}
+
+export function GraphInputs({}: {}) {
+    const inputNodeIDs = useInputNodeIds();
+
+    return <>
+        {inputNodeIDs.map((nodeId) => (
+            <GraphUiInput
+                key={nodeId}
+                nodeId={nodeId}
+            />
+        ))}
+    </>
+}
+
+export function GraphUiInput({nodeId}: {nodeId: string}) {
+    const node = useNodeState(nodeId);
+    const updateNodeState = useCurrentGraphStore().getState().updateNodeState;
+
+    if(!node) {
+        console.error("Node not found:", nodeId);
+        return <div>This is a bug. Node not found: {nodeId}. Please report it on GitHub.</div>;
+    }
+
+    const nodeOutputState = node?.state[NODE_INPUT_IO_NAME]
+
+    if(node.name == "input.numeric") {
+        return <Input
+            key={nodeId}
+            value={nodeOutputState ?? 0}
+            type="number"
+            onChange={(e) => {
+                const value = e.target.value;
+                const numericValue = value === "" ? "" : Number(value);
+                updateNodeState(nodeId, {
+                    state: {
+                        ...node.state,
+                        [NODE_INPUT_IO_NAME]: numericValue,
+                    },
+                });
+            }}
+            placeholder={`Numeric input for node ${nodeId}`}
+        />;
+    }
+    
+    return <Input
+        key={nodeId}
+        value={nodeOutputState ?? ""}
+        type="text"
+        onChange={(e) => {
+            updateNodeState(nodeId, {
+                state: {
+                    ...node.state,
+                    [NODE_INPUT_IO_NAME]: e.target.value,
+                },
+            });
+        }}
+        placeholder={`Input for node ${nodeId}`}
+    />;
 }
