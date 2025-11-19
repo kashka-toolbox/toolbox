@@ -51,7 +51,6 @@ export const NODE_DEFINITIONS: {
         }],
         outputs: [],
         execute: async (stateOfInputs) => {
-            console.warn("TODO: output to ui", stateOfInputs);
             return stateOfInputs;
         },
     }),

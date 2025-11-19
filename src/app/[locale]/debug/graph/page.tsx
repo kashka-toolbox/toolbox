@@ -1,7 +1,7 @@
 "use client";
 
 import { ExecuteGraphButton } from "@/components/graph/ExecuteGraphButton";
-import { Graph, GraphInputs } from "@/components/graph/Graph";
+import { Graph, GraphInputs, GraphOutputs } from "@/components/graph/Graph";
 import {
     createGraphStore,
     GraphStoreContext,
@@ -92,6 +92,7 @@ export default function Home() {
                 >
                     <Section variant={"ghost"}>
                         <GraphInputs />
+                        <GraphOutputs />
                         <ExecuteGraphButton />
                     </Section>
                     <Graph />
