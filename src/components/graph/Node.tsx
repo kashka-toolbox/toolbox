@@ -10,25 +10,31 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { useGraphStore, useNodeState } from "./GraphContextProvider";
 import { NodeIO } from "./NodeIO";
 import { NodeIOLabel } from "./NodeIOLabel";
+import { ContextMenu, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuSeparator } from "../ui/context-menu";
+import { ContextMenuTrigger } from "@radix-ui/react-context-menu";
 
 export function Node({
     nodeId,
-    graphRefOffsets
+    graphRefOffsets,
 }: {
     nodeId: string;
     graphRefOffsets: MutableRefObject<{
         left: number;
         top: number;
-    }>
+    }>;
 }) {
     const t = useTranslations("graph");
 
     const addEdge = useGraphStore((store) => store.addEdge);
     const setNodePosition = useGraphStore((store) => store.setNodePosition);
+    const removeNode = useGraphStore((store) => store.removeNodeAndConnectedEdges);
 
     const [isBeingDragged, setBeingDragged] = useState<boolean>(false);
 
-    const [dragStartPosition, setDragStartPosition] = useState<Position>({ x: 0, y: 0 });
+    const [dragStartPosition, setDragStartPosition] = useState<Position>({
+        x: 0,
+        y: 0,
+    });
     const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
 
     const nodeState = useNodeState(nodeId)!;
@@ -106,84 +112,104 @@ export function Node({
                 };
                 setNodePosition(nodeState.id, newPosition);
             }
-        }
+        };
         document.addEventListener("mousemove", handleMouseMove);
 
         return () => {
             document.removeEventListener("mousemove", handleMouseMove);
         };
-    }, [isBeingDragged, dragOffset, graphRefOffsets, setNodePosition, nodeState.id]);
+    }, [
+        isBeingDragged,
+        dragOffset,
+        graphRefOffsets,
+        setNodePosition,
+        nodeState.id,
+    ]);
 
     return (
-        <div
-            className={cn(
-                "node",
-                nodeState.type,
-                isBeingDragged ? "node-dragging" : undefined,
-                nodeState.isProcessing ? "is-processing" : undefined,
-                isBeingDragged ? "cursor-grabbing" : "cursor-grab",
-                "text-nowrap",
-            )}
-            style={{
-                left: nodeState.position.x,
-                top: nodeState.position.y,
-                transition: "transform 0.1s ease-out",
-            }}
-            onMouseDown={(e) => {
-                const target = e.target as HTMLElement;
+        <ContextMenu>
+            <ContextMenuTrigger asChild>
+                <div
+                    className={cn(
+                        "node",
+                        nodeState.type,
+                        isBeingDragged ? "node-dragging" : undefined,
+                        nodeState.isProcessing ? "is-processing" : undefined,
+                        isBeingDragged ? "cursor-grabbing" : "cursor-grab",
+                        "text-nowrap",
+                    )}
+                    style={{
+                        left: nodeState.position.x,
+                        top: nodeState.position.y,
+                        transition: "transform 0.1s ease-out",
+                    }}
+                    onMouseDown={(e) => {
+                        if(e.button !== 0) return;
 
-                if (
-                    target.getAttribute("data-node-dragable-handle") === "true"
-                ) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setBeingDragged(true);
-                    setDragStartPosition({
-                        x: e.clientX - graphRefOffsets.current.left,
-                        y: e.clientY - graphRefOffsets.current.top,
-                    });
-                    setDragOffset({
-                        x: nodeState.position.x -
-                            (e.clientX - graphRefOffsets.current.left),
-                        y: nodeState.position.y -
-                            (e.clientY - graphRefOffsets.current.top),
-                    });
-                }
-            }}
-            data-node-dragable-handle="true"
-        >
-            <div
-                data-node-dragable-handle="true"
-                className="p-1 bg-primary-foreground text-primary rounded"
-            >
-                {t("nodes." + nodeState.name + ".name")}
-            </div>
-            {nodeState.error && (
-                <Alert variant={"destructive"} className="mt-2">
-                    <AlertTitle>Error</AlertTitle>
-                    <AlertDescription>
-                        {nodeState.error}
-                    </AlertDescription>
-                </Alert>
-            )}
-            <div className="flex flex-col gap-1 mt-2">
-                <div className="flex flex-col gap-1">
-                    <div className="flex flex-col gap-1">
-                        {inputs}
+                        const target = e.target as HTMLElement;
+
+                        if (
+                            target.getAttribute("data-node-dragable-handle") ===
+                                "true"
+                        ) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setBeingDragged(true);
+                            setDragStartPosition({
+                                x: e.clientX - graphRefOffsets.current.left,
+                                y: e.clientY - graphRefOffsets.current.top,
+                            });
+                            setDragOffset({
+                                x: nodeState.position.x -
+                                    (e.clientX - graphRefOffsets.current.left),
+                                y: nodeState.position.y -
+                                    (e.clientY - graphRefOffsets.current.top),
+                            });
+                        }
+                    }}
+                    data-node-dragable-handle="true"
+                >
+                    <div
+                        data-node-dragable-handle="true"
+                        className="p-1 bg-primary-foreground text-primary rounded"
+                    >
+                        {t("nodes." + nodeState.name + ".name")}
+                    </div>
+                    {nodeState.error && (
+                        <Alert variant={"destructive"} className="mt-2">
+                            <AlertTitle>Error</AlertTitle>
+                            <AlertDescription>
+                                {nodeState.error}
+                            </AlertDescription>
+                        </Alert>
+                    )}
+                    <div className="flex flex-col gap-1 mt-2">
+                        <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-1">
+                                {inputs}
+                            </div>
+                        </div>
+
+                        <Separator
+                            className="my-px h-px bg-primary-foreground"
+                            orientation="horizontal"
+                        />
+
+                        <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-1">
+                                {outputs}
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <Separator
-                    className="my-px h-px bg-primary-foreground"
-                    orientation="horizontal"
-                />
-
-                <div className="flex flex-col gap-1">
-                    <div className="flex flex-col gap-1">
-                        {outputs}
-                    </div>
-                </div>
-            </div>
-        </div>
+            </ContextMenuTrigger>
+            <ContextMenuContent className="w-52">
+                <ContextMenuGroup>
+                    <ContextMenuItem variant={"destructive"} onClick={() => {
+                        removeNode(nodeState.id);
+                    }}>Delete</ContextMenuItem>
+                </ContextMenuGroup>
+            </ContextMenuContent>
+        </ContextMenu>  
     );
 }

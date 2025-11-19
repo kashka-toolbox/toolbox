@@ -65,7 +65,7 @@ export function Graph({}: {}) {
         <div
             ref={graphRef}
             className={cn(
-                "relative rounded bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video",
+                "relative rounded-md bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video border border-border",
                 isCurrentlyDragging ? "cursor-grab" : undefined,
             )}
             onMouseMove={onMouseMove}

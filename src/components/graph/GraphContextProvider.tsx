@@ -23,6 +23,7 @@ export type GraphState = {
 
   // actions
   // setNodes: (nodes: NodeState<any, any>[]) => void;
+  removeNodeAndConnectedEdges: (nodeId: string) => void;
   addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
   setPreviewEdge: (edge: PreviewEdge | null) => void;
   setNodePosition: (id: string, position: Position) => void;
@@ -47,6 +48,22 @@ export const createGraphStore = (): StoreApi<GraphState> =>
     previewEdge: null,
     currentlyDraggingNode: null,
 
+
+    removeNodeAndConnectedEdges: (nodeId) =>
+      set((s) => ({
+        nodes: (() => {
+          const newNodes = new Map(s.nodes);
+          newNodes.delete(nodeId);
+          return newNodes;
+        })(),
+        edges: s.edges.filter(
+          (edge) =>
+            edge.fromIO.nodeId !== nodeId && edge.toIO?.nodeId !== nodeId,
+        ),
+        nodeIds: s.nodeIds.filter((id) => id !== nodeId),
+        inputNodeIds: s.inputNodeIds.filter((id) => id !== nodeId),
+        outputNodeIds: s.outputNodeIds.filter((id) => id !== nodeId),
+      })),
     addEdge: (fromIO, toIO) =>
       set((s) => ({ edges: [...s.edges, { fromIO, toIO }] })),
     setPreviewEdge: (edge) => set({ previewEdge: edge }),
