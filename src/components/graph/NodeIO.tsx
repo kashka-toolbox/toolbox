@@ -123,6 +123,7 @@ const NodeIO: React.FC<NodeIOProps> = (
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDragExit={handleDragExit}
+            onDragLeave={handleDragExit}
             onDragEnd={handleDragEnd}
             onDrop={handleDrop}
             data-io-identifier={JSON.stringify(node_IO_identifier)}
