@@ -5,14 +5,18 @@ import { useGraphStore } from "@/components/graph/GraphContextProvider";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { areTypesCompatible } from "./areTypesCompatible";
 import { Position } from "./Position.type";
+import { render } from "react-dom";
 
 
 export const useEdgeRenderer = (
     graphRef: React.RefObject<HTMLDivElement>,
 ) => {
     const [renderedEdges, setRenderedEdges] = useState<JSX.Element[]>([]);
+    const [renderedPreviewEdge, setRenderedPreviewEdge] = useState<JSX.Element | null>(null);
     const nodes = useGraphStore((store) => store.nodes);
     const edges = useGraphStore((store) => store.edges);
+    const previewEdge = useGraphStore((store) => store.previewEdge);
+    const updatePreviewEdge = useGraphStore((store) => store.updatePreviewEdge);
 
     const recalculateEdges = () => {
         if (graphRef.current === null) {
@@ -77,9 +81,100 @@ export const useEdgeRenderer = (
         };
     }, [graphRef, graphRef.current, edges, nodes, setRenderedEdges]);
 
+    useEffect(() => {
+        console.log("Recalculating preview edge...");
+        
+        if (previewEdge === null && renderedPreviewEdge !== null) {
+            setRenderedPreviewEdge(null);
+        }
+        if (previewEdge === null) return;
+        if (graphRef.current === null) {
+            console.warn("Graph ref is null, cannot recalculate preview edge.");
+            setRenderedPreviewEdge(null);
+            return;
+        }
+
+        const graphBounds = graphRef.current.getBoundingClientRect();
+
+        const startIOBounds = graphRef.current.querySelector(`[data-io-identifier='${JSON.stringify(previewEdge.fromIO)}']`)?.getBoundingClientRect();
+        if (!startIOBounds) {
+            setRenderedPreviewEdge(null);
+            return;
+        }
+
+        const startPosition: Position = {
+            x: startIOBounds.left + startIOBounds.width / 2 - graphBounds.left,
+            y: startIOBounds.top + startIOBounds.height / 2 - graphBounds.top,
+        };
+
+        let currentPosition: Position = previewEdge.currentDragPosition ?? {
+            x: startPosition.x,
+            y: startPosition.y,
+        };
+
+        if (previewEdge.toIO) {
+            const endIOBounds = graphRef.current.querySelector(`[data-io-identifier='${JSON.stringify(previewEdge.toIO)}']`)?.getBoundingClientRect();
+            if (endIOBounds) {
+                currentPosition = {
+                    x: endIOBounds.left + endIOBounds.width / 2 - graphBounds.left,
+                    y: endIOBounds.top + endIOBounds.height / 2 - graphBounds.top,
+                };
+            }
+        }
+
+        if (previewEdge.fromIO === undefined) {
+            setRenderedPreviewEdge(null);
+            return;
+        }
+
+        const compatibility = areTypesCompatible(
+            nodes.get(previewEdge.fromIO.nodeId)?.getAllIO().find(io => io.name === previewEdge.fromIO!.nodeIOName)?.type || "any",
+            previewEdge.toIO
+                ? nodes.get(previewEdge.toIO.nodeId)?.getAllIO().find(io => io.name === previewEdge.toIO!.nodeIOName)?.type || "any"
+                : "any"
+        );
+
+        const edgeVariant = compatibility === "compatible" ? "default" : (compatibility === "warning" ? "typewarning" : "typeerror");
+
+        setRenderedPreviewEdge(
+            <Edge
+                key={"preview-edge"}
+                fromId={previewEdge.fromIO.nodeId}
+                toId={previewEdge.toIO?.nodeId}
+                startPosition={startPosition}
+                currentPosition={currentPosition}
+                variant={edgeVariant} />
+        );
+    }, [previewEdge, graphRef, nodes]);
+
+    useEffect(() => {
+        const updatePreviewEdgeOnMouseMove = (e: MouseEvent) => {
+            const graphBounds = graphRef.current?.getBoundingClientRect();
+            if (!graphBounds) return;
+
+            console.log("MouseMove");
+            
+
+            const currentPosition: Position = {
+                x: e.clientX - graphBounds.left,
+                y: e.clientY - graphBounds.top,
+            };
+
+            updatePreviewEdge({
+                currentDragPosition: currentPosition,
+            });
+        }
+
+        graphRef.current?.addEventListener("mousemove", updatePreviewEdgeOnMouseMove);
+
+        return () => {
+            graphRef.current?.removeEventListener("mousemove", updatePreviewEdgeOnMouseMove);
+        };
+    }, [graphRef.current, updatePreviewEdge]);
+
     useLayoutEffect(() => {
         recalculateEdges();
     }, [edges, nodes]);
 
-    return renderedEdges;
+    return [...renderedEdges, ...(renderedPreviewEdge ? [renderedPreviewEdge] : [])];
 };

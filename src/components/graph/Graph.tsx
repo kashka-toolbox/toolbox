@@ -21,10 +21,6 @@ export function Graph({}: {}) {
 
     const nodeIDs = useNodeIds();
 
-    //const previewEdge = useGraphStore((store) => store.previewEdge);
-    //const setPreviewEdge = useGraphStore((store) => store.setPreviewEdge);
-    //const setNodePosition = useGraphStore((store) => store.setNodePosition);
-
     const {
         onStartDragCanvas,
         onMouseMoveDragCanvas,

@@ -2,6 +2,8 @@ import { isEdgeDropValid } from "@/lib/graph/isEdgeDropValid";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { useGraphStore } from "./GraphContextProvider";
+import { exit } from "process";
+import { set } from "react-hook-form";
 
 export type NodeIOIdentifier = {
     nodeId: string;
@@ -20,6 +22,8 @@ const NodeIO: React.FC<NodeIOProps> = (
     { type, onConnectNodes, nodeId, ioName, data_type },
 ) => {
     const nodes = useGraphStore((store) => store.nodes);
+    const setPreviewEdge = useGraphStore((store) => store.setPreviewEdge);
+    const updatePreviewEdge = useGraphStore((store) => store.updatePreviewEdge);
 
     const node_IO_identifier: NodeIOIdentifier = {
         nodeId,
@@ -29,13 +33,21 @@ const NodeIO: React.FC<NodeIOProps> = (
     const handleDragStart = (e: React.DragEvent) => {
         console.log(`Dragging ${type} with nodeId: ${nodeId}`);
 
-        /*setPreviewEdge?.({ // TODO: add previews
+        setPreviewEdge?.({
             fromIO: node_IO_identifier,
             toIO: undefined,
-        });*/
+            dragStartPosition: { x: e.clientX,  y: e.clientY },
+            currentDragPosition: { x: e.clientX,  y: e.clientY },
+        });
 
         e.dataTransfer.setData("fromIO", JSON.stringify(node_IO_identifier));
     };
+
+    const handleDragExit = (e: React.DragEvent) => {
+        updatePreviewEdge?.({
+            toIO: undefined,
+        });
+    }
 
     const handleDragOver = (e: React.DragEvent) => {
         // TODO: add checks to ensure the drop is valid
@@ -51,13 +63,14 @@ const NodeIO: React.FC<NodeIOProps> = (
         const fromIO = JSON.parse(fromIoJSON) as NodeIOIdentifier;
         console.log({ fromIO, node_IO_identifier });
 
-        /*setPreviewEdge?.({
-            fromIO,
+        updatePreviewEdge?.({
             toIO: node_IO_identifier,
-        });*/
+        });
     };
 
     const handleDrop = (e: React.DragEvent) => {
+        setPreviewEdge?.(null);
+
         if (e.dataTransfer && e.dataTransfer.getData("fromIO")) {
             e.preventDefault();
             e.stopPropagation();
@@ -88,6 +101,12 @@ const NodeIO: React.FC<NodeIOProps> = (
         }
     };
 
+    const handleDragEnd = (e: React.DragEvent) => {
+        console.log("Drag ended");
+        
+        setPreviewEdge?.(null);
+    };
+
     if (type === "input") {
         return (
             <NodeIODot
@@ -96,6 +115,8 @@ const NodeIO: React.FC<NodeIOProps> = (
                 draggable={true}
                 onDragStart={handleDragStart}
                 onDragOver={handleDragOver}
+                onDragExit={handleDragExit}
+                onDragEnd={handleDragEnd}
                 onDrop={handleDrop}
                 data-io-identifier={JSON.stringify(node_IO_identifier)}
             />
@@ -107,9 +128,11 @@ const NodeIO: React.FC<NodeIOProps> = (
             type="output"
             data_type={data_type}
             draggable={true}
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
+                onDragStart={handleDragStart}
+                onDragOver={handleDragOver}
+                onDragExit={handleDragExit}
+                onDragEnd={handleDragEnd}
+                onDrop={handleDrop}
             data-io-identifier={JSON.stringify(node_IO_identifier)}
         />
     );

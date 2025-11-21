@@ -31,10 +31,6 @@ export function Node({
 
     const [isBeingDragged, setBeingDragged] = useState<boolean>(false);
 
-    const [dragStartPosition, setDragStartPosition] = useState<Position>({
-        x: 0,
-        y: 0,
-    });
     const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
 
     const nodeState = useNodeState(nodeId)!;
@@ -155,10 +151,6 @@ export function Node({
                             e.preventDefault();
                             e.stopPropagation();
                             setBeingDragged(true);
-                            setDragStartPosition({
-                                x: e.clientX - graphRefOffsets.current.left,
-                                y: e.clientY - graphRefOffsets.current.top,
-                            });
                             setDragOffset({
                                 x: nodeState.position.x -
                                     (e.clientX - graphRefOffsets.current.left),
