@@ -31,37 +31,30 @@ const NodeIO: React.FC<NodeIOProps> = (
     };
 
     const handleDragStart = (e: React.DragEvent) => {
-        console.log(`Dragging ${type} with nodeId: ${nodeId}`);
-
+        e.dataTransfer.setData(
+            "text",
+            "Chrome needs this for the dragOver event",
+        );
+        
         setPreviewEdge?.({
             fromIO: node_IO_identifier,
             toIO: undefined,
-            dragStartPosition: { x: e.clientX,  y: e.clientY },
-            currentDragPosition: { x: e.clientX,  y: e.clientY },
+            dragStartPosition: { x: e.clientX, y: e.clientY },
+            currentDragPosition: { x: e.clientX, y: e.clientY },
         });
 
         e.dataTransfer.setData("fromIO", JSON.stringify(node_IO_identifier));
     };
 
-    const handleDragExit = (e: React.DragEvent) => {
+    const handleDragExit = (e: React.DragEvent) => {        
         updatePreviewEdge?.({
             toIO: undefined,
         });
-    }
+    };
 
     const handleDragOver = (e: React.DragEvent) => {
         // TODO: add checks to ensure the drop is valid
         e.preventDefault();
-
-        e.dataTransfer.dropEffect = "move";
-
-        const fromIoJSON = e.dataTransfer.getData("fromIO");
-        if (fromIoJSON == undefined || fromIoJSON.length == 0) {
-            return;
-        }
-
-        const fromIO = JSON.parse(fromIoJSON) as NodeIOIdentifier;
-        console.log({ fromIO, node_IO_identifier });
 
         updatePreviewEdge?.({
             toIO: node_IO_identifier,
@@ -102,8 +95,6 @@ const NodeIO: React.FC<NodeIOProps> = (
     };
 
     const handleDragEnd = (e: React.DragEvent) => {
-        console.log("Drag ended");
-        
         setPreviewEdge?.(null);
     };
 
@@ -116,6 +107,7 @@ const NodeIO: React.FC<NodeIOProps> = (
                 onDragStart={handleDragStart}
                 onDragOver={handleDragOver}
                 onDragExit={handleDragExit}
+                onDragLeave={handleDragExit} // Again a chrome implementation difference. Why does Chrome ignore standards?
                 onDragEnd={handleDragEnd}
                 onDrop={handleDrop}
                 data-io-identifier={JSON.stringify(node_IO_identifier)}
@@ -128,11 +120,11 @@ const NodeIO: React.FC<NodeIOProps> = (
             type="output"
             data_type={data_type}
             draggable={true}
-                onDragStart={handleDragStart}
-                onDragOver={handleDragOver}
-                onDragExit={handleDragExit}
-                onDragEnd={handleDragEnd}
-                onDrop={handleDrop}
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragExit={handleDragExit}
+            onDragEnd={handleDragEnd}
+            onDrop={handleDrop}
             data-io-identifier={JSON.stringify(node_IO_identifier)}
         />
     );

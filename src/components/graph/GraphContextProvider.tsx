@@ -7,6 +7,7 @@ import { create, StoreApi, useStore } from "zustand";
 import { NodeIOIdentifier } from "./NodeIO";
 import { createContext, useContext } from "react";
 import { subscribeWithSelector } from "zustand/middleware";
+import { deepEqual } from "@/lib/graph/deepEqual";
 
 type Edge = {
   fromIO: NodeIOIdentifier;
@@ -49,7 +50,6 @@ export const createGraphStore = (): StoreApi<GraphState> =>
     previewEdge: null,
     currentlyDraggingNode: null,
 
-
     removeNodeAndConnectedEdges: (nodeId) =>
       set((s) => ({
         nodes: (() => {
@@ -68,11 +68,18 @@ export const createGraphStore = (): StoreApi<GraphState> =>
     addEdge: (fromIO, toIO) =>
       set((s) => ({ edges: [...s.edges, { fromIO, toIO }] })),
     setPreviewEdge: (edge) => set({ previewEdge: edge }),
-    updatePreviewEdge: (edge) =>{
-      if(edge === null) return;
-      set((s) => ({
-        previewEdge: { ...s.previewEdge, ...edge } as PreviewEdge,
-      }));
+    updatePreviewEdge: (edge) => {
+      if (edge === null) return;
+
+      set((s) => {
+        const newPreviewEdge = { ...s.previewEdge, ...edge } as PreviewEdge;
+
+        if (!deepEqual(s.previewEdge, newPreviewEdge)) { // reduce rerenders
+          return { previewEdge: newPreviewEdge };
+        }
+
+        return {};
+      });
     },
     setNodePosition: (id, position) => {
       const node = get().nodes.get(id);
