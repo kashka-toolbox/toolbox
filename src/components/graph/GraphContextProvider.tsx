@@ -8,6 +8,8 @@ import { NodeIOIdentifier } from "./NodeIO";
 import { createContext, useContext } from "react";
 import { subscribeWithSelector } from "zustand/middleware";
 import { deepEqual } from "@/lib/graph/deepEqual";
+import { createNode } from "@/lib/graph/CreateNode.factory";
+import { NODE_TYPE } from "@/lib/graph/NodeDefinitions";
 
 type Edge = {
   fromIO: NodeIOIdentifier;
@@ -26,6 +28,8 @@ export type GraphState = {
   // setNodes: (nodes: NodeState<any, any>[]) => void;
   removeNodeAndConnectedEdges: (nodeId: string) => void;
   addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
+  addNode: (node: NodeState<any, any>) => void;
+  addNodeFromDefinition: (nodeDefinitionKey: NODE_TYPE, position: Position) => void;
   setPreviewEdge: (edge: PreviewEdge | null) => void;
   updatePreviewEdge: (edge: Partial<PreviewEdge>) => void;
   setNodePosition: (id: string, position: Position) => void;
@@ -37,6 +41,7 @@ export type GraphState = {
     initialNodeStates: NodeState<any, any>[],
     initialEdges: Edge[],
   ) => void;
+  generateUniqueNodeId: () => string;
 };
 
 // Create a factory function that returns a NEW store instance each time it's called
@@ -67,6 +72,23 @@ export const createGraphStore = (): StoreApi<GraphState> =>
       })),
     addEdge: (fromIO, toIO) =>
       set((s) => ({ edges: [...s.edges, { fromIO, toIO }] })),
+    addNode: (node) =>
+      set((s) => ({
+        nodes: new Map(s.nodes).set(node.id, node),
+        nodeIds: [...s.nodeIds, node.id].toSorted(),
+        inputNodeIds:
+          node.type === "input"
+            ? [...s.inputNodeIds, node.id].toSorted()
+            : s.inputNodeIds,
+        outputNodeIds:
+          node.type === "output"
+            ? [...s.outputNodeIds, node.id].toSorted()
+            : s.outputNodeIds,
+      })),
+    addNodeFromDefinition: (nodeDefinitionKey, position) => {
+      const newNode: NodeState<any, any> = createNode(nodeDefinitionKey, get().generateUniqueNodeId(), position);
+      get().addNode(newNode);
+    },
     setPreviewEdge: (edge) => set({ previewEdge: edge }),
     updatePreviewEdge: (edge) => {
       if (edge === null) return;
@@ -119,6 +141,14 @@ export const createGraphStore = (): StoreApi<GraphState> =>
           .toSorted(),
         edges: initialEdges,
       }),
+    generateUniqueNodeId: () => {
+      if(self.crypto === undefined || self.crypto.randomUUID === undefined) {
+        console.warn("crypto.randomUUID is not available, using fallback for unique node IDs.");
+        return get().nodeIds.length.toString() + "_" + Math.random().toString(36).substring(2, 15);
+      }
+
+      return get().nodeIds.length.toString() + "_" + self.crypto.randomUUID();
+    }
   })));
 
 // GraphStoreContext

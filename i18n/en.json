@@ -186,6 +186,21 @@
           }
         }
       }
+    }, 
+    "addNodeDialog": {
+      "title": "Add Node",
+      "searchbar": {
+        "placeholder": "Search nodes...",
+        "noResultsFound": "No results found."
+      },
+      "category": {
+        "title": "Category",
+        "subItem": {
+          "title": "Sub Item",
+          "description": "This is a description of the sub item.",
+          "shortcut": "Ctrl+N"
+        }
+      }
     }
   }
 }
