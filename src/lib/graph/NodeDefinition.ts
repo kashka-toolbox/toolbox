@@ -17,6 +17,30 @@ export type NodeIO = {
     type: string;
 };
 
+export const NODE_CATEGORIES = {
+    input: {
+        icon: "input",
+        translationKey: "categories.input",
+    },
+    output: {
+        icon: "output",
+        translationKey: "categories.output",
+    },
+    strings: {
+        icon: "strings",
+        translationKey: "categories.strings",
+    },
+    math: {
+        icon: "math",
+        translationKey: "categories.math",
+    },
+    extra: {
+        icon: "extra",
+        translationKey: "categories.extra",
+    },
+} as const;
+export type NodeCategory = keyof typeof NODE_CATEGORIES;
+
 export type NodeDefinition<
     I extends { [key: string]: any },
     O extends { [key: string]: any },
@@ -53,4 +77,5 @@ export type NodeDefinition<
      * and any additional data needed for execution.
      */
     state: { [key: string]: any };
+    nodeCategory?: NodeCategory;
 };

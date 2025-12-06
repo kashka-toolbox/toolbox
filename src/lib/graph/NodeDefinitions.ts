@@ -27,6 +27,7 @@ export const NODE_DEFINITIONS: {
         execute: async (_, self) => {
             return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? "" };
         },
+        nodeCategory: "input",
     }),
     inputNumeric: createNodeDefinition<[], ["fromUi"]>({
         type: "input",
@@ -40,6 +41,7 @@ export const NODE_DEFINITIONS: {
         execute: async (_, self) => {
             return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? 0};
         },
+        nodeCategory: "input",
     }),
     output: createNodeDefinition<["toUi"], []>({
         type: "output",
@@ -53,6 +55,7 @@ export const NODE_DEFINITIONS: {
         execute: async (stateOfInputs) => {
             return stateOfInputs;
         },
+        nodeCategory: "output",
     }),
     textToBase64: createNodeDefinition<
         ["operation.text.textToBase64.inputs.text"],
@@ -87,6 +90,7 @@ export const NODE_DEFINITIONS: {
                 ),
             };
         },
+        nodeCategory: "strings",
     }),
     concatenateStrings: createNodeDefinition<
         [
@@ -126,6 +130,7 @@ export const NODE_DEFINITIONS: {
                     inputA + inputB,
             };
         },
+        nodeCategory: "strings",
     }),
     waitAndForward: createNodeDefinition<
         ["input"],
@@ -148,5 +153,6 @@ export const NODE_DEFINITIONS: {
             await new Promise((resolve) => setTimeout(resolve, 2000));
             return { "output": input };
         },
+        nodeCategory: "extra",
     }),
 };

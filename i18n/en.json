@@ -162,6 +162,13 @@
         "base64": "Text (Base64)"
       }
     },
+    "categories": {
+      "input": "Input",
+      "output": "Output",
+      "strings": "Strings",
+      "math": "Math",
+      "extra": "Extra"
+    },
     "nodes": {
       "input": {
         "any": {

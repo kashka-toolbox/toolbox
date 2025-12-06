@@ -1,4 +1,4 @@
-import { NodeDefinition } from "./NodeDefinition";
+import { NodeCategory, NodeDefinition } from "./NodeDefinition";
 import { NodeState } from "./NodeState";
 
 /**
@@ -19,6 +19,7 @@ export function createNodeDefinition<
         inputs: { name: InputKeys[number]; translationKey: string; type: string }[];
         outputs: { name: OutputKeys[number]; translationKey: string; type: string }[];
         execute: (parameters: { [K in InputKeys[number]]: any }, self: NodeState<InputKeys, OutputKeys>) => Promise<{ [K in OutputKeys[number]]: any }>;
+        nodeCategory: NodeCategory;
     }
 ): NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }> {
     return { ...config, state: {} } as NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }>;

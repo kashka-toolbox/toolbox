@@ -8,12 +8,13 @@ import { CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Com
 import { DialogContent } from "../ui/dialog";
 import { useGraphStore } from "./GraphContextProvider";
 import { NODE_DEFINITIONS, NODE_TYPE } from "@/lib/graph/NodeDefinitions";
-import { NodeDefinition } from "@/lib/graph/NodeDefinition";
+import { NODE_CATEGORIES, NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { createNode } from "@/lib/graph/CreateNode.factory";
 import { set } from "react-hook-form";
 
 export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivElement> }) {
-    const t = useTranslations("graph.addNodeDialog");
+    const t_graph = useTranslations("graph");
+    const t_dialog = useTranslations("graph.addNodeDialog");
     const t_node = useTranslations("graph.nodes");
 
     const [addMenuVisible, setAddMenuVisible] = useState(false);
@@ -59,27 +60,37 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
     return (
         <Dialog open={addMenuVisible} onOpenChange={setAddMenuVisible}>
             <DialogContent>
-                <DialogTitle>{t("title")} {nodePosition.current?.x} {nodePosition.current?.y}</DialogTitle>
+                <DialogTitle>{t_dialog("title")} {nodePosition.current?.x} {nodePosition.current?.y}</DialogTitle>
                 <Command>
                     <CommandInput
-                        placeholder={t("searchbar.placeholder")}
+                        placeholder={t_dialog("searchbar.placeholder")}
                     />
 
                     <CommandList className="min-w-[300px] max-h-80 overflow-y-auto">
-                        <CommandEmpty>{t("searchbar.noResultsFound")}</CommandEmpty>
-                                            {
-                        Object.entries(NODE_DEFINITIONS).map(([key, def]) => (
-                            <CommandItem key={key} onSelect={() => {
-                                addNodeFromDefinition(key as NODE_TYPE, nodePosition.current!);
-                                setAddMenuVisible(false);
-                            }}>
-                                <CubeIcon className="mr-2 h-4 w-4 min-w-4 place-self-center" />
-                                <span className="text-nowrap inline-block">{t_node(`${def.name}.name`)}</span>
-                                <span className="text-muted-foreground pl-2 text-xs text-ellipsis overflow-hidden min-w-0">{t_node(`todo.description`)}</span>
-                                <CommandShortcut className="w-fit pl-2">NOT YET IMPLEMENTED</CommandShortcut>
-                            </CommandItem>
-                        ))
-                    }
+                        <CommandEmpty>{t_dialog("searchbar.noResultsFound")}</CommandEmpty>
+                        {
+                            Object.entries(NODE_CATEGORIES).map(([key, category]) => {
+                                const nodesInCategory = Object.entries(NODE_DEFINITIONS).filter(([node_key, node_def]) => node_def.nodeCategory === key);
+                                if (nodesInCategory.length === 0) {
+                                    return null;
+                                }
+
+                                return (
+                                    <CommandGroup key={key} heading={t_graph(category.translationKey)}>
+                                        {nodesInCategory.map(([node_key, def]: [string, NodeDefinition<any, any>]) => (
+                                            <CommandItem key={node_key} onSelect={() => {
+                                                addNodeFromDefinition(node_key as NODE_TYPE, nodePosition.current!);
+                                                setAddMenuVisible(false);
+                                            }}>
+                                                <CubeIcon className="mr-2 h-4 w-4 min-w-4 place-self-center" />
+                                                <span className="text-nowrap inline-block">{t_node(`${def.name}.name`)}</span>
+                                                <span className="text-muted-foreground pl-2 text-xs text-ellipsis overflow-hidden min-w-0">{t_node(`todo.description`)}</span>
+                                            </CommandItem>
+                                        ))}
+                                    </CommandGroup>
+                                );
+                            })
+                        }
                     </CommandList>
                 </Command>
             </DialogContent>
