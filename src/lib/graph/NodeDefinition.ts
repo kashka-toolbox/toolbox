@@ -1,3 +1,4 @@
+import { ArrowRightIcon, InputIcon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
 import { NodeState } from "./NodeState";
 
 export type NodeIO = {
@@ -19,23 +20,23 @@ export type NodeIO = {
 
 export const NODE_CATEGORIES = {
     input: {
-        icon: "input",
+        icon: InputIcon,
         translationKey: "categories.input",
     },
     output: {
-        icon: "output",
+        icon: ArrowRightIcon,
         translationKey: "categories.output",
     },
     strings: {
-        icon: "strings",
+        icon: TextIcon,
         translationKey: "categories.strings",
     },
     math: {
-        icon: "math",
+        icon: PlusIcon,
         translationKey: "categories.math",
     },
     extra: {
-        icon: "extra",
+        icon: MagicWandIcon,
         translationKey: "categories.extra",
     },
 } as const;
