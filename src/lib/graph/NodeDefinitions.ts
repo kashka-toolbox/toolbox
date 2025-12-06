@@ -10,7 +10,8 @@ export type NODE_TYPE =
     | "output"
     | "textToBase64"
     | "concatenateStrings"
-    | "waitAndForward";
+    | "waitAndForward"
+    | "randomUUID";
 
 export const NODE_DEFINITIONS: {
     [key in NODE_TYPE]: NodeDefinition<any, any>;
@@ -155,4 +156,18 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "extra",
     }),
-};
+    randomUUID: createNodeDefinition<[], ["uuid"]>({
+        type: "operation",
+        name: "operation.cryptography.randomUUID",
+        inputs: [],
+        outputs: [{
+            name: "uuid",
+            translationKey: "types.text.uuid",
+            type: "text.uuid",
+        }],
+        execute: async () => {
+            return { "uuid": crypto.randomUUID() };
+        },
+        nodeCategory: "cryptography",
+    }),
+};  

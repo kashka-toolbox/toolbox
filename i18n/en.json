@@ -157,9 +157,11 @@
   "graph": {
     "types": {
       "any": "any",
+      "numeric": "Numeric",
       "text": {
         "any": "Text",
-        "base64": "Text (Base64)"
+        "base64": "Text (Base64)",
+        "uuid": "Text (UUID)"
       }
     },
     "categories": {
@@ -167,12 +169,16 @@
       "output": "Output",
       "strings": "Strings",
       "math": "Math",
+      "cryptography": "Cryptography",
       "extra": "Extra"
     },
     "nodes": {
       "input": {
         "any": {
           "name": "Input"
+        },
+        "numeric": {
+          "name": "Numeric Input"
         }
       },
       "output": {
@@ -190,6 +196,11 @@
           },
           "concatenateStrings": {
             "name": "Concatenate Strings"
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Random UUID"
           }
         }
       }

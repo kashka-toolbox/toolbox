@@ -1,4 +1,4 @@
-import { ArrowRightIcon, InputIcon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, InputIcon, LockOpen1Icon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
 import { NodeState } from "./NodeState";
 
 export type NodeIO = {
@@ -34,6 +34,10 @@ export const NODE_CATEGORIES = {
     math: {
         icon: PlusIcon,
         translationKey: "categories.math",
+    },
+    cryptography: {
+        icon: LockOpen1Icon,
+        translationKey: "categories.cryptography",
     },
     extra: {
         icon: MagicWandIcon,

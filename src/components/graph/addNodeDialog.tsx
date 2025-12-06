@@ -66,7 +66,7 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
                         placeholder={t_dialog("searchbar.placeholder")}
                     />
 
-                    <CommandList className="min-w-[300px] max-h-80 overflow-y-auto">
+                    <CommandList className="min-w-[300px] max-h-80 overflow-y-auto rounded border-border border">
                         <CommandEmpty>{t_dialog("searchbar.noResultsFound")}</CommandEmpty>
                         {
                             Object.entries(NODE_CATEGORIES).map(([key, category]) => {
