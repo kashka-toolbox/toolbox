@@ -5,23 +5,18 @@ import {
 } from "@/lib/graph/NodeDefinitions";
 import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
 import { cn } from "@/lib/utils";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Input } from "../ui/input";
+import { AddNodeDialog } from "./addNodeDialog";
 import {
     useCurrentGraphStore,
     useInputNodeIds,
     useNodeIds,
     useNodeState,
+    useOutputNodeIds,
 } from "./GraphContextProvider";
 import { GraphEdges } from "./GraphEdges";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
-import { Dialog, DialogTitle } from "@radix-ui/react-dialog";
-import { DialogContent } from "../ui/dialog";
-import { CommandAndNavigationCommand } from "../ui/CommandAndNavigationCommand";
-import { Command } from "cmdk";
-import { CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandShortcut } from "../ui/command";
-import { CubeIcon } from "@radix-ui/react-icons";
-import { AddNodeDialog } from "./addNodeDialog";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
@@ -161,7 +156,7 @@ export function GraphUiInput({ nodeId }: { nodeId: string }) {
 }
 
 export function GraphOutputs({ }: {}) {
-    const outputNodeIDs = useCurrentGraphStore().getState().outputNodeIds;
+    const outputNodeIDs = useOutputNodeIds();
 
     return (
         <>
