@@ -60,7 +60,7 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
     return (
         <Dialog open={addMenuVisible} onOpenChange={setAddMenuVisible}>
             <DialogContent>
-                <DialogTitle>{t_dialog("title")} {nodePosition.current?.x} {nodePosition.current?.y}</DialogTitle>
+                <DialogTitle className="font-bold">{t_dialog("title")}</DialogTitle>
                 <Command>
                     <CommandInput
                         placeholder={t_dialog("searchbar.placeholder")}
@@ -82,7 +82,7 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
                                                 addNodeFromDefinition(node_key as NODE_TYPE, nodePosition.current!);
                                                 setAddMenuVisible(false);
                                             }}>
-                                                <CubeIcon className="mr-2 h-4 w-4 min-w-4 place-self-center" />
+                                                <category.icon className="mr-2 h-4 w-4 min-w-4 place-self-center" />
                                                 <span className="text-nowrap inline-block">{t_node(`${def.name}.name`)}</span>
                                                 <span className="text-muted-foreground pl-2 text-xs text-ellipsis overflow-hidden min-w-0">{t_node(`todo.description`)}</span>
                                             </CommandItem>
