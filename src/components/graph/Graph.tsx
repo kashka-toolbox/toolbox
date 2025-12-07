@@ -17,6 +17,7 @@ import {
 } from "./GraphContextProvider";
 import { GraphEdges } from "./GraphEdges";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
+import { CopyToClipboard } from "../ui/copyToClipboard";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
@@ -170,6 +171,7 @@ export function GraphOutputs({ }: {}) {
     );
 }
 
+
 export function GraphUiOutput({ nodeId }: { nodeId: string }) {
     const node = useNodeState(nodeId);
 
@@ -184,25 +186,16 @@ export function GraphUiOutput({ nodeId }: { nodeId: string }) {
 
     const nodeOutputState = node?.state[NODE_OUTPUT_IO_NAME];
 
-    if (node.name == "input.numeric") {
-        return (
+    return (
+        <span className="flex flex-row items-center gap-2 w-full">
             <Input
                 key={nodeId}
-                value={nodeOutputState ?? 0}
-                type="number"
+                value={nodeOutputState ?? ""}
+                type="text"
                 readOnly={true}
-                placeholder={`Numeric input for node ${nodeId}`}
+                placeholder={`No output produced yet.`}
             />
-        );
-    }
-
-    return (
-        <Input
-            key={nodeId}
-            value={nodeOutputState ?? ""}
-            type="text"
-            readOnly={true}
-            placeholder={`No output produced yet.`}
-        />
+            <CopyToClipboard clipboardContent={nodeOutputState} className="mt-[1px]" />
+        </span>
     );
 }

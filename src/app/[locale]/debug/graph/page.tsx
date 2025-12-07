@@ -7,6 +7,7 @@ import {
     GraphStoreContext,
 } from "@/components/graph/GraphContextProvider";
 import { Section } from "@/components/ui/Section";
+import { Separator } from "@/components/ui/separator";
 import { createNode } from "@/lib/graph/CreateNode.factory";
 import { NODE_OUTPUT_IO_NAME } from "@/lib/graph/NodeDefinitions";
 
@@ -90,9 +91,17 @@ export default function Home() {
                 <GraphStoreContext.Provider
                     value={graphStore}
                 >
-                    <Section variant={"ghost"}>
-                        <GraphInputs />
-                        <GraphOutputs />
+                    <Section variant={"ghost"} className="flex flex-col gap-4 md:gap-8">
+                        <div className="flex flex-row gap-4">
+                            <div className="flex flex-col gap-2 w-full">
+                                <h2 className="header-section-3">Inputs</h2>
+                                <GraphInputs />
+                            </div>
+                            <div className="flex flex-col gap-2 w-full">
+                                <h2 className="header-section-3">Outputs</h2>
+                                <GraphOutputs />
+                            </div>
+                        </div>
                         <ExecuteGraphButton />
                     </Section>
                     <Graph />
