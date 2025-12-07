@@ -1,5 +1,6 @@
 import { ArrowRightIcon, InputIcon, LockOpen1Icon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
 import { NodeState } from "./NodeState";
+import { TYPE_DEFINITION_KEY } from "./TypeDefinitions";
 
 export type NodeIO = {
     /**
@@ -10,12 +11,14 @@ export type NodeIO = {
     name: string;
     /**
      * Translation key for the IO name
+     * 
+     * If undefined the type name will be used as fallback.
      */
-    translationKey: string;
+    translationKey?: string;
     /**
      * Data type of the IO, e.g. "types.text", "types.number", "types.image.png", etc.
      */
-    type: string;
+    type: TYPE_DEFINITION_KEY;
 };
 
 export const NODE_CATEGORIES = {

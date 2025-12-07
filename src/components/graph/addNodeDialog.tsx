@@ -55,8 +55,6 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
         };
     }, [graphRef, onContextMenu]);
 
-    console.info("Render Add Node Dialog", Date.now());
-
     return (
         <Dialog open={addMenuVisible} onOpenChange={setAddMenuVisible}>
             <DialogContent>

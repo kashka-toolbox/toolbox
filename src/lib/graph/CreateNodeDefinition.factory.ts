@@ -1,5 +1,6 @@
 import { NodeCategory, NodeDefinition } from "./NodeDefinition";
 import { NodeState } from "./NodeState";
+import { TYPE_DEFINITION_KEY } from "./TypeDefinitions";
 
 /**
  * Utility function to create a strongly-typed NodeDefinition.
@@ -16,8 +17,8 @@ export function createNodeDefinition<
     config: {
         type: string;
         name: string;
-        inputs: { name: InputKeys[number]; translationKey: string; type: string }[];
-        outputs: { name: OutputKeys[number]; translationKey: string; type: string }[];
+        inputs: { name: InputKeys[number]; translationKey?: string; type: string }[];
+        outputs: { name: OutputKeys[number]; translationKey?: string; type: TYPE_DEFINITION_KEY }[];
         execute: (parameters: { [K in InputKeys[number]]: any }, self: NodeState<InputKeys, OutputKeys>) => Promise<{ [K in OutputKeys[number]]: any }>;
         nodeCategory: NodeCategory;
     }

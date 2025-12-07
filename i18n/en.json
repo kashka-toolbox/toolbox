@@ -192,10 +192,17 @@
         },
         "text": {
           "textToBase64": {
-            "name": "Text to Base64"
+            "name": "Text to Base64",
+            "inputs": {
+              "stringA": "Text A"
+            }
           },
           "concatenateStrings": {
-            "name": "Concatenate Strings"
+            "name": "Concatenate Strings",
+            "inputs": {
+              "stringA": "Text A",
+              "stringB": "Text B"
+            }
           }
         },
         "cryptography": {

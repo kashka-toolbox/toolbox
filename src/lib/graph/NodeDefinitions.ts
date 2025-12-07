@@ -22,7 +22,6 @@ export const NODE_DEFINITIONS: {
         inputs: [],
         outputs: [{
             name: NODE_INPUT_IO_NAME,
-            translationKey: "types.any",
             type: "any",
         }],
         execute: async (_, self) => {
@@ -36,7 +35,6 @@ export const NODE_DEFINITIONS: {
         inputs: [],
         outputs: [{
             name: NODE_INPUT_IO_NAME,
-            translationKey: "types.numeric",
             type: "numeric",
         }],
         execute: async (_, self) => {
@@ -49,7 +47,6 @@ export const NODE_DEFINITIONS: {
         name: "output.any",
         inputs: [{
             name: NODE_OUTPUT_IO_NAME,
-            translationKey: "types.any",
             type: "any",
         }],
         outputs: [],
@@ -66,12 +63,10 @@ export const NODE_DEFINITIONS: {
         name: "operation.text.textToBase64",
         inputs: [{
             name: "operation.text.textToBase64.inputs.text",
-            translationKey: "types.text.any",
             type: "text.any",
         }],
         outputs: [{
             name: "operation.text.textToBase64.outputs.base64",
-            translationKey: "types.text.base64",
             type: "text.base64",
         }],
         execute: async (
@@ -104,16 +99,15 @@ export const NODE_DEFINITIONS: {
         name: "operation.text.concatenateStrings",
         inputs: [{
             name: "stringA",
-            translationKey: "types.text.any",
+            translationKey: "nodes.operation.text.concatenateStrings.inputs.stringA",
             type: "text.any",
         }, {
             name: "stringB",
-            translationKey: "types.text.any",
+            translationKey: "nodes.operation.text.concatenateStrings.inputs.stringB",
             type: "text.any",
         }],
         outputs: [{
             name: "concatenated",
-            translationKey: "types.text.any",
             type: "text.any",
         }],
         execute: async (
