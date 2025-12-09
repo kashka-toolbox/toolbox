@@ -11,6 +11,10 @@ on:
         description: 'The Docker platform name (e.g., linux/amd64, linux/arm64)'
         required: true
         type: string
+      digest-name:
+        description: 'The Docker digest name (e.g., linux-amd64, linux-arm64)'
+        required: true
+        type: string
       image-name:
         description: 'The name of the image to build'
         required: true
@@ -62,7 +66,7 @@ jobs:
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
-          name: digests-${{ inputs.platform-name }} # Use platform name for unique artifact
+          name: digests-${{ inputs.digest-name }} # Use platform name for unique artifact
           path: ${{ runner.temp }}/digests/*
           if-no-files-found: error
           retention-days: 7
