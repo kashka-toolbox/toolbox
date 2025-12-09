@@ -1,4 +1,4 @@
-import { BlendingModeIcon, ExclamationTriangleIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
+import { BlendingModeIcon, ExclamationTriangleIcon, FileTextIcon, GitHubLogoIcon, HomeIcon, TextIcon, UpdateIcon } from "@radix-ui/react-icons";
 
 interface NavigationGroupTranslationKey {
   translationKey: string;
@@ -50,6 +50,7 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           href: "/",
           displayInMenu: false,
           shortcut: "*",
+          icon: HomeIcon,
         },
         {
           translationKey: "source",
@@ -91,6 +92,12 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           href: "/debug/auth",
           displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
           icon: ExclamationTriangleIcon,
+        },
+        {
+          translationKey: "ui",
+          href: "/debug/ui",
+          displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
+          icon: ExclamationTriangleIcon,
         }
       ],
     },
@@ -114,12 +121,20 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           translationKey: "URL",
           href: "/encoding/url",
           displayInMenu: true,
+          icon: UpdateIcon,
         },
         {
           translationKey: "base64",
           href: "/encoding/base64",
           displayInMenu: true,
+          icon: UpdateIcon,
         },
+        {
+          translationKey: "UnicodeBinary",
+          href: "/encoding/UnicodeBinary",
+          displayInMenu: true,
+          icon: UpdateIcon,
+        }
       ],
     },
     {
@@ -131,6 +146,18 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           href: "/color/hex-to-hsl",
           displayInMenu: true,
           icon: BlendingModeIcon,
+        },
+      ],
+    },
+    {
+      translationKey: "tools.pdf",
+      displayInMenu: true,
+      items: [
+        {
+          translationKey: "split",
+          href: "/pdf/split",
+          displayInMenu: true,
+          icon: FileTextIcon,
         },
       ],
     }

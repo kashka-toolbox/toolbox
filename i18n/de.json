@@ -1,16 +1,147 @@
 {
   "home": {
-    "title": "Die ultimative Werkzeugkiste"
+    "title": "Die Ultimative Toolbox",
+    "description": "Eine Sammlung von online Tools, die kostenlos und für alle zugänglich sind",
+    "clientSideComputing": {
+      "title": "Client-seitige Verarbeitung",
+      "description": "Jede Eingabe, die du machst, wird auf deinem Gerät verarbeitet. Keine Daten werden an die Cloud gesendet."
+    },
+    "openSource": {
+      "forever": "Für immer",
+      "title": "Open Source",
+      "description": "Der gesamte Quellcode ist auf GitHub verfügbar. Dieses Projekt ist für die nicht-kommerzielle Nutzung kostenlos. Weitere Informationen findest du in der AGPL-3.0 Lizenz.",
+      "GitHub": "GitHub",
+      "license": "Lizenz"
+    }
   },
-  "tools": {
-    "color": {
-      "hexToHsl": {
-        "title": "Hex zu HSL",
-        "description": "Konvertiert eine Hex-Farbe zum HSL Format.",
-        "options": {
-          "valuesOnly": "In hsl(...) einschließen"
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Suche nach einem Tool...",
+      "noResultsFound": "Keine Ergebnisse gefunden."
+    },
+    "gettingStarted": {
+      "title": "Erste Schritte",
+      "home": {
+        "title": "Startseite",
+        "description": ""
+      },
+      "source": {
+        "title": "Quellcode anzeigen",
+        "description": "Starte uns auf GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Fehlerbehebung",
+      "auth": {
+        "title": "Auth",
+        "description": ""
+      },
+      "debug": {
+        "title": "Debug",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Rechtliches",
+      "privacy": {
+        "title": "Datenschutzerklärung",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Impressum",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Wörter zählen",
+          "description": "Zählt Sätze, Wörter und Zeichen"
+        }
+      },
+      "encoding": {
+        "title": "Kodierung",
+        "URL": {
+          "title": "URL-Encoding",
+          "description": "Kodiert Text als URL-Parameter"
+        },
+        "base64": {
+          "title": "Base64 Encoding",
+          "description": "Kodiert oder dekodiert Text als Base64"
+        }
+      },
+      "color": {
+        "title": "Farbe",
+        "hexToHSL": {
+          "title": "Hex zu HSL",
+          "description": "Konvertiert eine Hex-Farbe in das HSL-Format"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "PDFs Teilen",
+          "description": "Teilt eine PDF in mehrere Dateien"
         }
       }
     }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Kodiert:",
+        "b2a_result": "Dekodiert:",
+        "a2b_title": "URL-Kodierung",
+        "b2a_title": "URL-Dekodierung",
+        "whatis": "Was ist URL-Kodierung?",
+        "description": "URL-Kodierung (auch bekannt als Prozent-Kodierung) ist eine Methode zur Kodierung von Zeichen in URLs, die nicht Teil des standardmäßigen ASCII-Zeichensatzes sind. Dazu gehören Sonderzeichen wie Leerzeichen, Pfeile oder Sonderzeichen aus anderen Sprachen.",
+        "howItWorks": {
+          "title": "Wie es funktioniert",
+          "description": "<li>Jedes Sonderzeichen wird mit einem \"%\" gefolgt von einer 2-stelligen Hexadezimalzahl kodiert.</li>\n<li>Ein Leerzeichen würde zum Beispiel als \"%20\" kodiert und das weniger als Zeichen \"<\" würde als \"%3C\" kodiert.</li>"
+        },
+        "lookup": {
+          "title": "Nachschlagetabelle",
+          "description": "Suche die URL-Kodierung für ein bestimmtes Zeichen."
+        }
+      },
+      "base64": {
+        "a2b_result": "Als Base64 kodiert:",
+        "b2a_result": "Als String dekodiert:",
+        "a2b_title": "Base64-Encoding",
+        "b2a_title": "Base64-Decoding"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex zu HSL",
+        "description": "Konvertiert eine Hex-Farbe in das HSL-Format.",
+        "options": {
+            "valuesOnly": "In hsl(...) einfügen"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "PDF teilen",
+        "description": "Teilt eine PDF-Datei in mehrere Dateien.",
+        "actions": {
+          "downloadAll": "Alle geteilten Seiten herunterladen",
+          "dropFiles": "Dateien hierhin ziehen und ablegen oder klicken, um auszuwählen"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Suche"
+  },
+  "converterBidirectional": {
+    "input": "Eingabe:",
+    "swapSides": "Seiten tauschen",
+    "clearInput": "Eingabe löschen"
   }
 }

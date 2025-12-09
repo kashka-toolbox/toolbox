@@ -5,6 +5,8 @@ export default function Home() {
 
     if (typeof process.env["kashkaImprint"] === "string")
         markdown = process.env["kashkaImprint"]
+    else
+        console.warn("No imprint found in process.env",  process.env["kashkaImprint"])
 
     return (
         <section className="flex flex-col gap-4">
@@ -12,3 +14,5 @@ export default function Home() {
         </section>
     );
 }
+
+export const dynamic = 'force-dynamic'

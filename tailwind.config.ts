@@ -1,8 +1,6 @@
-import type { Config } from "tailwindcss"
-import { PluginCreator, PluginsConfig } from "tailwindcss/types/config"
-import { PluginAPI } from 'tailwindcss/types/config';
+import type { Config } from "tailwindcss";
 import plugin from 'tailwindcss/plugin';
-import { WidthIcon } from "@radix-ui/react-icons";
+import { PluginAPI } from 'tailwindcss/types/config';
 
 const config = {
   darkMode: ["class"],
@@ -89,10 +87,15 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "marquee": {
+          from: { transform: "translate(0%, 0)" },
+          to: { transform: "translate(-25%, 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "marquee-slow": "marquee 20s linear infinite",
       },
       fontFamily: {
         groteskItalic: ['var(--font-HostGroteskItalic)']

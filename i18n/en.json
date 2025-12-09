@@ -1,6 +1,18 @@
 {
   "home": {
-    "title": "The Ultimate Toolbox"
+    "title": "The Ultimate Toolbox",
+    "description": "A collection of tools free and for everyone",
+    "clientSideComputing": {
+      "title": "Client-side computing",
+      "description": "Every input you provide is processed on your device. No data is sent to cloud."
+    },
+    "openSource": {
+      "forever": "Forever",
+      "title": "Open Source",
+      "description": " All the source code is available on GitHub. This project is free for non-commercial use. See the AGPL-3.0 license for more information.",
+      "GitHub": "GitHub",
+      "license": "License"
+    }
   },
   "navigation": {
     "searchbar": {
@@ -26,6 +38,10 @@
       },
       "debug": {
         "title": "Debug Overview",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
         "description": ""
       }
     },
@@ -57,6 +73,10 @@
         "base64": {
           "title": "Base64 En-/Decoding",
           "description": "Encode or decode text as Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode Binary En-/Decoding",
+          "description": "Encode or decode text as Unicode Binary"
         }
       },
       "color": {
@@ -64,6 +84,13 @@
         "hexToHSL": {
           "title": "Hex to HSL",
           "description": "Convert a hex color to HSL format"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Split",
+          "description": "Split a PDF into multiple files"
         }
       }
     }
@@ -91,6 +118,12 @@
         "b2a_result": "Decoded as a string:",
         "a2b_title": "Base64 Encoding",
         "b2a_title": "Base64 Decoding"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Encoded as Unicode:",
+        "b2a_result": "Decoded as binary:",
+        "a2b_title": "Binary to Unicode",
+        "b2a_title": "Unicode to Binary"
       }
     },
     "color": {
@@ -98,7 +131,17 @@
         "title": "Hex to HSL",
         "description": "Converts a hex color to HSL format.",
         "options": {
-            "valuesOnly": "Include in hsl(...)"
+          "valuesOnly": "Include in hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Split PDF",
+        "description": "Split a PDF file into multiple files.",
+        "actions": {
+          "downloadAll": "Download all split pages",
+          "dropFiles": "Drag & drop files here, or click to select"
         }
       }
     }
@@ -110,5 +153,39 @@
     "input": "Input:",
     "swapSides": "Swap sides",
     "clearInput": "Clear input"
+  },
+  "graph": {
+    "types": {
+      "any": "any",
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)"
+      }
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Input"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Output"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Wait and Forward"
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text to Base64"
+          },
+          "concatenateStrings": {
+            "name": "Concatenate Strings"
+          }
+        }
+      }
+    }
   }
 }

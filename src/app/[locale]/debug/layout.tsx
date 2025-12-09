@@ -3,8 +3,8 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { getTranslationKeyByHref } from "@/lib/navigation";
-import { Link } from "@/navigation";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { usePathname } from "next/navigation";
 

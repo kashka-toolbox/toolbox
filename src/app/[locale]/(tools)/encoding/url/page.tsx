@@ -1,19 +1,13 @@
 "use client"
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Section } from "@/components/ui/Section";
-import { Textarea } from "@/components/ui/textarea";
-import { TranslationTable, TranslationTableItem } from "@/components/ui/translationTable";
-import { UpdateIcon } from "@radix-ui/react-icons";
-import { useTranslations } from 'next-intl';
-import { useEffect, useState } from "react";
-import { urlEncodingTranslationTableData } from "./translationTableData";
-import { Separator } from "@/components/ui/separator";
-import { Checkbox } from "@/components/ui/checkbox";
-import { convertURL } from "./convertURL";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Section } from "@/components/ui/Section";
 import { ConverterBidirectional } from "@/components/ui/tools/converter/converter-bidirectional";
 import { ConverterCheckbox } from "@/components/ui/tools/converter/converter-checkbox";
+import { TranslationTable, TranslationTableItem } from "@/components/ui/translationTable";
+import { useTranslations } from 'next-intl';
+import { useState } from "react";
+import { convertURL } from "./convertURL";
+import { urlEncodingTranslationTableData } from "./translationTableData";
 
 export default function URLEncoding() {
   const t = useTranslations("tools.encoding.url");
@@ -54,7 +48,9 @@ export default function URLEncoding() {
 
       <h3 className="header-section-3">{t("howItWorks.title")}</h3>
       <ul className="ps-4 mt-0 space-y-1 list-disc list-none [&>*]:before:content-['→'] [&>*]:before:pr-4">
-        {t.rich("howItWorks.description")}
+        {t.rich("howItWorks.description", {
+          "li": (children) => <li className="text-muted-foreground">{children}</li>,
+        })}
       </ul>
     </Section>
     <Section variant={"default"}>

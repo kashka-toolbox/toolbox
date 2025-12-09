@@ -15,10 +15,9 @@ export default function Header() {
   const { isSignedIn, logout } = useContext(AuthContext) ?? {};
 
   return (
-    <>
       <header className='sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
         <div className='container px-4 md:px-8 flex justify-around items-center gap-2 sm:gap-6 h-14 max-w-screen-2xl'>
-          <span className='text-3xl font-groteskItalic font-black tracking-tight hidden sm:flex  gap-2 items-center min-w-fit'>
+          <span className='text-3xl font-groteskItalic font-black tracking-tight hidden sm:flex  gap-2 items-center min-w-fit flex-[1] basis-0'>
             <FourDotsIcon />
             <span>Kashka</span>
           </span>
@@ -27,7 +26,7 @@ export default function Header() {
               <CommandAndNavigationCommand className='absolute left-0 right-0 top-0 w-full h-max' />
             </div>
           </div>
-          <div className='flex items-center justify-between space-x-2 md:justify-end'>
+          <div className='flex items-center space-x-2 md:justify-end flex-[1] basis-1 justify-end'>
             <Sheet>
               <SheetTrigger asChild>
                 {
@@ -69,6 +68,5 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </>
   );
 };

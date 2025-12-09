@@ -9,12 +9,11 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/components/ui/command";
+import { useRouter } from "@/i18n/navigation";
 import { menuData } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
-import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
 
@@ -49,7 +48,7 @@ export const CommandAndNavigationCommand = React.forwardRef<
           <CommandEmpty>{t("searchbar.noResultsFound")}</CommandEmpty>
           {
             menuData.map((category, index) => {
-              if(category.displayInMenu !== true)
+              if (category.displayInMenu !== true)
                 return undefined;
 
               return (

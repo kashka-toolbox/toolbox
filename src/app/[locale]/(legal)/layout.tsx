@@ -1,11 +1,7 @@
 "use client";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { getTranslationKeyByHref } from "@/lib/navigation";
-import { Link } from "@/navigation";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 

@@ -2,6 +2,7 @@
 
 import api from "@/lib/axios/axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { set } from "react-hook-form";
 
 // Export the Context (refresh and access token)
 export const AuthContext = createContext<{
@@ -28,9 +29,14 @@ export const AuthContext = createContext<{
  * ```
  */
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [refreshToken, setRefreshToken] = useState<string>(localStorage.getItem('refreshToken') ?? '');
-  const [accessToken, setAccessToken] = useState<string>(localStorage.getItem('accessToken') ?? '');
+  const [refreshToken, setRefreshToken] = useState<string>('');
+  const [accessToken, setAccessToken] = useState<string>('');
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    setRefreshToken(localStorage.getItem('refreshToken') ?? '');
+    setAccessToken(localStorage.getItem('accessToken') ?? '');
+  }, []);
 
   const logout = () => {
     setRefreshToken('');

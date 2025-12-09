@@ -2,7 +2,10 @@ name: Create and publish a Docker image
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows: ["Playwright Tests"]
+    types:
+      - completed
     branches: [development, production]
 
 env:
@@ -10,8 +13,20 @@ env:
   UPPER_IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
+  preconditions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check preconditions
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_run" && "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+            echo "Precondition failed: previous workflow was not successful."
+            exit 1
+          fi
+          echo "Preconditions met, proceeding with workflow."
+
   prepare:
     runs-on: ubuntu-latest
+    needs: preconditions
     outputs:
       image-name: ${{ steps.step1.outputs.IMAGE_NAME }}
     steps:
