@@ -45,7 +45,7 @@ jobs:
       packages: write
     with:
       platform-runner: ubuntu-latest
-      platform-name: linux/amd64
+      platform-name: linux-amd64
       image-name: ${{ needs.prepare.outputs.image-name }}
     secrets: inherit
 
@@ -58,7 +58,7 @@ jobs:
       packages: write
     with:
       platform-runner: ubuntu-24.04-arm
-      platform-name: linux/arm64
+      platform-name: linux-arm64
       image-name: ${{ needs.prepare.outputs.image-name }}
     secrets: inherit
 
