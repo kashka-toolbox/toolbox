@@ -1,0 +1,70 @@
+name: Reusable Docker Build
+
+on:
+  workflow_call:
+    inputs:
+      platform-runner:
+        description: 'The runner to use (e.g., ubuntu-latest, ubuntu-24.04-arm)'
+        required: true
+        type: string
+      platform-name:
+        description: 'The Docker platform name (e.g., linux/amd64, linux/arm64)'
+        required: true
+        type: string
+      image-name:
+        description: 'The name of the image to build'
+        required: true
+        type: string
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
+jobs:
+  build:
+    runs-on: ${{ inputs.platform-runner }}
+    env:
+      IMAGE_NAME: ${{ inputs.image-name }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: ${{ inputs.platform-name }}
+          labels: ${{ steps.meta.outputs.labels }}
+          outputs: type=image,"name=${{ env.IMAGE_NAME }}",push-by-digest=true,name-canonical=true,push=true
+
+      - name: Export digest
+        run: |
+          mkdir -p ${{ runner.temp }}/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "${{ runner.temp }}/digests/${digest#sha256:}"
+
+      - name: Upload digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-${{ inputs.platform-name }} # Use platform name for unique artifact
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          retention-days: 7
