@@ -30,7 +30,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
-    "next": "15.2.4",
+    "next": "15.2.6",
     "next-intl": "^4.0.1",
     "next-themes": "^0.3.0",
     "pdf-lib": "^1.17.1",
