@@ -6,8 +6,8 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json pnpm-lock.yaml* ./
-ENV COREPACK_INTEGRITY_KEYS=0
-RUN corepack enable pnpm && pnpm i --frozen-lockfile
+RUN npm install -g pnpm 
+RUN pnpm i --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -16,8 +16,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV COREPACK_INTEGRITY_KEYS=0
-RUN corepack enable pnpm && pnpm run build
+RUN npm install -g pnpm
+RUN pnpm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
