@@ -19,6 +19,8 @@ export type GraphState = {
   outputNodeIds: string[];
   edges: Edge[];
   previewEdge: PreviewEdge | null;
+  scale: number;
+  panOffset: Position;
 
   // actions
   // setNodes: (nodes: NodeState<any, any>[]) => void;
@@ -39,6 +41,10 @@ export type GraphState = {
   ) => void;
   generateUniqueNodeId: () => string;
   sortGraph: (nodeSpacingX?: number, nodeSpacingY?: number, nodeOffsetX?: number, nodeOffsetY?: number) => void;
+  setScale: (scale: number) => void;
+  setPanOffset: (offset: Position) => void;
+  zoomTo: (delta: number, point: Position) => void;
+  resetZoom: () => void;
 };
 
 // Create a factory function that returns a NEW store instance each time it's called
@@ -50,7 +56,8 @@ export const createGraphStore = (): StoreApi<GraphState> =>
     outputNodeIds: [],
     edges: [],
     previewEdge: null,
-    currentlyDraggingNode: null,
+    scale: 1,
+    panOffset: { x: 0, y: 0 },
 
     removeNodeAndConnectedEdges: (nodeId) =>
       set((s) => ({
@@ -169,7 +176,20 @@ export const createGraphStore = (): StoreApi<GraphState> =>
         });
         return { nodes: newNodes };
       });
-    }
+    },
+    setScale: (scale) => set({ scale: Math.max(0.1, Math.min(4, scale)) }),
+    setPanOffset: (offset) => set({ panOffset: offset }),
+    zoomTo: (delta, point) => {
+      const { scale, panOffset } = get();
+      const newScale = Math.max(0.1, Math.min(4, scale * (1 + delta)));
+      const scaleFactor = newScale / scale;
+      const newPanOffset = {
+        x: point.x - (point.x - panOffset.x) * scaleFactor,
+        y: point.y - (point.y - panOffset.y) * scaleFactor,
+      };
+      set({ scale: newScale, panOffset: newPanOffset });
+    },
+    resetZoom: () => set({ scale: 1, panOffset: { x: 0, y: 0 } }),
   })));
 
 // GraphStoreContext

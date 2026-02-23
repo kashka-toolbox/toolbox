@@ -28,6 +28,8 @@ export function Node({
     const addEdge = useGraphStore((store) => store.addEdge);
     const setNodePosition = useGraphStore((store) => store.setNodePosition);
     const removeNode = useGraphStore((store) => store.removeNodeAndConnectedEdges);
+    const scale = useGraphStore((store) => store.scale);
+    const panOffset = useGraphStore((store) => store.panOffset);
 
     const [isBeingDragged, setBeingDragged] = useState<boolean>(false);
 
@@ -101,9 +103,9 @@ export function Node({
         const handleMouseMove = (e: MouseEvent) => {
             if (isBeingDragged) {
                 const newPosition = {
-                    x: e.clientX - graphRefOffsets.current.left +
+                    x: (e.clientX - graphRefOffsets.current.left - panOffset.x) / scale +
                         dragOffset.x,
-                    y: e.clientY - graphRefOffsets.current.top +
+                    y: (e.clientY - graphRefOffsets.current.top - panOffset.y) / scale +
                         dragOffset.y,
                 };
                 setNodePosition(nodeState.id, newPosition);
@@ -120,6 +122,8 @@ export function Node({
         graphRefOffsets,
         setNodePosition,
         nodeState.id,
+        scale,
+        panOffset,
     ]);
 
     return (
@@ -151,11 +155,11 @@ export function Node({
                             e.preventDefault();
                             e.stopPropagation();
                             setBeingDragged(true);
+                            const mouseX = (e.clientX - graphRefOffsets.current.left - panOffset.x) / scale;
+                            const mouseY = (e.clientY - graphRefOffsets.current.top - panOffset.y) / scale;
                             setDragOffset({
-                                x: nodeState.position.x -
-                                    (e.clientX - graphRefOffsets.current.left),
-                                y: nodeState.position.y -
-                                    (e.clientY - graphRefOffsets.current.top),
+                                x: nodeState.position.x - mouseX,
+                                y: nodeState.position.y - mouseY,
                             });
                         }
                     }}

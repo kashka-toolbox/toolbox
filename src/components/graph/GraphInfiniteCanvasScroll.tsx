@@ -1,59 +1,24 @@
-import { useEffect, useRef } from "react";
+import { Position } from "@/lib/graph/Position.type";
 
-export function GraphInfiniteCanvasScroll() {
-    const sizeRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        const resizeScrollArea = () => {
-            if (!sizeRef.current) {
-                return;
-            }
-
-            const parentScrollLeft =
-                (sizeRef.current.parentElement?.clientWidth ?? 0) +
-                (sizeRef.current.parentElement?.scrollLeft ?? 0);
-            const parentScrollHeight =
-                (sizeRef.current.parentElement?.clientHeight ?? 0) +
-                (sizeRef.current.parentElement?.scrollTop ?? 0);
-            sizeRef.current.style.minHeight = (parentScrollHeight +
-                (sizeRef.current.parentElement?.clientHeight ?? 0)) + "px";
-            sizeRef.current.style.minWidth = (parentScrollLeft +
-                (sizeRef.current.parentElement?.clientWidth ?? 0)) + "px";
-        };
-
-        resizeScrollArea();
-        const resizeObserver = new ResizeObserver(resizeScrollArea);
-        if (sizeRef.current?.parentElement) {
-            resizeObserver.observe(sizeRef.current.parentElement);
-        }
-
-        sizeRef.current?.parentElement?.addEventListener(
-            "scroll",
-            resizeScrollArea,
-        );
-
-        return () => {
-            resizeObserver.disconnect();
-            sizeRef.current?.parentElement?.removeEventListener(
-                "scroll",
-                resizeScrollArea,
-            );
-        };
-    }, [
-        sizeRef.current?.parentElement?.scrollLeft,
-        sizeRef.current?.parentElement?.clientWidth,
-        sizeRef.current?.parentElement?.scrollTop,
-        sizeRef.current?.parentElement?.clientHeight,
-        sizeRef.current?.parentElement,
-    ]);
-
+export function GraphInfiniteCanvasScroll({ 
+}: { 
+    scale: number; 
+    panOffset: Position;
+}) {
+    const gridSize = 40;
+    const dotSize = 1;
+    
     return (
         <div
-            className="w-full h-full pointer-events-none"
+            className="absolute pointer-events-none"
             style={{
-                backgroundImage: "radial-gradient(hsl(var(--border)) 1px, transparent 0)",
-                backgroundSize: "40px 40px"
-            }}  
-            ref={sizeRef}
+                width: "50000px",
+                height: "50000px",
+                left: "-25000px",
+                top: "-25000px",
+                backgroundImage: `radial-gradient(circle, hsl(var(--border)) ${dotSize}px, transparent ${dotSize}px)`,
+                backgroundSize: `${gridSize}px ${gridSize}px`,
+            }}
         />
     );
 }

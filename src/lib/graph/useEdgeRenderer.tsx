@@ -7,6 +7,8 @@ import { areTypesCompatible } from "./areTypesCompatible";
 import { Position } from "./Position.type";
 import { PreviewEdge } from "./PreviewEdge.type";
 
+const SVG_OFFSET = 25000;
+
 export const useEdgeRenderer = (
     graphRef: React.RefObject<HTMLDivElement>,
 ) => {
@@ -18,6 +20,8 @@ export const useEdgeRenderer = (
     const edges = useGraphStore((store) => store.edges);
     const previewEdge = useGraphStore((store) => store.previewEdge);
     const updatePreviewEdge = useGraphStore((store) => store.updatePreviewEdge);
+    const scale = useGraphStore((store) => store.scale);
+    const panOffset = useGraphStore((store) => store.panOffset);
 
     const previewEdgeRef = useRef<PreviewEdge | null>(null);
 
@@ -46,18 +50,18 @@ export const useEdgeRenderer = (
                 `[data-io-identifier='${JSON.stringify(edge.toIO)}']`,
             )?.getBoundingClientRect();
             if (!endIOBounds) return null;
-            // TODO: take scrolling into account
+            
             const startPosition: Position = {
-                x: startIOBounds.left + startIOBounds.width / 2 -
-                    graphBounds.left,
-                y: startIOBounds.top + startIOBounds.height / 2 -
-                    graphBounds.top,
+                x: (startIOBounds.left + startIOBounds.width / 2 -
+                    graphBounds.left - panOffset.x) / scale + SVG_OFFSET,
+                y: (startIOBounds.top + startIOBounds.height / 2 -
+                    graphBounds.top - panOffset.y) / scale + SVG_OFFSET,
             };
 
             const currentPosition: Position = {
-                x: endIOBounds.left + endIOBounds.width / 2 -
-                        graphBounds.left || startPosition.x,
-                y: endIOBounds.top + endIOBounds.height / 2 - graphBounds.top ||
+                x: (endIOBounds.left + endIOBounds.width / 2 -
+                        graphBounds.left - panOffset.x) / scale + SVG_OFFSET || startPosition.x,
+                y: (endIOBounds.top + endIOBounds.height / 2 - graphBounds.top - panOffset.y) / scale + SVG_OFFSET ||
                     startPosition.y,
             };
 
@@ -94,7 +98,6 @@ export const useEdgeRenderer = (
     useEffect(() => {
         const graphCurrent = graphRef.current;
         graphCurrent?.addEventListener("transitionend", recalculateEdges);
-        graphCurrent?.addEventListener("scroll", recalculateEdges);
 
         if (graphCurrent !== null) {
             recalculateEdges();
@@ -105,9 +108,8 @@ export const useEdgeRenderer = (
                 "transitionend",
                 recalculateEdges,
             );
-            graphCurrent?.removeEventListener("scroll", recalculateEdges);
         };
-    }, [graphRef, graphRef.current, edges, nodes, setRenderedEdges]);
+    }, [graphRef, graphRef.current, edges, nodes, setRenderedEdges, scale, panOffset]);
 
     useEffect(() => {
         if (previewEdge === null && renderedPreviewEdge !== null) {
@@ -131,8 +133,8 @@ export const useEdgeRenderer = (
         }
 
         const startPosition: Position = {
-            x: startIOBounds.left + startIOBounds.width / 2 - graphBounds.left,
-            y: startIOBounds.top + startIOBounds.height / 2 - graphBounds.top,
+            x: (startIOBounds.left + startIOBounds.width / 2 - graphBounds.left - panOffset.x) / scale + SVG_OFFSET,
+            y: (startIOBounds.top + startIOBounds.height / 2 - graphBounds.top - panOffset.y) / scale + SVG_OFFSET,
         };
 
         let currentPosition: Position = previewEdge.currentDragPosition ?? {
@@ -146,10 +148,10 @@ export const useEdgeRenderer = (
             )?.getBoundingClientRect();
             if (endIOBounds) {
                 currentPosition = {
-                    x: endIOBounds.left + endIOBounds.width / 2 -
-                        graphBounds.left,
-                    y: endIOBounds.top + endIOBounds.height / 2 -
-                        graphBounds.top,
+                    x: (endIOBounds.left + endIOBounds.width / 2 -
+                        graphBounds.left - panOffset.x) / scale + SVG_OFFSET,
+                    y: (endIOBounds.top + endIOBounds.height / 2 -
+                        graphBounds.top - panOffset.y) / scale + SVG_OFFSET,
                 };
             }
         }
@@ -184,7 +186,7 @@ export const useEdgeRenderer = (
                 variant={edgeVariant}
             />,
         );
-    }, [previewEdge, graphRef, nodes]);
+    }, [previewEdge, graphRef, nodes, scale, panOffset]);
 
     useEffect(() => {
         const updatePreviewEdgeOnMouseMove = (e: MouseEvent) => {
@@ -196,8 +198,8 @@ export const useEdgeRenderer = (
             if (!graphBounds) return;
 
             const currentPosition: Position = {
-                x: e.clientX - graphBounds.left,
-                y: e.clientY - graphBounds.top,
+                x: (e.clientX - graphBounds.left - panOffset.x) / scale + SVG_OFFSET,
+                y: (e.clientY - graphBounds.top - panOffset.y) / scale + SVG_OFFSET,
             };
 
             updatePreviewEdge({
@@ -216,11 +218,11 @@ export const useEdgeRenderer = (
                 updatePreviewEdgeOnMouseMove,
             );
         };
-    }, [graphRef.current, previewEdgeRef, updatePreviewEdge]);
+    }, [graphRef.current, previewEdgeRef, updatePreviewEdge, scale, panOffset]);
 
     useLayoutEffect(() => {
         recalculateEdges();
-    }, [edges, nodes]);
+    }, [edges, nodes, scale, panOffset]);
 
     return [
         ...renderedEdges,

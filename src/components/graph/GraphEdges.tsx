@@ -1,13 +1,10 @@
 import { useEdgeRenderer } from "@/lib/graph/useEdgeRenderer";
 
-/**
- * Just the rendered edges of the graph.
- */
 export function GraphEdges({graphRef}: {graphRef: React.RefObject<HTMLDivElement>}) {
     const renderedEdges = useEdgeRenderer(graphRef);
 
     return (
-        <svg className="sticky inset-0 w-full h-full pointer-events-none z-20">
+        <svg className="absolute pointer-events-none z-20" style={{ width: "50000px", height: "50000px", left: "-25000px", top: "-25000px" }}>
             {renderedEdges}
         </svg>
     );

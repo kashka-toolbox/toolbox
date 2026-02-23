@@ -4,12 +4,14 @@ import {
     NODE_OUTPUT_IO_NAME,
 } from "@/lib/graph/NodeDefinitions";
 import { useCanvasDrag } from "@/lib/graph/useCanvasDrag";
+import { useZoom } from "@/lib/graph/useZoom";
 import { cn } from "@/lib/utils";
 import { useCallback, useEffect, useRef } from "react";
 import { Input } from "../ui/input";
 import { AddNodeDialog } from "./addNodeDialog";
 import {
     useCurrentGraphStore,
+    useGraphStore,
     useInputNodeIds,
     useNodeIds,
     useNodeState,
@@ -18,11 +20,14 @@ import {
 import { GraphEdges } from "./GraphEdges";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
 import { CopyToClipboard } from "../ui/copyToClipboard";
+import { ZoomControls } from "./ZoomControls";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
 
     const nodeIDs = useNodeIds();
+    const scale = useGraphStore((state) => state.scale);
+    const panOffset = useGraphStore((state) => state.panOffset);
 
     const {
         onStartDragCanvas,
@@ -30,6 +35,8 @@ export function Graph({ }: {}) {
         onEndDraggingCanvas,
         isCurrentlyDragging,
     } = useCanvasDrag(graphRef);
+
+    useZoom(graphRef);
 
     const graphRefOffsets = useRef({ left: 0, top: 0 });
     useEffect(() => {
@@ -40,16 +47,19 @@ export function Graph({ }: {}) {
     }, [graphRef.current?.offsetTop]);
 
     const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.button === 0 && e.target === graphRef.current) {
+        if (e.button !== 0) return;
+        const target = e.target as HTMLElement;
+        const isInteractive = target.closest('[data-node-dragable-handle], .node, button, input, [data-io-identifier]');
+        if (!isInteractive) {
             e.preventDefault();
             e.stopPropagation();
             onStartDragCanvas(e);
         }
-    }, [graphRef]);
+    }, [onStartDragCanvas]);
 
     const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         onMouseMoveDragCanvas(e);
-    }, [graphRefOffsets, onMouseMoveDragCanvas]);
+    }, [onMouseMoveDragCanvas]);
 
     const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -64,24 +74,33 @@ export function Graph({ }: {}) {
         <div
             ref={graphRef}
             className={cn(
-                "relative rounded-md bg-background text-foreground p-0 shadow-md overflow-scroll w-full aspect-video border border-border",
-                isCurrentlyDragging ? "cursor-grab" : undefined,
+                "relative rounded-md bg-background text-foreground p-0 shadow-md overflow-hidden w-full aspect-video border border-border",
+                isCurrentlyDragging ? "cursor-grabbing" : "cursor-grab",
             )}
             onMouseMove={onMouseMove}
             onMouseUp={onMouseUp}
             onMouseDown={onMouseDown}
             onMouseLeave={onEndDraggingCanvas}
         >
-            <AddNodeDialog graphRef={graphRef} />
-            <GraphInfiniteCanvasScroll />
-            <GraphEdges graphRef={graphRef} />
-            {nodeIDs.map((nodeId) => (
-                <Node
-                    key={nodeId}
-                    nodeId={nodeId}
-                    graphRefOffsets={graphRefOffsets}
-                />
-            ))}
+            <div
+                className="absolute inset-0"
+                style={{
+                    transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${scale})`,
+                    transformOrigin: "0 0",
+                }}
+            >
+                <AddNodeDialog graphRef={graphRef} />
+                <GraphInfiniteCanvasScroll scale={scale} panOffset={panOffset} />
+                <GraphEdges graphRef={graphRef} />
+                {nodeIDs.map((nodeId) => (
+                    <Node
+                        key={nodeId}
+                        nodeId={nodeId}
+                        graphRefOffsets={graphRefOffsets}
+                    />
+                ))}
+            </div>
+            <ZoomControls className="absolute bottom-2 right-2 z-30" />
         </div>
     );
 }
