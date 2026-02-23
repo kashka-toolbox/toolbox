@@ -73,7 +73,7 @@ export default async function LocaleLayout({
               {children}
               <footer className="container border-t border-border pt-8 pb-8 flex flex-col">
                 <h1 className="text-xs font-bold tracking-tight scroll-m-20 mb-4">
-                  Copyright © 2024-2025 Morten Renner. Licensed under AGPL-3.0.
+                  Copyright © 2024-{new Date().getFullYear()} Morten Renner. Licensed under AGPL-3.0.
                 </h1>
                 <Link
                   href="/privacy"
