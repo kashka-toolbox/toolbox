@@ -42,6 +42,7 @@ export type GraphState = {
     initialEdges: Edge[],
   ) => void;
   generateUniqueNodeId: () => string;
+  sortGraph: (nodeSpacingX?: number, nodeSpacingY?: number, nodeOffsetX?: number, nodeOffsetY?: number) => void;
 };
 
 // Create a factory function that returns a NEW store instance each time it's called
@@ -148,6 +149,212 @@ export const createGraphStore = (): StoreApi<GraphState> =>
       }
 
       return get().nodeIds.length.toString() + "_" + self.crypto.randomUUID();
+    },
+    sortGraph: (nodeSpacingX = 250, nodeSpacingY = 180, nodeOffsetX = 50, nodeOffsetY = 50) => {
+      const state = get();
+      const { nodes, edges, inputNodeIds, outputNodeIds } = state;
+
+      const positions = new Map<string, Position>();
+      const NODE_HEIGHT = 100;
+
+      const buildAdjacencyList = () => {
+        const adj = new Map<string, Set<string>>();
+        const incoming = new Map<string, Set<string>>();
+
+        nodes.forEach((node, id) => {
+          adj.set(id, new Set());
+          incoming.set(id, new Set());
+        });
+
+        edges.forEach(edge => {
+          if (edge.toIO) {
+            adj.get(edge.fromIO.nodeId)?.add(edge.toIO.nodeId);
+            incoming.get(edge.toIO.nodeId)?.add(edge.fromIO.nodeId);
+          }
+        });
+
+        return { adj, incoming };
+      };
+
+      const { adj, incoming } = buildAdjacencyList();
+      const levels = new Map<string, number>();
+
+      const visited = new Set<string>();
+      const queue: { nodeId: string; level: number }[] = [];
+
+      inputNodeIds.forEach(nodeId => {
+        levels.set(nodeId, 0);
+        queue.push({ nodeId, level: 0 });
+      });
+
+      while (queue.length > 0) {
+        const { nodeId, level } = queue.shift()!;
+
+        if (visited.has(nodeId)) continue;
+        visited.add(nodeId);
+
+        const currentLevel = levels.get(nodeId) ?? level;
+        levels.set(nodeId, currentLevel);
+
+        adj.get(nodeId)?.forEach(neighborId => {
+          const neighborLevel = levels.get(neighborId) ?? 0;
+          if (currentLevel + 1 > neighborLevel) {
+            levels.set(neighborId, currentLevel + 1);
+          }
+          queue.push({ nodeId: neighborId, level: currentLevel + 1 });
+        });
+      }
+
+      const nodesByLevel = new Map<number, string[]>();
+      levels.forEach((level, nodeId) => {
+        if (!nodesByLevel.has(level)) {
+          nodesByLevel.set(level, []);
+        }
+        nodesByLevel.get(level)!.push(nodeId);
+      });
+
+      const maxLevel = Math.max(...levels.values());
+
+      for (let level = 0; level <= maxLevel; level++) {
+        const nodeIdsAtLevel = nodesByLevel.get(level) || [];
+
+        if (level === 0) {
+          nodeIdsAtLevel.forEach((nodeId, index) => {
+            const node = nodes.get(nodeId);
+            if (!node) return;
+
+            positions.set(nodeId, {
+              x: nodeOffsetX,
+              y: nodeOffsetY + index * nodeSpacingY,
+            });
+          });
+        } else {
+          const idealPositions = new Map<string, number>();
+
+          nodeIdsAtLevel.forEach(nodeId => {
+            const parents = incoming.get(nodeId);
+            
+            if (parents && parents.size > 0) {
+              let parentSum = 0;
+              let parentCount = 0;
+
+              parents.forEach(parentId => {
+                const parentPos = positions.get(parentId);
+                if (parentPos) {
+                  parentSum += parentPos.y;
+                  parentCount++;
+                }
+              });
+
+              const idealY = parentCount > 0 ? parentSum / parentCount : nodeOffsetY;
+              idealPositions.set(nodeId, idealY);
+            } else {
+              idealPositions.set(nodeId, nodeOffsetY);
+            }
+          });
+
+          const sortedNodeIds = nodeIdsAtLevel.toSorted((a, b) => {
+            const idealA = idealPositions.get(a) ?? 0;
+            const idealB = idealPositions.get(b) ?? 0;
+            return idealA - idealB;
+          });
+
+          const levelPositions = new Map<string, number>();
+          let currentY = nodeOffsetY;
+
+          sortedNodeIds.forEach(nodeId => {
+            const idealY = idealPositions.get(nodeId) ?? nodeOffsetY;
+            currentY = Math.max(currentY, idealY);
+            levelPositions.set(nodeId, currentY);
+            currentY += nodeSpacingY;
+          });
+
+          const nodeRects = new Map<string, { y: number; height: number }>();
+          levelPositions.forEach((y, nodeId) => {
+            nodeRects.set(nodeId, { y, height: NODE_HEIGHT });
+          });
+
+          const sortedByY = sortedNodeIds.toSorted((a, b) => {
+            const posA = levelPositions.get(a) ?? 0;
+            const posB = levelPositions.get(b) ?? 0;
+            return posA - posB;
+          });
+
+          for (let i = 0; i < sortedByY.length; i++) {
+            const nodeId = sortedByY[i];
+            const currentRect = nodeRects.get(nodeId);
+            if (!currentRect) continue;
+
+            for (let j = i + 1; j < sortedByY.length; j++) {
+              const nextNodeId = sortedByY[j];
+              const nextRect = nodeRects.get(nextNodeId);
+              if (!nextRect) continue;
+
+              if (currentRect.y + currentRect.height > nextRect.y) {
+                const overlap = currentRect.y + currentRect.height - nextRect.y;
+                const shift = overlap + 10;
+
+                nextRect.y += shift;
+
+                nodeRects.set(nextNodeId, nextRect);
+              }
+            }
+          }
+
+          levelPositions.forEach((y, nodeId) => {
+            const node = nodes.get(nodeId);
+            if (!node) return;
+
+            let x: number;
+            if (node.type === "output") {
+              x = nodeOffsetX + (levels.get(nodeId) ?? 0) * nodeSpacingX + 100;
+            } else {
+              x = nodeOffsetX + (levels.get(nodeId) ?? 0) * nodeSpacingX;
+            }
+
+            const finalY = nodeRects.get(nodeId)?.y ?? y;
+            positions.set(nodeId, { x, y: finalY });
+          });
+        }
+      }
+
+      const looseNodes: string[] = [];
+      nodes.forEach((node, nodeId) => {
+        if (!levels.has(nodeId)) {
+          looseNodes.push(nodeId);
+        }
+      });
+
+      if (looseNodes.length > 0) {
+        let maxY = 0;
+        positions.forEach(pos => {
+          maxY = Math.max(maxY, pos.y);
+        });
+
+        const looseY = maxY + nodeSpacingY + 50;
+        const looseStartX = nodeOffsetX;
+
+        looseNodes.forEach((nodeId, index) => {
+          const node = nodes.get(nodeId);
+          if (!node) return;
+
+          positions.set(nodeId, {
+            x: looseStartX + index * nodeSpacingX,
+            y: looseY,
+          });
+        });
+      }
+
+      set(s => {
+        const newNodes = new Map(s.nodes);
+        positions.forEach((pos, nodeId) => {
+          const node = newNodes.get(nodeId);
+          if (node) {
+            newNodes.set(nodeId, { ...node, position: pos });
+          }
+        });
+        return { nodes: newNodes };
+      });
     }
   })));
 

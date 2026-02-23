@@ -8,6 +8,7 @@ import {
 } from "@/components/graph/GraphContextProvider";
 import { Section } from "@/components/ui/Section";
 import { Separator } from "@/components/ui/separator";
+import { SortGraphButton } from "@/components/graph/SortGraphButton";
 import { createNode } from "@/lib/graph/CreateNode.factory";
 import { NODE_OUTPUT_IO_NAME } from "@/lib/graph/NodeDefinitions";
 
@@ -102,7 +103,10 @@ export default function Home() {
                                 <GraphOutputs />
                             </div>
                         </div>
-                        <ExecuteGraphButton />
+                        <div className="flex flex-row gap-2">
+                            <SortGraphButton />
+                            <ExecuteGraphButton />
+                        </div>
                     </Section>
                     <Graph />
                 </GraphStoreContext.Provider>
