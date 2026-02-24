@@ -24,6 +24,7 @@ import { ZoomControls } from "./ZoomControls";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
+    const transformContainerRef = useRef<HTMLDivElement>(null);
 
     const nodeIDs = useNodeIds();
     const scale = useGraphStore((state) => state.scale);
@@ -31,10 +32,8 @@ export function Graph({ }: {}) {
 
     const {
         onStartDragCanvas,
-        onMouseMoveDragCanvas,
-        onEndDraggingCanvas,
         isCurrentlyDragging,
-    } = useCanvasDrag(graphRef);
+    } = useCanvasDrag(graphRef, transformContainerRef);
 
     useZoom(graphRef);
 
@@ -57,17 +56,6 @@ export function Graph({ }: {}) {
         }
     }, [onStartDragCanvas]);
 
-    const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        onMouseMoveDragCanvas(e);
-    }, [onMouseMoveDragCanvas]);
-
-    const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        onEndDraggingCanvas(e);
-    }, [onEndDraggingCanvas]);
-
     console.info("Render Graph", Date.now());
 
     return (
@@ -77,16 +65,15 @@ export function Graph({ }: {}) {
                 "relative rounded-md bg-background text-foreground p-0 shadow-md overflow-hidden w-full aspect-video border border-border",
                 isCurrentlyDragging ? "cursor-grabbing" : "cursor-grab",
             )}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
             onMouseDown={onMouseDown}
-            onMouseLeave={onEndDraggingCanvas}
         >
             <div
+                ref={transformContainerRef}
                 className="absolute inset-0"
                 style={{
-                    transform: `translate(${panOffset.x}px, ${panOffset.y}px) scale(${scale})`,
+                    transform: `translate3d(${panOffset.x}px, ${panOffset.y}px, 0) scale(${scale})`,
                     transformOrigin: "0 0",
+                    willChange: isCurrentlyDragging ? "transform" : "auto",
                 }}
             >
                 <AddNodeDialog graphRef={graphRef} />
