@@ -9,8 +9,6 @@ import { DialogContent } from "../ui/dialog";
 import { useGraphStore } from "./GraphContextProvider";
 import { NODE_DEFINITIONS, NODE_TYPE } from "@/lib/graph/NodeDefinitions";
 import { NODE_CATEGORIES, NodeDefinition } from "@/lib/graph/NodeDefinition";
-import { createNode } from "@/lib/graph/CreateNode.factory";
-import { set } from "react-hook-form";
 
 export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivElement> }) {
     const t_graph = useTranslations("graph");
@@ -20,26 +18,32 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
     const [addMenuVisible, setAddMenuVisible] = useState(false);
     const nodePosition = useRef<Position | null>(null);
     const addNodeFromDefinition = useGraphStore((store) => store.addNodeFromDefinition);
+    const scale = useGraphStore((store) => store.scale);
+    const panOffset = useGraphStore((store) => store.panOffset);
 
-    const onContextMenu = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target !== graphRef.current) {
-            return;
-        }
+    const onContextMenu = useCallback((e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        const isInteractive = target.closest('.node, button, input, [data-io-identifier]');
+        if (isInteractive) return;
+        
         e.preventDefault();
         e.stopPropagation();
+        
         const rect = graphRef.current?.getBoundingClientRect();
-        const relativeToGraphX = e.clientX - (rect?.left ?? 0);
-        const relativeToGraphY = e.clientY - (rect?.top ?? 0);
-        const relativeToGraphScrollX =
-            (graphRef.current?.scrollLeft ?? 0) + relativeToGraphX;
-        const relativeToGraphScrollY =
-            (graphRef.current?.scrollTop ?? 0) + relativeToGraphY;
+        if (!rect) return;
+        
+        const relativeX = e.clientX - rect.left;
+        const relativeY = e.clientY - rect.top;
+        
+        const graphX = (relativeX - panOffset.x) / scale;
+        const graphY = (relativeY - panOffset.y) / scale;
+        
         setAddMenuVisible(true);
         nodePosition.current = {
-            x: relativeToGraphScrollX,
-            y: relativeToGraphScrollY,
+            x: graphX,
+            y: graphY,
         };
-    }, [graphRef, setAddMenuVisible]);
+    }, [graphRef, scale, panOffset]);
 
     useEffect(() => {
         const currentGraphRef = graphRef.current;

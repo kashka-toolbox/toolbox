@@ -1,7 +1,7 @@
 "use client";
 
 import { Edge } from "@/components/graph/Edge";
-import { useGraphStore } from "@/components/graph/GraphContextProvider";
+import { useGraphStore, useCurrentGraphStore } from "@/components/graph/GraphContextProvider";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { areTypesCompatible } from "./areTypesCompatible";
 import { Position } from "./Position.type";
@@ -20,10 +20,19 @@ export const useEdgeRenderer = (
     const edges = useGraphStore((store) => store.edges);
     const previewEdge = useGraphStore((store) => store.previewEdge);
     const updatePreviewEdge = useGraphStore((store) => store.updatePreviewEdge);
-    const scale = useGraphStore((store) => store.scale);
-    const panOffset = useGraphStore((store) => store.panOffset);
+    const store = useCurrentGraphStore();
 
     const previewEdgeRef = useRef<PreviewEdge | null>(null);
+    const scaleRef = useRef(1);
+    const panOffsetRef = useRef({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const unsubscribe = store.subscribe((state) => {
+            scaleRef.current = state.scale;
+            panOffsetRef.current = state.panOffset;
+        });
+        return unsubscribe;
+    }, [store]);
 
     useEffect(() => {
         previewEdgeRef.current = previewEdge;
@@ -37,6 +46,8 @@ export const useEdgeRenderer = (
         }
 
         const graphBounds = graphRef.current.getBoundingClientRect();
+        const scale = scaleRef.current;
+        const panOffset = panOffsetRef.current;
 
         const elements = edges.map((edge, index) => {
             if (graphRef.current === null) return null;
@@ -109,7 +120,7 @@ export const useEdgeRenderer = (
                 recalculateEdges,
             );
         };
-    }, [graphRef, graphRef.current, edges, nodes, setRenderedEdges, scale, panOffset]);
+    }, [graphRef, graphRef.current, edges, nodes]);
 
     useEffect(() => {
         if (previewEdge === null && renderedPreviewEdge !== null) {
@@ -123,6 +134,8 @@ export const useEdgeRenderer = (
         }
 
         const graphBounds = graphRef.current.getBoundingClientRect();
+        const scale = scaleRef.current;
+        const panOffset = panOffsetRef.current;
 
         const startIOBounds = graphRef.current.querySelector(
             `[data-io-identifier='${JSON.stringify(previewEdge.fromIO)}']`,
@@ -186,7 +199,7 @@ export const useEdgeRenderer = (
                 variant={edgeVariant}
             />,
         );
-    }, [previewEdge, graphRef, nodes, scale, panOffset]);
+    }, [previewEdge, graphRef, nodes]);
 
     useEffect(() => {
         const updatePreviewEdgeOnMouseMove = (e: MouseEvent) => {
@@ -196,6 +209,9 @@ export const useEdgeRenderer = (
 
             const graphBounds = graphRef.current?.getBoundingClientRect();
             if (!graphBounds) return;
+
+            const scale = scaleRef.current;
+            const panOffset = panOffsetRef.current;
 
             const currentPosition: Position = {
                 x: (e.clientX - graphBounds.left - panOffset.x) / scale + SVG_OFFSET,
@@ -218,11 +234,11 @@ export const useEdgeRenderer = (
                 updatePreviewEdgeOnMouseMove,
             );
         };
-    }, [graphRef.current, previewEdgeRef, updatePreviewEdge, scale, panOffset]);
+    }, [graphRef.current, previewEdgeRef, updatePreviewEdge]);
 
     useLayoutEffect(() => {
         recalculateEdges();
-    }, [edges, nodes, scale, panOffset]);
+    }, [edges, nodes]);
 
     return [
         ...renderedEdges,
