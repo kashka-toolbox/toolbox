@@ -1,5 +1,6 @@
 import { NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { createNodeDefinition } from "./CreateNodeDefinition.factory";
+import { NODE_SETTING_UI_LABEL_NAME } from "./NodeSettings"
 
 export const NODE_INPUT_IO_NAME = "fromUi";
 export const NODE_OUTPUT_IO_NAME = "toUi";
@@ -14,9 +15,9 @@ export type NODE_TYPE =
     | "randomUUID";
 
 export const NODE_DEFINITIONS: {
-    [key in NODE_TYPE]: NodeDefinition<any, any>;
+    [key in NODE_TYPE]: NodeDefinition<any, any, any>;
 } = {
-    input: createNodeDefinition<[], ["fromUi"]>({
+    input: createNodeDefinition<[], ["fromUi"], []>({
         type: "input",
         name: "input.any",
         inputs: [],
@@ -28,8 +29,9 @@ export const NODE_DEFINITIONS: {
             return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? "" };
         },
         nodeCategory: "input",
+        settings: {}
     }),
-    inputNumeric: createNodeDefinition<[], ["fromUi"]>({
+    inputNumeric: createNodeDefinition<[], ["fromUi"], []>({
         type: "input",
         name: "input.numeric",
         inputs: [],
@@ -38,11 +40,12 @@ export const NODE_DEFINITIONS: {
             type: "numeric",
         }],
         execute: async (_, self) => {
-            return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? 0};
+            return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? 0 };
         },
         nodeCategory: "input",
+        settings: {}
     }),
-    output: createNodeDefinition<["toUi"], []>({
+    output: createNodeDefinition<["toUi"], [], [typeof NODE_SETTING_UI_LABEL_NAME]>({
         type: "output",
         name: "output.any",
         inputs: [{
@@ -54,10 +57,19 @@ export const NODE_DEFINITIONS: {
             return stateOfInputs;
         },
         nodeCategory: "output",
+        settings: {
+            UI_LABEL_NAME: {
+                type: "text.any",
+                defaultValue: "",
+                value: "",
+                translationKey: NODE_SETTING_UI_LABEL_NAME
+            }
+        }
     }),
     textToBase64: createNodeDefinition<
         ["operation.text.textToBase64.inputs.text"],
-        ["operation.text.textToBase64.outputs.base64"]
+        ["operation.text.textToBase64.outputs.base64"],
+        []
     >({
         type: "operation",
         name: "operation.text.textToBase64",
@@ -87,13 +99,15 @@ export const NODE_DEFINITIONS: {
             };
         },
         nodeCategory: "strings",
+        settings: {}
     }),
     concatenateStrings: createNodeDefinition<
         [
             "stringA",
             "stringB",
         ],
-        ["concatenated"]
+        ["concatenated"],
+        []
     >({
         type: "operation",
         name: "operation.text.concatenateStrings",
@@ -126,10 +140,12 @@ export const NODE_DEFINITIONS: {
             };
         },
         nodeCategory: "strings",
+        settings: {}
     }),
     waitAndForward: createNodeDefinition<
         ["input"],
-        ["output"]
+        ["output"],
+        []
     >({
         type: "operation",
         name: "operation.waitAndForward",
@@ -149,8 +165,9 @@ export const NODE_DEFINITIONS: {
             return { "output": input };
         },
         nodeCategory: "extra",
+        settings: {}
     }),
-    randomUUID: createNodeDefinition<[], ["uuid"]>({
+    randomUUID: createNodeDefinition<[], ["uuid"], []>({
         type: "operation",
         name: "operation.cryptography.randomUUID",
         inputs: [],
@@ -163,5 +180,6 @@ export const NODE_DEFINITIONS: {
             return { "uuid": crypto.randomUUID() };
         },
         nodeCategory: "cryptography",
+        settings: {}
     }),
 };  

@@ -12,6 +12,8 @@ import { NodeIO } from "./NodeIO";
 import { NodeIOLabel } from "./NodeIOLabel";
 import { ContextMenu, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuSeparator } from "../ui/context-menu";
 import { ContextMenuTrigger } from "@radix-ui/react-context-menu";
+import { EditNodeSettingsDialog } from "./editNodeSettingsDialog";
+import { NodeState } from "@/lib/graph/NodeState";
 
 export function Node({
     nodeId,
@@ -37,7 +39,9 @@ export function Node({
 
     const nodeState = useNodeState(nodeId)!;
 
-    const inputs = nodeState.inputs.map((input, index) => (
+    const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
+
+    const inputs = nodeState.inputs.map((input: any, index: number) => (
         <NodeIOLabel
             key={input.name}
             type="input"
@@ -61,7 +65,7 @@ export function Node({
         </NodeIOLabel>
     ));
 
-    const outputs = nodeState.outputs.map((output, index) => (
+    const outputs = nodeState.outputs.map((output: any, index: number) => (
         <NodeIOLabel
             key={output.name}
             type="output"
@@ -126,7 +130,12 @@ export function Node({
         panOffset,
     ]);
 
-    return (
+    return <>
+        <EditNodeSettingsDialog
+            nodeId={nodeState.id}
+            open={isSettingsDialogOpen}
+            onOpenChange={setIsSettingsDialogOpen}
+        />
         <ContextMenu>
             <ContextMenuTrigger asChild>
                 <div
@@ -144,13 +153,13 @@ export function Node({
                         transition: "transform 0.1s ease-out",
                     }}
                     onMouseDown={(e) => {
-                        if(e.button !== 0) return;
+                        if (e.button !== 0) return;
 
                         const target = e.target as HTMLElement;
 
                         if (
                             target.getAttribute("data-node-dragable-handle") ===
-                                "true"
+                            "true"
                         ) {
                             e.preventDefault();
                             e.stopPropagation();
@@ -201,11 +210,14 @@ export function Node({
             </ContextMenuTrigger>
             <ContextMenuContent className="w-52">
                 <ContextMenuGroup>
+                    <ContextMenuItem variant={"default"} onClick={() => {
+                        setIsSettingsDialogOpen(true);
+                    }}>Node Properties</ContextMenuItem>
                     <ContextMenuItem variant={"destructive"} onClick={() => {
                         removeNode(nodeState.id);
                     }}>Delete</ContextMenuItem>
                 </ContextMenuGroup>
             </ContextMenuContent>
-        </ContextMenu>  
-    );
+        </ContextMenu>
+    </>;
 }

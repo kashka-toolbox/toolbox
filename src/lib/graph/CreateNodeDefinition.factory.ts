@@ -1,4 +1,5 @@
 import { NodeCategory, NodeDefinition } from "./NodeDefinition";
+import { NodeSetting } from "./NodeSettings";
 import { NodeState } from "./NodeState";
 import { TYPE_DEFINITION_KEY } from "./TypeDefinitions";
 
@@ -12,7 +13,8 @@ import { TYPE_DEFINITION_KEY } from "./TypeDefinitions";
  */
 export function createNodeDefinition<
     InputKeys extends readonly string[],
-    OutputKeys extends readonly string[]
+    OutputKeys extends readonly string[],
+    SettingKeys extends readonly string[],
 >(
     config: {
         type: string;
@@ -21,8 +23,9 @@ export function createNodeDefinition<
         outputs: { name: OutputKeys[number]; translationKey?: string; type: TYPE_DEFINITION_KEY }[];
         execute: (parameters: { [K in InputKeys[number]]: any }, self: NodeState<InputKeys, OutputKeys>) => Promise<{ [K in OutputKeys[number]]: any }>;
         nodeCategory: NodeCategory;
+        settings: { [key in SettingKeys[number]]: NodeSetting };
     }
-): NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }> {
-    return { ...config, state: {} } as NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }>;
+): NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }, { [K in SettingKeys[number]]: any }> {
+    return { ...config, state: {} } as NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }, { [K in SettingKeys[number]]: any }>;
 }
 

@@ -11,6 +11,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { deepEqual } from "@/lib/graph/deepEqual";
 import { createNode } from "@/lib/graph/CreateNode.factory";
 import { NODE_TYPE } from "@/lib/graph/NodeDefinitions";
+import { NodeSetting } from "@/lib/graph/NodeSettings";
 
 export type GraphState = {
   nodes: Map<string, NodeState<any, any>>;
@@ -31,6 +32,11 @@ export type GraphState = {
   setPreviewEdge: (edge: PreviewEdge | null) => void;
   updatePreviewEdge: (edge: Partial<PreviewEdge>) => void;
   setNodePosition: (id: string, position: Position) => void;
+  updateNodeSetting: (
+    nodeId: string,
+    settingKey: string,
+    setting: Partial<NodeSetting>,
+  ) => void;
   updateNodeState: (
     nodeId: string,
     newState: Partial<NodeState<any, any>>,
@@ -118,6 +124,21 @@ export const createGraphStore = (): StoreApi<GraphState> =>
         nodes: new Map(s.nodes).set(id, { ...node, position }),
       }));
     },
+    updateNodeSetting: (
+      nodeId: string,
+      settingKey: string,
+      setting: Partial<NodeSetting>,
+    ) => {
+      const node = get().nodes.get(nodeId);
+      if (!node) {
+        throw new ReferenceError(
+          `Node with id ${nodeId} not found in setNodePosition`,
+        );
+      }
+      set((s) => ({
+        nodes: new Map(s.nodes).set(nodeId, { ...node, settings: { ...node.settings, [settingKey]: setting } }),
+      }));
+    },
     updateNodeState: (nodeId, newState) =>
       set((s) => {
         const node = s.nodes.get(nodeId);
@@ -146,7 +167,7 @@ export const createGraphStore = (): StoreApi<GraphState> =>
         edges: initialEdges,
       }),
     generateUniqueNodeId: () => {
-      if(self.crypto === undefined || self.crypto.randomUUID === undefined) {
+      if (self.crypto === undefined || self.crypto.randomUUID === undefined) {
         console.warn("crypto.randomUUID is not available, using fallback for unique node IDs.");
         return get().nodeIds.length.toString() + "_" + Math.random().toString(36).substring(2, 15);
       }
@@ -189,7 +210,7 @@ export const createGraphStore = (): StoreApi<GraphState> =>
       };
       set({ scale: newScale, panOffset: newPanOffset });
     },
-    resetZoom: () => set({ scale: 1, panOffset: { x: 0, y: 0 } }),
+    resetZoom: () => set({ scale: 1, panOffset: { x: 0, y: 0 } })
   })));
 
 // GraphStoreContext

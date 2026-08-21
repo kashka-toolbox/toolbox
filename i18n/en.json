@@ -210,6 +210,11 @@
             "name": "Random UUID"
           }
         }
+      },
+      "settings": {
+        "UI_LABEL_NAME": {
+          "name": "Ui Label Name"
+        }
       }
     }, 
     "addNodeDialog": {
@@ -226,6 +231,12 @@
           "shortcut": "Ctrl+N"
         }
       }
+    },
+    "editNodeSettingsDialog": {
+     "title": "Node Properties"
+    },
+    "speculativelabel": {
+      "result": "Result"
     }
   }
 }

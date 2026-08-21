@@ -1,6 +1,7 @@
 import { ArrowRightIcon, InputIcon, LockOpen1Icon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
 import { NodeState } from "./NodeState";
 import { TYPE_DEFINITION_KEY } from "./TypeDefinitions";
+import { NodeSettings } from "./NodeSettings";
 
 export type NodeIO = {
     /**
@@ -48,10 +49,10 @@ export const NODE_CATEGORIES = {
     },
 } as const;
 export type NodeCategory = keyof typeof NODE_CATEGORIES;
-
 export type NodeDefinition<
     I extends { [key: string]: any },
     O extends { [key: string]: any },
+    Settings extends NodeSettings
 > = {
     type: "input" | "output" | "operation";
     name: string;
@@ -86,4 +87,11 @@ export type NodeDefinition<
      */
     state: { [key: string]: any };
     nodeCategory?: NodeCategory;
+    /**
+     * Settings are used for user configuration of a node,
+     * for everything that should not be a dynamic input.
+     * 
+     * Static on runtime, the user can configure those on graph creation time.
+     */
+    settings: Settings;
 };

@@ -1,5 +1,6 @@
 import { Node } from "@/components/graph/Node";
 import {
+    NODE_DEFINITIONS,
     NODE_INPUT_IO_NAME,
     NODE_OUTPUT_IO_NAME,
 } from "@/lib/graph/NodeDefinitions";
@@ -21,6 +22,11 @@ import { GraphEdges } from "./GraphEdges";
 import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
 import { CopyToClipboard } from "../ui/copyToClipboard";
 import { ZoomControls } from "./ZoomControls";
+import { NodeSetting, NodeSettings } from "@/lib/graph/NodeSettings";
+import { NODE_SETTING_UI_LABEL_NAME } from "@/lib/graph/NodeSettings";
+import { Label } from "../ui/label";
+import { useTranslations } from "next-intl";
+import { useSpeculativeUiLabelI18N } from "@/lib/graph/useSpeculativeUiLabelI18N";
 
 export function Graph({ }: {}) {
     const graphRef = useRef<HTMLDivElement>(null);
@@ -180,6 +186,8 @@ export function GraphOutputs({ }: {}) {
 
 export function GraphUiOutput({ nodeId }: { nodeId: string }) {
     const node = useNodeState(nodeId);
+    const t = useTranslations("graph");
+    const t_speculative = useSpeculativeUiLabelI18N();
 
     if (!node) {
         console.error("Node not found:", nodeId);
@@ -191,17 +199,28 @@ export function GraphUiOutput({ nodeId }: { nodeId: string }) {
     }
 
     const nodeOutputState = node?.state[NODE_OUTPUT_IO_NAME];
+    const nodeSettings: NodeSettings = node.settings;
+    const uiLabelNameSetting: Partial<NodeSetting> = nodeSettings[NODE_SETTING_UI_LABEL_NAME];
+    const uiLabelName: string | undefined =
+        (uiLabelNameSetting.value == undefined || uiLabelNameSetting.value.length == 0)
+            ? t(`nodes.${NODE_DEFINITIONS.output.name}.name`)
+            : t_speculative(uiLabelNameSetting.value);
 
     return (
-        <span className="flex flex-row items-center gap-2 w-full">
-            <Input
-                key={nodeId}
-                value={nodeOutputState ?? ""}
-                type="text"
-                readOnly={true}
-                placeholder={`No output produced yet.`}
-            />
-            <CopyToClipboard clipboardContent={nodeOutputState} className="mt-[1px]" />
+        <span className="flex flex-col gap-1 w-full">
+            <Label htmlFor={nodeId} className="ml-1">
+                {uiLabelName}
+            </Label>
+            <span className="flex flex-row items-center gap-2 w-full">
+                <Input
+                    key={nodeId}
+                    value={nodeOutputState ?? ""}
+                    type="text"
+                    readOnly={true}
+                    placeholder={`No output produced yet.`}
+                />
+                <CopyToClipboard clipboardContent={nodeOutputState} className="mt-[1px]" />
+            </span>
         </span>
     );
 }
