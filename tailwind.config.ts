@@ -58,15 +58,15 @@ const config = {
         },
         popover: {
           DEFAULT: "hsl(var(--popover), <alpha-value>)",
-          foreground: "var(--popover-foreground), <alpha-value>)",
+          foreground: "hsl(var(--popover-foreground), <alpha-value>)",
         },
         code: {
           DEFAULT: "hsl(var(--code), <alpha-value>)",
-          foreground: "var(--code-foreground), <alpha-value>)",
+          foreground: "hsl(var(--code-foreground), <alpha-value>)",
         },
         card: {
           DEFAULT: "hsl(var(--card), <alpha-value>)",
-          foreground: "var(--card-foreground), <alpha-value>)",
+          foreground: "hsl(var(--card-foreground), <alpha-value>)",
         },
         success: {
           DEFAULT: "hsl(var(--success), <alpha-value>)",
