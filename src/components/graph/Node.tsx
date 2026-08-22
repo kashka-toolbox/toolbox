@@ -14,6 +14,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuGroup, ContextMenuItem, Con
 import { ContextMenuTrigger } from "@radix-ui/react-context-menu";
 import { EditNodeSettingsDialog } from "./editNodeSettingsDialog";
 import { NodeState } from "@/lib/graph/NodeState";
+import { NODE_SETTING_UI_LABEL_TEXT } from "@/lib/graph/NodeSettings";
 
 export function Node({
     nodeId,
@@ -38,8 +39,10 @@ export function Node({
     const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
 
     const nodeState = useNodeState(nodeId)!;
+    const nodeDisplayName = nodeState.settings[NODE_SETTING_UI_LABEL_TEXT]?.value ?? undefined;
 
     const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
+    const [isNodeSettingsInContextMenu, setNodeSettingsInContextMenu] = useState(true);
 
     const inputs = nodeState.inputs.map((input: any, index: number) => (
         <NodeIOLabel
@@ -130,6 +133,10 @@ export function Node({
         panOffset,
     ]);
 
+    useEffect(() => {
+        setNodeSettingsInContextMenu(Object.values(nodeState?.settings).length > 0);
+    }, [nodeState, setNodeSettingsInContextMenu]);
+
     return <>
         <EditNodeSettingsDialog
             nodeId={nodeState.id}
@@ -178,7 +185,7 @@ export function Node({
                         data-node-dragable-handle="true"
                         className="p-1 bg-primary-foreground text-primary rounded"
                     >
-                        {t("nodes." + nodeState.name + ".name")}
+                        {t("nodes." + nodeState.name + ".name") + (nodeDisplayName ? ": " + nodeDisplayName : "")}
                     </div>
                     {nodeState.error && (
                         <Alert variant={"destructive"} className="mt-2">
@@ -210,9 +217,12 @@ export function Node({
             </ContextMenuTrigger>
             <ContextMenuContent className="w-52">
                 <ContextMenuGroup>
-                    <ContextMenuItem variant={"default"} onClick={() => {
-                        setIsSettingsDialogOpen(true);
-                    }}>Node Properties</ContextMenuItem>
+                    {
+                        isNodeSettingsInContextMenu &&
+                        <ContextMenuItem variant={"default"} onClick={() => {
+                            setIsSettingsDialogOpen(true);
+                        }}>Node Properties</ContextMenuItem>
+                    }
                     <ContextMenuItem variant={"destructive"} onClick={() => {
                         removeNode(nodeState.id);
                     }}>Delete</ContextMenuItem>

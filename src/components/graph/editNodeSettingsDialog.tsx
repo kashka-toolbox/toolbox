@@ -31,7 +31,7 @@ export function EditNodeSettingsDialog({
                 <DialogTitle className="font-bold">{t_dialog("title")}</DialogTitle>
                 {
                     nodeState.settings && Object.entries(nodeState.settings as NodeSettings).map(([key, setting]) => {
-                        return <span>
+                        return <span key={key}>
                             <Label htmlFor={setting.translationKey}>
                                 {t_settings(setting.translationKey + ".name")}
                             </Label>
