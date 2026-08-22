@@ -1,6 +1,6 @@
 import { NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { createNodeDefinition } from "./CreateNodeDefinition.factory";
-import { NODE_SETTING_UI_LABEL_NAME } from "./NodeSettings"
+import { NODE_SETTING_UI_LABEL_NAME, NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS } from "./NodeSettings"
 
 export const NODE_INPUT_IO_NAME = "fromUi";
 export const NODE_OUTPUT_IO_NAME = "toUi";
@@ -30,12 +30,7 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "input",
         settings: {
-            UI_LABEL_NAME: {
-                type: "text.any",
-                defaultValue: "",
-                value: "",
-                translationKey: NODE_SETTING_UI_LABEL_NAME
-            }
+            ...NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS
         }
     }),
     inputNumeric: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_NAME]>({
@@ -51,12 +46,7 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "input",
         settings: {
-            UI_LABEL_NAME: {
-                type: "text.any",
-                defaultValue: "",
-                value: "",
-                translationKey: NODE_SETTING_UI_LABEL_NAME
-            }
+            ...NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS
         }
     }),
     output: createNodeDefinition<["toUi"], [], [typeof NODE_SETTING_UI_LABEL_NAME]>({
@@ -72,12 +62,7 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "output",
         settings: {
-            UI_LABEL_NAME: {
-                type: "text.any",
-                defaultValue: "",
-                value: "",
-                translationKey: NODE_SETTING_UI_LABEL_NAME
-            }
+            ...NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS
         }
     }),
     textToBase64: createNodeDefinition<
