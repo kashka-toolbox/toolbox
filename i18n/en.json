@@ -212,7 +212,7 @@
         }
       },
       "settings": {
-        "UI_LABEL_NAME": {
+        "UI_LABEL_TEXT": {
           "name": "Ui Label Name"
         }
       }

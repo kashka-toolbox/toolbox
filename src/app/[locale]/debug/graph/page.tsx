@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { SortGraphButton } from "@/components/graph/SortGraphButton";
 import { createNode } from "@/lib/graph/CreateNode.factory";
 import { NODE_OUTPUT_IO_NAME } from "@/lib/graph/NodeDefinitions";
-import { NODE_SETTING_UI_LABEL_NAME } from "@/lib/graph/NodeSettings";
+import { NODE_SETTING_UI_LABEL_TEXT } from "@/lib/graph/NodeSettings";
 
 const graphStore = createGraphStore();
 
@@ -20,7 +20,7 @@ graphStore.getState().initialize([
     createNode("textToBase64", "2", { x: 250, y: 50 }),
     createNode("concatenateStrings", "3", { x: 470, y: 85 }),
     createNode("waitAndForward", "4", { x: 690, y: 85 }),
-    createNode("output", "5", { x: 880, y: 85 }, {[NODE_SETTING_UI_LABEL_NAME]: {value: "Result"}}),
+    createNode("output", "5", { x: 880, y: 85 }, {[NODE_SETTING_UI_LABEL_TEXT]: {value: "Result"}}),
     createNode("inputNumeric", "6", { x: 50, y: 200 }),
 ], [{
     fromIO: { nodeId: "1", nodeIOName: "fromUi" },

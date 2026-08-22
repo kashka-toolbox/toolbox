@@ -1,6 +1,6 @@
 import { NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { createNodeDefinition } from "./CreateNodeDefinition.factory";
-import { NODE_SETTING_UI_LABEL_NAME, NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS } from "./NodeSettings"
+import { NODE_SETTING_UI_LABEL_TEXT, NODE_SETTING_UI_LABEL_TEXT_DEFAULT } from "./NodeSettings"
 
 export const NODE_INPUT_IO_NAME = "fromUi";
 export const NODE_OUTPUT_IO_NAME = "toUi";
@@ -17,7 +17,7 @@ export type NODE_TYPE =
 export const NODE_DEFINITIONS: {
     [key in NODE_TYPE]: NodeDefinition<any, any, any>;
 } = {
-    input: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_NAME]>({
+    input: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_TEXT]>({
         type: "input",
         name: "input.any",
         inputs: [],
@@ -30,10 +30,10 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "input",
         settings: {
-            ...NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS
+            ...NODE_SETTING_UI_LABEL_TEXT_DEFAULT
         }
     }),
-    inputNumeric: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_NAME]>({
+    inputNumeric: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_TEXT]>({
         type: "input",
         name: "input.numeric",
         inputs: [],
@@ -46,10 +46,10 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "input",
         settings: {
-            ...NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS
+            ...NODE_SETTING_UI_LABEL_TEXT_DEFAULT
         }
     }),
-    output: createNodeDefinition<["toUi"], [], [typeof NODE_SETTING_UI_LABEL_NAME]>({
+    output: createNodeDefinition<["toUi"], [], [typeof NODE_SETTING_UI_LABEL_TEXT]>({
         type: "output",
         name: "output.any",
         inputs: [{
@@ -62,7 +62,7 @@ export const NODE_DEFINITIONS: {
         },
         nodeCategory: "output",
         settings: {
-            ...NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS
+            ...NODE_SETTING_UI_LABEL_TEXT_DEFAULT
         }
     }),
     textToBase64: createNodeDefinition<

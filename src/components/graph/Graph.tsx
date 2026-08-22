@@ -23,7 +23,7 @@ import { GraphInfiniteCanvasScroll } from "./GraphInfiniteCanvasScroll";
 import { CopyToClipboard } from "../ui/copyToClipboard";
 import { ZoomControls } from "./ZoomControls";
 import { NodeSetting, NodeSettings } from "@/lib/graph/NodeSettings";
-import { NODE_SETTING_UI_LABEL_NAME } from "@/lib/graph/NodeSettings";
+import { NODE_SETTING_UI_LABEL_TEXT } from "@/lib/graph/NodeSettings";
 import { Label } from "../ui/label";
 import { useTranslations } from "next-intl";
 import { useSpeculativeUiLabelI18N } from "@/lib/graph/useSpeculativeUiLabelI18N";
@@ -131,7 +131,7 @@ export function GraphUiInput({ nodeId }: { nodeId: string }) {
 
     const nodeOutputState = node?.state[NODE_INPUT_IO_NAME];
     const nodeSettings: NodeSettings = node.settings;
-    const uiLabelNameSetting: Partial<NodeSetting> = nodeSettings[NODE_SETTING_UI_LABEL_NAME];
+    const uiLabelNameSetting: Partial<NodeSetting> = nodeSettings[NODE_SETTING_UI_LABEL_TEXT];
     const uiLabelName: string | undefined =
         (uiLabelNameSetting?.value == undefined || uiLabelNameSetting.value.length == 0)
             ? t(`nodes.${NODE_DEFINITIONS.input.name}.name`)
@@ -215,7 +215,7 @@ export function GraphUiOutput({ nodeId }: { nodeId: string }) {
 
     const nodeOutputState = node?.state[NODE_OUTPUT_IO_NAME];
     const nodeSettings: NodeSettings = node.settings;
-    const uiLabelNameSetting: Partial<NodeSetting> = nodeSettings[NODE_SETTING_UI_LABEL_NAME];
+    const uiLabelNameSetting: Partial<NodeSetting> = nodeSettings[NODE_SETTING_UI_LABEL_TEXT];
     const uiLabelName: string | undefined =
         (uiLabelNameSetting.value == undefined || uiLabelNameSetting.value.length == 0)
             ? t(`nodes.${NODE_DEFINITIONS.output.name}.name`)

@@ -14,12 +14,12 @@ export type NodeSettings = {
 };
 
 // Node Setting constants: 
-export const NODE_SETTING_UI_LABEL_NAME = "UI_LABEL_NAME";
-export const NODE_SETTING_UI_LABEL_NAME_DEFAULT_SETTINGS = {
-    UI_LABEL_NAME: {
+export const NODE_SETTING_UI_LABEL_TEXT = "UI_LABEL_TEXT";
+export const NODE_SETTING_UI_LABEL_TEXT_DEFAULT = {
+    [NODE_SETTING_UI_LABEL_TEXT]: {
         type: "text.any",
         defaultValue: "",
         value: "",
-        translationKey: NODE_SETTING_UI_LABEL_NAME
+        translationKey: NODE_SETTING_UI_LABEL_TEXT
     } as NodeSetting
 };
