@@ -115,6 +115,8 @@ export function GraphInputs({ }: {}) {
 
 export function GraphUiInput({ nodeId }: { nodeId: string }) {
     const node = useNodeState(nodeId);
+    const t = useTranslations("graph");
+    const t_speculative = useSpeculativeUiLabelI18N();
     const updateNodeState = useCurrentGraphStore().getState().updateNodeState;
 
     if (!node) {
@@ -128,45 +130,58 @@ export function GraphUiInput({ nodeId }: { nodeId: string }) {
     }
 
     const nodeOutputState = node?.state[NODE_INPUT_IO_NAME];
+    const nodeSettings: NodeSettings = node.settings;
+    const uiLabelNameSetting: Partial<NodeSetting> = nodeSettings[NODE_SETTING_UI_LABEL_NAME];
+    const uiLabelName: string | undefined =
+        (uiLabelNameSetting?.value == undefined || uiLabelNameSetting.value.length == 0)
+            ? t(`nodes.${NODE_DEFINITIONS.input.name}.name`)
+            : t_speculative(uiLabelNameSetting.value);
 
-    if (node.name == "input.numeric") {
-        return (
-            <Input
-                key={nodeId}
-                value={nodeOutputState ?? 0}
-                type="number"
-                onChange={(e) => {
-                    const value = e.target.value;
-                    const numericValue = value === "" ? "" : Number(value);
-                    updateNodeState(nodeId, {
-                        state: {
-                            ...node.state,
-                            [NODE_INPUT_IO_NAME]: numericValue,
-                        },
-                    });
-                }}
-                placeholder={`Numeric input for node ${nodeId}`}
-            />
-        );
-    }
+    return <span className="flex flex-col gap-1 w-full">
+        <Label htmlFor={nodeId} className="ml-1">
+            {uiLabelName}
+        </Label>
+        <span className="flex flex-row items-center gap-2 w-full">
+            {
+                node.name == "input.numeric" ?
+                    <Input
+                        key={nodeId}
+                        value={nodeOutputState ?? 0}
+                        type="number"
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            const numericValue = value === "" ? "" : Number(value);
+                            updateNodeState(nodeId, {
+                                state: {
+                                    ...node.state,
+                                    [NODE_INPUT_IO_NAME]: numericValue,
+                                },
+                            });
+                        }}
+                        placeholder={`Numeric input for node ${nodeId}`}
+                    />
+                    :
+                    <Input
+                        key={nodeId}
+                        value={nodeOutputState ?? ""}
+                        type="text"
+                        onChange={(e) => {
+                            updateNodeState(nodeId, {
+                                state: {
+                                    ...node.state,
+                                    [NODE_INPUT_IO_NAME]: e.target.value,
+                                },
+                            });
+                        }}
+                        placeholder={`Input for node ${nodeId}`}
+                    />
+            }
+        </span>
+    </span>
 
-    return (
-        <Input
-            key={nodeId}
-            value={nodeOutputState ?? ""}
-            type="text"
-            onChange={(e) => {
-                updateNodeState(nodeId, {
-                    state: {
-                        ...node.state,
-                        [NODE_INPUT_IO_NAME]: e.target.value,
-                    },
-                });
-            }}
-            placeholder={`Input for node ${nodeId}`}
-        />
-    );
 }
+
+
 
 export function GraphOutputs({ }: {}) {
     const outputNodeIDs = useOutputNodeIds();

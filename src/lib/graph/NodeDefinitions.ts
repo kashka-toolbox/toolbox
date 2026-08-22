@@ -17,7 +17,7 @@ export type NODE_TYPE =
 export const NODE_DEFINITIONS: {
     [key in NODE_TYPE]: NodeDefinition<any, any, any>;
 } = {
-    input: createNodeDefinition<[], ["fromUi"], []>({
+    input: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_NAME]>({
         type: "input",
         name: "input.any",
         inputs: [],
@@ -29,9 +29,16 @@ export const NODE_DEFINITIONS: {
             return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? "" };
         },
         nodeCategory: "input",
-        settings: {}
+        settings: {
+            UI_LABEL_NAME: {
+                type: "text.any",
+                defaultValue: "",
+                value: "",
+                translationKey: NODE_SETTING_UI_LABEL_NAME
+            }
+        }
     }),
-    inputNumeric: createNodeDefinition<[], ["fromUi"], []>({
+    inputNumeric: createNodeDefinition<[], ["fromUi"], [typeof NODE_SETTING_UI_LABEL_NAME]>({
         type: "input",
         name: "input.numeric",
         inputs: [],
@@ -43,7 +50,14 @@ export const NODE_DEFINITIONS: {
             return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? 0 };
         },
         nodeCategory: "input",
-        settings: {}
+        settings: {
+            UI_LABEL_NAME: {
+                type: "text.any",
+                defaultValue: "",
+                value: "",
+                translationKey: NODE_SETTING_UI_LABEL_NAME
+            }
+        }
     }),
     output: createNodeDefinition<["toUi"], [], [typeof NODE_SETTING_UI_LABEL_NAME]>({
         type: "output",
