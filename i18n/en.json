@@ -155,6 +155,9 @@
     "clearInput": "Clear input"
   },
   "graph": {
+    "errorMessages": {
+      "divideByZero": "Division by zero is not allowed."
+    },
     "types": {
       "any": "any",
       "numeric": {

@@ -1,6 +1,6 @@
 import { NodeDefinition } from "@/lib/graph/NodeDefinition";
+import { NodeExecutionError } from "@/lib/graph/NodeExecutionError";
 import { createNodeDefinition } from "../CreateNodeDefinition.factory";
-import { NODE_SETTING_UI_LABEL_TEXT, NODE_SETTING_UI_LABEL_TEXT_DEFAULT } from "../NodeSettings"
 
 export const NODE_INPUT_IO_NAME = "fromUi";
 export const NODE_OUTPUT_IO_NAME = "toUi";
@@ -56,7 +56,7 @@ export const NODE_DEFINITIONS_MATH: {
         nodeCategory: "math",
         settings: {}
     }),
-   substraction: createNodeDefinition<
+    substraction: createNodeDefinition<
         [
             "numberA",
             "numberB",
@@ -98,7 +98,7 @@ export const NODE_DEFINITIONS_MATH: {
         nodeCategory: "math",
         settings: {}
     }),
-   multiplication: createNodeDefinition<
+    multiplication: createNodeDefinition<
         [
             "numberA",
             "numberB",
@@ -176,7 +176,7 @@ export const NODE_DEFINITIONS_MATH: {
                 parameters["numberB"];
 
             if (inputB === 0) {
-                throw new Error("Cannot divide by zero");
+                throw new NodeExecutionError(NodeExecutionError.translationKeys.DIVIDE_BY_ZERO);
             }
 
             return {

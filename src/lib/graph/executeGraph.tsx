@@ -96,7 +96,8 @@ export async function executeGraph(
             setNodeState(node.id, { state: { ...node.state, ...result } });
             console.info(`Node ${node.id} state updated to:`, { ...node.state, ...result });
         }).catch((error) => {
-            console.error(`Error executing node ${node.id}:`, error);
+            console.warn(`Error executing node ${node.id}:`, error);
+            // TODO: Give user the option to stop exection on first error
             // Optionally handle errors, e.g., set an error state
             setNodeState(node.id, { isProcessing: false, error: error.message });
         }).finally(() => {

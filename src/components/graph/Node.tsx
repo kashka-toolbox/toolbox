@@ -27,6 +27,7 @@ export function Node({
     }>;
 }) {
     const t = useTranslations("graph");
+    const t_error = useTranslations("graph.errorMessages");
 
     const addEdge = useGraphStore((store) => store.addEdge);
     const setNodePosition = useGraphStore((store) => store.setNodePosition);
@@ -191,7 +192,7 @@ export function Node({
                         <Alert variant={"destructive"} className="mt-2">
                             <AlertTitle>Error</AlertTitle>
                             <AlertDescription>
-                                {nodeState.error}
+                                {t_error(nodeState.error)}
                             </AlertDescription>
                         </Alert>
                     )}
