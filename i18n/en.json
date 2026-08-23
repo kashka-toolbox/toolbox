@@ -236,6 +236,51 @@
             "outputs": {
               "result": "A / B"
             }
+          },
+         "abs": {
+            "name": "Absolute Value",
+            "inputs": {
+              "number": "Number"
+            },
+            "outputs": {
+              "result": "Absolute"
+            }
+          },
+          "ceil": {
+            "name": "Ceil",
+            "inputs": {
+              "number": "Number"
+            },
+            "outputs": {
+              "result": "Ceil"
+            }
+          },
+          "floor": {
+            "name": "Floor",
+            "inputs": {
+              "number": "Number"
+            },
+            "outputs": {
+              "result": "Floored"
+            }
+          },
+          "round": {
+            "name": "Round",
+            "inputs": {
+              "number": "Number"
+            },
+            "outputs": {
+              "result": "Rounded"
+            }
+          },
+          "sign": {
+            "name": "Sign",
+            "inputs": {
+              "number": "Number"
+            },
+            "outputs": {
+              "result": "Sign"
+            }
           }
         },
         "text": {
