@@ -1,6 +1,7 @@
 import { NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { createNodeDefinition } from "./CreateNodeDefinition.factory";
 import { NODE_SETTING_UI_LABEL_TEXT, NODE_SETTING_UI_LABEL_TEXT_DEFAULT } from "./NodeSettings"
+import { NODE_DEFINITIONS_MATH, NODE_TYPE_MATH } from "./NodeDefinitions/NodeDefinitionsMath";
 
 export const NODE_INPUT_IO_NAME = "fromUi";
 export const NODE_OUTPUT_IO_NAME = "toUi";
@@ -12,7 +13,8 @@ export type NODE_TYPE =
     | "textToBase64"
     | "concatenateStrings"
     | "waitAndForward"
-    | "randomUUID";
+    | "randomUUID"
+    | NODE_TYPE_MATH;
 
 export const NODE_DEFINITIONS: {
     [key in NODE_TYPE]: NodeDefinition<any, any, any>;
@@ -39,7 +41,7 @@ export const NODE_DEFINITIONS: {
         inputs: [],
         outputs: [{
             name: NODE_INPUT_IO_NAME,
-            type: "numeric",
+            type: "numeric.any",
         }],
         execute: async (_, self) => {
             return { "fromUi": self.state[NODE_INPUT_IO_NAME] ?? 0 };
@@ -181,4 +183,5 @@ export const NODE_DEFINITIONS: {
         nodeCategory: "cryptography",
         settings: {}
     }),
+    ...NODE_DEFINITIONS_MATH
 };  

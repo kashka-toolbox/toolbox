@@ -2,7 +2,8 @@ import { TypeDefinition } from "./TypeDefinition";
 
 export type TYPE_DEFINITION_KEY =
     | "any"
-    | "numeric"
+    | "numeric.any"
+    | "numeric.int"
     | "text.any"
     | "text.base64"
     | "text.uuid";
@@ -14,9 +15,13 @@ export const TYPE_DEFINITIONS: {
         name: "any",
         translationKey: "types.any",
     },
-    "numeric": {
-        name: "numeric",
-        translationKey: "types.numeric",
+    "numeric.any": {
+        name: "numeric.any",
+        translationKey: "types.numeric.any",
+    },
+    "numeric.int": {
+        name: "numeric.any",
+        translationKey: "types.numeric.int",
     },
     "text.any": {
         name: "text.any",

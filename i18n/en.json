@@ -157,7 +157,10 @@
   "graph": {
     "types": {
       "any": "any",
-      "numeric": "Numeric",
+      "numeric": {
+        "any": "Number",
+        "int": "Integer"
+      },
       "text": {
         "any": "Text",
         "base64": "Text (Base64)",
@@ -189,6 +192,48 @@
       "operation": {
         "waitAndForward": {
           "name": "Wait and Forward"
+        },
+        "math": {
+          "addition": {
+            "name": "Addition",
+            "inputs": {
+              "numberA": "Number A",
+              "numberB": "Number B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Substraction",
+            "inputs": {
+              "numberA": "Number A",
+              "numberB": "Number B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+         "multiplication": {
+            "name": "Multiplication",
+            "inputs": {
+              "numberA": "Number A",
+              "numberB": "Number B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Division",
+            "inputs": {
+              "numberA": "Number A",
+              "numberB": "Number B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          }
         },
         "text": {
           "textToBase64": {
