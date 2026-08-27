@@ -42,13 +42,18 @@ jobs:
           echo $GITHUB_OUTPUT
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
     needs: prepare
     strategy:
       matrix:
         platform:
           - linux/amd64
           - linux/arm64
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-24.04
+          - platform: linux/arm64
+            runner: ubicloud-standard-2-arm # https://www.ubicloud.com/use-cases/github-actions
     env:
       IMAGE_NAME: ${{ needs.prepare.outputs.image-name }}
     permissions:
