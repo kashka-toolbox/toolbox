@@ -1,11 +1,20 @@
 "use client"
 
+import { ExecuteGraphButton } from "@/components/graph/ExecuteGraphButton";
+import { Graph, GraphInputs, GraphOutputs } from "@/components/graph/Graph";
+import { createGraphStore, GraphStoreContext } from "@/components/graph/GraphContextProvider";
+import { Node } from "@/components/graph/Node";
+import { SortGraphButton } from "@/components/graph/SortGraphButton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import { Label } from "@/components/ui/label";
 import { Section } from "@/components/ui/Section";
+import { createNode } from "@/lib/graph/CreateNode.factory";
+import { NODE_INPUT_IO_NAME, NODE_OUTPUT_IO_NAME } from "@/lib/graph/NodeDefinitions";
+import { NODE_SETTING_UI_LABEL_TEXT } from "@/lib/graph/NodeSettings";
 import { ExclamationTriangleIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 
 export default function Page() {
@@ -118,7 +127,82 @@ export default function Page() {
           </AlertDescription>
         </Alert>
       </Section>
+      <Section variant="ghost">
+        <h1 className="header-section-1">Graph</h1>
+        <UiDemoGraph />
+      </Section>
     </>
   );
 }
 
+function UiDemoGraph() {
+  const graphStore = createGraphStore();
+
+  graphStore.getState().initialize([
+    createNode("inputNumeric", "1", { x: 50, y: 50 }),
+    createNode("round", "2", { x: 300, y: 50 }),
+    createNode("output", "3", { x: 500, y: 50 }, { [NODE_SETTING_UI_LABEL_TEXT]: { value: "Result" } }),
+  ], [{
+    fromIO: { nodeId: "1", nodeIOName: NODE_INPUT_IO_NAME },
+    toIO: { nodeId: "2", nodeIOName: "number" },
+  }, {
+    fromIO: { nodeId: "2", nodeIOName: "result" },
+    toIO: { nodeId: "3", nodeIOName: NODE_OUTPUT_IO_NAME },
+  },
+  ]);
+
+
+  return <GraphStoreContext.Provider
+    value={graphStore}
+  >
+    <Section variant={"ghost"} className="flex flex-col gap-4 md:gap-8">
+      <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <Card className="w-full mt-2">
+          <CardContent>
+            <div className="flex flex-col gap-2 w-full mt-4">
+              <h2 className="header-section-3 mb-1">Inputs</h2>
+              <GraphInputs />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="w-full mt-2">
+          <CardContent>
+            <div className="flex flex-col gap-2 w-full mt-4">
+              <h2 className="header-section-3 mb-1">Outputs</h2>
+              <GraphOutputs />
+            </div>
+          </CardContent>
+          <CardFooter className="flex">
+            <span className="flex flex-col w-full">
+              <Item variant="destructive">
+                <ItemContent>
+                  <ItemTitle>Error Message</ItemTitle>
+                  <ItemDescription>
+                    A simple item with title and description.
+                  </ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                  <Button variant="outline" className="bg-transparent" size="sm">
+                    View Node
+                  </Button>
+                </ItemActions>
+              </Item>
+            </span>
+          </CardFooter>
+        </Card>
+      </div>
+    </Section>
+
+    <Section variant={"ghost"} className="flex items-center gap-4">
+      <SortGraphButton />
+      <ExecuteGraphButton />
+      <div className="flex-grow h-[1px] bg-primary-foreground"/>
+    </Section>
+
+    <Section variant={"ghost"}>
+      <Graph className="h-64" />
+    </Section>
+  </GraphStoreContext.Provider>
+
+}

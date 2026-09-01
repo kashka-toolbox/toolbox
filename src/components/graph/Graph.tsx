@@ -28,7 +28,7 @@ import { Label } from "../ui/label";
 import { useTranslations } from "next-intl";
 import { useSpeculativeUiLabelI18N } from "@/lib/graph/useSpeculativeUiLabelI18N";
 
-export function Graph({ }: {}) {
+export function Graph({ className }: { className?: string }) {
     const graphRef = useRef<HTMLDivElement>(null);
     const transformContainerRef = useRef<HTMLDivElement>(null);
 
@@ -69,6 +69,7 @@ export function Graph({ }: {}) {
             ref={graphRef}
             className={cn(
                 "relative rounded-md bg-background text-foreground p-0 shadow-md overflow-hidden w-full aspect-video border border-border",
+                className,
                 isCurrentlyDragging ? "cursor-grabbing" : "cursor-grab",
             )}
             onMouseDown={onMouseDown}
