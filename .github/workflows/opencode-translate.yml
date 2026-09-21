@@ -36,7 +36,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Run OpenCode
-        if: steps.sync.outputs.count != '0'
+        if: github.event_name == 'workflow_dispatch' && steps.sync.outputs.count != '0'
         uses: anomalyco/opencode/github@latest
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
