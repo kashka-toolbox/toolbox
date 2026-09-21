@@ -7,6 +7,7 @@ import { Link } from "@/i18n/navigation";
 import { getTranslationKeyByHref } from "@/lib/navigation";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 
 export default function Layout({
@@ -15,7 +16,9 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname()
-  const pageTitle = getTranslationKeyByHref(pathname);
+  const t = useTranslations("navigation.debug");
+  const translationKey = getTranslationKeyByHref(pathname);
+  const pageTitle = translationKey ? t(`${translationKey}.title`) : translationKey;
 
   return (
     <main className="container pb-2 pt-2 md:pt-8 md:pb-8 min-h-screen mx-auto max-w-screen-2xl p-8 pt-6">

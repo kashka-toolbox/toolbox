@@ -98,6 +98,12 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           href: "/debug/ui",
           displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
           icon: ExclamationTriangleIcon,
+        },
+        {
+          translationKey: "translations",
+          href: "/debug/translations",
+          displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
+          icon: ExclamationTriangleIcon,
         }
       ],
     },
