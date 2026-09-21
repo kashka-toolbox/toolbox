@@ -2,6 +2,15 @@ import { NodeDefinition } from "@/lib/graph/NodeDefinition";
 import { NodeExecutionError } from "@/lib/graph/NodeExecutionError";
 import { createNodeDefinition } from "../CreateNodeDefinition.factory";
 
+const parseNumericInput = (value: unknown): number => {
+    if (typeof value === "number") return value;
+    if (typeof value === "string") {
+        const parsed = Number(value);
+        if (!Number.isNaN(parsed)) return parsed;
+    }
+    throw new NodeExecutionError(NodeExecutionError.translationKeys.INVALID_INPUT_TYPE);
+};
+
 export const NODE_INPUT_IO_NAME = "fromUi";
 export const NODE_OUTPUT_IO_NAME = "toUi";
 
@@ -49,10 +58,18 @@ export const NODE_DEFINITIONS_MATH: {
                 "numberB": number;
             },
         ) => {
-            const inputA =
-                parameters["numberA"];
-            const inputB =
-                parameters["numberB"];
+            const parseInput = (value: unknown): number => {
+                if (typeof value === "number") return value;
+                if (typeof value === "string") {
+                    const parsed = Number(value);
+                    if (!Number.isNaN(parsed)) return parsed;
+                }
+                throw new NodeExecutionError(NodeExecutionError.translationKeys.INVALID_INPUT_TYPE);
+            };
+
+            const inputA = parseInput(parameters["numberA"]);
+            const inputB = parseInput(parameters["numberB"]);
+
             return {
                 "result":
                     inputA + inputB,
