@@ -1,0 +1,58 @@
+name: Update German translations
+
+on:
+  workflow_dispatch:
+
+jobs:
+  opencode:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Copy missing keys from English source
+        id: sync
+        run: |
+          node scripts/sync-i18n.mjs de > added-keys.txt
+          echo "count=$(grep -c . added-keys.txt || true)" >> "$GITHUB_OUTPUT"
+          {
+            echo "keys<<KEYS_EOF"
+            cat added-keys.txt
+            echo "KEYS_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Run OpenCode
+        if: steps.sync.outputs.count != '0'
+        uses: anomalyco/opencode/github@latest
+        env:
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+        with:
+          model: zai/glm-5.3-flash
+          prompt: |
+            The German translation file i18n/de.json already contains every key from the English source. A static sync step copied every missing key and prefixed its value with the marker "FROM en.json REPLACE: " followed by the English text. Every value carrying that marker is a placeholder that still needs a German translation.
+
+            Your task:
+            - Read i18n/de.json. You do not need to read any other file.
+            - Find every string value that starts with "FROM en.json REPLACE: ".
+            - Replace each such value with a natural German translation of the English text that follows the marker. Do not keep the marker in the result.
+            - If the English text after the marker is empty, set the value to an empty string.
+            - Match the existing style of the file (informal "du" form).
+            - Leave every other key and its translation completely untouched.
+            - Do not add, remove, or rename any keys.
+            - Keep i18n/de.json valid JSON with 2-space indentation and a trailing newline.
+            - Do not modify any other file.
+
+            The keys added by the sync step (for reference, full key paths):
+            ${{ steps.sync.outputs.keys }}
+
+            After editing, verify that no value in i18n/de.json still contains the marker "FROM en.json REPLACE: ".
+
+            If you changed i18n/de.json: create a new branch (e.g. "i18n/de-update-<date>"), commit the change with the message "chore(i18n): update German translations", and open a pull request against the default branch with the title "chore(i18n): update German translations" and a short description.
