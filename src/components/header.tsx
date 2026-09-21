@@ -9,6 +9,7 @@ import { FourDotsIcon } from './ui/Icons/FourDotsIcon';
 import { Separator } from './ui/separator';
 import { Sheet, SheetBody, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
 import { DarkmodeToggle } from './ui/darkmode-toggle';
+import LanguageSwitcher from './ui/language-switcher';
 
 
 export default function Header() {
@@ -27,6 +28,7 @@ export default function Header() {
             </div>
           </div>
           <div className='flex items-center space-x-2 md:justify-end flex-[1] basis-1 justify-end'>
+            <LanguageSwitcher />
             <Sheet>
               <SheetTrigger asChild>
                 {
