@@ -39,6 +39,9 @@ next-env.d.ts
 /blob-report/
 /playwright/.cache/
 
+# translation agent logs
+/logs/
+
 # pwa sw
 **/public/workbox-*.js*
 **/public/sw.js*

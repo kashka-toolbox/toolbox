@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Dokonalá sada nástrojů",
+    "description": "Sada nástrojů zdarma a pro každého",
+    "clientSideComputing": {
+      "title": "Výpočty na straně klienta",
+      "description": "Každý tvůj vstup se zpracovává přímo na tvém zařízení. Žádná data se neposílají do cloudu."
+    },
+    "openSource": {
+      "forever": "Navždy",
+      "title": "Open Source",
+      "description": " Veškerý zdrojový kód je k dispozici na GitHubu. Tento projekt je zdarma pro nekomerční použití. Více informací najdeš v licenci AGPL-3.0.",
+      "GitHub": "GitHub",
+      "license": "Licence"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Hledej nástroj tady...",
+      "noResultsFound": "Nenalezeny žádné výsledky."
+    },
+    "gettingStarted": {
+      "title": "Začínáme",
+      "home": {
+        "title": "Domů",
+        "description": ""
+      },
+      "source": {
+        "title": "Zobrazit zdrojový kód",
+        "description": "Dej nám hvězdičku na GitHubu!"
+      }
+    },
+    "debug": {
+      "title": "Ladění",
+      "auth": {
+        "title": "Autentizace",
+        "description": ""
+      },
+      "debug": {
+        "title": "Přehled ladění",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Překlady",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Právní informace",
+      "privacy": {
+        "title": "Prohlášení o ochraně osobních údajů",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Impressum",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Počítadlo slov",
+          "description": "Počítej věty, slova a znaky"
+        }
+      },
+      "encoding": {
+        "title": "Kódování",
+        "URL": {
+          "title": "Kódování URL",
+          "description": "Zakóduj text jako parametr URL"
+        },
+        "base64": {
+          "title": "Kódování/dekódování Base64",
+          "description": "Zakóduj nebo dekóduj text jako Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Binární kódování/dekódování Unicode",
+          "description": "Zakóduj nebo dekóduj text jako Unicode binárně"
+        }
+      },
+      "color": {
+        "title": "Barva",
+        "hexToHSL": {
+          "title": "Hex na HSL",
+          "description": "Převeď hex barvu do formátu HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Rozdělit",
+          "description": "Rozděl PDF do více souborů"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Zakódováno:",
+        "b2a_result": "Dekódováno:",
+        "a2b_title": "Kódování URL",
+        "b2a_title": "Dekódování URL",
+        "whatis": "Co je kódování URL?",
+        "description": "Kódování URL (také známé jako Percent-Encoding) je metoda kódování znaků v URL, které nejsou součástí standardní znakové sady ASCII. Patří sem speciální znaky, jako jsou mezery, šipky nebo speciální znaky z jiných jazyků.",
+        "howItWorks": {
+          "title": "Jak to funguje",
+          "description": "<li>Každý speciální znak je kódován znakem \"%\" následovaným dvoumístným šestnáctkovým číslem.</li>\n<li>Mezera se například kóduje jako \"%20\" a symbol menší než \"<\" jako \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Přehledová tabulka",
+          "description": "Vyhledej URL kódování pro konkrétní znak."
+        }
+      },
+      "base64": {
+        "a2b_result": "Zakódováno jako Base64:",
+        "b2a_result": "Dekódováno jako text:",
+        "a2b_title": "Kódování Base64",
+        "b2a_title": "Dekódování Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Zakódováno jako Unicode:",
+        "b2a_result": "Dekódováno jako binární:",
+        "a2b_title": "Binární na Unicode",
+        "b2a_title": "Unicode na binární"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex na HSL",
+        "description": "Převádí hex barvu do formátu HSL.",
+        "options": {
+          "valuesOnly": "Zahrnout do hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Rozdělit PDF",
+        "description": "Rozděl soubor PDF do více souborů.",
+        "actions": {
+          "downloadAll": "Stáhnout všechny rozdělené strany",
+          "dropFiles": "Přetáhni sem soubory, nebo klikni a vyber"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Hledat"
+  },
+  "converterBidirectional": {
+    "input": "Vstup:",
+    "swapSides": "Prohodit strany",
+    "clearInput": "Vymazat vstup"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Dělení nulou není povoleno."
+    },
+    "types": {
+      "any": "libovolný",
+      "numeric": {
+        "any": "Číslo",
+        "int": "Celé číslo"
+      },
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)",
+        "uuid": "Text (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Vstup",
+      "output": "Výstup",
+      "strings": "Řetězce",
+      "math": "Matematika",
+      "cryptography": "Kryptografie",
+      "extra": "Extra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Vstup"
+        },
+        "numeric": {
+          "name": "Číselný vstup"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Výstup"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Počkat a přeposlat"
+        },
+        "math": {
+          "addition": {
+            "name": "Sčítání",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Odčítání",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Násobení",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Dělení",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Absolutní hodnota",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Absolutní hodnota"
+            }
+          },
+          "ceil": {
+            "name": "Zaokrouhlení nahoru",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Zaokrouhleno nahoru"
+            }
+          },
+          "floor": {
+            "name": "Zaokrouhlení dolů",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Zaokrouhleno dolů"
+            }
+          },
+          "round": {
+            "name": "Zaokrouhlení",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Zaokrouhleno"
+            }
+          },
+          "sign": {
+            "name": "Znaménko",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Znaménko"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text na Base64",
+            "inputs": {
+              "stringA": "Text A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Spojit řetězce",
+            "inputs": {
+              "stringA": "Text A",
+              "stringB": "Text B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Náhodné UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Název UI popisku"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Přidat uzel",
+      "searchbar": {
+        "placeholder": "Hledej uzly...",
+        "noResultsFound": "Nenalezeny žádné výsledky."
+      },
+      "category": {
+        "title": "Kategorie",
+        "subItem": {
+          "title": "Podpoložka",
+          "description": "Toto je popis podpoložky.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Vlastnosti uzlu"
+    },
+    "speculativelabel": {
+      "result": "Výsledek"
+    }
+  }
+}

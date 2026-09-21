@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Trusa de unelte supremă",
+    "description": "O colecție de unelte gratuite și pentru toată lumea",
+    "clientSideComputing": {
+      "title": "Calculare pe partea clientului",
+      "description": "Toate datele pe care le introduci sunt procesate pe dispozitivul tău. Nu se trimite nicio dată în cloud."
+    },
+    "openSource": {
+      "forever": "Pentru totdeauna",
+      "title": "Open Source",
+      "description": "Tot codul sursă este disponibil pe GitHub. Acest proiect este gratuit pentru utilizare necomercială. Consultă licența AGPL-3.0 pentru mai multe informații.",
+      "GitHub": "GitHub",
+      "license": "Licență"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Caută o unealtă aici...",
+      "noResultsFound": "Niciun rezultat găsit."
+    },
+    "gettingStarted": {
+      "title": "Primii pași",
+      "home": {
+        "title": "Acasă",
+        "description": ""
+      },
+      "source": {
+        "title": "Vezi codul sursă",
+        "description": "Dă-ne un star pe GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Depanare",
+      "auth": {
+        "title": "Autentificare",
+        "description": ""
+      },
+      "debug": {
+        "title": "Prezentare generală depanare",
+        "description": ""
+      },
+      "ui": {
+        "title": "Interfață",
+        "description": ""
+      },
+      "translations": {
+        "title": "Traduceri",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Informații legale",
+      "privacy": {
+        "title": "Declarație de confidențialitate",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Mențiuni legale",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Numărător de cuvinte",
+          "description": "Numără propozițiile, cuvintele și caracterele"
+        }
+      },
+      "encoding": {
+        "title": "Codificare",
+        "URL": {
+          "title": "Codificare URL",
+          "description": "Codifică textul ca parametru URL"
+        },
+        "base64": {
+          "title": "Codificare/Decodificare Base64",
+          "description": "Codifică sau decodifică textul în Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Codificare/Decodificare binar Unicode",
+          "description": "Codifică sau decodifică textul în binar Unicode"
+        }
+      },
+      "color": {
+        "title": "Culoare",
+        "hexToHSL": {
+          "title": "Hex în HSL",
+          "description": "Convertește o culoare hex în format HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Împarte",
+          "description": "Împarte un PDF în mai multe fișiere"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Codificat:",
+        "b2a_result": "Decodificat:",
+        "a2b_title": "Codificare URL",
+        "b2a_title": "Decodificare URL",
+        "whatis": "Ce este codificarea URL?",
+        "description": "Codificarea URL (cunoscută și sub numele de Percent-Encoding) este o metodă de codificare a caracterelor din URL-uri care nu fac parte din setul standard de caractere ASCII. Aceasta include caractere speciale, cum ar fi spațiile, săgețile sau caracterele speciale din alte limbi.",
+        "howItWorks": {
+          "title": "Cum funcționează",
+          "description": "<li>Fiecare caracter special este codificat printr-un \"%\" urmat de un număr hexazecimal din două cifre.</li>\n<li>De exemplu, caracterul spațiu ar fi codificat ca \"%20\", iar simbolul \"<\" ar fi codificat ca \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Tabel de căutare",
+          "description": "Caută codificarea URL pentru un anumit caracter."
+        }
+      },
+      "base64": {
+        "a2b_result": "Codificat în Base64:",
+        "b2a_result": "Decodificat ca text:",
+        "a2b_title": "Codificare Base64",
+        "b2a_title": "Decodificare Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Codificat în Unicode:",
+        "b2a_result": "Decodificat în binar:",
+        "a2b_title": "Binar în Unicode",
+        "b2a_title": "Unicode în binar"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex în HSL",
+        "description": "Convertește o culoare hex în format HSL.",
+        "options": {
+          "valuesOnly": "Include în hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Împarte PDF",
+        "description": "Împarte un fișier PDF în mai multe fișiere.",
+        "actions": {
+          "downloadAll": "Descarcă toate paginile împărțite",
+          "dropFiles": "Trage și plasează fișiere aici sau dă clic pentru a selecta"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Caută"
+  },
+  "converterBidirectional": {
+    "input": "Intrare:",
+    "swapSides": "Schimbă părțile",
+    "clearInput": "Golește intrarea"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Împărțirea la zero nu este permisă."
+    },
+    "types": {
+      "any": "oricare",
+      "numeric": {
+        "any": "Număr",
+        "int": "Număr întreg"
+      },
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)",
+        "uuid": "Text (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Intrare",
+      "output": "Ieșire",
+      "strings": "Șiruri",
+      "math": "Matematică",
+      "cryptography": "Criptografie",
+      "extra": "Extra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Intrare"
+        },
+        "numeric": {
+          "name": "Intrare numerică"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Ieșire"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Așteaptă și transmite"
+        },
+        "math": {
+          "addition": {
+            "name": "Adunare",
+            "inputs": {
+              "numberA": "Număr A",
+              "numberB": "Număr B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Scădere",
+            "inputs": {
+              "numberA": "Număr A",
+              "numberB": "Număr B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Înmulțire",
+            "inputs": {
+              "numberA": "Număr A",
+              "numberB": "Număr B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Împărțire",
+            "inputs": {
+              "numberA": "Număr A",
+              "numberB": "Număr B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Valoare absolută",
+            "inputs": {
+              "number": "Număr"
+            },
+            "outputs": {
+              "result": "Absolut"
+            }
+          },
+          "ceil": {
+            "name": "Rotunjire în sus",
+            "inputs": {
+              "number": "Număr"
+            },
+            "outputs": {
+              "result": "Rotunjit în sus"
+            }
+          },
+          "floor": {
+            "name": "Rotunjire în jos",
+            "inputs": {
+              "number": "Număr"
+            },
+            "outputs": {
+              "result": "Rotunjit în jos"
+            }
+          },
+          "round": {
+            "name": "Rotunjire",
+            "inputs": {
+              "number": "Număr"
+            },
+            "outputs": {
+              "result": "Rotunjit"
+            }
+          },
+          "sign": {
+            "name": "Semn",
+            "inputs": {
+              "number": "Număr"
+            },
+            "outputs": {
+              "result": "Semn"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text în Base64",
+            "inputs": {
+              "stringA": "Text A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Concatenează șiruri",
+            "inputs": {
+              "stringA": "Text A",
+              "stringB": "Text B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "UUID aleatoriu"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Nume etichetă UI"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Adaugă nod",
+      "searchbar": {
+        "placeholder": "Caută noduri...",
+        "noResultsFound": "Niciun rezultat găsit."
+      },
+      "category": {
+        "title": "Categorie",
+        "subItem": {
+          "title": "Subelement",
+          "description": "Aceasta este o descriere a subelementului.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Proprietățile nodului"
+    },
+    "speculativelabel": {
+      "result": "Rezultat"
+    }
+  }
+}

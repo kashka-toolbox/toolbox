@@ -1,15 +1,30 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const lang = process.argv[2] ?? "de";
+const registryPath = path.join(dir, "..", "src", "i18n", "languages.json");
 const enPath = path.join(dir, "..", "i18n", "en.json");
 const targetPath = path.join(dir, "..", "i18n", `${lang}.json`);
 
+const registry = JSON.parse(readFileSync(registryPath, "utf8"));
+if (!registry.some((l) => l.code === lang)) {
+  console.error(
+    `error: unknown language code "${lang}". Known codes: ${registry
+      .map((l) => l.code)
+      .join(", ")}`
+  );
+  process.exit(1);
+}
+
 const en = JSON.parse(readFileSync(enPath, "utf8"));
-const target = JSON.parse(readFileSync(targetPath, "utf8"));
+// Bootstrap: a missing target file starts from an empty object, so every key
+// is added (and marked) on the first run.
+const target = existsSync(targetPath)
+  ? JSON.parse(readFileSync(targetPath, "utf8"))
+  : {};
 
 const MARKER = "FROM en.json REPLACE: ";
 

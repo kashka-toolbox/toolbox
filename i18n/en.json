@@ -43,6 +43,10 @@
       "ui": {
         "title": "UI",
         "description": ""
+      },
+      "translations": {
+        "title": "Translations",
+        "description": ""
       }
     },
     "legal": {
@@ -217,7 +221,7 @@
               "result": "A - B"
             }
           },
-         "multiplication": {
+          "multiplication": {
             "name": "Multiplication",
             "inputs": {
               "numberA": "Number A",
@@ -237,7 +241,7 @@
               "result": "A / B"
             }
           },
-         "abs": {
+          "abs": {
             "name": "Absolute Value",
             "inputs": {
               "number": "Number"
@@ -309,7 +313,7 @@
           "name": "Ui Label Name"
         }
       }
-    }, 
+    },
     "addNodeDialog": {
       "title": "Add Node",
       "searchbar": {
@@ -326,10 +330,11 @@
       }
     },
     "editNodeSettingsDialog": {
-     "title": "Node Properties"
+      "title": "Node Properties"
     },
     "speculativelabel": {
       "result": "Result"
     }
   }
 }
+

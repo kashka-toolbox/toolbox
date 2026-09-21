@@ -43,6 +43,10 @@
       "ui": {
         "title": "UI",
         "description": ""
+      },
+      "translations": {
+        "title": "Übersetzungen",
+        "description": ""
       }
     },
     "legal": {

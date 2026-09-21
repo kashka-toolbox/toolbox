@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Η απόλυτη εργαλειοθήκη",
+    "description": "Μια συλλογή από δωρεάν εργαλεία για όλους",
+    "clientSideComputing": {
+      "title": "Υπολογισμός στην πλευρά του πελάτη",
+      "description": "Κάθε εισαγωγή που κάνεις επεξεργάζεται στη συσκευή σου. Δεν στέλνονται δεδομένα στο cloud."
+    },
+    "openSource": {
+      "forever": "Για πάντα",
+      "title": "Ανοιχτού κώδικα",
+      "description": "Όλος ο πηγαίος κώδικας είναι διαθέσιμος στο GitHub. Αυτό το project είναι δωρεάν για μη εμπορική χρήση. Δες την άδεια AGPL-3.0 για περισσότερες πληροφορίες.",
+      "GitHub": "GitHub",
+      "license": "Άδεια"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Αναζήτησε ένα εργαλείο εδώ...",
+      "noResultsFound": "Δεν βρέθηκαν αποτελέσματα."
+    },
+    "gettingStarted": {
+      "title": "Πρώτα βήματα",
+      "home": {
+        "title": "Αρχική",
+        "description": ""
+      },
+      "source": {
+        "title": "Δες τον πηγαίο κώδικα",
+        "description": "Βάλε μας star στο GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Debug",
+      "auth": {
+        "title": "Auth",
+        "description": ""
+      },
+      "debug": {
+        "title": "Επισκόπηση Debug",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Μεταφράσεις",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Νομικά",
+      "privacy": {
+        "title": "Δήλωση απορρήτου",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Στοιχεία εκδότη",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Κείμενο",
+        "wordCounter": {
+          "title": "Μετρητής λέξεων",
+          "description": "Μέτρα προτάσεις, λέξεις και χαρακτήρες"
+        }
+      },
+      "encoding": {
+        "title": "Κωδικοποίηση",
+        "URL": {
+          "title": "Κωδικοποίηση URL",
+          "description": "Κωδικοποίησε κείμενο ως παράμετρο URL"
+        },
+        "base64": {
+          "title": "Κωδικοποίηση/Αποκωδικοποίηση Base64",
+          "description": "Κωδικοποίησε ή αποκωδικοποίησε κείμενο ως Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Κωδικοποίηση/Αποκωδικοποίηση δυαδικού Unicode",
+          "description": "Κωδικοποίησε ή αποκωδικοποίησε κείμενο ως δυαδικό Unicode"
+        }
+      },
+      "color": {
+        "title": "Χρώμα",
+        "hexToHSL": {
+          "title": "Hex σε HSL",
+          "description": "Μετατρέψε ένα χρώμα hex σε μορφή HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Διαίρεση",
+          "description": "Διαίρεσε ένα PDF σε πολλά αρχεία"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Κωδικοποιημένο:",
+        "b2a_result": "Αποκωδικοποιημένο:",
+        "a2b_title": "Κωδικοποίηση URL",
+        "b2a_title": "Αποκωδικοποίηση URL",
+        "whatis": "Τι είναι η κωδικοποίηση URL;",
+        "description": "Η κωδικοποίηση URL (γνωστή και ως Percent-Encoding) είναι μια μέθοδος κωδικοποίησης χαρακτήρων σε URL που δεν ανήκουν στο τυπικό σετ χαρακτήρων ASCII. Περιλαμβάνει ειδικούς χαρακτήρες όπως κενά, βέλη ή ειδικούς χαρακτήρες από άλλες γλώσσες.",
+        "howItWorks": {
+          "title": "Πώς λειτουργεί",
+          "description": "<li>Κάθε ειδικός χαρακτήρας κωδικοποιείται με ένα \"%\" ακολουθούμενο από έναν δεκαεξαδικό αριθμό 2 ψηφίων.</li>\n<li>Για παράδειγμα, ο χαρακτήρας κενού κωδικοποιείται ως \"%20\" και το σύμβολο μικρότερου από \"<\" κωδικοποιείται ως \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Πίνακας αναζήτησης",
+          "description": "Αναζήτησε την κωδικοποίηση URL για έναν συγκεκριμένο χαρακτήρα."
+        }
+      },
+      "base64": {
+        "a2b_result": "Κωδικοποιημένο ως Base64:",
+        "b2a_result": "Αποκωδικοποιημένο ως κείμενο:",
+        "a2b_title": "Κωδικοποίηση Base64",
+        "b2a_title": "Αποκωδικοποίηση Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Κωδικοποιημένο ως Unicode:",
+        "b2a_result": "Αποκωδικοποιημένο ως δυαδικό:",
+        "a2b_title": "Δυαδικό σε Unicode",
+        "b2a_title": "Unicode σε δυαδικό"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex σε HSL",
+        "description": "Μετατρέπει ένα χρώμα hex σε μορφή HSL.",
+        "options": {
+          "valuesOnly": "Συμπερίληψη στο hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Διαίρεση PDF",
+        "description": "Διαίρεσε ένα αρχείο PDF σε πολλά αρχεία.",
+        "actions": {
+          "downloadAll": "Λήψη όλων των σελίδων που χωρίστηκαν",
+          "dropFiles": "Σύρε & άφησε αρχεία εδώ, ή κάνε κλικ για επιλογή"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Αναζήτηση"
+  },
+  "converterBidirectional": {
+    "input": "Είσοδος:",
+    "swapSides": "Εναλλαγή πλευρών",
+    "clearInput": "Καθαρισμός εισόδου"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Δεν επιτρέπεται διαίρεση με το μηδέν."
+    },
+    "types": {
+      "any": "οποιοδήποτε",
+      "numeric": {
+        "any": "Αριθμός",
+        "int": "Ακέραιος"
+      },
+      "text": {
+        "any": "Κείμενο",
+        "base64": "Κείμενο (Base64)",
+        "uuid": "Κείμενο (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Είσοδος",
+      "output": "Έξοδος",
+      "strings": "Συμβολοσειρές",
+      "math": "Μαθηματικά",
+      "cryptography": "Κρυπτογραφία",
+      "extra": "Έξτρα"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Είσοδος"
+        },
+        "numeric": {
+          "name": "Αριθμητική είσοδος"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Έξοδος"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Αναμονή και προώθηση"
+        },
+        "math": {
+          "addition": {
+            "name": "Πρόσθεση",
+            "inputs": {
+              "numberA": "Αριθμός A",
+              "numberB": "Αριθμός B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Αφαίρεση",
+            "inputs": {
+              "numberA": "Αριθμός A",
+              "numberB": "Αριθμός B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Πολλαπλασιασμός",
+            "inputs": {
+              "numberA": "Αριθμός A",
+              "numberB": "Αριθμός B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Διαίρεση",
+            "inputs": {
+              "numberA": "Αριθμός A",
+              "numberB": "Αριθμός B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Απόλυτη τιμή",
+            "inputs": {
+              "number": "Αριθμός"
+            },
+            "outputs": {
+              "result": "Απόλυτη"
+            }
+          },
+          "ceil": {
+            "name": "Στρογγυλοποίηση προς τα πάνω",
+            "inputs": {
+              "number": "Αριθμός"
+            },
+            "outputs": {
+              "result": "Στρογγυλοποιημένο προς τα πάνω"
+            }
+          },
+          "floor": {
+            "name": "Στρογγυλοποίηση προς τα κάτω",
+            "inputs": {
+              "number": "Αριθμός"
+            },
+            "outputs": {
+              "result": "Στρογγυλοποιημένο προς τα κάτω"
+            }
+          },
+          "round": {
+            "name": "Στρογγυλοποίηση",
+            "inputs": {
+              "number": "Αριθμός"
+            },
+            "outputs": {
+              "result": "Στρογγυλοποιημένο"
+            }
+          },
+          "sign": {
+            "name": "Πρόσημο",
+            "inputs": {
+              "number": "Αριθμός"
+            },
+            "outputs": {
+              "result": "Πρόσημο"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Κείμενο σε Base64",
+            "inputs": {
+              "stringA": "Κείμενο A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Σύνδεση συμβολοσειρών",
+            "inputs": {
+              "stringA": "Κείμενο A",
+              "stringB": "Κείμενο B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Τυχαίο UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Όνομα ετικέτας UI"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Προσθήκη κόμβου",
+      "searchbar": {
+        "placeholder": "Αναζήτηση κόμβων...",
+        "noResultsFound": "Δεν βρέθηκαν αποτελέσματα."
+      },
+      "category": {
+        "title": "Κατηγορία",
+        "subItem": {
+          "title": "Υποστοιχείο",
+          "description": "Αυτή είναι μια περιγραφή του υποστοιχείου.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Ιδιότητες κόμβου"
+    },
+    "speculativelabel": {
+      "result": "Αποτέλεσμα"
+    }
+  }
+}

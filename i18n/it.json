@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "La toolbox definitiva",
+    "description": "Una raccolta di strumenti gratuiti per tutti",
+    "clientSideComputing": {
+      "title": "Calcolo lato client",
+      "description": "Ogni input che fornisci viene elaborato sul tuo dispositivo. Nessun dato viene inviato al cloud."
+    },
+    "openSource": {
+      "forever": "Per sempre",
+      "title": "Open Source",
+      "description": " Tutto il codice sorgente è disponibile su GitHub. Questo progetto è gratuito per uso non commerciale. Consulta la licenza AGPL-3.0 per maggiori informazioni.",
+      "GitHub": "GitHub",
+      "license": "Licenza"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Cerca uno strumento qui...",
+      "noResultsFound": "Nessun risultato trovato."
+    },
+    "gettingStarted": {
+      "title": "Primi passi",
+      "home": {
+        "title": "Home",
+        "description": ""
+      },
+      "source": {
+        "title": "Visualizza il codice sorgente",
+        "description": "Mettici una stella su GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Debug",
+      "auth": {
+        "title": "Autenticazione",
+        "description": ""
+      },
+      "debug": {
+        "title": "Panoramica del debug",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Traduzioni",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Legale",
+      "privacy": {
+        "title": "Informativa sulla privacy",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Note legali",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Testo",
+        "wordCounter": {
+          "title": "Contatore di parole",
+          "description": "Conta frasi, parole e caratteri"
+        }
+      },
+      "encoding": {
+        "title": "Codifica",
+        "URL": {
+          "title": "Codifica URL",
+          "description": "Codifica il testo come parametro URL"
+        },
+        "base64": {
+          "title": "Codifica/Decodifica Base64",
+          "description": "Codifica o decodifica il testo in Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Codifica/Decodifica Binaria Unicode",
+          "description": "Codifica o decodifica il testo in binario Unicode"
+        }
+      },
+      "color": {
+        "title": "Colore",
+        "hexToHSL": {
+          "title": "Da Hex a HSL",
+          "description": "Converti un colore hex in formato HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Dividi",
+          "description": "Dividi un PDF in più file"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Codificato:",
+        "b2a_result": "Decodificato:",
+        "a2b_title": "Codifica URL",
+        "b2a_title": "Decodifica URL",
+        "whatis": "Cos'è la codifica URL?",
+        "description": "La codifica URL (nota anche come Percent-Encoding) è un metodo per codificare i caratteri degli URL che non fanno parte del set di caratteri ASCII standard. Questo include caratteri speciali come spazi, frecce o caratteri speciali di altre lingue.",
+        "howItWorks": {
+          "title": "Come funziona",
+          "description": "<li>Ogni carattere speciale viene codificato con un \"%\" seguito da un numero esadecimale di 2 cifre.</li>\n<li>Ad esempio, lo spazio viene codificato come \"%20\" e il simbolo minore \"<\" viene codificato come \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Tabella di riferimento",
+          "description": "Trova la codifica URL per un carattere specifico."
+        }
+      },
+      "base64": {
+        "a2b_result": "Codificato in Base64:",
+        "b2a_result": "Decodificato come stringa:",
+        "a2b_title": "Codifica Base64",
+        "b2a_title": "Decodifica Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Codificato in Unicode:",
+        "b2a_result": "Decodificato in binario:",
+        "a2b_title": "Da binario a Unicode",
+        "b2a_title": "Da Unicode a binario"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Da Hex a HSL",
+        "description": "Converte un colore hex in formato HSL.",
+        "options": {
+          "valuesOnly": "Includi in hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Dividi PDF",
+        "description": "Dividi un file PDF in più file.",
+        "actions": {
+          "downloadAll": "Scarica tutte le pagine divise",
+          "dropFiles": "Trascina e rilascia i file qui, oppure clicca per selezionarli"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Cerca"
+  },
+  "converterBidirectional": {
+    "input": "Ingresso:",
+    "swapSides": "Scambia i lati",
+    "clearInput": "Svuota l'input"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "La divisione per zero non è consentita."
+    },
+    "types": {
+      "any": "qualsiasi",
+      "numeric": {
+        "any": "Numero",
+        "int": "Intero"
+      },
+      "text": {
+        "any": "Testo",
+        "base64": "Testo (Base64)",
+        "uuid": "Testo (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Ingresso",
+      "output": "Uscita",
+      "strings": "Stringhe",
+      "math": "Matematica",
+      "cryptography": "Crittografia",
+      "extra": "Extra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Ingresso"
+        },
+        "numeric": {
+          "name": "Ingresso numerico"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Uscita"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Aspetta e inoltra"
+        },
+        "math": {
+          "addition": {
+            "name": "Somma",
+            "inputs": {
+              "numberA": "Numero A",
+              "numberB": "Numero B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Sottrazione",
+            "inputs": {
+              "numberA": "Numero A",
+              "numberB": "Numero B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Moltiplicazione",
+            "inputs": {
+              "numberA": "Numero A",
+              "numberB": "Numero B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Divisione",
+            "inputs": {
+              "numberA": "Numero A",
+              "numberB": "Numero B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Valore assoluto",
+            "inputs": {
+              "number": "Numero"
+            },
+            "outputs": {
+              "result": "Assoluto"
+            }
+          },
+          "ceil": {
+            "name": "Arrotonda per eccesso",
+            "inputs": {
+              "number": "Numero"
+            },
+            "outputs": {
+              "result": "Arrotonda per eccesso"
+            }
+          },
+          "floor": {
+            "name": "Arrotonda per difetto",
+            "inputs": {
+              "number": "Numero"
+            },
+            "outputs": {
+              "result": "Arrotondato per difetto"
+            }
+          },
+          "round": {
+            "name": "Arrotonda",
+            "inputs": {
+              "number": "Numero"
+            },
+            "outputs": {
+              "result": "Arrotondato"
+            }
+          },
+          "sign": {
+            "name": "Segno",
+            "inputs": {
+              "number": "Numero"
+            },
+            "outputs": {
+              "result": "Segno"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Da testo a Base64",
+            "inputs": {
+              "stringA": "Testo A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Concatena stringhe",
+            "inputs": {
+              "stringA": "Testo A",
+              "stringB": "Testo B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "UUID casuale"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Nome etichetta UI"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Aggiungi nodo",
+      "searchbar": {
+        "placeholder": "Cerca nodi...",
+        "noResultsFound": "Nessun risultato trovato."
+      },
+      "category": {
+        "title": "Categoria",
+        "subItem": {
+          "title": "Sottoelemento",
+          "description": "Questa è una descrizione del sottoelemento.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Proprietà del nodo"
+    },
+    "speculativelabel": {
+      "result": "Risultato"
+    }
+  }
+}

@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Универсальный набор инструментов",
+    "description": "Набор бесплатных инструментов, доступных каждому",
+    "clientSideComputing": {
+      "title": "Вычисления на стороне клиента",
+      "description": "Всё, что ты вводишь, обрабатывается на твоём устройстве. Никакие данные не отправляются в облако."
+    },
+    "openSource": {
+      "forever": "Навсегда",
+      "title": "Открытый исходный код",
+      "description": " Весь исходный код доступен на GitHub. Проект бесплатен для некоммерческого использования. Подробнее см. в лицензии AGPL-3.0.",
+      "GitHub": "GitHub",
+      "license": "Лицензия"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Найди инструмент здесь...",
+      "noResultsFound": "Ничего не найдено."
+    },
+    "gettingStarted": {
+      "title": "Начало работы",
+      "home": {
+        "title": "Главная",
+        "description": ""
+      },
+      "source": {
+        "title": "Посмотреть исходный код",
+        "description": "Поставь нам звезду на GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Отладка",
+      "auth": {
+        "title": "Авторизация",
+        "description": ""
+      },
+      "debug": {
+        "title": "Обзор отладки",
+        "description": ""
+      },
+      "ui": {
+        "title": "Интерфейс",
+        "description": ""
+      },
+      "translations": {
+        "title": "Переводы",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Правовая информация",
+      "privacy": {
+        "title": "Заявление о конфиденциальности",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Импрессум",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Текст",
+        "wordCounter": {
+          "title": "Счётчик слов",
+          "description": "Подсчитывай предложения, слова и символы"
+        }
+      },
+      "encoding": {
+        "title": "Кодирование",
+        "URL": {
+          "title": "Кодирование URL",
+          "description": "Кодируй текст как параметр URL"
+        },
+        "base64": {
+          "title": "Кодирование/декодирование Base64",
+          "description": "Кодируй или декодируй текст в Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Кодирование/декодирование бинарного Unicode",
+          "description": "Кодируй или декодируй текст в бинарный Unicode"
+        }
+      },
+      "color": {
+        "title": "Цвет",
+        "hexToHSL": {
+          "title": "HEX в HSL",
+          "description": "Преобразуй HEX-цвет в формат HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Разделение",
+          "description": "Раздели PDF на несколько файлов"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Закодировано:",
+        "b2a_result": "Декодировано:",
+        "a2b_title": "Кодирование URL",
+        "b2a_title": "Декодирование URL",
+        "whatis": "Что такое кодирование URL?",
+        "description": "Кодирование URL (также известное как процентное кодирование) — это способ кодирования в URL символов, которые не входят в стандартный набор символов ASCII. К ним относятся специальные символы, например пробелы, стрелки или знаки из других языков.",
+        "howItWorks": {
+          "title": "Как это работает",
+          "description": "<li>Каждый специальный символ кодируется знаком \"%\", за которым следует двузначное шестнадцатеричное число.</li>\n<li>Например, пробел кодируется как \"%20\", а знак «меньше» \"<\" — как \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Таблица соответствий",
+          "description": "Найди URL-кодирование для конкретного символа."
+        }
+      },
+      "base64": {
+        "a2b_result": "Закодировано в Base64:",
+        "b2a_result": "Декодировано в строку:",
+        "a2b_title": "Кодирование Base64",
+        "b2a_title": "Декодирование Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Закодировано в Unicode:",
+        "b2a_result": "Декодировано в бинарный вид:",
+        "a2b_title": "Из бинарного в Unicode",
+        "b2a_title": "Из Unicode в бинарный"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "HEX в HSL",
+        "description": "Преобразует HEX-цвет в формат HSL.",
+        "options": {
+          "valuesOnly": "Включать в hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Разделить PDF",
+        "description": "Раздели PDF-файл на несколько файлов.",
+        "actions": {
+          "downloadAll": "Скачать все разделённые страницы",
+          "dropFiles": "Перетащи файлы сюда или нажми, чтобы выбрать"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Поиск"
+  },
+  "converterBidirectional": {
+    "input": "Ввод:",
+    "swapSides": "Поменять стороны",
+    "clearInput": "Очистить ввод"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Деление на ноль недопустимо."
+    },
+    "types": {
+      "any": "любой",
+      "numeric": {
+        "any": "Число",
+        "int": "Целое число"
+      },
+      "text": {
+        "any": "Текст",
+        "base64": "Текст (Base64)",
+        "uuid": "Текст (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Ввод",
+      "output": "Вывод",
+      "strings": "Строки",
+      "math": "Математика",
+      "cryptography": "Криптография",
+      "extra": "Дополнительно"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Ввод"
+        },
+        "numeric": {
+          "name": "Числовой ввод"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Вывод"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Подождать и передать"
+        },
+        "math": {
+          "addition": {
+            "name": "Сложение",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Вычитание",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Умножение",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Деление",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Модуль числа",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Модуль"
+            }
+          },
+          "ceil": {
+            "name": "Округление вверх",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Округлено вверх"
+            }
+          },
+          "floor": {
+            "name": "Округление вниз",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Округлено вниз"
+            }
+          },
+          "round": {
+            "name": "Округление",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Округлено"
+            }
+          },
+          "sign": {
+            "name": "Знак",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Знак"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Текст в Base64",
+            "inputs": {
+              "stringA": "Текст A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Объединение строк",
+            "inputs": {
+              "stringA": "Текст A",
+              "stringB": "Текст B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Случайный UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Название UI-метки"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Добавить узел",
+      "searchbar": {
+        "placeholder": "Поиск узлов...",
+        "noResultsFound": "Ничего не найдено."
+      },
+      "category": {
+        "title": "Категория",
+        "subItem": {
+          "title": "Подэлемент",
+          "description": "Это описание подэлемента.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Свойства узла"
+    },
+    "speculativelabel": {
+      "result": "Результат"
+    }
+  }
+}

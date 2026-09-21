@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "De ultieme toolbox",
+    "description": "Een collectie gratis tools voor iedereen",
+    "clientSideComputing": {
+      "title": "Berekeningen aan de clientzijde",
+      "description": "Alle invoer die je geeft wordt op je apparaat verwerkt. Er worden geen gegevens naar de cloud gestuurd."
+    },
+    "openSource": {
+      "forever": "Voor altijd",
+      "title": "Open source",
+      "description": "Alle broncode is beschikbaar op GitHub. Dit project is gratis voor niet-commercieel gebruik. Bekijk de AGPL-3.0-licentie voor meer informatie.",
+      "GitHub": "GitHub",
+      "license": "Licentie"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Zoek hier naar een tool...",
+      "noResultsFound": "Geen resultaten gevonden."
+    },
+    "gettingStarted": {
+      "title": "Aan de slag",
+      "home": {
+        "title": "Home",
+        "description": ""
+      },
+      "source": {
+        "title": "Bekijk de broncode",
+        "description": "Geef ons een ster op GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Debug",
+      "auth": {
+        "title": "Auth",
+        "description": ""
+      },
+      "debug": {
+        "title": "Debug-overzicht",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Vertalingen",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Juridisch",
+      "privacy": {
+        "title": "Privacyverklaring",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Colofon",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Tekst",
+        "wordCounter": {
+          "title": "Woordenteller",
+          "description": "Tel zinnen, woorden en tekens"
+        }
+      },
+      "encoding": {
+        "title": "Codering",
+        "URL": {
+          "title": "URL-codering",
+          "description": "Codeer tekst als een URL-parameter"
+        },
+        "base64": {
+          "title": "Base64 coderen/decoderen",
+          "description": "Codeer of decodeer tekst als Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode-binair coderen/decoderen",
+          "description": "Codeer of decodeer tekst als Unicode-binair"
+        }
+      },
+      "color": {
+        "title": "Kleur",
+        "hexToHSL": {
+          "title": "Hex naar HSL",
+          "description": "Converteer een hex-kleur naar HSL-formaat"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Splitsen",
+          "description": "Splits een PDF in meerdere bestanden"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Gecodeerd:",
+        "b2a_result": "Gedecodeerd:",
+        "a2b_title": "URL-codering",
+        "b2a_title": "URL-decodering",
+        "whatis": "Wat is URL-codering?",
+        "description": "URL-codering (ook bekend als percent-codering) is een methode om tekens in URL's te coderen die niet deel uitmaken van de standaard ASCII-tekenset. Dit omvat speciale tekens zoals spaties, pijlen of speciale tekens uit andere talen.",
+        "howItWorks": {
+          "title": "Hoe het werkt",
+          "description": "<li>Elk speciaal teken wordt gecodeerd door een \"%\" gevolgd door een hexadecimaal getal van 2 cijfers.</li>\n<li>Een spatie wordt bijvoorbeeld gecodeerd als \"%20\" en het kleiner-dan-teken \"<\" wordt gecodeerd als \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Opzoektabel",
+          "description": "Zoek de URL-codering op voor een specifiek teken."
+        }
+      },
+      "base64": {
+        "a2b_result": "Gecodeerd als Base64:",
+        "b2a_result": "Gedecodeerd als tekst:",
+        "a2b_title": "Base64-codering",
+        "b2a_title": "Base64-decodering"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Gecodeerd als Unicode:",
+        "b2a_result": "Gedecodeerd als binair:",
+        "a2b_title": "Binair naar Unicode",
+        "b2a_title": "Unicode naar binair"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex naar HSL",
+        "description": "Converteert een hex-kleur naar HSL-formaat.",
+        "options": {
+          "valuesOnly": "Opnemen in hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "PDF splitsen",
+        "description": "Splits een PDF-bestand in meerdere bestanden.",
+        "actions": {
+          "downloadAll": "Download alle gesplitste pagina's",
+          "dropFiles": "Sleep bestanden hierheen, of klik om te selecteren"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Zoeken"
+  },
+  "converterBidirectional": {
+    "input": "Invoer:",
+    "swapSides": "Wissel de kanten om",
+    "clearInput": "Invoer wissen"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Delen door nul is niet toegestaan."
+    },
+    "types": {
+      "any": "elk",
+      "numeric": {
+        "any": "Getal",
+        "int": "Geheel getal"
+      },
+      "text": {
+        "any": "Tekst",
+        "base64": "Tekst (Base64)",
+        "uuid": "Tekst (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Invoer",
+      "output": "Uitvoer",
+      "strings": "Teksten",
+      "math": "Wiskunde",
+      "cryptography": "Cryptografie",
+      "extra": "Extra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Invoer"
+        },
+        "numeric": {
+          "name": "Numerieke invoer"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Uitvoer"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Wachten en doorsturen"
+        },
+        "math": {
+          "addition": {
+            "name": "Optelling",
+            "inputs": {
+              "numberA": "Getal A",
+              "numberB": "Getal B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Aftrekking",
+            "inputs": {
+              "numberA": "Getal A",
+              "numberB": "Getal B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Vermenigvuldiging",
+            "inputs": {
+              "numberA": "Getal A",
+              "numberB": "Getal B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Deling",
+            "inputs": {
+              "numberA": "Getal A",
+              "numberB": "Getal B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Absolute waarde",
+            "inputs": {
+              "number": "Getal"
+            },
+            "outputs": {
+              "result": "Absoluut"
+            }
+          },
+          "ceil": {
+            "name": "Afronden naar boven",
+            "inputs": {
+              "number": "Getal"
+            },
+            "outputs": {
+              "result": "Naar boven afgerond"
+            }
+          },
+          "floor": {
+            "name": "Afronden naar beneden",
+            "inputs": {
+              "number": "Getal"
+            },
+            "outputs": {
+              "result": "Naar beneden afgerond"
+            }
+          },
+          "round": {
+            "name": "Afronden",
+            "inputs": {
+              "number": "Getal"
+            },
+            "outputs": {
+              "result": "Afgerond"
+            }
+          },
+          "sign": {
+            "name": "Teken",
+            "inputs": {
+              "number": "Getal"
+            },
+            "outputs": {
+              "result": "Teken"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Tekst naar Base64",
+            "inputs": {
+              "stringA": "Tekst A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Teksten samenvoegen",
+            "inputs": {
+              "stringA": "Tekst A",
+              "stringB": "Tekst B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Willekeurige UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "UI-labelnaam"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Node toevoegen",
+      "searchbar": {
+        "placeholder": "Zoek nodes...",
+        "noResultsFound": "Geen resultaten gevonden."
+      },
+      "category": {
+        "title": "Categorie",
+        "subItem": {
+          "title": "Subitem",
+          "description": "Dit is een beschrijving van het subitem.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Node-eigenschappen"
+    },
+    "speculativelabel": {
+      "result": "Resultaat"
+    }
+  }
+}

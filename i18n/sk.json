@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Ultimátny toolbox",
+    "description": "Zbierka nástrojov zadarmo a pre každého",
+    "clientSideComputing": {
+      "title": "Výpočty na strane klienta",
+      "description": "Každý vstup, ktorý zadáš, sa spracováva na tvojom zariadení. Do cloudu sa neposielajú žiadne dáta."
+    },
+    "openSource": {
+      "forever": "Navždy",
+      "title": "Open Source",
+      "description": "Celý zdrojový kód je dostupný na GitHube. Tento projekt je voľne použiteľný na nekomerčné účely. Viac informácií nájdeš v licencii AGPL-3.0.",
+      "GitHub": "GitHub",
+      "license": "Licencia"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Tu vyhľadaj nástroj...",
+      "noResultsFound": "Nenašli sa žiadne výsledky."
+    },
+    "gettingStarted": {
+      "title": "Začíname",
+      "home": {
+        "title": "Domov",
+        "description": ""
+      },
+      "source": {
+        "title": "Zobraziť zdrojový kód",
+        "description": "Daj nám hviezdičku na GitHube!"
+      }
+    },
+    "debug": {
+      "title": "Ladenie",
+      "auth": {
+        "title": "Autentizácia",
+        "description": ""
+      },
+      "debug": {
+        "title": "Prehľad ladenia",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Preklady",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Právne informácie",
+      "privacy": {
+        "title": "Vyhlásenie o ochrane súkromia",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Tiráž",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Počítadlo slov",
+          "description": "Počítaj vety, slová a znaky"
+        }
+      },
+      "encoding": {
+        "title": "Kódovanie",
+        "URL": {
+          "title": "URL kódovanie",
+          "description": "Zakóduj text ako parameter URL"
+        },
+        "base64": {
+          "title": "Kódovanie/dekódovanie Base64",
+          "description": "Zakóduj alebo dekóduj text ako Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Kódovanie/dekódovanie binárneho Unicode",
+          "description": "Zakóduj alebo dekóduj text ako binárny Unicode"
+        }
+      },
+      "color": {
+        "title": "Farba",
+        "hexToHSL": {
+          "title": "Hex na HSL",
+          "description": "Preveď hex farbu do formátu HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Rozdeliť",
+          "description": "Rozdeľ PDF do viacerých súborov"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Zakódované:",
+        "b2a_result": "Dekódované:",
+        "a2b_title": "URL kódovanie",
+        "b2a_title": "Dekódovanie URL",
+        "whatis": "Čo je URL kódovanie?",
+        "description": "URL kódovanie (známe aj ako Percent-Encoding) je spôsob kódovania znakov v URL adresách, ktoré nie sú súčasťou štandardnej znakovej sady ASCII. Patria medzi ne špeciálne znaky ako medzery, šípky alebo špeciálne znaky iných jazykov.",
+        "howItWorks": {
+          "title": "Ako to funguje",
+          "description": "<li>Každý špeciálny znak sa kóduje znakom \"%\" nasledovaným dvojciferným hexadecimálnym číslom.</li>\n<li>Napríklad medzera by sa zakódovala ako \"%20\" a symbol menšie ako \"<\" by sa zakódoval ako \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Prehľadová tabuľka",
+          "description": "Vyhľadaj URL kódovanie pre konkrétny znak."
+        }
+      },
+      "base64": {
+        "a2b_result": "Zakódované ako Base64:",
+        "b2a_result": "Dekódované ako reťazec:",
+        "a2b_title": "Kódovanie Base64",
+        "b2a_title": "Dekódovanie Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Zakódované ako Unicode:",
+        "b2a_result": "Dekódované ako binárne:",
+        "a2b_title": "Binárne na Unicode",
+        "b2a_title": "Unicode na binárne"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex na HSL",
+        "description": "Prevedie hex farbu do formátu HSL.",
+        "options": {
+          "valuesOnly": "Zahrnúť do hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Rozdeliť PDF",
+        "description": "Rozdeľ PDF súbor do viacerých súborov.",
+        "actions": {
+          "downloadAll": "Stiahnuť všetky rozdelené strany",
+          "dropFiles": "Pretiahni sem súbory, alebo klikni na výber"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Hľadať"
+  },
+  "converterBidirectional": {
+    "input": "Vstup:",
+    "swapSides": "Prehodiť strany",
+    "clearInput": "Vymazať vstup"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Delenie nulou nie je povolené."
+    },
+    "types": {
+      "any": "ľubovoľný",
+      "numeric": {
+        "any": "Číslo",
+        "int": "Celé číslo"
+      },
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)",
+        "uuid": "Text (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Vstup",
+      "output": "Výstup",
+      "strings": "Reťazce",
+      "math": "Matematika",
+      "cryptography": "Kryptografia",
+      "extra": "Extra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Vstup"
+        },
+        "numeric": {
+          "name": "Číselný vstup"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Výstup"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Čakať a poslať ďalej"
+        },
+        "math": {
+          "addition": {
+            "name": "Sčítanie",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Odčítanie",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Násobenie",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Delenie",
+            "inputs": {
+              "numberA": "Číslo A",
+              "numberB": "Číslo B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Absolútna hodnota",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Absolútna hodnota"
+            }
+          },
+          "ceil": {
+            "name": "Zaokrúhlenie nahor",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Zaokrúhlené nahor"
+            }
+          },
+          "floor": {
+            "name": "Zaokrúhlenie nadol",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Zaokrúhlené nadol"
+            }
+          },
+          "round": {
+            "name": "Zaokrúhlenie",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Zaokrúhlené"
+            }
+          },
+          "sign": {
+            "name": "Znamienko",
+            "inputs": {
+              "number": "Číslo"
+            },
+            "outputs": {
+              "result": "Znamienko"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text na Base64",
+            "inputs": {
+              "stringA": "Text A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Zreťazenie reťazcov",
+            "inputs": {
+              "stringA": "Text A",
+              "stringB": "Text B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Náhodné UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Názov UI menovky"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Pridať uzol",
+      "searchbar": {
+        "placeholder": "Hľadať uzly...",
+        "noResultsFound": "Nenašli sa žiadne výsledky."
+      },
+      "category": {
+        "title": "Kategória",
+        "subItem": {
+          "title": "Podpoložka",
+          "description": "Toto je popis podpoložky.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Vlastnosti uzla"
+    },
+    "speculativelabel": {
+      "result": "Výsledok"
+    }
+  }
+}

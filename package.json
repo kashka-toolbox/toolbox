@@ -10,7 +10,9 @@
     "lint": "next lint",
     "playwright-ui": "pnpm exec playwright test --ui",
     "playwright-ci": "pnpm exec playwright test",
-    "test": "jest"
+    "test": "jest",
+    "translate": "scripts/translate.sh",
+    "translate-all": "TRANSLATE_API_BASE=http://localhost:4000/v1 TRANSLATE_API_MODEL=qwen3.8-27b scripts/translate.sh all"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",

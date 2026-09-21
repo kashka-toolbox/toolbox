@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Den ultimative værktøjskasse",
+    "description": "En samling af gratis værktøjer for alle",
+    "clientSideComputing": {
+      "title": "Beregning på klientsiden",
+      "description": "Alt det input, du giver, behandles på din enhed. Ingen data sendes til skyen."
+    },
+    "openSource": {
+      "forever": "For altid",
+      "title": "Open source",
+      "description": " Hele kildekoden er tilgængelig på GitHub. Dette projekt er gratis til ikke-kommerciel brug. Se AGPL-3.0-licensen for mere information.",
+      "GitHub": "GitHub",
+      "license": "Licens"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Søg efter et værktøj her...",
+      "noResultsFound": "Ingen resultater fundet."
+    },
+    "gettingStarted": {
+      "title": "Kom godt i gang",
+      "home": {
+        "title": "Hjem",
+        "description": ""
+      },
+      "source": {
+        "title": "Vis kildekoden",
+        "description": "Giv os en stjerne på GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Fejlfinding",
+      "auth": {
+        "title": "Godkendelse",
+        "description": ""
+      },
+      "debug": {
+        "title": "Fejlfindingsoversigt",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Oversættelser",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Juridisk",
+      "privacy": {
+        "title": "Privatlivserklæring",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Colophon",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Tekst",
+        "wordCounter": {
+          "title": "Ordtæller",
+          "description": "Tæl sætninger, ord og tegn"
+        }
+      },
+      "encoding": {
+        "title": "Kodning",
+        "URL": {
+          "title": "URL-kodning",
+          "description": "Kod tekst som en URL-parameter"
+        },
+        "base64": {
+          "title": "Base64-kodning/-afkodning",
+          "description": "Kod eller afkod tekst som Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode-binær kodning/-afkodning",
+          "description": "Kod eller afkod tekst som Unicode-binær"
+        }
+      },
+      "color": {
+        "title": "Farve",
+        "hexToHSL": {
+          "title": "Hex til HSL",
+          "description": "Konvertér en hex-farve til HSL-format"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Opdel",
+          "description": "Opdel en PDF i flere filer"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Kodet:",
+        "b2a_result": "Afkodet:",
+        "a2b_title": "URL-kodning",
+        "b2a_title": "URL-afkodning",
+        "whatis": "Hvad er URL-kodning?",
+        "description": "URL-kodning (også kendt som procentkodning) er en metode til at kode tegn i URL'er, som ikke er en del af det almindelige ASCII-tegnsæt. Det omfatter specialtegn som mellemrum, pile eller specialtegn fra andre sprog.",
+        "howItWorks": {
+          "title": "Sådan fungerer det",
+          "description": "<li>Hvert specialtegn kodes med et \"%\" efterfulgt af et tocifret hexadecimalt tal.</li>\n<li>Mellemrumstegnet kodes for eksempel som \"%20\", og mindre end-tegnet \"<\" kodes som \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Opslagstabel",
+          "description": "Slå URL-kodningen op for et bestemt tegn."
+        }
+      },
+      "base64": {
+        "a2b_result": "Kodet som Base64:",
+        "b2a_result": "Afkodet som en streng:",
+        "a2b_title": "Base64-kodning",
+        "b2a_title": "Base64-afkodning"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Kodet som Unicode:",
+        "b2a_result": "Afkodet som binær:",
+        "a2b_title": "Binær til Unicode",
+        "b2a_title": "Unicode til binær"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex til HSL",
+        "description": "Konverterer en hex-farve til HSL-format.",
+        "options": {
+          "valuesOnly": "Medtag i hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Opdel PDF",
+        "description": "Opdel en PDF-fil i flere filer.",
+        "actions": {
+          "downloadAll": "Download alle opdelte sider",
+          "dropFiles": "Træk og slip filer her, eller klik for at vælge"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Søg"
+  },
+  "converterBidirectional": {
+    "input": "Input:",
+    "swapSides": "Byt om på siderne",
+    "clearInput": "Ryd input"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Division med nul er ikke tilladt."
+    },
+    "types": {
+      "any": "vilkårlig",
+      "numeric": {
+        "any": "Tal",
+        "int": "Heltal"
+      },
+      "text": {
+        "any": "Tekst",
+        "base64": "Tekst (Base64)",
+        "uuid": "Tekst (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Input",
+      "output": "Output",
+      "strings": "Strenge",
+      "math": "Matematik",
+      "cryptography": "Kryptografi",
+      "extra": "Ekstra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Input"
+        },
+        "numeric": {
+          "name": "Numerisk input"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Output"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Vent og videresend"
+        },
+        "math": {
+          "addition": {
+            "name": "Addition",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Subtraktion",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Multiplikation",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Division",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Absolut værdi",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Absolut"
+            }
+          },
+          "ceil": {
+            "name": "Afrund op",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Afrundet op"
+            }
+          },
+          "floor": {
+            "name": "Afrund ned",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Afrundet ned"
+            }
+          },
+          "round": {
+            "name": "Afrund",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Afrundet"
+            }
+          },
+          "sign": {
+            "name": "Fortegn",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Fortegn"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Tekst til Base64",
+            "inputs": {
+              "stringA": "Tekst A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Sammenkæd strenge",
+            "inputs": {
+              "stringA": "Tekst A",
+              "stringB": "Tekst B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Tilfældig UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "UI-etiketnavn"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Tilføj node",
+      "searchbar": {
+        "placeholder": "Søg efter noder...",
+        "noResultsFound": "Ingen resultater fundet."
+      },
+      "category": {
+        "title": "Kategori",
+        "subItem": {
+          "title": "Underelement",
+          "description": "Dette er en beskrivelse af underelementet.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Nodeegenskaber"
+    },
+    "speculativelabel": {
+      "result": "Resultat"
+    }
+  }
+}

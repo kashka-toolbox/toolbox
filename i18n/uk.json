@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Ультимативний набір інструментів",
+    "description": "Колекція безкоштовних інструментів для всіх",
+    "clientSideComputing": {
+      "title": "Обчислення на стороні клієнта",
+      "description": "Усе, що ти вводиш, обробляється на твоєму пристрої. Жодні дані не надсилаються в хмару."
+    },
+    "openSource": {
+      "forever": "Назавжди",
+      "title": "Відкритий код",
+      "description": "Увесь вихідний код доступний на GitHub. Цей проєкт безкоштовний для некомерційного використання. Докладніше дивись у ліцензії AGPL-3.0.",
+      "GitHub": "GitHub",
+      "license": "Ліцензія"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Шукай інструмент тут...",
+      "noResultsFound": "Нічого не знайдено."
+    },
+    "gettingStarted": {
+      "title": "Початок роботи",
+      "home": {
+        "title": "Головна",
+        "description": ""
+      },
+      "source": {
+        "title": "Переглянути вихідний код",
+        "description": "Постав нам зірку на GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Налагодження",
+      "auth": {
+        "title": "Авторизація",
+        "description": ""
+      },
+      "debug": {
+        "title": "Огляд налагодження",
+        "description": ""
+      },
+      "ui": {
+        "title": "Інтерфейс",
+        "description": ""
+      },
+      "translations": {
+        "title": "Переклади",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Правова інформація",
+      "privacy": {
+        "title": "Політика конфіденційності",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Вихідні дані",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Текст",
+        "wordCounter": {
+          "title": "Лічильник слів",
+          "description": "Підрахунок речень, слів та символів"
+        }
+      },
+      "encoding": {
+        "title": "Кодування",
+        "URL": {
+          "title": "URL-кодування",
+          "description": "Кодуй текст як параметр URL"
+        },
+        "base64": {
+          "title": "Кодування/декодування Base64",
+          "description": "Кодуй або декодуй текст у Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Кодування/декодування Unicode Binary",
+          "description": "Кодуй або декодуй текст у Unicode Binary"
+        }
+      },
+      "color": {
+        "title": "Колір",
+        "hexToHSL": {
+          "title": "Hex у HSL",
+          "description": "Перетворюй HEX-колір у формат HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Розділення",
+          "description": "Розділи PDF на кілька файлів"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Закодовано:",
+        "b2a_result": "Декодовано:",
+        "a2b_title": "URL-кодування",
+        "b2a_title": "URL-декодування",
+        "whatis": "Що таке URL-кодування?",
+        "description": "URL-кодування (також відоме як процентне кодування, Percent-Encoding) — це метод кодування символів в URL-адресах, які не входять до стандартного набору символів ASCII. Це стосується спеціальних символів, як-от пробілів, стрілок чи символів інших мов.",
+        "howItWorks": {
+          "title": "Як це працює",
+          "description": "<li>Кожен спеціальний символ кодується знаком \"%\", за яким іде двозначне шістнадцяткове число.</li>\n<li>Наприклад, пробіл кодується як \"%20\", а знак менше \"<\" — як \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Таблиця відповідностей",
+          "description": "Знайди URL-кодування для конкретного символу."
+        }
+      },
+      "base64": {
+        "a2b_result": "Закодовано в Base64:",
+        "b2a_result": "Декодовано як рядок:",
+        "a2b_title": "Кодування Base64",
+        "b2a_title": "Декодування Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Закодовано в Unicode:",
+        "b2a_result": "Декодовано як двійковий код:",
+        "a2b_title": "Двійковий код у Unicode",
+        "b2a_title": "Unicode у двійковий код"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex у HSL",
+        "description": "Перетворює HEX-колір у формат HSL.",
+        "options": {
+          "valuesOnly": "Включати в hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Розділити PDF",
+        "description": "Розділи PDF-файл на кілька файлів.",
+        "actions": {
+          "downloadAll": "Завантажити всі розділені сторінки",
+          "dropFiles": "Перетягни файли сюди або клацни, щоб вибрати"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Пошук"
+  },
+  "converterBidirectional": {
+    "input": "Введення:",
+    "swapSides": "Поміняти місцями",
+    "clearInput": "Очистити введення"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Ділення на нуль недопустиме."
+    },
+    "types": {
+      "any": "будь-який",
+      "numeric": {
+        "any": "Число",
+        "int": "Ціле число"
+      },
+      "text": {
+        "any": "Текст",
+        "base64": "Текст (Base64)",
+        "uuid": "Текст (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Введення",
+      "output": "Виведення",
+      "strings": "Рядки",
+      "math": "Математика",
+      "cryptography": "Криптографія",
+      "extra": "Додатково"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Введення"
+        },
+        "numeric": {
+          "name": "Числове введення"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Виведення"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Чекати та пересилати"
+        },
+        "math": {
+          "addition": {
+            "name": "Додавання",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Віднімання",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Множення",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Ділення",
+            "inputs": {
+              "numberA": "Число A",
+              "numberB": "Число B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Абсолютне значення",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Модуль"
+            }
+          },
+          "ceil": {
+            "name": "Округлення вгору",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Округлено вгору"
+            }
+          },
+          "floor": {
+            "name": "Округлення вниз",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Округлено вниз"
+            }
+          },
+          "round": {
+            "name": "Округлення",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Округлено"
+            }
+          },
+          "sign": {
+            "name": "Знак",
+            "inputs": {
+              "number": "Число"
+            },
+            "outputs": {
+              "result": "Знак"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Текст у Base64",
+            "inputs": {
+              "stringA": "Текст A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Об'єднати рядки",
+            "inputs": {
+              "stringA": "Текст A",
+              "stringB": "Текст B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Випадковий UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Назва мітки інтерфейсу"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Додати вузол",
+      "searchbar": {
+        "placeholder": "Шукай вузли...",
+        "noResultsFound": "Нічого не знайдено."
+      },
+      "category": {
+        "title": "Категорія",
+        "subItem": {
+          "title": "Піделемент",
+          "description": "Це опис піделемента.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Властивості вузла"
+    },
+    "speculativelabel": {
+      "result": "Результат"
+    }
+  }
+}

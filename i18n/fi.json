@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Kattava työkalupakki",
+    "description": "Kokoelma ilmaisia työkaluja kaikille",
+    "clientSideComputing": {
+      "title": "Selainpuolen laskenta",
+      "description": "Kaikki antamasi syötteet käsitellään laitteellasi. Tietoja ei lähetetä pilveen."
+    },
+    "openSource": {
+      "forever": "Ikuisesti",
+      "title": "Avoin lähdekoodi",
+      "description": "Koko lähdekoodi on saatavilla GitHubissa. Tämä projekti on ilmainen ei-kaupalliseen käyttöön. Lisätietoja saat AGPL-3.0-lisenssistä.",
+      "GitHub": "GitHub",
+      "license": "Lisenssi"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Etsi työkalu tästä...",
+      "noResultsFound": "Ei tuloksia."
+    },
+    "gettingStarted": {
+      "title": "Aloittaminen",
+      "home": {
+        "title": "Etusivu",
+        "description": ""
+      },
+      "source": {
+        "title": "Näytä lähdekoodi",
+        "description": "Anna tähti GitHubissa!"
+      }
+    },
+    "debug": {
+      "title": "Vianetsintä",
+      "auth": {
+        "title": "Todennus",
+        "description": ""
+      },
+      "debug": {
+        "title": "Vianetsinnän yleiskatsaus",
+        "description": ""
+      },
+      "ui": {
+        "title": "Käyttöliittymä",
+        "description": ""
+      },
+      "translations": {
+        "title": "Käännökset",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Juridiikka",
+      "privacy": {
+        "title": "Tietosuojaseloste",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Yhteystiedot",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Teksti",
+        "wordCounter": {
+          "title": "Sanalaskuri",
+          "description": "Laske virkkeet, sanat ja merkit"
+        }
+      },
+      "encoding": {
+        "title": "Koodaus",
+        "URL": {
+          "title": "URL-koodaus",
+          "description": "Koodaa teksti URL-parametriksi"
+        },
+        "base64": {
+          "title": "Base64-koodaus/-dekoodaus",
+          "description": "Koodaa tai dekoodaa teksti Base64-muotoon"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode-binäärikoodaus/-dekoodaus",
+          "description": "Koodaa tai dekoodaa teksti Unicode-binäärimuotoon"
+        }
+      },
+      "color": {
+        "title": "Väri",
+        "hexToHSL": {
+          "title": "Hex → HSL",
+          "description": "Muunna heksadesimaaliväri HSL-muotoon"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Jaa",
+          "description": "Jaa PDF useisiin tiedostoihin"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Koodattu:",
+        "b2a_result": "Dekoodattu:",
+        "a2b_title": "URL-koodaus",
+        "b2a_title": "URL-dekoodaus",
+        "whatis": "Mitä URL-koodaus on?",
+        "description": "URL-koodaus (tunnetaan myös nimellä prosenttikoodaus) on menetelmä, jolla koodataan URL-osoitteissa olevia merkkejä, jotka eivät kuulu vakio-ASCII-merkistöön. Tähän kuuluvat erikoismerkit, kuten välilyönnit, nuolet tai muiden kielten erikoismerkit.",
+        "howItWorks": {
+          "title": "Näin se toimii",
+          "description": "<li>Jokainen erikoismerkki koodataan merkillä \"%\", jota seuraa kaksinumeroinen heksadesimaaliluku.</li>\n<li>Esimerkiksi välilyönti koodattaisiin muotoon \"%20\" ja pienempi kuin -merkki \"<\" muotoon \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Hakutaulukko",
+          "description": "Selvitä tietyn merkin URL-koodaus."
+        }
+      },
+      "base64": {
+        "a2b_result": "Koodattu Base64-muotoon:",
+        "b2a_result": "Dekoodattu merkkijonoksi:",
+        "a2b_title": "Base64-koodaus",
+        "b2a_title": "Base64-dekoodaus"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Koodattu Unicode-muotoon:",
+        "b2a_result": "Dekoodattu binäärimuotoon:",
+        "a2b_title": "Binääri → Unicode",
+        "b2a_title": "Unicode → binääri"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex → HSL",
+        "description": "Muuntaa heksadesimaalivärin HSL-muotoon.",
+        "options": {
+          "valuesOnly": "Sisällytä muotoon hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Jaa PDF",
+        "description": "Jaa PDF-tiedosto useisiin tiedostoihin.",
+        "actions": {
+          "downloadAll": "Lataa kaikki jaetut sivut",
+          "dropFiles": "Raahaa tiedostot tähän tai napsauta valitaksesi"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Hae"
+  },
+  "converterBidirectional": {
+    "input": "Syöte:",
+    "swapSides": "Vaihda puolia",
+    "clearInput": "Tyhjennä syöte"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Nollalla jakaminen ei ole sallittua."
+    },
+    "types": {
+      "any": "mikä tahansa",
+      "numeric": {
+        "any": "Luku",
+        "int": "Kokonaisluku"
+      },
+      "text": {
+        "any": "Teksti",
+        "base64": "Teksti (Base64)",
+        "uuid": "Teksti (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Syöte",
+      "output": "Tuloste",
+      "strings": "Merkkijonot",
+      "math": "Matematiikka",
+      "cryptography": "Salaus",
+      "extra": "Muut"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Syöte"
+        },
+        "numeric": {
+          "name": "Numeerinen syöte"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Tuloste"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Odota ja välitä"
+        },
+        "math": {
+          "addition": {
+            "name": "Yhteenlasku",
+            "inputs": {
+              "numberA": "Luku A",
+              "numberB": "Luku B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Vähennyslasku",
+            "inputs": {
+              "numberA": "Luku A",
+              "numberB": "Luku B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Kertolasku",
+            "inputs": {
+              "numberA": "Luku A",
+              "numberB": "Luku B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Jakolasku",
+            "inputs": {
+              "numberA": "Luku A",
+              "numberB": "Luku B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Itseisarvo",
+            "inputs": {
+              "number": "Luku"
+            },
+            "outputs": {
+              "result": "Itseisarvo"
+            }
+          },
+          "ceil": {
+            "name": "Pyöristä ylös",
+            "inputs": {
+              "number": "Luku"
+            },
+            "outputs": {
+              "result": "Pyöristetty ylös"
+            }
+          },
+          "floor": {
+            "name": "Pyöristä alas",
+            "inputs": {
+              "number": "Luku"
+            },
+            "outputs": {
+              "result": "Pyöristetty alas"
+            }
+          },
+          "round": {
+            "name": "Pyöristä",
+            "inputs": {
+              "number": "Luku"
+            },
+            "outputs": {
+              "result": "Pyöristetty"
+            }
+          },
+          "sign": {
+            "name": "Etumerkki",
+            "inputs": {
+              "number": "Luku"
+            },
+            "outputs": {
+              "result": "Etumerkki"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Teksti → Base64",
+            "inputs": {
+              "stringA": "Teksti A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Yhdistä merkkijonot",
+            "inputs": {
+              "stringA": "Teksti A",
+              "stringB": "Teksti B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Satunnainen UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Käyttöliittymän nimiö"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Lisää solmu",
+      "searchbar": {
+        "placeholder": "Etsi solmuja...",
+        "noResultsFound": "Ei tuloksia."
+      },
+      "category": {
+        "title": "Luokka",
+        "subItem": {
+          "title": "Alikohde",
+          "description": "Tämä on alikohteen kuvaus.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Solmun ominaisuudet"
+    },
+    "speculativelabel": {
+      "result": "Tulos"
+    }
+  }
+}

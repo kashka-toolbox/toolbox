@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Najlepszy zestaw narzędzi",
+    "description": "Kolekcja darmowych narzędzi dla każdego",
+    "clientSideComputing": {
+      "title": "Obliczenia po stronie klienta",
+      "description": "Wszystko, co wpiszesz, jest przetwarzane na Twoim urządzeniu. Żadne dane nie są wysyłane do chmury."
+    },
+    "openSource": {
+      "forever": "Na zawsze",
+      "title": "Open Source",
+      "description": "Cały kod źródłowy jest dostępny na GitHubie. Ten projekt jest darmowy do użytku niekomercyjnego. Więcej informacji znajdziesz w licencji AGPL-3.0.",
+      "GitHub": "GitHub",
+      "license": "Licencja"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Szukaj narzędzia tutaj...",
+      "noResultsFound": "Brak wyników."
+    },
+    "gettingStarted": {
+      "title": "Pierwsze kroki",
+      "home": {
+        "title": "Strona główna",
+        "description": ""
+      },
+      "source": {
+        "title": "Zobacz kod źródłowy",
+        "description": "Daj nam gwiazdkę na GitHubie!"
+      }
+    },
+    "debug": {
+      "title": "Debugowanie",
+      "auth": {
+        "title": "Uwierzytelnianie",
+        "description": ""
+      },
+      "debug": {
+        "title": "Przegląd debugowania",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Tłumaczenia",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Informacje prawne",
+      "privacy": {
+        "title": "Oświadczenie o prywatności",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Impressum",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Tekst",
+        "wordCounter": {
+          "title": "Licznik słów",
+          "description": "Policz zdania, słowa i znaki"
+        }
+      },
+      "encoding": {
+        "title": "Kodowanie",
+        "URL": {
+          "title": "Kodowanie URL",
+          "description": "Zakoduj tekst jako parametr URL"
+        },
+        "base64": {
+          "title": "Kodowanie/dekodowanie Base64",
+          "description": "Zakoduj lub zdekoduj tekst jako Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Kodowanie/dekodowanie Unicode Binary",
+          "description": "Zakoduj lub zdekoduj tekst jako Unicode Binary"
+        }
+      },
+      "color": {
+        "title": "Kolor",
+        "hexToHSL": {
+          "title": "Hex na HSL",
+          "description": "Konwertuj kolor hex do formatu HSL"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Dziel",
+          "description": "Podziel plik PDF na wiele plików"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Zakodowano:",
+        "b2a_result": "Dekodowano:",
+        "a2b_title": "Kodowanie URL",
+        "b2a_title": "Dekodowanie URL",
+        "whatis": "Czym jest kodowanie URL?",
+        "description": "Kodowanie URL (znane też jako Percent-Encoding) to metoda kodowania w adresach URL znaków, które nie należą do standardowego zestawu znaków ASCII. Obejmuje to znaki specjalne, takie jak spacje, strzałki czy znaki z innych języków.",
+        "howItWorks": {
+          "title": "Jak to działa",
+          "description": "<li>Każdy znak specjalny jest kodowany za pomocą \"%\", po którym następuje dwucyfrowa liczba szesnastkowa.</li>\n<li>Na przykład spacja zostanie zakodowana jako \"%20\", a symbol mniejszości \"<\" jako \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Tabela kodowania",
+          "description": "Sprawdź kodowanie URL dla konkretnego znaku."
+        }
+      },
+      "base64": {
+        "a2b_result": "Zakodowano jako Base64:",
+        "b2a_result": "Dekodowano jako tekst:",
+        "a2b_title": "Kodowanie Base64",
+        "b2a_title": "Dekodowanie Base64"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Zakodowano jako Unicode:",
+        "b2a_result": "Dekodowano jako binarne:",
+        "a2b_title": "Z binarnego na Unicode",
+        "b2a_title": "Z Unicode na binarne"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex na HSL",
+        "description": "Konwertuje kolor hex do formatu HSL.",
+        "options": {
+          "valuesOnly": "Uwzględnij w hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Podziel PDF",
+        "description": "Podziel plik PDF na wiele plików.",
+        "actions": {
+          "downloadAll": "Pobierz wszystkie podzielone strony",
+          "dropFiles": "Przeciągnij i upuść pliki tutaj albo kliknij, aby wybrać"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Szukaj"
+  },
+  "converterBidirectional": {
+    "input": "Wejście:",
+    "swapSides": "Zamień strony",
+    "clearInput": "Wyczyść pole"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Dzielenie przez zero jest niedozwolone."
+    },
+    "types": {
+      "any": "dowolny",
+      "numeric": {
+        "any": "Liczba",
+        "int": "Liczba całkowita"
+      },
+      "text": {
+        "any": "Tekst",
+        "base64": "Tekst (Base64)",
+        "uuid": "Tekst (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Wejście",
+      "output": "Wyjście",
+      "strings": "Teksty",
+      "math": "Matematyka",
+      "cryptography": "Kryptografia",
+      "extra": "Dodatkowe"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Wejście"
+        },
+        "numeric": {
+          "name": "Wejście liczbowe"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Wyjście"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Czekaj i przekaż"
+        },
+        "math": {
+          "addition": {
+            "name": "Dodawanie",
+            "inputs": {
+              "numberA": "Liczba A",
+              "numberB": "Liczba B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Odejmowanie",
+            "inputs": {
+              "numberA": "Liczba A",
+              "numberB": "Liczba B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Mnożenie",
+            "inputs": {
+              "numberA": "Liczba A",
+              "numberB": "Liczba B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Dzielenie",
+            "inputs": {
+              "numberA": "Liczba A",
+              "numberB": "Liczba B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Wartość bezwzględna",
+            "inputs": {
+              "number": "Liczba"
+            },
+            "outputs": {
+              "result": "Wartość bezwzględna"
+            }
+          },
+          "ceil": {
+            "name": "Zaokrąglenie w górę",
+            "inputs": {
+              "number": "Liczba"
+            },
+            "outputs": {
+              "result": "Zaokrąglone w górę"
+            }
+          },
+          "floor": {
+            "name": "Zaokrąglenie w dół",
+            "inputs": {
+              "number": "Liczba"
+            },
+            "outputs": {
+              "result": "Zaokrąglone w dół"
+            }
+          },
+          "round": {
+            "name": "Zaokrąglenie",
+            "inputs": {
+              "number": "Liczba"
+            },
+            "outputs": {
+              "result": "Zaokrąglone"
+            }
+          },
+          "sign": {
+            "name": "Znak",
+            "inputs": {
+              "number": "Liczba"
+            },
+            "outputs": {
+              "result": "Znak"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Tekst na Base64",
+            "inputs": {
+              "stringA": "Tekst A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Połącz teksty",
+            "inputs": {
+              "stringA": "Tekst A",
+              "stringB": "Tekst B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Losowy UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Nazwa etykiety UI"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Dodaj węzeł",
+      "searchbar": {
+        "placeholder": "Szukaj węzłów...",
+        "noResultsFound": "Brak wyników."
+      },
+      "category": {
+        "title": "Kategoria",
+        "subItem": {
+          "title": "Podpozycja",
+          "description": "To jest opis podpozycji.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Właściwości węzła"
+    },
+    "speculativelabel": {
+      "result": "Wynik"
+    }
+  }
+}

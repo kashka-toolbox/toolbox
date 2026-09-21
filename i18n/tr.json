@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Nihai Araç Kutusu",
+    "description": "Ücretsiz ve herkese açık bir araç koleksiyonu",
+    "clientSideComputing": {
+      "title": "İstemci Taraflı Hesaplama",
+      "description": "Sağladığın her girdi cihazında işlenir. Buluta hiçbir veri gönderilmez."
+    },
+    "openSource": {
+      "forever": "Sonsuza dek",
+      "title": "Açık Kaynak",
+      "description": " Tüm kaynak kod GitHub'da mevcuttur. Bu proje ticari olmayan kullanım için ücretsizdir. Daha fazla bilgi için AGPL-3.0 lisansına bak.",
+      "GitHub": "GitHub",
+      "license": "Lisans"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Burada bir araç ara...",
+      "noResultsFound": "Sonuç bulunamadı."
+    },
+    "gettingStarted": {
+      "title": "Başlarken",
+      "home": {
+        "title": "Ana Sayfa",
+        "description": ""
+      },
+      "source": {
+        "title": "Kaynak kodu görüntüle",
+        "description": "GitHub'da bize yıldız ver!"
+      }
+    },
+    "debug": {
+      "title": "Hata Ayıklama",
+      "auth": {
+        "title": "Kimlik Doğrulama",
+        "description": ""
+      },
+      "debug": {
+        "title": "Hata Ayıklamaya Genel Bakış",
+        "description": ""
+      },
+      "ui": {
+        "title": "Arayüz",
+        "description": ""
+      },
+      "translations": {
+        "title": "Çeviriler",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Yasal",
+      "privacy": {
+        "title": "Gizlilik Bildirimi",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Künye",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Metin",
+        "wordCounter": {
+          "title": "Kelime Sayacı",
+          "description": "Cümle, kelime ve karakter say"
+        }
+      },
+      "encoding": {
+        "title": "Kodlama",
+        "URL": {
+          "title": "URL Kodlama",
+          "description": "Metni bir URL parametresi olarak kodla"
+        },
+        "base64": {
+          "title": "Base64 Kodlama/Kod Çözme",
+          "description": "Metni Base64 olarak kodla veya kodunu çöz"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode İkili Kodlama/Kod Çözme",
+          "description": "Metni Unicode İkili olarak kodla veya kodunu çöz"
+        }
+      },
+      "color": {
+        "title": "Renk",
+        "hexToHSL": {
+          "title": "Hex'ten HSL'ye",
+          "description": "Bir hex rengini HSL biçimine dönüştür"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Böl",
+          "description": "Bir PDF'yi birden fazla dosyaya böl"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Kodlandı:",
+        "b2a_result": "Kodu çözüldü:",
+        "a2b_title": "URL Kodlama",
+        "b2a_title": "URL Kod Çözme",
+        "whatis": "URL Kodlama nedir?",
+        "description": "URL Kodlama (Percent-Encoding olarak da bilinir), URL'lerde standart ASCII karakter setinin parçası olmayan karakterlerin kodlanması yöntemidir. Bu, boşluklar, oklar veya diğer dillerden gelen özel karakterler gibi özel karakterleri kapsar.",
+        "howItWorks": {
+          "title": "Nasıl çalışır",
+          "description": "<li>Her özel karakter, ardından 2 haneli onaltılık bir sayı gelen bir \"%\" ile kodlanır.</li>\n<li>Örneğin boşluk karakteri \"%20\" olarak, küçüktür simgesi \"<\" ise \"%3C\" olarak kodlanır.</li>"
+        },
+        "lookup": {
+          "title": "Arama Tablosu",
+          "description": "Belirli bir karakterin URL kodlamasını sorgula."
+        }
+      },
+      "base64": {
+        "a2b_result": "Base64 olarak kodlandı:",
+        "b2a_result": "Metin olarak kodu çözüldü:",
+        "a2b_title": "Base64 Kodlama",
+        "b2a_title": "Base64 Kod Çözme"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Unicode olarak kodlandı:",
+        "b2a_result": "İkili olarak kodu çözüldü:",
+        "a2b_title": "İkiliden Unicode'a",
+        "b2a_title": "Unicode'dan İkiliye"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex'ten HSL'ye",
+        "description": "Bir hex rengini HSL biçimine dönüştürür.",
+        "options": {
+          "valuesOnly": "hsl(...) içine dahil et"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "PDF Böl",
+        "description": "Bir PDF dosyasını birden fazla dosyaya böl.",
+        "actions": {
+          "downloadAll": "Bölünmüş tüm sayfaları indir",
+          "dropFiles": "Dosyaları buraya sürükleyip bırak veya seçmek için tıkla"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Ara"
+  },
+  "converterBidirectional": {
+    "input": "Girdi:",
+    "swapSides": "Yönleri değiştir",
+    "clearInput": "Girdiyi temizle"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Sıfıra bölmeye izin verilmiyor."
+    },
+    "types": {
+      "any": "herhangi biri",
+      "numeric": {
+        "any": "Sayı",
+        "int": "Tam Sayı"
+      },
+      "text": {
+        "any": "Metin",
+        "base64": "Metin (Base64)",
+        "uuid": "Metin (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Girdi",
+      "output": "Çıktı",
+      "strings": "Dizeler",
+      "math": "Matematik",
+      "cryptography": "Kriptografi",
+      "extra": "Ekstra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Girdi"
+        },
+        "numeric": {
+          "name": "Sayısal Girdi"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Çıktı"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Bekle ve İlet"
+        },
+        "math": {
+          "addition": {
+            "name": "Toplama",
+            "inputs": {
+              "numberA": "Sayı A",
+              "numberB": "Sayı B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Çıkarma",
+            "inputs": {
+              "numberA": "Sayı A",
+              "numberB": "Sayı B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Çarpma",
+            "inputs": {
+              "numberA": "Sayı A",
+              "numberB": "Sayı B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Bölme",
+            "inputs": {
+              "numberA": "Sayı A",
+              "numberB": "Sayı B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Mutlak Değer",
+            "inputs": {
+              "number": "Sayı"
+            },
+            "outputs": {
+              "result": "Mutlak"
+            }
+          },
+          "ceil": {
+            "name": "Yukarı Yuvarlama",
+            "inputs": {
+              "number": "Sayı"
+            },
+            "outputs": {
+              "result": "Yukarı Yuvarlanmış"
+            }
+          },
+          "floor": {
+            "name": "Aşağı Yuvarlama",
+            "inputs": {
+              "number": "Sayı"
+            },
+            "outputs": {
+              "result": "Aşağı Yuvarlanmış"
+            }
+          },
+          "round": {
+            "name": "Yuvarlama",
+            "inputs": {
+              "number": "Sayı"
+            },
+            "outputs": {
+              "result": "Yuvarlanmış"
+            }
+          },
+          "sign": {
+            "name": "İşaret",
+            "inputs": {
+              "number": "Sayı"
+            },
+            "outputs": {
+              "result": "İşaret"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Metinden Base64'e",
+            "inputs": {
+              "stringA": "Metin A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Dizeleri Birleştir",
+            "inputs": {
+              "stringA": "Metin A",
+              "stringB": "Metin B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Rastgele UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "Arayüz Etiket Adı"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Düğüm Ekle",
+      "searchbar": {
+        "placeholder": "Düğüm ara...",
+        "noResultsFound": "Sonuç bulunamadı."
+      },
+      "category": {
+        "title": "Kategori",
+        "subItem": {
+          "title": "Alt Öğe",
+          "description": "Bu, alt öğenin bir açıklamasıdır.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Düğüm Özellikleri"
+    },
+    "speculativelabel": {
+      "result": "Sonuç"
+    }
+  }
+}

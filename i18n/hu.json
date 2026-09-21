@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "A végső eszköztár",
+    "description": "Egy ingyenes eszközgyűjtemény, mindenki számára",
+    "clientSideComputing": {
+      "title": "Kliensoldali számítástechnika",
+      "description": "Minden általad megadott adat a te eszközödön kerül feldolgozásra. Semmilyen adat nem kerül a felhőbe."
+    },
+    "openSource": {
+      "forever": "Örökre",
+      "title": "Nyílt forráskód",
+      "description": "A teljes forráskód elérhető a GitHubon. Ez a projekt nem kereskedelmi célú felhasználásra ingyenes. További információkért lásd az AGPL-3.0 licencet.",
+      "GitHub": "GitHub",
+      "license": "Licenc"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Keress eszközt itt...",
+      "noResultsFound": "Nincs találat."
+    },
+    "gettingStarted": {
+      "title": "Első lépések",
+      "home": {
+        "title": "Kezdőlap",
+        "description": ""
+      },
+      "source": {
+        "title": "Forráskód megtekintése",
+        "description": "Adj csillagot nekünk a GitHubon!"
+      }
+    },
+    "debug": {
+      "title": "Hibakeresés",
+      "auth": {
+        "title": "Hitelesítés",
+        "description": ""
+      },
+      "debug": {
+        "title": "Hibakeresési áttekintés",
+        "description": ""
+      },
+      "ui": {
+        "title": "UI",
+        "description": ""
+      },
+      "translations": {
+        "title": "Fordítások",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Jogi információk",
+      "privacy": {
+        "title": "Adatvédelmi nyilatkozat",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Impresszum",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Szöveg",
+        "wordCounter": {
+          "title": "Szószámláló",
+          "description": "Mondatok, szavak és karakterek megszámolása"
+        }
+      },
+      "encoding": {
+        "title": "Kódolás",
+        "URL": {
+          "title": "URL-kódolás",
+          "description": "Szöveg kódolása URL-paraméterként"
+        },
+        "base64": {
+          "title": "Base64-kódolás/-dekódolás",
+          "description": "Szöveg kódolása vagy dekódolása Base64 formátumba"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode bináris kódolás/dekódolás",
+          "description": "Szöveg kódolása vagy dekódolása Unicode bináris formátumba"
+        }
+      },
+      "color": {
+        "title": "Szín",
+        "hexToHSL": {
+          "title": "Hex-ből HSL",
+          "description": "Hex szín átalakítása HSL formátumba"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Felosztás",
+          "description": "PDF felosztása több fájlra"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Kódolva:",
+        "b2a_result": "Dekódolva:",
+        "a2b_title": "URL-kódolás",
+        "b2a_title": "URL-dekódolás",
+        "whatis": "Mi az URL-kódolás?",
+        "description": "Az URL-kódolás (más néven percent-kódolás) olyan módszer, amellyel az URL-ekben előforduló, a szabványos ASCII-karakterkészletbe nem tartozó karakterek kódolhatók. Ilyenek például a szóközök, a nyilak vagy más nyelvek speciális karakterei.",
+        "howItWorks": {
+          "title": "Hogyan működik",
+          "description": "<li>Minden speciális karakter kódolása egy \"%\" jellel kezdődik, amelyet egy kétjegyű hexadecimális szám követ.</li>\n<li>Például a szóköz karakter kódolása \"%20\", a kisebb-jelőlt jel \"<\" kódolása pedig \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Keresőtáblázat",
+          "description": "Keresd meg egy adott karakter URL-kódolását."
+        }
+      },
+      "base64": {
+        "a2b_result": "Kódolva Base64-ként:",
+        "b2a_result": "Dekódolva szövegként:",
+        "a2b_title": "Base64-kódolás",
+        "b2a_title": "Base64-dekódolás"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Kódolva Unicode-ként:",
+        "b2a_result": "Dekódolva binárisként:",
+        "a2b_title": "Binárisból Unicode",
+        "b2a_title": "Unicode-ból bináris"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex-ből HSL",
+        "description": "Hex színt alakít át HSL formátumba.",
+        "options": {
+          "valuesOnly": "Tartalmazza a hsl(...) részt"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "PDF felosztása",
+        "description": "PDF fájl felosztása több fájlra.",
+        "actions": {
+          "downloadAll": "Összes felosztott oldal letöltése",
+          "dropFiles": "Húzd ide a fájlokat, vagy kattints a kiválasztáshoz"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Keresés"
+  },
+  "converterBidirectional": {
+    "input": "Bemenet:",
+    "swapSides": "Oldalak felcserélése",
+    "clearInput": "Bemenet törlése"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Nullával való osztás nem megengedett."
+    },
+    "types": {
+      "any": "bármilyen",
+      "numeric": {
+        "any": "Szám",
+        "int": "Egész szám"
+      },
+      "text": {
+        "any": "Szöveg",
+        "base64": "Szöveg (Base64)",
+        "uuid": "Szöveg (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Bemenet",
+      "output": "Kimenet",
+      "strings": "Szövegek",
+      "math": "Matematika",
+      "cryptography": "Kriptográfia",
+      "extra": "Extrák"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Bemenet"
+        },
+        "numeric": {
+          "name": "Numerikus bemenet"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Kimenet"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Várakozás és továbbítás"
+        },
+        "math": {
+          "addition": {
+            "name": "Összeadás",
+            "inputs": {
+              "numberA": "A szám",
+              "numberB": "B szám"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Kivonás",
+            "inputs": {
+              "numberA": "A szám",
+              "numberB": "B szám"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Szorzás",
+            "inputs": {
+              "numberA": "A szám",
+              "numberB": "B szám"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Osztás",
+            "inputs": {
+              "numberA": "A szám",
+              "numberB": "B szám"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Abszolút érték",
+            "inputs": {
+              "number": "Szám"
+            },
+            "outputs": {
+              "result": "Abszolút"
+            }
+          },
+          "ceil": {
+            "name": "Felfelé kerekítés",
+            "inputs": {
+              "number": "Szám"
+            },
+            "outputs": {
+              "result": "Felfelé kerekítve"
+            }
+          },
+          "floor": {
+            "name": "Lefelé kerekítés",
+            "inputs": {
+              "number": "Szám"
+            },
+            "outputs": {
+              "result": "Lefelé kerekítve"
+            }
+          },
+          "round": {
+            "name": "Kerekítés",
+            "inputs": {
+              "number": "Szám"
+            },
+            "outputs": {
+              "result": "Kerekítve"
+            }
+          },
+          "sign": {
+            "name": "Előjel",
+            "inputs": {
+              "number": "Szám"
+            },
+            "outputs": {
+              "result": "Előjel"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Szövegből Base64",
+            "inputs": {
+              "stringA": "A szöveg"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Szövegek összefűzése",
+            "inputs": {
+              "stringA": "A szöveg",
+              "stringB": "B szöveg"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Véletlenszerű UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "UI címke neve"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Csomópont hozzáadása",
+      "searchbar": {
+        "placeholder": "Keress csomópontokat...",
+        "noResultsFound": "Nincs találat."
+      },
+      "category": {
+        "title": "Kategória",
+        "subItem": {
+          "title": "Alelem",
+          "description": "Ez az alelem leírása.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Csomópont tulajdonságai"
+    },
+    "speculativelabel": {
+      "result": "Eredmény"
+    }
+  }
+}

@@ -1,0 +1,339 @@
+{
+  "home": {
+    "title": "Den ultimata verktygslådan",
+    "description": "En samling verktyg – gratis och för alla",
+    "clientSideComputing": {
+      "title": "Klientbaserad beräkning",
+      "description": "All inmatning du anger bearbetas på din enhet. Ingen data skickas till molnet."
+    },
+    "openSource": {
+      "forever": "För alltid",
+      "title": "Öppen källkod",
+      "description": " All källkod finns tillgänglig på GitHub. Detta projekt är gratis för icke-kommersiellt bruk. Se licensen AGPL-3.0 för mer information.",
+      "GitHub": "GitHub",
+      "license": "Licens"
+    }
+  },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Sök efter ett verktyg här...",
+      "noResultsFound": "Inga resultat hittades."
+    },
+    "gettingStarted": {
+      "title": "Kom igång",
+      "home": {
+        "title": "Hem",
+        "description": ""
+      },
+      "source": {
+        "title": "Visa källkoden",
+        "description": "Ge oss en stjärna på GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Felsökning",
+      "auth": {
+        "title": "Autentisering",
+        "description": ""
+      },
+      "debug": {
+        "title": "Felsökningsöversikt",
+        "description": ""
+      },
+      "ui": {
+        "title": "Gränssnitt",
+        "description": ""
+      },
+      "translations": {
+        "title": "Översättningar",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Juridiskt",
+      "privacy": {
+        "title": "Sekretesspolicy",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Impressum",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Ord Räknare",
+          "description": "Räkna meningar, ord och tecken"
+        }
+      },
+      "encoding": {
+        "title": "Kodning",
+        "URL": {
+          "title": "URL-kodning",
+          "description": "Koda text som en URL-parameter"
+        },
+        "base64": {
+          "title": "Base64-kodning/-avkodning",
+          "description": "Koda eller avkoda text som Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode-binär kodning/-avkodning",
+          "description": "Koda eller avkoda text som Unicode-binär"
+        }
+      },
+      "color": {
+        "title": "Färg",
+        "hexToHSL": {
+          "title": "Hex till HSL",
+          "description": "Konvertera en hexfärg till HSL-format"
+        }
+      },
+      "pdf": {
+        "title": "PDF",
+        "split": {
+          "title": "Dela upp",
+          "description": "Dela upp en PDF i flera filer"
+        }
+      }
+    }
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "a2b_result": "Kodad:",
+        "b2a_result": "Avkodad:",
+        "a2b_title": "URL-kodning",
+        "b2a_title": "URL-avkodning",
+        "whatis": "Vad är URL-kodning?",
+        "description": "URL-kodning (även känt som procentkodning) är en metod för att koda tecken i URL:er som inte ingår i standardteckenuppsättningen ASCII. Detta inkluderar specialtecken som mellanslag, pilar eller specialtecken från andra språk.",
+        "howItWorks": {
+          "title": "Hur det fungerar",
+          "description": "<li>Varje specialtecken kodas med ett \"%\" följt av ett hexadecimalt tal med två siffror.</li>\n<li>Ett mellanslag kodas till exempel som \"%20\" och tecknet \"<\" kodas som \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Uppslagstabell",
+          "description": "Slå upp URL-kodningen för ett specifikt tecken."
+        }
+      },
+      "base64": {
+        "a2b_result": "Kodad som Base64:",
+        "b2a_result": "Avkodad som text:",
+        "a2b_title": "Base64-kodning",
+        "b2a_title": "Base64-avkodning"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Kodad som Unicode:",
+        "b2a_result": "Avkodad som binär:",
+        "a2b_title": "Binär till Unicode",
+        "b2a_title": "Unicode till binär"
+      }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex till HSL",
+        "description": "Konverterar en hexfärg till HSL-format.",
+        "options": {
+          "valuesOnly": "Inkludera i hsl(...)"
+        }
+      }
+    },
+    "pdf": {
+      "split": {
+        "title": "Dela upp PDF",
+        "description": "Dela upp en PDF-fil i flera filer.",
+        "actions": {
+          "downloadAll": "Ladda ner alla delade sidor",
+          "dropFiles": "Dra och släpp filer här, eller klicka för att välja"
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Sök"
+  },
+  "converterBidirectional": {
+    "input": "Indata:",
+    "swapSides": "Växla sidor",
+    "clearInput": "Rensa inmatningen"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Division med noll är inte tillåten."
+    },
+    "types": {
+      "any": "valfri",
+      "numeric": {
+        "any": "Tal",
+        "int": "Heltal"
+      },
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)",
+        "uuid": "Text (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Indata",
+      "output": "Utdata",
+      "strings": "Strängar",
+      "math": "Matematik",
+      "cryptography": "Kryptografi",
+      "extra": "Extra"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Indata"
+        },
+        "numeric": {
+          "name": "Numerisk indata"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Utdata"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Vänta och vidarebefordra"
+        },
+        "math": {
+          "addition": {
+            "name": "Addition",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Subtraktion",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Multiplikation",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Division",
+            "inputs": {
+              "numberA": "Tal A",
+              "numberB": "Tal B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Absolutvärde",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Absolut"
+            }
+          },
+          "ceil": {
+            "name": "Avrunda uppåt",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Avrundat uppåt"
+            }
+          },
+          "floor": {
+            "name": "Avrunda nedåt",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Avrundat nedåt"
+            }
+          },
+          "round": {
+            "name": "Avrunda",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Avrundat"
+            }
+          },
+          "sign": {
+            "name": "Tecken",
+            "inputs": {
+              "number": "Tal"
+            },
+            "outputs": {
+              "result": "Tecken"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text till Base64",
+            "inputs": {
+              "stringA": "Text A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Sammanfoga strängar",
+            "inputs": {
+              "stringA": "Text A",
+              "stringB": "Text B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Slumpmässigt UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "UI-etikettnamn"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Lägg till nod",
+      "searchbar": {
+        "placeholder": "Sök efter noder...",
+        "noResultsFound": "Inga resultat hittades."
+      },
+      "category": {
+        "title": "Kategori",
+        "subItem": {
+          "title": "Underobjekt",
+          "description": "Detta är en beskrivning av underobjektet.",
+          "shortcut": "Ctrl+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Nodegenskaper"
+    },
+    "speculativelabel": {
+      "result": "Resultat"
+    }
+  }
+}
