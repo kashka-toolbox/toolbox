@@ -73,6 +73,10 @@
         "base64": {
           "title": "Base64 Encoding",
           "description": "Kodiert oder dekodiert Text als Base64"
+        },
+        "UnicodeBinary": {
+          "title": "Unicode Binary En-/Decoding",
+          "description": "Kodiert oder dekodiert Text als Unicode Binary"
         }
       },
       "color": {
@@ -114,6 +118,12 @@
         "b2a_result": "Als String dekodiert:",
         "a2b_title": "Base64-Encoding",
         "b2a_title": "Base64-Decoding"
+      },
+      "UnicodeBinary": {
+        "a2b_result": "Als Unicode kodiert:",
+        "b2a_result": "Als binär dekodiert:",
+        "a2b_title": "Binär zu Unicode",
+        "b2a_title": "Unicode zu Binär"
       }
     },
     "color": {
@@ -121,7 +131,7 @@
         "title": "Hex zu HSL",
         "description": "Konvertiert eine Hex-Farbe in das HSL-Format.",
         "options": {
-            "valuesOnly": "In hsl(...) einfügen"
+          "valuesOnly": "In hsl(...) einfügen"
         }
       }
     },
@@ -143,5 +153,183 @@
     "input": "Eingabe:",
     "swapSides": "Seiten tauschen",
     "clearInput": "Eingabe löschen"
+  },
+  "graph": {
+    "errorMessages": {
+      "divideByZero": "Division durch Null ist nicht erlaubt."
+    },
+    "types": {
+      "any": "beliebig",
+      "numeric": {
+        "any": "Zahl",
+        "int": "Ganzzahl"
+      },
+      "text": {
+        "any": "Text",
+        "base64": "Text (Base64)",
+        "uuid": "Text (UUID)"
+      }
+    },
+    "categories": {
+      "input": "Eingabe",
+      "output": "Ausgabe",
+      "strings": "Strings",
+      "math": "Mathematik",
+      "cryptography": "Kryptographie",
+      "extra": "Extras"
+    },
+    "nodes": {
+      "input": {
+        "any": {
+          "name": "Eingabe"
+        },
+        "numeric": {
+          "name": "Numerische Eingabe"
+        }
+      },
+      "output": {
+        "any": {
+          "name": "Ausgabe"
+        }
+      },
+      "operation": {
+        "waitAndForward": {
+          "name": "Warten und Weiterleiten"
+        },
+        "math": {
+          "addition": {
+            "name": "Addition",
+            "inputs": {
+              "numberA": "Zahl A",
+              "numberB": "Zahl B"
+            },
+            "outputs": {
+              "result": "A + B"
+            }
+          },
+          "substraction": {
+            "name": "Subtraktion",
+            "inputs": {
+              "numberA": "Zahl A",
+              "numberB": "Zahl B"
+            },
+            "outputs": {
+              "result": "A - B"
+            }
+          },
+          "multiplication": {
+            "name": "Multiplikation",
+            "inputs": {
+              "numberA": "Zahl A",
+              "numberB": "Zahl B"
+            },
+            "outputs": {
+              "result": "A * B"
+            }
+          },
+          "division": {
+            "name": "Division",
+            "inputs": {
+              "numberA": "Zahl A",
+              "numberB": "Zahl B"
+            },
+            "outputs": {
+              "result": "A / B"
+            }
+          },
+          "abs": {
+            "name": "Absolutwert",
+            "inputs": {
+              "number": "Zahl"
+            },
+            "outputs": {
+              "result": "Absolutwert"
+            }
+          },
+          "ceil": {
+            "name": "Aufrundung",
+            "inputs": {
+              "number": "Zahl"
+            },
+            "outputs": {
+              "result": "Aufrundung"
+            }
+          },
+          "floor": {
+            "name": "Abrundung",
+            "inputs": {
+              "number": "Zahl"
+            },
+            "outputs": {
+              "result": "Abgerundet"
+            }
+          },
+          "round": {
+            "name": "Rundung",
+            "inputs": {
+              "number": "Zahl"
+            },
+            "outputs": {
+              "result": "Gerundet"
+            }
+          },
+          "sign": {
+            "name": "Vorzeichen",
+            "inputs": {
+              "number": "Zahl"
+            },
+            "outputs": {
+              "result": "Vorzeichen"
+            }
+          }
+        },
+        "text": {
+          "textToBase64": {
+            "name": "Text zu Base64",
+            "inputs": {
+              "stringA": "Text A"
+            }
+          },
+          "concatenateStrings": {
+            "name": "Strings verbinden",
+            "inputs": {
+              "stringA": "Text A",
+              "stringB": "Text B"
+            }
+          }
+        },
+        "cryptography": {
+          "randomUUID": {
+            "name": "Zufällige UUID"
+          }
+        }
+      },
+      "settings": {
+        "UI_LABEL_TEXT": {
+          "name": "UI-Label-Name"
+        }
+      }
+    },
+    "addNodeDialog": {
+      "title": "Knoten hinzufügen",
+      "searchbar": {
+        "placeholder": "Knoten suchen...",
+        "noResultsFound": "Keine Ergebnisse gefunden."
+      },
+      "category": {
+        "title": "Kategorie",
+        "subItem": {
+          "title": "Unterelement",
+          "description": "Dies ist eine Beschreibung des Unterelements.",
+          "shortcut": "Strg+N"
+        }
+      }
+    },
+    "editNodeSettingsDialog": {
+      "title": "Eigenschaften des Knotens"
+    },
+    "speculativelabel": {
+      "result": "Ergebnis"
+    }
   }
 }
