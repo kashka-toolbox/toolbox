@@ -1,6 +1,12 @@
 name: Update German translations
 
 on:
+  # Temporary: forces the first run so this workflow registers and becomes
+  # triggerable via `gh workflow run` and the Actions tab.
+  # Safe to delete this block once the workflow has run once.
+  push:
+    branches:
+      - graph-based-tools
   workflow_dispatch:
 
 jobs:
