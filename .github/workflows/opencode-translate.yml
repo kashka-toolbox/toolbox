@@ -1,12 +1,6 @@
 name: Update German translations
 
 on:
-  # Temporary: forces the first run so this workflow registers and becomes
-  # triggerable via `gh workflow run` and the Actions tab.
-  # Safe to delete this block once the workflow has run once.
-  push:
-    branches:
-      - graph-based-tools
   workflow_dispatch:
 
 jobs:
@@ -36,7 +30,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Run OpenCode
-        if: github.event_name == 'workflow_dispatch' && steps.sync.outputs.count != '0'
+        if: steps.sync.outputs.count != '0'
         uses: anomalyco/opencode/github@latest
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
