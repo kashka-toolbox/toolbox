@@ -1,6 +1,9 @@
 name: Update German translations
 
 on:
+  push:
+    branches:
+      - graph-based-tools
   workflow_dispatch:
 
 jobs:
@@ -9,8 +12,6 @@ jobs:
     permissions:
       id-token: write
       contents: write
-      pull-requests: write
-      issues: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -30,6 +31,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Run OpenCode
+        id: opencode
         if: steps.sync.outputs.count != '0'
         uses: anomalyco/opencode/github@latest
         env:
@@ -55,4 +57,30 @@ jobs:
 
             After editing, verify that no value in i18n/de.json still contains the marker "FROM en.json REPLACE: ".
 
-            If you changed i18n/de.json: create a new branch (e.g. "i18n/de-update-<date>"), commit the change with the message "chore(i18n): update German translations", and open a pull request against the default branch with the title "chore(i18n): update German translations" and a short description.
+            Only edit i18n/de.json in the working tree. Do not run any git commands, do not create branches, do not commit, do not push, and do not open pull requests. Committing is handled by a later workflow step.
+
+      - name: Commit translations if changed
+        if: steps.opencode.outcome == 'success'
+        run: |
+          set -euo pipefail
+          base_sha="${{ steps.checkout.outputs.sha }}"
+
+          remaining=$(grep -c "FROM en.json REPLACE: " i18n/de.json || true)
+          if [ "$remaining" -gt 0 ]; then
+            echo "::error::Aborting without commit: $remaining value(s) in i18n/de.json still contain the marker 'FROM en.json REPLACE: '."
+            exit 1
+          fi
+
+          if git diff --quiet "$base_sha" -- i18n/de.json; then
+            echo "i18n/de.json is unchanged - nothing to commit."
+            exit 0
+          fi
+
+          # Undo any commits the agent may have created locally; keep the changes only.
+          git reset --soft "$base_sha"
+          git reset
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add i18n/de.json
+          git commit -m "chore(i18n): update German translations"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${GITHUB_REF_NAME}"
