@@ -2,6 +2,9 @@ import createNextIntlPlugin from 'next-intl/plugin';
 import withPWAInit from "@ducanh2912/next-pwa";
 
 const withPWA = withPWAInit({
+    // Keep the service worker out of `next dev`: it serves stale chunks and
+    // (with reloadOnOnline) can trigger reload loops during development.
+    disable: process.env.NODE_ENV === "development",
     cacheOnFrontEndNav: true,
     aggressiveFrontEndNavCaching: true,
     reloadOnOnline: true,

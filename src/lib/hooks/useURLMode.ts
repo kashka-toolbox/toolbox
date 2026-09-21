@@ -27,6 +27,10 @@ const useURLMode = <T extends string>(modes: T[], defaultMode: T, param: string 
   const [mode, setMode] = useState<T>(modes.includes(initialMode as T) ? initialMode as T : defaultMode);
 
   useEffect(() => {
+    // Skip when the URL already reflects the mode, otherwise replacing the
+    // URL produces a new `searchParams` object and this effect re-fires in
+    // an infinite loop (with full page reloads when an RSC fetch fails).
+    if (searchParams.get(param) === mode) return;
     const params = new URLSearchParams(searchParams.toString());
     params.set(param, mode);
     replace(`${pathname}?${params.toString()}`, { scroll: false });
