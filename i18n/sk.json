@@ -1,15 +1,15 @@
 {
   "home": {
-    "title": "Ultimátny toolbox",
-    "description": "Zbierka nástrojov zadarmo a pre každého",
+    "title": "Najlepšia súprava nástrojov",
+    "description": "Zbierka nástrojov, zadarmo a pre každého",
     "clientSideComputing": {
-      "title": "Výpočty na strane klienta",
-      "description": "Každý vstup, ktorý zadáš, sa spracováva na tvojom zariadení. Do cloudu sa neposielajú žiadne dáta."
+      "title": "Výpočty na klientskej strane",
+      "description": "Každý vstup, ktorý zadáš, sa spracuje vo tvojom zariadení. Žiadne údaje sa neposielajú do cloudu."
     },
     "openSource": {
       "forever": "Navždy",
-      "title": "Open Source",
-      "description": "Celý zdrojový kód je dostupný na GitHube. Tento projekt je voľne použiteľný na nekomerčné účely. Viac informácií nájdeš v licencii AGPL-3.0.",
+      "title": "Otvorený zdroj",
+      "description": " Všetok zdrojový kód je dostupný na GitHubu. Tento projekt je zadarmo pre nekomerčné použitie. Viac informácií nájdete v licencii AGPL-3.0.",
       "GitHub": "GitHub",
       "license": "Licencia"
     }
@@ -20,20 +20,20 @@
       "noResultsFound": "Nenašli sa žiadne výsledky."
     },
     "gettingStarted": {
-      "title": "Začíname",
+      "title": "Začiatok",
       "home": {
         "title": "Domov",
         "description": ""
       },
       "source": {
         "title": "Zobraziť zdrojový kód",
-        "description": "Daj nám hviezdičku na GitHube!"
+        "description": "Daj nám hviezdičku na GitHubu!"
       }
     },
     "debug": {
       "title": "Ladenie",
       "auth": {
-        "title": "Autentizácia",
+        "title": "Prihlásenie",
         "description": ""
       },
       "debug": {
@@ -50,13 +50,13 @@
       }
     },
     "legal": {
-      "title": "Právne informácie",
+      "title": "Právne",
       "privacy": {
-        "title": "Vyhlásenie o ochrane súkromia",
+        "title": "Zásady ochrany súkromia",
         "description": ""
       },
       "imprint": {
-        "title": "Tiráž",
+        "title": "Impresum",
         "description": ""
       }
     },
@@ -72,29 +72,29 @@
         "title": "Kódovanie",
         "URL": {
           "title": "URL kódovanie",
-          "description": "Zakóduj text ako parameter URL"
+          "description": "Kóduj text ako URL parameter"
         },
         "base64": {
-          "title": "Kódovanie/dekódovanie Base64",
-          "description": "Zakóduj alebo dekóduj text ako Base64"
+          "title": "Base64 kódovanie/dekódovanie",
+          "description": "Kóduj alebo dekóduj text ako Base64"
         },
         "UnicodeBinary": {
-          "title": "Kódovanie/dekódovanie binárneho Unicode",
-          "description": "Zakóduj alebo dekóduj text ako binárny Unicode"
+          "title": "Unicode binárne kódovanie/dekódovanie",
+          "description": "Kóduj alebo dekóduj text ako binárny Unicode"
         }
       },
       "color": {
         "title": "Farba",
         "hexToHSL": {
           "title": "Hex na HSL",
-          "description": "Preveď hex farbu do formátu HSL"
+          "description": "Previedz hex farbu na HSL formát"
         }
       },
       "pdf": {
         "title": "PDF",
         "split": {
-          "title": "Rozdeliť",
-          "description": "Rozdeľ PDF do viacerých súborov"
+          "title": "Rozdelenie",
+          "description": "Rozdeľ PDF na viacero súborov"
         }
       }
     }
@@ -102,38 +102,38 @@
   "tools": {
     "encoding": {
       "url": {
-        "a2b_result": "Zakódované:",
+        "a2b_result": "Kódované:",
         "b2a_result": "Dekódované:",
-        "a2b_title": "URL kódovanie",
-        "b2a_title": "Dekódovanie URL",
-        "whatis": "Čo je URL kódovanie?",
-        "description": "URL kódovanie (známe aj ako Percent-Encoding) je spôsob kódovania znakov v URL adresách, ktoré nie sú súčasťou štandardnej znakovej sady ASCII. Patria medzi ne špeciálne znaky ako medzery, šípky alebo špeciálne znaky iných jazykov.",
+        "a2b_title": "URL Kódovanie",
+        "b2a_title": "URL Dekódovanie",
+        "whatis": "Čo je URL Kódovanie?",
+        "description": "URL Kódovanie (známe aj ako Percentové Kódovanie) je metóda kódovania znakov v URL, ktoré nie sú súčasťou štandardnej množiny znakov ASCII. Zahŕňa to špeciálne znaky, ako sú medzery, šípky alebo špeciálne znaky z iných jazykov.",
         "howItWorks": {
           "title": "Ako to funguje",
-          "description": "<li>Každý špeciálny znak sa kóduje znakom \"%\" nasledovaným dvojciferným hexadecimálnym číslom.</li>\n<li>Napríklad medzera by sa zakódovala ako \"%20\" a symbol menšie ako \"<\" by sa zakódoval ako \"%3C\".</li>"
+          "description": "<li>Každý špeciálny znak sa kóduje znakom \"%\" nasledovaným 2-miestnym hexadecimálnym číslom.</li>\n<li>Napríklad znak medzery sa kóduje ako \"%20\" a znak menšie ako \"<\" sa kóduje ako \"%3C\".</li>"
         },
         "lookup": {
-          "title": "Prehľadová tabuľka",
-          "description": "Vyhľadaj URL kódovanie pre konkrétny znak."
+          "title": "Tabuľka Vyhľadávania",
+          "description": "Vyhľadaj URL kódovanie konkrétneho znaku."
         }
       },
       "base64": {
-        "a2b_result": "Zakódované ako Base64:",
+        "a2b_result": "Kódované ako Base64:",
         "b2a_result": "Dekódované ako reťazec:",
-        "a2b_title": "Kódovanie Base64",
-        "b2a_title": "Dekódovanie Base64"
+        "a2b_title": "Base64 Kódovanie",
+        "b2a_title": "Base64 Dekódovanie"
       },
       "UnicodeBinary": {
-        "a2b_result": "Zakódované ako Unicode:",
+        "a2b_result": "Kódované ako Unicode:",
         "b2a_result": "Dekódované ako binárne:",
         "a2b_title": "Binárne na Unicode",
-        "b2a_title": "Unicode na binárne"
+        "b2a_title": "Unicode na Binárne"
       }
     },
     "color": {
       "hexToHsl": {
         "title": "Hex na HSL",
-        "description": "Prevedie hex farbu do formátu HSL.",
+        "description": "Previedz hex farbu na HSL formát.",
         "options": {
           "valuesOnly": "Zahrnúť do hsl(...)"
         }
@@ -141,22 +141,22 @@
     },
     "pdf": {
       "split": {
-        "title": "Rozdeliť PDF",
-        "description": "Rozdeľ PDF súbor do viacerých súborov.",
+        "title": "Rozdelenie PDF",
+        "description": "Rozdeľ súbor PDF na viacero súborov.",
         "actions": {
-          "downloadAll": "Stiahnuť všetky rozdelené strany",
-          "dropFiles": "Pretiahni sem súbory, alebo klikni na výber"
+          "downloadAll": "Stiahni všetky rozdelené stránky",
+          "dropFiles": "Presuň sem súbory ťahaním a pustením, alebo klikni pre výber"
         }
       }
     }
   },
   "translationTable": {
-    "search": "Hľadať"
+    "search": "Hľadaj"
   },
   "converterBidirectional": {
     "input": "Vstup:",
-    "swapSides": "Prehodiť strany",
-    "clearInput": "Vymazať vstup"
+    "swapSides": "Vymen strany",
+    "clearInput": "Vymaž vstup"
   },
   "graph": {
     "errorMessages": {
@@ -168,6 +168,7 @@
         "any": "Číslo",
         "int": "Celé číslo"
       },
+      "arrayOf": "Pole typu {type}",
       "text": {
         "any": "Text",
         "base64": "Text (Base64)",
@@ -180,7 +181,8 @@
       "strings": "Reťazce",
       "math": "Matematika",
       "cryptography": "Kryptografia",
-      "extra": "Extra"
+      "arrays": "Polia",
+      "extra": "Ďalšie"
     },
     "nodes": {
       "input": {
@@ -198,7 +200,7 @@
       },
       "operation": {
         "waitAndForward": {
-          "name": "Čakať a poslať ďalej"
+          "name": "Počkaj a prepošli"
         },
         "math": {
           "addition": {
@@ -247,11 +249,11 @@
               "number": "Číslo"
             },
             "outputs": {
-              "result": "Absolútna hodnota"
+              "result": "Absolútna"
             }
           },
           "ceil": {
-            "name": "Zaokrúhlenie nahor",
+            "name": "Zaokrúhli nahor",
             "inputs": {
               "number": "Číslo"
             },
@@ -260,7 +262,7 @@
             }
           },
           "floor": {
-            "name": "Zaokrúhlenie nadol",
+            "name": "Zaokrúhli nadol",
             "inputs": {
               "number": "Číslo"
             },
@@ -269,7 +271,7 @@
             }
           },
           "round": {
-            "name": "Zaokrúhlenie",
+            "name": "Zaokrúhli",
             "inputs": {
               "number": "Číslo"
             },
@@ -289,13 +291,13 @@
         },
         "text": {
           "textToBase64": {
-            "name": "Text na Base64",
+            "name": "Text do Base64",
             "inputs": {
               "stringA": "Text A"
             }
           },
           "concatenateStrings": {
-            "name": "Zreťazenie reťazcov",
+            "name": "Spojiť reťazce",
             "inputs": {
               "stringA": "Text A",
               "stringB": "Text B"
@@ -306,11 +308,23 @@
           "randomUUID": {
             "name": "Náhodné UUID"
           }
+        },
+        "array": {
+          "createArray": {
+            "name": "Vytvoriť pole"
+          },
+          "getElementAtPosition": {
+            "name": "Získať prvok na pozícii",
+            "inputs": {
+              "array": "Pole",
+              "index": "Index"
+            }
+          }
         }
       },
       "settings": {
         "UI_LABEL_TEXT": {
-          "name": "Názov UI menovky"
+          "name": "Názov popisku UI"
         }
       }
     },

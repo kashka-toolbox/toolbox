@@ -1,15 +1,15 @@
 {
   "home": {
     "title": "Najlepszy zestaw narzędzi",
-    "description": "Kolekcja darmowych narzędzi dla każdego",
+    "description": "Darmowy zbiór narzędzi dla każdego",
     "clientSideComputing": {
       "title": "Obliczenia po stronie klienta",
-      "description": "Wszystko, co wpiszesz, jest przetwarzane na Twoim urządzeniu. Żadne dane nie są wysyłane do chmury."
+      "description": "Każde dane, które podajesz, są przetwarzane na twoim urządzeniu. Żadne dane nie są wysyłane do chmury."
     },
     "openSource": {
       "forever": "Na zawsze",
-      "title": "Open Source",
-      "description": "Cały kod źródłowy jest dostępny na GitHubie. Ten projekt jest darmowy do użytku niekomercyjnego. Więcej informacji znajdziesz w licencji AGPL-3.0.",
+      "title": "Otwarte źródło",
+      "description": " Cały kod źródłowy jest dostępny na GitHub. Ten projekt jest darmowy do użytku niekomercyjnego. Zobacz licencję AGPL-3.0, aby uzyskać więcej informacji.",
       "GitHub": "GitHub",
       "license": "Licencja"
     }
@@ -17,21 +17,21 @@
   "navigation": {
     "searchbar": {
       "placeholder": "Szukaj narzędzia tutaj...",
-      "noResultsFound": "Brak wyników."
+      "noResultsFound": "Nie znaleziono wyników."
     },
     "gettingStarted": {
-      "title": "Pierwsze kroki",
+      "title": "Szybki start",
       "home": {
         "title": "Strona główna",
         "description": ""
       },
       "source": {
         "title": "Zobacz kod źródłowy",
-        "description": "Daj nam gwiazdkę na GitHubie!"
+        "description": "Daj nam gwiazdkę na GitHub!"
       }
     },
     "debug": {
-      "title": "Debugowanie",
+      "title": "Debug",
       "auth": {
         "title": "Uwierzytelnianie",
         "description": ""
@@ -50,13 +50,13 @@
       }
     },
     "legal": {
-      "title": "Informacje prawne",
+      "title": "Prawne",
       "privacy": {
-        "title": "Oświadczenie o prywatności",
+        "title": "Polityka prywatności",
         "description": ""
       },
       "imprint": {
-        "title": "Impressum",
+        "title": "Wydawca",
         "description": ""
       }
     },
@@ -76,25 +76,25 @@
         },
         "base64": {
           "title": "Kodowanie/dekodowanie Base64",
-          "description": "Zakoduj lub zdekoduj tekst jako Base64"
+          "description": "Zakoduj lub dekoduj tekst jako Base64"
         },
         "UnicodeBinary": {
           "title": "Kodowanie/dekodowanie Unicode Binary",
-          "description": "Zakoduj lub zdekoduj tekst jako Unicode Binary"
+          "description": "Zakoduj lub dekoduj tekst jako Unicode Binary"
         }
       },
       "color": {
         "title": "Kolor",
         "hexToHSL": {
           "title": "Hex na HSL",
-          "description": "Konwertuj kolor hex do formatu HSL"
+          "description": "Konwertuj kolor hex na format HSL"
         }
       },
       "pdf": {
         "title": "PDF",
         "split": {
-          "title": "Dziel",
-          "description": "Podziel plik PDF na wiele plików"
+          "title": "Podział",
+          "description": "Podziel PDF na wiele plików"
         }
       }
     }
@@ -102,40 +102,40 @@
   "tools": {
     "encoding": {
       "url": {
-        "a2b_result": "Zakodowano:",
-        "b2a_result": "Dekodowano:",
+        "a2b_result": "Zakodowane:",
+        "b2a_result": "Rozkodowane:",
         "a2b_title": "Kodowanie URL",
-        "b2a_title": "Dekodowanie URL",
+        "b2a_title": "Rozkodowanie URL",
         "whatis": "Czym jest kodowanie URL?",
-        "description": "Kodowanie URL (znane też jako Percent-Encoding) to metoda kodowania w adresach URL znaków, które nie należą do standardowego zestawu znaków ASCII. Obejmuje to znaki specjalne, takie jak spacje, strzałki czy znaki z innych języków.",
+        "description": "Kodowanie URL (znane również jako kodowanie procentowe) to metoda kodowania znaków w adresach URL, które nie należą do standardowego zestawu znaków ASCII. Obejmuje to znaki specjalne, takie jak spacje, strzałki lub znaki specjalne z innych języków.",
         "howItWorks": {
           "title": "Jak to działa",
-          "description": "<li>Każdy znak specjalny jest kodowany za pomocą \"%\", po którym następuje dwucyfrowa liczba szesnastkowa.</li>\n<li>Na przykład spacja zostanie zakodowana jako \"%20\", a symbol mniejszości \"<\" jako \"%3C\".</li>"
+          "description": "<li>Każdy znak specjalny jest kodowany przez \"%\" po którym następuje 2-cyfrowa liczba szesnastkowa.</li>\n<li>Na przykład, znak spacji byłby kodowany jako \"%20\", a znak mniejszy niż \"<\" jako \"%3C\".</li>"
         },
         "lookup": {
-          "title": "Tabela kodowania",
-          "description": "Sprawdź kodowanie URL dla konkretnego znaku."
+          "title": "Tabela wyszukiwania",
+          "description": "Wyszukaj kodowanie URL dla konkretnego znaku."
         }
       },
       "base64": {
-        "a2b_result": "Zakodowano jako Base64:",
-        "b2a_result": "Dekodowano jako tekst:",
+        "a2b_result": "Zakodowane jako Base64:",
+        "b2a_result": "Rozkodowane jako ciąg:",
         "a2b_title": "Kodowanie Base64",
-        "b2a_title": "Dekodowanie Base64"
+        "b2a_title": "Rozkodowanie Base64"
       },
       "UnicodeBinary": {
-        "a2b_result": "Zakodowano jako Unicode:",
-        "b2a_result": "Dekodowano jako binarne:",
-        "a2b_title": "Z binarnego na Unicode",
-        "b2a_title": "Z Unicode na binarne"
+        "a2b_result": "Zakodowane jako Unicode:",
+        "b2a_result": "Rozkodowane jako binarne:",
+        "a2b_title": "Binarny na Unicode",
+        "b2a_title": "Unicode na binarny"
       }
     },
     "color": {
       "hexToHsl": {
         "title": "Hex na HSL",
-        "description": "Konwertuje kolor hex do formatu HSL.",
+        "description": "Konwertuje kolor hex na format HSL.",
         "options": {
-          "valuesOnly": "Uwzględnij w hsl(...)"
+          "valuesOnly": "Dołącz do hsl(...)"
         }
       }
     },
@@ -145,7 +145,7 @@
         "description": "Podziel plik PDF na wiele plików.",
         "actions": {
           "downloadAll": "Pobierz wszystkie podzielone strony",
-          "dropFiles": "Przeciągnij i upuść pliki tutaj albo kliknij, aby wybrać"
+          "dropFiles": "Przeciągnij i upuść pliki tutaj lub kliknij, aby wybrać"
         }
       }
     }
@@ -156,18 +156,19 @@
   "converterBidirectional": {
     "input": "Wejście:",
     "swapSides": "Zamień strony",
-    "clearInput": "Wyczyść pole"
+    "clearInput": "Wyczyść wejście"
   },
   "graph": {
     "errorMessages": {
-      "divideByZero": "Dzielenie przez zero jest niedozwolone."
+      "divideByZero": "Dzielenie przez zero nie jest dozwolone."
     },
     "types": {
       "any": "dowolny",
       "numeric": {
         "any": "Liczba",
-        "int": "Liczba całkowita"
+        "int": "Całkowita"
       },
+      "arrayOf": "Tablica {type}",
       "text": {
         "any": "Tekst",
         "base64": "Tekst (Base64)",
@@ -177,9 +178,10 @@
     "categories": {
       "input": "Wejście",
       "output": "Wyjście",
-      "strings": "Teksty",
+      "strings": "Napisy",
       "math": "Matematyka",
       "cryptography": "Kryptografia",
+      "arrays": "Tablice",
       "extra": "Dodatkowe"
     },
     "nodes": {
@@ -198,7 +200,7 @@
       },
       "operation": {
         "waitAndForward": {
-          "name": "Czekaj i przekaż"
+          "name": "Poczekaj i przekaż"
         },
         "math": {
           "addition": {
@@ -247,7 +249,7 @@
               "number": "Liczba"
             },
             "outputs": {
-              "result": "Wartość bezwzględna"
+              "result": "Bezwzględna"
             }
           },
           "ceil": {
@@ -289,13 +291,13 @@
         },
         "text": {
           "textToBase64": {
-            "name": "Tekst na Base64",
+            "name": "Tekst do Base64",
             "inputs": {
               "stringA": "Tekst A"
             }
           },
           "concatenateStrings": {
-            "name": "Połącz teksty",
+            "name": "Łączenie tekstów",
             "inputs": {
               "stringA": "Tekst A",
               "stringB": "Tekst B"
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "Losowy UUID"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Utwórz tablicę"
+          },
+          "getElementAtPosition": {
+            "name": "Pobierz element w pozycji",
+            "inputs": {
+              "array": "Tablica",
+              "index": "Indeks"
+            }
           }
         }
       },
@@ -318,7 +332,7 @@
       "title": "Dodaj węzeł",
       "searchbar": {
         "placeholder": "Szukaj węzłów...",
-        "noResultsFound": "Brak wyników."
+        "noResultsFound": "Nie znaleziono wyników."
       },
       "category": {
         "title": "Kategoria",

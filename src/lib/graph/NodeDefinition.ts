@@ -1,4 +1,4 @@
-import { ArrowRightIcon, InputIcon, LockOpen1Icon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, InputIcon, ListBulletIcon, LockOpen1Icon, MagicWandIcon, PlusIcon, TextIcon } from "@radix-ui/react-icons";
 import { NodeState } from "./NodeState";
 import { TYPE_DEFINITION_KEY } from "./TypeDefinitions";
 import { NodeSettings } from "./NodeSettings";
@@ -19,7 +19,7 @@ export type NodeIO = {
     /**
      * Data type of the IO, e.g. "types.text", "types.number", "types.image.png", etc.
      */
-    type: TYPE_DEFINITION_KEY;
+    type: TYPE_DEFINITION_KEY | string;
 };
 
 export const NODE_CATEGORIES = {
@@ -43,6 +43,10 @@ export const NODE_CATEGORIES = {
         icon: LockOpen1Icon,
         translationKey: "categories.cryptography",
     },
+    arrays: {
+        icon: ListBulletIcon,
+        translationKey: "categories.arrays",
+    },
     extra: {
         icon: MagicWandIcon,
         translationKey: "categories.extra",
@@ -64,6 +68,15 @@ export type NodeDefinition<
      * Each name must be unique within the node definition.
      */
     outputs: NodeIO[];
+    /**
+     * If true, the node can have dynamic inputs that are added at runtime.
+     * The node will always show connectedInputs + 1 empty inputs.
+     */
+    hasDynamicInputs?: boolean;
+    /**
+     * The type for dynamic inputs. If not specified, defaults to "any".
+     */
+    dynamicInputType?: TYPE_DEFINITION_KEY;
     /**
      * @param parameters
      * @returns

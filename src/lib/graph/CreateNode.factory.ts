@@ -21,19 +21,25 @@ export const createNode: (
         throw new Error(`Node type ${nodeType} does not exist`);
     }
 
-    return {
+    const state: NodeState<any, any> = {
         ...nodeDefinition,
         id,
         position,
         isProcessing: false,
-        getAllIO: () => [
-            ...nodeDefinition.inputs,
-            ...nodeDefinition.outputs,
-        ],
+        dynamicInputs: [],
+        getAllIO: function() {
+            return [
+                ...nodeDefinition.inputs,
+                ...(this.dynamicInputs || []),
+                ...nodeDefinition.outputs,
+            ];
+        },
         settings: {
             ...nodeDefinition.settings,
             // Keep the definition as fallback values:
             ...Object.fromEntries(Object.entries(settings ?? {}).map(([key, setting]) => [key, {...nodeDefinition.settings[key], ...setting}])),
         }
     };
+
+    return state;
 };

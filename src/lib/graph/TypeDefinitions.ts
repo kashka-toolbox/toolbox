@@ -8,6 +8,8 @@ export type TYPE_DEFINITION_KEY =
     | "text.base64"
     | "text.uuid";
 
+export const PRIMITIVE_TYPES = ["any", "numeric", "text.any", "text.base64", "text.uuid"] as const;
+
 export const TYPE_DEFINITIONS: {
     [key in TYPE_DEFINITION_KEY]: TypeDefinition;
 } = {
@@ -36,3 +38,20 @@ export const TYPE_DEFINITIONS: {
         translationKey: "types.text.uuid",
     },
 };
+
+export const ARRAY_TYPE_PREFIX = "array.";
+
+export function isArrayType(type: string): boolean {
+    return type.startsWith(ARRAY_TYPE_PREFIX);
+}
+
+export function getArrayInnerType(type: string): string {
+    if (!isArrayType(type)) {
+        throw new Error(`Type "${type}" is not an array type`);
+    }
+    return type.slice(ARRAY_TYPE_PREFIX.length);
+}
+
+export function createArrayType(innerType: string): string {
+    return ARRAY_TYPE_PREFIX + innerType;
+}

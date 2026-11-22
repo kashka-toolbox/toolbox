@@ -1,5 +1,6 @@
 "use client";
 
+import { NodeIO } from "@/lib/graph/NodeDefinition";
 import { NodeState } from "@/lib/graph/NodeState";
 import { Position } from "@/lib/graph/Position.type";
 import { PreviewEdge } from "@/lib/graph/PreviewEdge.type";
@@ -26,6 +27,7 @@ export type GraphState = {
   // actions
   // setNodes: (nodes: NodeState<any, any>[]) => void;
   removeNodeAndConnectedEdges: (nodeId: string) => void;
+  removeEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
   addEdge: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier) => void;
   addNode: (node: NodeState<any, any>) => void;
   addNodeFromDefinition: (nodeDefinitionKey: NODE_TYPE, position: Position) => void;
@@ -51,6 +53,8 @@ export type GraphState = {
   setPanOffset: (offset: Position) => void;
   zoomTo: (delta: number, point: Position) => void;
   resetZoom: () => void;
+  ensureDynamicInput: (nodeId: string) => void;
+  removeDisconnectedDynamicInputs: (nodeId: string) => void;
 };
 
 // Create a factory function that returns a NEW store instance each time it's called
@@ -80,8 +84,26 @@ export const createGraphStore = (): StoreApi<GraphState> =>
         inputNodeIds: s.inputNodeIds.filter((id) => id !== nodeId),
         outputNodeIds: s.outputNodeIds.filter((id) => id !== nodeId),
       })),
-    addEdge: (fromIO, toIO) =>
-      set((s) => ({ edges: [...s.edges, { fromIO, toIO }] })),
+    removeEdge: (fromIO, toIO) => {
+      set((s) => ({
+        edges: s.edges.filter(
+          (edge) =>
+            !(
+              edge.fromIO.nodeId === fromIO.nodeId &&
+              edge.fromIO.nodeIOName === fromIO.nodeIOName &&
+              edge.toIO?.nodeId === toIO.nodeId &&
+              edge.toIO?.nodeIOName === toIO.nodeIOName
+            ),
+        ),
+      }));
+      // Clean up disconnected dynamic inputs
+      get().removeDisconnectedDynamicInputs(toIO.nodeId);
+    },
+    addEdge: (fromIO, toIO) => {
+      set((s) => ({ edges: [...s.edges, { fromIO, toIO }] }));
+      // Ensure there's always one empty dynamic input available
+      get().ensureDynamicInput(toIO.nodeId);
+    },
     addNode: (node) =>
       set((s) => ({
         nodes: new Map(s.nodes).set(node.id, node),
@@ -210,7 +232,94 @@ export const createGraphStore = (): StoreApi<GraphState> =>
       };
       set({ scale: newScale, panOffset: newPanOffset });
     },
-    resetZoom: () => set({ scale: 1, panOffset: { x: 0, y: 0 } })
+    resetZoom: () => set({ scale: 1, panOffset: { x: 0, y: 0 } }),
+    ensureDynamicInput: (nodeId: string) => {
+      const node = get().nodes.get(nodeId);
+      if (!node || !node.hasDynamicInputs) return;
+
+      const edges = get().edges;
+      const connectedInputNames = new Set(
+        edges
+          .filter(e => e.toIO?.nodeId === nodeId)
+          .map(e => e.toIO!.nodeIOName)
+      );
+
+      const dynamicInputs = node.dynamicInputs || [];
+      const hasEmptyInput = dynamicInputs.some(input => !connectedInputNames.has(input.name));
+
+      if (!hasEmptyInput || dynamicInputs.length === 0) {
+        const newIndex = dynamicInputs.length;
+        const newInput: NodeIO = {
+          name: `element_${newIndex}`,
+          type: node.dynamicInputType || "any",
+        };
+
+        set(s => {
+          const updatedNode = {
+            ...node,
+            dynamicInputs: [...dynamicInputs, newInput],
+          };
+          return {
+            nodes: new Map(s.nodes).set(nodeId, updatedNode),
+          };
+        });
+      }
+    },
+    removeDisconnectedDynamicInputs: (nodeId: string) => {
+      const node = get().nodes.get(nodeId);
+      if (!node || !node.hasDynamicInputs) return;
+
+      const edges = get().edges;
+      const connectedInputNames = new Set(
+        edges
+          .filter(e => e.toIO?.nodeId === nodeId)
+          .map(e => e.toIO!.nodeIOName)
+      );
+
+      const dynamicInputs = node.dynamicInputs || [];
+      
+      // Keep only connected inputs + one empty input
+      const connectedInputs = dynamicInputs.filter(input => connectedInputNames.has(input.name));
+      const hasEmptyInput = dynamicInputs.some(input => !connectedInputNames.has(input.name));
+
+      let newDynamicInputs = connectedInputs;
+      if (!hasEmptyInput && connectedInputs.length > 0) {
+        // Add an empty input
+        const newIndex = connectedInputs.length;
+        newDynamicInputs = [
+          ...connectedInputs,
+          {
+            name: `element_${newIndex}`,
+            type: node.dynamicInputType || "any",
+          },
+        ];
+      } else if (hasEmptyInput) {
+        // Keep only one empty input at the end
+        const emptyInputs = dynamicInputs.filter(input => !connectedInputNames.has(input.name));
+        if (emptyInputs.length > 1) {
+          // Keep only the last empty input
+          const connectedPlusOneEmpty = [
+            ...connectedInputs,
+            emptyInputs[emptyInputs.length - 1],
+          ];
+          newDynamicInputs = connectedPlusOneEmpty;
+        } else {
+          newDynamicInputs = dynamicInputs;
+        }
+      }
+
+      if (newDynamicInputs.length !== dynamicInputs.length) {
+        set(s => {
+          const updatedNode = {
+            ...node,
+            dynamicInputs: newDynamicInputs,
+          };
+          return {
+            nodes: new Map(s.nodes).set(nodeId, updatedNode),
+          };
+        });
+      }
+    },
   })));
 
 // GraphStoreContext

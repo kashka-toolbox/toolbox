@@ -36,7 +36,8 @@ export const isEdgeDropValid: (fromIO: NodeIOIdentifier, toIO: NodeIOIdentifier,
     }
 
     const isFromIoOutput = fromNode.outputs.some(output => output.name === fromIO.nodeIOName);
-    const isToIoInput = toNode.inputs.some(input => input.name === toIO.nodeIOName);
+    const isToIoInput = toNode.inputs.some(input => input.name === toIO.nodeIOName) ||
+        (toNode.dynamicInputs?.some(input => input.name === toIO.nodeIOName) ?? false);
 
     if(isFromIoOutput !== isToIoInput) { // only input to output or output to input is valid
         return {

@@ -1,3 +1,4 @@
+import { isArrayType, getArrayInnerType } from "./TypeDefinitions";
 
 const areTypesCompatibleCache: Record<string, CompatibilityVariant> = {};
 
@@ -12,6 +13,13 @@ export type CompatibilityVariant = "compatible" | "incompatible" | "warning";
  * text.base64:text.text is incompatible
  * any:any is compatible
  *
+ * For array types (array.X):
+ * array.text.any:array.text.any is compatible
+ * array.text.any:array.any is compatible
+ * array.any:array.text.any is warning
+ * array.text.any:array.numeric is incompatible
+ * array.any:any is incompatible (array is not compatible with non-array)
+ *
  * those keys can have any depth smth.smth: smth.any is compatible, smth.any:smth.smth is warning
  *
  * @param sourceType The source type.
@@ -24,6 +32,12 @@ export function areTypesCompatible(sourceType: string, targetType: string): Comp
         return areTypesCompatibleCache[cacheKey];
     }
 
+    // Handle array types specially
+    if (isArrayType(sourceType) || isArrayType(targetType)) {
+        const result = areArrayTypesCompatible(sourceType, targetType);
+        areTypesCompatibleCache[cacheKey] = result;
+        return result;
+    }
 
     const sourceParts = sourceType.split(".");
     const targetParts = targetType.split(".");
@@ -66,4 +80,21 @@ export function areTypesCompatible(sourceType: string, targetType: string): Comp
 
     areTypesCompatibleCache[cacheKey] = variant;
     return variant;
+}
+
+function areArrayTypesCompatible(sourceType: string, targetType: string): CompatibilityVariant {
+    const sourceIsArray = isArrayType(sourceType);
+    const targetIsArray = isArrayType(targetType);
+
+    // Array can only connect to array
+    if (sourceIsArray !== targetIsArray) {
+        return "incompatible";
+    }
+
+    // Both are arrays - compare inner types
+    const sourceInner = getArrayInnerType(sourceType);
+    const targetInner = getArrayInnerType(targetType);
+
+    // Recursively check inner type compatibility
+    return areTypesCompatible(sourceInner, targetInner);
 }

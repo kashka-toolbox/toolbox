@@ -78,6 +78,8 @@ export async function executeGraph(
 
         // map the output of the prevoius nodes to the input of the current node, using the edges
         const parameters: Record<string, any> = {};
+        
+        // Process static inputs
         node.inputs.forEach(input => {
             const inputEdge = edges.find(edge => edge.toIO?.nodeId === node.id && edge.toIO.nodeIOName === input.name);
             if (inputEdge) {
@@ -87,6 +89,18 @@ export async function executeGraph(
                 }
             } else {
                 parameters[input.name] = previousStates[input.name] || null; // fallback to previous state
+            }
+        });
+
+        // Process dynamic inputs
+        const dynamicInputs = node.dynamicInputs || [];
+        dynamicInputs.forEach(input => {
+            const inputEdge = edges.find(edge => edge.toIO?.nodeId === node.id && edge.toIO.nodeIOName === input.name);
+            if (inputEdge) {
+                const inputNode = nodes.get(inputEdge.fromIO.nodeId);
+                if (inputNode) {
+                    parameters[input.name] = inputNode.state[inputEdge.fromIO.nodeIOName];
+                }
             }
         });
 

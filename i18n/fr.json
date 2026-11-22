@@ -168,6 +168,7 @@
         "any": "Nombre",
         "int": "Entier"
       },
+      "arrayOf": "Tableau de {type}",
       "text": {
         "any": "Texte",
         "base64": "Texte (Base64)",
@@ -180,6 +181,7 @@
       "strings": "Chaînes",
       "math": "Maths",
       "cryptography": "Cryptographie",
+      "arrays": "Tableaux",
       "extra": "Extra"
     },
     "nodes": {
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "UUID aléatoire"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Créer un tableau"
+          },
+          "getElementAtPosition": {
+            "name": "Récupérer l'élément à la position",
+            "inputs": {
+              "array": "Tableau",
+              "index": "Index"
+            }
           }
         }
       },

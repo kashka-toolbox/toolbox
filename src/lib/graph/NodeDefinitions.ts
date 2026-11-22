@@ -14,7 +14,9 @@ export type NODE_TYPE =
     | "concatenateStrings"
     | "waitAndForward"
     | "randomUUID"
-    | NODE_TYPE_MATH;
+    | NODE_TYPE_MATH
+    | "createArray"
+    | "getElementAtPosition";
 
 export const NODE_DEFINITIONS: {
     [key in NODE_TYPE]: NodeDefinition<any, any, any>;
@@ -83,7 +85,7 @@ export const NODE_DEFINITIONS: {
             type: "text.base64",
         }],
         execute: async (
-            parameters: { "operation.text.textToBase64.inputs.text": string },
+            parameters: Record<string, any>,
         ) => {
             const inputkey = "operation.text.textToBase64.inputs.text";
 
@@ -126,18 +128,12 @@ export const NODE_DEFINITIONS: {
             type: "text.any",
         }],
         execute: async (
-            parameters: {
-                "stringA": string;
-                "stringB": string;
-            },
+            parameters: Record<string, any>,
         ) => {
-            const inputA =
-                parameters["stringA"];
-            const inputB =
-                parameters["stringB"];
+            const inputA = parameters["stringA"];
+            const inputB = parameters["stringB"];
             return {
-                "concatenated":
-                    inputA + inputB,
+                "concatenated": inputA + inputB,
             };
         },
         nodeCategory: "strings",
@@ -183,5 +179,68 @@ export const NODE_DEFINITIONS: {
         nodeCategory: "cryptography",
         settings: {}
     }),
-    ...NODE_DEFINITIONS_MATH
+    ...NODE_DEFINITIONS_MATH,
+    createArray: createNodeDefinition<["__dynamic__"], ["array"], []>({
+        type: "operation",
+        name: "operation.array.createArray",
+        hasDynamicInputs: true,
+        dynamicInputType: "any",
+        inputs: [],
+        outputs: [{
+            name: "array",
+            type: "array.any",
+        }],
+        execute: async (parameters) => {
+            const params = parameters as Record<string, any>;
+            const values: any[] = [];
+            
+            for (const key of Object.keys(params)) {
+                const value = params[key];
+                if (value !== undefined && value !== null) {
+                    values.push(value);
+                }
+            }
+            
+            return { "array": values };
+        },
+        nodeCategory: "arrays",
+        settings: {}
+    }),
+    getElementAtPosition: createNodeDefinition<["array", "index"], ["element"], []>({
+        type: "operation",
+        name: "operation.array.getElementAtPosition",
+        inputs: [{
+            name: "array",
+            translationKey: "nodes.operation.array.getElementAtPosition.inputs.array",
+            type: "array.any",
+        }, {
+            name: "index",
+            translationKey: "nodes.operation.array.getElementAtPosition.inputs.index",
+            type: "numeric",
+        }],
+        outputs: [{
+            name: "element",
+            type: "any",
+        }],
+        execute: async (parameters) => {
+            const arr = parameters["array"];
+            const index = parameters["index"];
+            
+            if (!Array.isArray(arr)) {
+                throw new Error("Input is not an array");
+            }
+            
+            if (typeof index !== "number") {
+                throw new Error("Index must be a number");
+            }
+            
+            if (index < 0 || index >= arr.length) {
+                throw new Error(`Index ${index} out of bounds (array length: ${arr.length})`);
+            }
+            
+            return { "element": arr[index] };
+        },
+        nodeCategory: "arrays",
+        settings: {}
+    }),
 };  

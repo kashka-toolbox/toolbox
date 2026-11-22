@@ -1,33 +1,33 @@
 {
   "home": {
-    "title": "Nihai Araç Kutusu",
-    "description": "Ücretsiz ve herkese açık bir araç koleksiyonu",
+    "title": "En İyi Araç Kutusu",
+    "description": "Herkes için ücretsiz araç koleksiyonu",
     "clientSideComputing": {
-      "title": "İstemci Taraflı Hesaplama",
-      "description": "Sağladığın her girdi cihazında işlenir. Buluta hiçbir veri gönderilmez."
+      "title": "İstemci tarafında hesaplama",
+      "description": "Sağladığın her giriş cihazında işlenir. Hiçbir veri buluta gönderilmez."
     },
     "openSource": {
       "forever": "Sonsuza dek",
       "title": "Açık Kaynak",
-      "description": " Tüm kaynak kod GitHub'da mevcuttur. Bu proje ticari olmayan kullanım için ücretsizdir. Daha fazla bilgi için AGPL-3.0 lisansına bak.",
+      "description": " Tüm kaynak kod GitHub'da mevcut. Bu proje ticari olmayan kullanım için ücretsizdir. Daha fazla bilgi için AGPL-3.0 lisansına bak.",
       "GitHub": "GitHub",
       "license": "Lisans"
     }
   },
   "navigation": {
     "searchbar": {
-      "placeholder": "Burada bir araç ara...",
+      "placeholder": "Buradan bir araç ara...",
       "noResultsFound": "Sonuç bulunamadı."
     },
     "gettingStarted": {
-      "title": "Başlarken",
+      "title": "Başlangıç",
       "home": {
         "title": "Ana Sayfa",
         "description": ""
       },
       "source": {
         "title": "Kaynak kodu görüntüle",
-        "description": "GitHub'da bize yıldız ver!"
+        "description": "GitHub'da bizi yıldızla!"
       }
     },
     "debug": {
@@ -37,7 +37,7 @@
         "description": ""
       },
       "debug": {
-        "title": "Hata Ayıklamaya Genel Bakış",
+        "title": "Hata Ayıklama Genel Bakışı",
         "description": ""
       },
       "ui": {
@@ -52,11 +52,11 @@
     "legal": {
       "title": "Yasal",
       "privacy": {
-        "title": "Gizlilik Bildirimi",
+        "title": "Gizlilik Beyanı",
         "description": ""
       },
       "imprint": {
-        "title": "Künye",
+        "title": "Yasal Bilgiler",
         "description": ""
       }
     },
@@ -72,29 +72,29 @@
         "title": "Kodlama",
         "URL": {
           "title": "URL Kodlama",
-          "description": "Metni bir URL parametresi olarak kodla"
+          "description": "Metni URL parametresi olarak kodla"
         },
         "base64": {
-          "title": "Base64 Kodlama/Kod Çözme",
-          "description": "Metni Base64 olarak kodla veya kodunu çöz"
+          "title": "Base64 Kodlama/Çözme",
+          "description": "Metni Base64 olarak kodla veya çöz"
         },
         "UnicodeBinary": {
-          "title": "Unicode İkili Kodlama/Kod Çözme",
-          "description": "Metni Unicode İkili olarak kodla veya kodunu çöz"
+          "title": "Unicode İkili Kodlama/Çözme",
+          "description": "Metni Unicode İkili olarak kodla veya çöz"
         }
       },
       "color": {
         "title": "Renk",
         "hexToHSL": {
           "title": "Hex'ten HSL'ye",
-          "description": "Bir hex rengini HSL biçimine dönüştür"
+          "description": "Bir hex rengi HSL biçimine dönüştür"
         }
       },
       "pdf": {
         "title": "PDF",
         "split": {
           "title": "Böl",
-          "description": "Bir PDF'yi birden fazla dosyaya böl"
+          "description": "Bir PDF'i birden fazla dosyaya böl"
         }
       }
     }
@@ -102,50 +102,50 @@
   "tools": {
     "encoding": {
       "url": {
-        "a2b_result": "Kodlandı:",
-        "b2a_result": "Kodu çözüldü:",
+        "a2b_result": "Kodlanmış:",
+        "b2a_result": "Çözümlenmiş:",
         "a2b_title": "URL Kodlama",
-        "b2a_title": "URL Kod Çözme",
-        "whatis": "URL Kodlama nedir?",
-        "description": "URL Kodlama (Percent-Encoding olarak da bilinir), URL'lerde standart ASCII karakter setinin parçası olmayan karakterlerin kodlanması yöntemidir. Bu, boşluklar, oklar veya diğer dillerden gelen özel karakterler gibi özel karakterleri kapsar.",
+        "b2a_title": "URL Çözme",
+        "whatis": "URL Kodlama Nedir?",
+        "description": "URL Kodlama (aynı zamanda Yüzde Kodlama olarak da bilinir), standart ASCII karakter setinin parçası olmayan URL'deki karakterleri kodlama yöntemidir. Bu, boşluklar, oklar veya diğer dillerden gelen özel karakterler gibi özel karakterleri içerir.",
         "howItWorks": {
           "title": "Nasıl çalışır",
-          "description": "<li>Her özel karakter, ardından 2 haneli onaltılık bir sayı gelen bir \"%\" ile kodlanır.</li>\n<li>Örneğin boşluk karakteri \"%20\" olarak, küçüktür simgesi \"<\" ise \"%3C\" olarak kodlanır.</li>"
+          "description": "<li>Her özel karakter, bir \"%\" ve ardından 2 haneli onaltılık sayı ile kodlanır.</li>\n<li>Örneğin, boşluk karakteri \"%20\" olarak kodlanır ve küçükten büyük sembolü \"<\" \"%3C\" olarak kodlanır.</li>"
         },
         "lookup": {
           "title": "Arama Tablosu",
-          "description": "Belirli bir karakterin URL kodlamasını sorgula."
+          "description": "Belirli bir karakterin URL kodlamasını ara."
         }
       },
       "base64": {
-        "a2b_result": "Base64 olarak kodlandı:",
-        "b2a_result": "Metin olarak kodu çözüldü:",
+        "a2b_result": "Base64 olarak kodlanmış:",
+        "b2a_result": "Dize olarak çözümlenmiş:",
         "a2b_title": "Base64 Kodlama",
-        "b2a_title": "Base64 Kod Çözme"
+        "b2a_title": "Base64 Çözme"
       },
       "UnicodeBinary": {
-        "a2b_result": "Unicode olarak kodlandı:",
-        "b2a_result": "İkili olarak kodu çözüldü:",
-        "a2b_title": "İkiliden Unicode'a",
-        "b2a_title": "Unicode'dan İkiliye"
+        "a2b_result": "Unicode olarak kodlanmış:",
+        "b2a_result": "Binary olarak çözümlenmiş:",
+        "a2b_title": "Binary'den Unicode'a",
+        "b2a_title": "Unicode'tan Binary'ye"
       }
     },
     "color": {
       "hexToHsl": {
         "title": "Hex'ten HSL'ye",
-        "description": "Bir hex rengini HSL biçimine dönüştürür.",
+        "description": "Bir hex rengi HSL biçimine dönüştürür.",
         "options": {
-          "valuesOnly": "hsl(...) içine dahil et"
+          "valuesOnly": "hsl(...) içinde dahil et"
         }
       }
     },
     "pdf": {
       "split": {
-        "title": "PDF Böl",
+        "title": "PDF'i Böl",
         "description": "Bir PDF dosyasını birden fazla dosyaya böl.",
         "actions": {
-          "downloadAll": "Bölünmüş tüm sayfaları indir",
-          "dropFiles": "Dosyaları buraya sürükleyip bırak veya seçmek için tıkla"
+          "downloadAll": "Bölünen tüm sayfaları indir",
+          "dropFiles": "Dosyaları buraya sürükle & bırak veya seçmek için tıkla"
         }
       }
     }
@@ -155,19 +155,20 @@
   },
   "converterBidirectional": {
     "input": "Girdi:",
-    "swapSides": "Yönleri değiştir",
+    "swapSides": "Yanları değiştir",
     "clearInput": "Girdiyi temizle"
   },
   "graph": {
     "errorMessages": {
-      "divideByZero": "Sıfıra bölmeye izin verilmiyor."
+      "divideByZero": "Sıfıra bölme işlemine izin verilmez."
     },
     "types": {
-      "any": "herhangi biri",
+      "any": "herhangi",
       "numeric": {
         "any": "Sayı",
-        "int": "Tam Sayı"
+        "int": "Tamsayı"
       },
+      "arrayOf": "{type} türünde dizi",
       "text": {
         "any": "Metin",
         "base64": "Metin (Base64)",
@@ -177,9 +178,10 @@
     "categories": {
       "input": "Girdi",
       "output": "Çıktı",
-      "strings": "Dizeler",
+      "strings": "Dizgiler",
       "math": "Matematik",
       "cryptography": "Kriptografi",
+      "arrays": "Diziler",
       "extra": "Ekstra"
     },
     "nodes": {
@@ -251,21 +253,21 @@
             }
           },
           "ceil": {
-            "name": "Yukarı Yuvarlama",
+            "name": "Tavan",
             "inputs": {
               "number": "Sayı"
             },
             "outputs": {
-              "result": "Yukarı Yuvarlanmış"
+              "result": "Tavan"
             }
           },
           "floor": {
-            "name": "Aşağı Yuvarlama",
+            "name": "Taban",
             "inputs": {
               "number": "Sayı"
             },
             "outputs": {
-              "result": "Aşağı Yuvarlanmış"
+              "result": "Taban"
             }
           },
           "round": {
@@ -289,13 +291,13 @@
         },
         "text": {
           "textToBase64": {
-            "name": "Metinden Base64'e",
+            "name": "Metni Base64'e Dönüştür",
             "inputs": {
               "stringA": "Metin A"
             }
           },
           "concatenateStrings": {
-            "name": "Dizeleri Birleştir",
+            "name": "Metinleri Birleştir",
             "inputs": {
               "stringA": "Metin A",
               "stringB": "Metin B"
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "Rastgele UUID"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Dizi Oluştur"
+          },
+          "getElementAtPosition": {
+            "name": "Konumdaki Öğeyi Al",
+            "inputs": {
+              "array": "Dizi",
+              "index": "Dizin"
+            }
           }
         }
       },
@@ -317,14 +331,14 @@
     "addNodeDialog": {
       "title": "Düğüm Ekle",
       "searchbar": {
-        "placeholder": "Düğüm ara...",
+        "placeholder": "Düğümleri ara...",
         "noResultsFound": "Sonuç bulunamadı."
       },
       "category": {
         "title": "Kategori",
         "subItem": {
           "title": "Alt Öğe",
-          "description": "Bu, alt öğenin bir açıklamasıdır.",
+          "description": "Bu, alt öğenin açıklamasıdır.",
           "shortcut": "Ctrl+N"
         }
       }

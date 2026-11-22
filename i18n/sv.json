@@ -1,15 +1,15 @@
 {
   "home": {
     "title": "Den ultimata verktygslådan",
-    "description": "En samling verktyg – gratis och för alla",
+    "description": "En samling verktyg, gratis och för alla",
     "clientSideComputing": {
-      "title": "Klientbaserad beräkning",
+      "title": "Beräkning på klientsidan",
       "description": "All inmatning du anger bearbetas på din enhet. Ingen data skickas till molnet."
     },
     "openSource": {
       "forever": "För alltid",
       "title": "Öppen källkod",
-      "description": " All källkod finns tillgänglig på GitHub. Detta projekt är gratis för icke-kommersiellt bruk. Se licensen AGPL-3.0 för mer information.",
+      "description": " All källkoden finns tillgänglig på GitHub. Detta projekt är gratis för icke-kommersiell användning. Se AGPL-3.0-licensen för mer information.",
       "GitHub": "GitHub",
       "license": "Licens"
     }
@@ -26,7 +26,7 @@
         "description": ""
       },
       "source": {
-        "title": "Visa källkoden",
+        "title": "Visa källkod",
         "description": "Ge oss en stjärna på GitHub!"
       }
     },
@@ -41,7 +41,7 @@
         "description": ""
       },
       "ui": {
-        "title": "Gränssnitt",
+        "title": "UI",
         "description": ""
       },
       "translations": {
@@ -52,11 +52,11 @@
     "legal": {
       "title": "Juridiskt",
       "privacy": {
-        "title": "Sekretesspolicy",
+        "title": "Integritetspolicy",
         "description": ""
       },
       "imprint": {
-        "title": "Impressum",
+        "title": "Utgivare",
         "description": ""
       }
     },
@@ -64,7 +64,7 @@
       "text": {
         "title": "Text",
         "wordCounter": {
-          "title": "Ord Räknare",
+          "title": "Ordräknare",
           "description": "Räkna meningar, ord och tecken"
         }
       },
@@ -79,8 +79,8 @@
           "description": "Koda eller avkoda text som Base64"
         },
         "UnicodeBinary": {
-          "title": "Unicode-binär kodning/-avkodning",
-          "description": "Koda eller avkoda text som Unicode-binär"
+          "title": "Unicode binär kodning/-avkodning",
+          "description": "Koda eller avkoda text som Unicode binär"
         }
       },
       "color": {
@@ -93,7 +93,7 @@
       "pdf": {
         "title": "PDF",
         "split": {
-          "title": "Dela upp",
+          "title": "Dela",
           "description": "Dela upp en PDF i flera filer"
         }
       }
@@ -107,19 +107,19 @@
         "a2b_title": "URL-kodning",
         "b2a_title": "URL-avkodning",
         "whatis": "Vad är URL-kodning?",
-        "description": "URL-kodning (även känt som procentkodning) är en metod för att koda tecken i URL:er som inte ingår i standardteckenuppsättningen ASCII. Detta inkluderar specialtecken som mellanslag, pilar eller specialtecken från andra språk.",
+        "description": "URL-kodning (även kallad procentkodning) är ett sätt att koda tecken i URL:er som inte ingår i den standardiserade ASCII-teckenuppsättningen. Detta inkluderar specialtecken som mellanslag, pilar eller specialtecken från andra språk.",
         "howItWorks": {
-          "title": "Hur det fungerar",
-          "description": "<li>Varje specialtecken kodas med ett \"%\" följt av ett hexadecimalt tal med två siffror.</li>\n<li>Ett mellanslag kodas till exempel som \"%20\" och tecknet \"<\" kodas som \"%3C\".</li>"
+          "title": "Så fungerar det",
+          "description": "<li>Varje specialtecken kodas med en \"%\" följt av ett tvåsiffrigt hexadecimalt tal.</li>\n<li>Till exempel kodas ett mellanslag som \"%20\" och mindre-än-tecknet \"<\" kodas som \"%3C\".</li>"
         },
         "lookup": {
-          "title": "Uppslagstabell",
+          "title": "Slå upp i tabell",
           "description": "Slå upp URL-kodningen för ett specifikt tecken."
         }
       },
       "base64": {
         "a2b_result": "Kodad som Base64:",
-        "b2a_result": "Avkodad som text:",
+        "b2a_result": "Avkodad som en sträng:",
         "a2b_title": "Base64-kodning",
         "b2a_title": "Base64-avkodning"
       },
@@ -154,13 +154,13 @@
     "search": "Sök"
   },
   "converterBidirectional": {
-    "input": "Indata:",
-    "swapSides": "Växla sidor",
-    "clearInput": "Rensa inmatningen"
+    "input": "Inmatning:",
+    "swapSides": "Byt sidor",
+    "clearInput": "Rensa inmatning"
   },
   "graph": {
     "errorMessages": {
-      "divideByZero": "Division med noll är inte tillåten."
+      "divideByZero": "Division med noll är inte tillåtet."
     },
     "types": {
       "any": "valfri",
@@ -168,6 +168,7 @@
         "any": "Tal",
         "int": "Heltal"
       },
+      "arrayOf": "Array av {type}",
       "text": {
         "any": "Text",
         "base64": "Text (Base64)",
@@ -175,25 +176,26 @@
       }
     },
     "categories": {
-      "input": "Indata",
-      "output": "Utdata",
+      "input": "Inmatning",
+      "output": "Utmatning",
       "strings": "Strängar",
       "math": "Matematik",
       "cryptography": "Kryptografi",
+      "arrays": "Arrayer",
       "extra": "Extra"
     },
     "nodes": {
       "input": {
         "any": {
-          "name": "Indata"
+          "name": "Inmatning"
         },
         "numeric": {
-          "name": "Numerisk indata"
+          "name": "Numerisk inmatning"
         }
       },
       "output": {
         "any": {
-          "name": "Utdata"
+          "name": "Utmatning"
         }
       },
       "operation": {
@@ -242,16 +244,16 @@
             }
           },
           "abs": {
-            "name": "Absolutvärde",
+            "name": "Absolutbelopp",
             "inputs": {
               "number": "Tal"
             },
             "outputs": {
-              "result": "Absolut"
+              "result": "Absolutbelopp"
             }
           },
           "ceil": {
-            "name": "Avrunda uppåt",
+            "name": "Avrundning uppåt",
             "inputs": {
               "number": "Tal"
             },
@@ -260,7 +262,7 @@
             }
           },
           "floor": {
-            "name": "Avrunda nedåt",
+            "name": "Avrundning nedåt",
             "inputs": {
               "number": "Tal"
             },
@@ -269,7 +271,7 @@
             }
           },
           "round": {
-            "name": "Avrunda",
+            "name": "Avrundning",
             "inputs": {
               "number": "Tal"
             },
@@ -304,33 +306,45 @@
         },
         "cryptography": {
           "randomUUID": {
-            "name": "Slumpmässigt UUID"
+            "name": "Slumpmässig UUID"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Skapa array"
+          },
+          "getElementAtPosition": {
+            "name": "Hämta element på position",
+            "inputs": {
+              "array": "Array",
+              "index": "Index"
+            }
           }
         }
       },
       "settings": {
         "UI_LABEL_TEXT": {
-          "name": "UI-etikettnamn"
+          "name": "UI-etikettens namn"
         }
       }
     },
     "addNodeDialog": {
       "title": "Lägg till nod",
       "searchbar": {
-        "placeholder": "Sök efter noder...",
+        "placeholder": "Sök noder...",
         "noResultsFound": "Inga resultat hittades."
       },
       "category": {
         "title": "Kategori",
         "subItem": {
-          "title": "Underobjekt",
-          "description": "Detta är en beskrivning av underobjektet.",
+          "title": "Underpunkt",
+          "description": "Detta är en beskrivning av underpunkten.",
           "shortcut": "Ctrl+N"
         }
       }
     },
     "editNodeSettingsDialog": {
-      "title": "Nodegenskaper"
+      "title": "Nodens egenskaper"
     },
     "speculativelabel": {
       "result": "Resultat"

@@ -79,7 +79,7 @@ export function AddNodeDialog({ graphRef }: { graphRef: React.RefObject<HTMLDivE
 
                                 return (
                                     <CommandGroup key={key} heading={t_graph(category.translationKey)}>
-                                        {nodesInCategory.map(([node_key, def]: [string, NodeDefinition<any, any>]) => (
+                                        {nodesInCategory.map(([node_key, def]: [string, NodeDefinition<any, any, any>]) => (
                                             <CommandItem key={node_key} onSelect={() => {
                                                 addNodeFromDefinition(node_key as NODE_TYPE, nodePosition.current!);
                                                 setAddMenuVisible(false);

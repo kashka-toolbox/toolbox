@@ -168,6 +168,7 @@
         "any": "Luku",
         "int": "Kokonaisluku"
       },
+      "arrayOf": "Taulukko, jossa {type}",
       "text": {
         "any": "Teksti",
         "base64": "Teksti (Base64)",
@@ -180,6 +181,7 @@
       "strings": "Merkkijonot",
       "math": "Matematiikka",
       "cryptography": "Salaus",
+      "arrays": "Taulukot",
       "extra": "Muut"
     },
     "nodes": {
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "Satunnainen UUID"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Luo taulukko"
+          },
+          "getElementAtPosition": {
+            "name": "Hae alkio indeksistä",
+            "inputs": {
+              "array": "Taulukko",
+              "index": "Indeksi"
+            }
           }
         }
       },

@@ -1,22 +1,22 @@
 {
   "home": {
     "title": "De ultieme toolbox",
-    "description": "Een collectie gratis tools voor iedereen",
+    "description": "Een verzameling tools, gratis en voor iedereen",
     "clientSideComputing": {
-      "title": "Berekeningen aan de clientzijde",
-      "description": "Alle invoer die je geeft wordt op je apparaat verwerkt. Er worden geen gegevens naar de cloud gestuurd."
+      "title": "Berekeningen op je apparaat",
+      "description": "Elke invoer die je geeft wordt op je apparaat verwerkt. Er wordt geen data naar de cloud gestuurd."
     },
     "openSource": {
       "forever": "Voor altijd",
-      "title": "Open source",
-      "description": "Alle broncode is beschikbaar op GitHub. Dit project is gratis voor niet-commercieel gebruik. Bekijk de AGPL-3.0-licentie voor meer informatie.",
+      "title": "Open Source",
+      "description": " Alle broncode is beschikbaar op GitHub. Dit project is gratis voor niet-commercieel gebruik. Zie de AGPL-3.0-licentie voor meer informatie.",
       "GitHub": "GitHub",
       "license": "Licentie"
     }
   },
   "navigation": {
     "searchbar": {
-      "placeholder": "Zoek hier naar een tool...",
+      "placeholder": "Zoek hier een tool...",
       "noResultsFound": "Geen resultaten gevonden."
     },
     "gettingStarted": {
@@ -26,7 +26,7 @@
         "description": ""
       },
       "source": {
-        "title": "Bekijk de broncode",
+        "title": "Bekijk broncode",
         "description": "Geef ons een ster op GitHub!"
       }
     },
@@ -56,7 +56,7 @@
         "description": ""
       },
       "imprint": {
-        "title": "Colofon",
+        "title": "Impressum",
         "description": ""
       }
     },
@@ -64,7 +64,7 @@
       "text": {
         "title": "Tekst",
         "wordCounter": {
-          "title": "Woordenteller",
+          "title": "Woordteller",
           "description": "Tel zinnen, woorden en tekens"
         }
       },
@@ -72,15 +72,15 @@
         "title": "Codering",
         "URL": {
           "title": "URL-codering",
-          "description": "Codeer tekst als een URL-parameter"
+          "description": "Codeer tekst als URL-parameter"
         },
         "base64": {
-          "title": "Base64 coderen/decoderen",
+          "title": "Base64-codering/-decodering",
           "description": "Codeer of decodeer tekst als Base64"
         },
         "UnicodeBinary": {
-          "title": "Unicode-binair coderen/decoderen",
-          "description": "Codeer of decodeer tekst als Unicode-binair"
+          "title": "Unicode Binary-codering/-decodering",
+          "description": "Codeer of decodeer tekst als Unicode Binary"
         }
       },
       "color": {
@@ -110,7 +110,7 @@
         "description": "URL-codering (ook bekend als percent-codering) is een methode om tekens in URL's te coderen die niet deel uitmaken van de standaard ASCII-tekenset. Dit omvat speciale tekens zoals spaties, pijlen of speciale tekens uit andere talen.",
         "howItWorks": {
           "title": "Hoe het werkt",
-          "description": "<li>Elk speciaal teken wordt gecodeerd door een \"%\" gevolgd door een hexadecimaal getal van 2 cijfers.</li>\n<li>Een spatie wordt bijvoorbeeld gecodeerd als \"%20\" en het kleiner-dan-teken \"<\" wordt gecodeerd als \"%3C\".</li>"
+          "description": "<li>Elk speciaal teken wordt gecodeerd door een \"%\" gevolgd door een 2-cijferig hexadecimaal getal.</li>\n<li>Bijvoorbeeld, een spatie wordt gecodeerd als \"%20\" en het kleiner-dan-teken \"<\" wordt gecodeerd als \"%3C\".</li>"
         },
         "lookup": {
           "title": "Opzoektabel",
@@ -119,7 +119,7 @@
       },
       "base64": {
         "a2b_result": "Gecodeerd als Base64:",
-        "b2a_result": "Gedecodeerd als tekst:",
+        "b2a_result": "Gedecodeerd als een tekenreeks:",
         "a2b_title": "Base64-codering",
         "b2a_title": "Base64-decodering"
       },
@@ -135,7 +135,7 @@
         "title": "Hex naar HSL",
         "description": "Converteert een hex-kleur naar HSL-formaat.",
         "options": {
-          "valuesOnly": "Opnemen in hsl(...)"
+          "valuesOnly": "In hsl(...) opnemen"
         }
       }
     },
@@ -145,7 +145,7 @@
         "description": "Splits een PDF-bestand in meerdere bestanden.",
         "actions": {
           "downloadAll": "Download alle gesplitste pagina's",
-          "dropFiles": "Sleep bestanden hierheen, of klik om te selecteren"
+          "dropFiles": "Sleep & drop bestanden hierheen, of klik om te selecteren"
         }
       }
     }
@@ -155,7 +155,7 @@
   },
   "converterBidirectional": {
     "input": "Invoer:",
-    "swapSides": "Wissel de kanten om",
+    "swapSides": "Kanten wisselen",
     "clearInput": "Invoer wissen"
   },
   "graph": {
@@ -168,6 +168,7 @@
         "any": "Getal",
         "int": "Geheel getal"
       },
+      "arrayOf": "Array van {type}",
       "text": {
         "any": "Tekst",
         "base64": "Tekst (Base64)",
@@ -177,9 +178,10 @@
     "categories": {
       "input": "Invoer",
       "output": "Uitvoer",
-      "strings": "Teksten",
+      "strings": "Strings",
       "math": "Wiskunde",
       "cryptography": "Cryptografie",
+      "arrays": "Arrays",
       "extra": "Extra"
     },
     "nodes": {
@@ -198,7 +200,7 @@
       },
       "operation": {
         "waitAndForward": {
-          "name": "Wachten en doorsturen"
+          "name": "Wacht en doorsturen"
         },
         "math": {
           "addition": {
@@ -251,21 +253,21 @@
             }
           },
           "ceil": {
-            "name": "Afronden naar boven",
+            "name": "Omhoog afronden",
             "inputs": {
               "number": "Getal"
             },
             "outputs": {
-              "result": "Naar boven afgerond"
+              "result": "Afgerond omhoog"
             }
           },
           "floor": {
-            "name": "Afronden naar beneden",
+            "name": "Omlaag afronden",
             "inputs": {
               "number": "Getal"
             },
             "outputs": {
-              "result": "Naar beneden afgerond"
+              "result": "Afgerond omlaag"
             }
           },
           "round": {
@@ -278,12 +280,12 @@
             }
           },
           "sign": {
-            "name": "Teken",
+            "name": "Voorteken",
             "inputs": {
               "number": "Getal"
             },
             "outputs": {
-              "result": "Teken"
+              "result": "Voorteken"
             }
           }
         },
@@ -306,18 +308,30 @@
           "randomUUID": {
             "name": "Willekeurige UUID"
           }
+        },
+        "array": {
+          "createArray": {
+            "name": "Array aanmaken"
+          },
+          "getElementAtPosition": {
+            "name": "Element op positie ophalen",
+            "inputs": {
+              "array": "Array",
+              "index": "Index"
+            }
+          }
         }
       },
       "settings": {
         "UI_LABEL_TEXT": {
-          "name": "UI-labelnaam"
+          "name": "Ui Label Naam"
         }
       }
     },
     "addNodeDialog": {
       "title": "Node toevoegen",
       "searchbar": {
-        "placeholder": "Zoek nodes...",
+        "placeholder": "Nodes zoeken...",
         "noResultsFound": "Geen resultaten gevonden."
       },
       "category": {

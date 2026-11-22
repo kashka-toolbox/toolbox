@@ -168,6 +168,7 @@
         "any": "Número",
         "int": "Entero"
       },
+      "arrayOf": "Arreglo de {type}",
       "text": {
         "any": "Texto",
         "base64": "Texto (Base64)",
@@ -180,6 +181,7 @@
       "strings": "Cadenas de texto",
       "math": "Matemáticas",
       "cryptography": "Criptografía",
+      "arrays": "Arreglos",
       "extra": "Extra"
     },
     "nodes": {
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "UUID aleatorio"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Crear Arreglo"
+          },
+          "getElementAtPosition": {
+            "name": "Obtener Elemento en Posición",
+            "inputs": {
+              "array": "Arreglo",
+              "index": "Índice"
+            }
           }
         }
       },

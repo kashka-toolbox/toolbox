@@ -9,7 +9,13 @@
 // Optional:
 //   TRANSLATE_API_BATCH  keys per request (default 40)
 //
-// Exit codes: 0 = no markers remain, 2 = some markers remain, 1 = hard error.
+// The run stops at the first failed batch and exits 255 (which also aborts
+// parallel "translate.sh all" runs via xargs). Partial translations are
+// written, so re-running resumes where it stopped. Opt out of stop-on-fail
+// with --keep-going or TRANSLATE_KEEP_GOING=1 (then exit 2 if markers remain).
+//
+// Exit codes: 0 = all translated, 2 = some markers remain (keep-going only),
+//             1 = hard error, 255 = stopped on first failed batch.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -30,6 +36,8 @@ const BASE = process.env.TRANSLATE_API_BASE?.replace(/\/$/, "");
 const KEY = process.env.TRANSLATE_API_KEY;
 const MODEL = process.env.TRANSLATE_API_MODEL;
 const BATCH = Number(process.env.TRANSLATE_API_BATCH ?? 40);
+const KEEP_GOING = process.argv.includes("--keep-going")
+  || /^(1|true|yes)$/i.test(process.env.TRANSLATE_KEEP_GOING ?? "");
 
 for (const [name, value] of [["TRANSLATE_API_BASE", BASE], ["TRANSLATE_API_KEY", KEY], ["TRANSLATE_API_MODEL", MODEL]]) {
   if (!value) {
@@ -84,6 +92,19 @@ function extractJson(s) {
   return JSON.parse(t.slice(start, end + 1));
 }
 
+// Node's fetch wraps low-level failures (DNS, connect, TLS, timeouts) in a
+// generic "fetch failed" error and puts the actual reason in `e.cause`.
+// Walk the whole cause chain so the log shows why the request failed.
+function describeError(e) {
+  const parts = [];
+  let err = e;
+  while (err) {
+    parts.push(err.code ? `${err.code}: ${err.message}` : (err.message ?? String(err)));
+    err = err.cause;
+  }
+  return parts.join(" | ");
+}
+
 async function translateBatch(batch, attempt) {
   const input = Object.fromEntries(batch.map((k) => [k.path, k.text]));
   const system = [
@@ -105,8 +126,9 @@ async function translateBatch(batch, attempt) {
       { role: "user", content: user },
     ],
   };
+  const url = `${BASE}/chat/completions`;
   const makeRequest = (withJsonFormat) =>
-    fetch(`${BASE}/chat/completions`, {
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -116,10 +138,18 @@ async function translateBatch(batch, attempt) {
     });
 
   const t0 = Date.now();
-  let res = await makeRequest(true);
-  if (!res.ok) res = await makeRequest(false);
+  let res;
+  try {
+    res = await makeRequest(true);
+    if (!res.ok) res = await makeRequest(false);
+  } catch (e) {
+    throw new Error(`${url} unreachable: ${describeError(e)}`);
+  }
   const elapsedMs = Date.now() - t0;
-  if (!res.ok) throw new Error(`API ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  if (!res.ok) {
+    const detail = (await res.text()).slice(0, 200);
+    throw new Error(`API ${res.status} from ${url}: ${detail}`);
+  }
 
   const data = await res.json();
   const content = data?.choices?.[0]?.message?.content;
@@ -149,7 +179,7 @@ for (let i = 0; i < pending.length; i += BATCH) batches.push(pending.slice(i, i 
 const translations = {}; // path -> translated string
 let failed = 0;
 
-for (const batch of batches) {
+for (const [index, batch] of batches.entries()) {
   let done = false;
   for (let attempt = 0; attempt < 3 && !done; attempt++) {
     try {
@@ -163,10 +193,21 @@ for (const batch of batches) {
       if (missing.length === 0) done = true;
       else batch.splice(0, batch.length, ...missing); // retry only the missing ones
     } catch (e) {
-      console.error(`[${lang}] batch attempt ${attempt + 1} failed: ${e.message}`);
+      console.error(`[${lang}] batch ${index + 1} attempt ${attempt + 1} failed: ${describeError(e)}`);
     }
   }
-  failed += batch.filter(({ path: p }) => typeof translations[p] !== "string").length;
+
+  const missing = batch.filter(({ path: p }) => typeof translations[p] !== "string");
+  if (missing.length > 0 && !KEEP_GOING) {
+    persistPartial();
+    console.error(
+      `[${lang}] stopped after batch ${index + 1}: ${missing.length} key(s) still untranslated, ` +
+      `e.g. "${missing[0].path}". Partial results were written; re-run to resume. ` +
+      `Use --keep-going or TRANSLATE_KEEP_GOING=1 to continue past failures instead.`
+    );
+    process.exit(255);
+  }
+  failed += missing.length;
 }
 
 // --- merge -----------------------------------------------------------------
@@ -180,13 +221,16 @@ function assign(node, pathParts, value) {
   assign(node[head], rest, value);
 }
 
-for (const { path: p } of pending) {
-  if (typeof translations[p] === "string") {
-    assign(target, p.split("."), translations[p]);
+function persistPartial() {
+  for (const { path: p } of pending) {
+    if (typeof translations[p] === "string") {
+      assign(target, p.split("."), translations[p]);
+    }
   }
+  writeFileSync(targetPath, `${JSON.stringify(target, null, 2)}\n`);
 }
 
-writeFileSync(targetPath, `${JSON.stringify(target, null, 2)}\n`);
+persistPartial();
 
 const remaining = pending.filter(({ path: p }) => typeof translations[p] !== "string").length;
 console.log(`[${lang}] translated ${pending.length - remaining}/${pending.length} key(s)${failed ? `, ${failed} failed` : ""}`);

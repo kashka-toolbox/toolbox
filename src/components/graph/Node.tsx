@@ -1,11 +1,12 @@
 "use client";
 
+import { NodeIO as NodeIOType } from "@/lib/graph/NodeDefinition";
 import { Position } from "@/lib/graph/Position.type";
 import { cn } from "@/lib/utils";
 import "@/styles/node.css";
 import { Separator } from "@radix-ui/react-separator";
 import { useTranslations } from "next-intl";
-import { MutableRefObject, useEffect, useState } from "react";
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { useGraphStore, useNodeState } from "./GraphContextProvider";
 import { NodeIO } from "./NodeIO";
@@ -34,6 +35,7 @@ export function Node({
     const removeNode = useGraphStore((store) => store.removeNodeAndConnectedEdges);
     const scale = useGraphStore((store) => store.scale);
     const panOffset = useGraphStore((store) => store.panOffset);
+    const ensureDynamicInput = useGraphStore((store) => store.ensureDynamicInput);
 
     const [isBeingDragged, setBeingDragged] = useState<boolean>(false);
 
@@ -45,7 +47,24 @@ export function Node({
     const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
     const [isNodeSettingsInContextMenu, setNodeSettingsInContextMenu] = useState(true);
 
-    const inputs = nodeState.inputs.map((input: any, index: number) => (
+    const initializedRef = useRef(false);
+
+    // Initialize dynamic inputs for nodes that support them (only once)
+    useEffect(() => {
+        if (nodeState?.hasDynamicInputs && !initializedRef.current) {
+            initializedRef.current = true;
+            ensureDynamicInput(nodeState.id);
+        }
+    }, [nodeState?.hasDynamicInputs, nodeState?.id, ensureDynamicInput]);
+
+    // Combine static and dynamic inputs
+    const allInputs = useMemo(() => {
+        const staticInputs = nodeState.inputs || [];
+        const dynamicInputs = nodeState.dynamicInputs || [];
+        return [...staticInputs, ...dynamicInputs];
+    }, [nodeState.inputs, nodeState.dynamicInputs]);
+
+    const inputs = allInputs.map((input: NodeIOType) => (
         <NodeIOLabel
             key={input.name}
             type="input"

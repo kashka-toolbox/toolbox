@@ -168,6 +168,7 @@
         "any": "Numero",
         "int": "Intero"
       },
+      "arrayOf": "Array di {type}",
       "text": {
         "any": "Testo",
         "base64": "Testo (Base64)",
@@ -180,6 +181,7 @@
       "strings": "Stringhe",
       "math": "Matematica",
       "cryptography": "Crittografia",
+      "arrays": "Array",
       "extra": "Extra"
     },
     "nodes": {
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "UUID casuale"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Crea array"
+          },
+          "getElementAtPosition": {
+            "name": "Ottieni elemento in posizione",
+            "inputs": {
+              "array": "Array",
+              "index": "Indice"
+            }
           }
         }
       },

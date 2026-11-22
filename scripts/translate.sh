@@ -7,6 +7,10 @@ set -euo pipefail
 #
 # Translation runs through a direct OpenAI-compatible API call
 # (scripts/translate-api.mjs, configured via the TRANSLATE_API_* variables).
+#
+# The run stops at the first failed batch/language. Opt out of stop-on-fail
+# with TRANSLATE_KEEP_GOING=1 (or pass --keep-going directly to
+# scripts/translate-api.mjs); failed languages are then skipped and reported.
 
 MARKER="FROM en.json REPLACE: "
 REGISTRY="src/i18n/languages.json"
@@ -21,11 +25,15 @@ translate_one() {
 
   # 1. Copy missing keys from the English source.
   #    sync-i18n.mjs writes i18n/<lang>.json and prints the added key paths to stdout.
-  local added
-  added="$(node scripts/sync-i18n.mjs "$target" 2>/dev/null)" || {
-    echo "error: sync-i18n.mjs failed for ${target}" >&2
+  local added err_file
+  err_file="$(mktemp)"
+  if ! added="$(node scripts/sync-i18n.mjs "$target" 2>"$err_file")"; then
+    echo "error: sync-i18n.mjs failed for ${target}:" >&2
+    cat "$err_file" >&2
+    rm -f "$err_file"
     return 1
-  }
+  fi
+  rm -f "$err_file"
 
   # Trigger on any marker present (covers both newly added keys and leftovers from an interrupted run).
   local pending
@@ -44,14 +52,18 @@ translate_one() {
 
   # 2. Translate the placeholder values via the OpenAI-compatible API,
   #    including token/TPS stats. Teed to a per-language log file for review.
+  #    Propagate the exit code: 255 stops parallel "all" runs (xargs aborts
+  #    on 255), other non-zero codes fail only this language.
   mkdir -p "$LOG_DIR"
-  local log_file
+  local log_file rc
   log_file="$LOG_DIR/${target}-$(date +%Y%m%d-%H%M%S).log"
   echo "[$target] Logging to ${log_file}"
 
-  if ! node scripts/translate-api.mjs "$target" 2>&1 | tee -a "$log_file"; then
-    echo "error: API translation failed for ${target}. See ${log_file}" >&2
-    return 1
+  rc=0
+  node scripts/translate-api.mjs "$target" 2>&1 | tee -a "$log_file" || rc=$?
+  if [ "$rc" -ne 0 ]; then
+    echo "error: API translation failed for ${target} (exit ${rc}). See ${log_file}" >&2
+    return "$rc"
   fi
 
   # 3. Verify no marker remains and the file is valid JSON before the user commits.
@@ -76,9 +88,10 @@ if [ "$lang" = "all" ]; then
     for (const l of r) if (l.enabled && l.code !== "en") console.log(l.code);
   ' "$REGISTRY")"
   echo "Translating all enabled languages (up to ${parallel} in parallel; override with TRANSLATE_JOBS)."
-  echo "Per-language logs: ${LOG_DIR}/"
+  echo "Stops on the first failed language. Per-language logs: ${LOG_DIR}/"
   if ! printf '%s\n' "$langs" | xargs -P "$parallel" -I{} scripts/translate.sh {}; then
-    echo "error: one or more languages failed or are incomplete. Check ${LOG_DIR}/ for details." >&2
+    echo "error: one or more languages failed or are incomplete (remaining languages may not have started). Check ${LOG_DIR}/ for details." >&2
+    echo "       Set TRANSLATE_KEEP_GOING=1 to continue past failures instead." >&2
     exit 1
   fi
   echo "All enabled languages are in sync."

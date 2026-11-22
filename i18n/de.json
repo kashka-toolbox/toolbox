@@ -168,6 +168,7 @@
         "any": "Zahl",
         "int": "Ganzzahl"
       },
+      "arrayOf": "Array von {type}",
       "text": {
         "any": "Text",
         "base64": "Text (Base64)",
@@ -180,6 +181,7 @@
       "strings": "Strings",
       "math": "Mathematik",
       "cryptography": "Kryptographie",
+      "arrays": "Arrays",
       "extra": "Extras"
     },
     "nodes": {
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "Zufällige UUID"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Array erstellen"
+          },
+          "getElementAtPosition": {
+            "name": "Element an Position",
+            "inputs": {
+              "array": "Array",
+              "index": "Index"
+            }
           }
         }
       },

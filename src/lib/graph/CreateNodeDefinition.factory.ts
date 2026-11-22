@@ -19,8 +19,10 @@ export function createNodeDefinition<
     config: {
         type: string;
         name: string;
+        hasDynamicInputs?: boolean;
+        dynamicInputType?: TYPE_DEFINITION_KEY;
         inputs: { name: InputKeys[number]; translationKey?: string; type: string }[];
-        outputs: { name: OutputKeys[number]; translationKey?: string; type: TYPE_DEFINITION_KEY }[];
+        outputs: { name: OutputKeys[number]; translationKey?: string; type: TYPE_DEFINITION_KEY | string }[];
         execute: (parameters: { [K in InputKeys[number]]: any }, self: NodeState<InputKeys, OutputKeys>) => Promise<{ [K in OutputKeys[number]]: any }>;
         nodeCategory: NodeCategory;
         settings: { [key in SettingKeys[number]]: NodeSetting };
@@ -28,4 +30,3 @@ export function createNodeDefinition<
 ): NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }, { [K in SettingKeys[number]]: any }> {
     return { ...config, state: {} } as NodeDefinition<{ [K in InputKeys[number]]: any }, { [K in OutputKeys[number]]: any }, { [K in SettingKeys[number]]: any }>;
 }
-

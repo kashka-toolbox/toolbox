@@ -168,6 +168,7 @@
         "any": "Szám",
         "int": "Egész szám"
       },
+      "arrayOf": "{type} tömb",
       "text": {
         "any": "Szöveg",
         "base64": "Szöveg (Base64)",
@@ -180,6 +181,7 @@
       "strings": "Szövegek",
       "math": "Matematika",
       "cryptography": "Kriptográfia",
+      "arrays": "Tömbök",
       "extra": "Extrák"
     },
     "nodes": {
@@ -305,6 +307,18 @@
         "cryptography": {
           "randomUUID": {
             "name": "Véletlenszerű UUID"
+          }
+        },
+        "array": {
+          "createArray": {
+            "name": "Tömb létrehozása"
+          },
+          "getElementAtPosition": {
+            "name": "Elem lekérése pozíció alapján",
+            "inputs": {
+              "array": "Tömb",
+              "index": "Index"
+            }
           }
         }
       },

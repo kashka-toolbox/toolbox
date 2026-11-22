@@ -1,22 +1,22 @@
 {
   "home": {
     "title": "Den ultimate verktøykassen",
-    "description": "En samling verktøy – gratis og for alle",
+    "description": "En samling gratis verktøy for alle",
     "clientSideComputing": {
-      "title": "Klientbasert databehandling",
-      "description": "Alle inndata du oppgir behandles på enheten din. Ingen data sendes til skyen."
+      "title": "Klientside-beregning",
+      "description": "All inndata du oppgir behandles på enheten din. Ingen data sendes til skyen."
     },
     "openSource": {
       "forever": "For alltid",
       "title": "Åpen kildekode",
-      "description": "All kildekoden er tilgjengelig på GitHub. Dette prosjektet er gratis for ikke-kommersiell bruk. Se AGPL-3.0-lisensen for mer informasjon.",
+      "description": " All kildekoden er tilgjengelig på GitHub. Dette prosjektet er gratis for ikke-kommersiell bruk. Se AGPL-3.0-lisensen for mer informasjon.",
       "GitHub": "GitHub",
       "license": "Lisens"
     }
   },
   "navigation": {
     "searchbar": {
-      "placeholder": "Søk etter et verktøy her ...",
+      "placeholder": "Søk etter et verktøy her...",
       "noResultsFound": "Ingen resultater funnet."
     },
     "gettingStarted": {
@@ -41,7 +41,7 @@
         "description": ""
       },
       "ui": {
-        "title": "Brukergrensesnitt",
+        "title": "UI",
         "description": ""
       },
       "translations": {
@@ -52,11 +52,11 @@
     "legal": {
       "title": "Juridisk",
       "privacy": {
-        "title": "Personvernerklæring",
+        "title": "Personvernserklæring",
         "description": ""
       },
       "imprint": {
-        "title": "Impressum",
+        "title": "Imprint",
         "description": ""
       }
     },
@@ -64,7 +64,7 @@
       "text": {
         "title": "Tekst",
         "wordCounter": {
-          "title": "Ordteller",
+          "title": "Ordeteller",
           "description": "Tell setninger, ord og tegn"
         }
       },
@@ -75,12 +75,12 @@
           "description": "Kod tekst som en URL-parameter"
         },
         "base64": {
-          "title": "Base64-koding/-dekoding",
+          "title": "Base64-kod-/dekoding",
           "description": "Kod eller dekod tekst som Base64"
         },
         "UnicodeBinary": {
-          "title": "Unicode-binærkoding/-dekoding",
-          "description": "Kod eller dekod tekst som Unicode-binærtall"
+          "title": "Unicode binær kod-/dekoding",
+          "description": "Kod eller dekod tekst som Unicode binær"
         }
       },
       "color": {
@@ -93,8 +93,8 @@
       "pdf": {
         "title": "PDF",
         "split": {
-          "title": "Del opp",
-          "description": "Del opp en PDF i flere filer"
+          "title": "Splitt",
+          "description": "Splitt en PDF i flere filer"
         }
       }
     }
@@ -110,24 +110,24 @@
         "description": "URL-koding (også kjent som prosentkoding) er en metode for å kode tegn i URL-er som ikke er en del av standard ASCII-tegnsettet. Dette inkluderer spesialtegn som mellomrom, piler eller spesialtegn fra andre språk.",
         "howItWorks": {
           "title": "Slik fungerer det",
-          "description": "<li>Hvert spesialtegn kodes med et «%» etterfulgt av et heksadesimalt tall med to siffer.</li>\n<li>Mellomromstegnet kodes for eksempel som «%20», og mindre enn-tegnet «<» kodes som «%3C».</li>"
+          "description": "<li>Hvert spesialtegn kodes med et \"%\" etterfulgt av et 2-sifret hexadesimalt tall.</li>\n<li>For eksempel kodes et mellomrom som \"%20\", og mindre enn-tegnet \"<\" kodes som \"%3C\".</li>"
         },
         "lookup": {
-          "title": "Oppslagstabell",
+          "title": "Oppslagsbord",
           "description": "Slå opp URL-kodingen for et bestemt tegn."
         }
       },
       "base64": {
         "a2b_result": "Kodet som Base64:",
-        "b2a_result": "Dekodet som en tekststreng:",
+        "b2a_result": "Dekodet som en streng:",
         "a2b_title": "Base64-koding",
         "b2a_title": "Base64-dekoding"
       },
       "UnicodeBinary": {
         "a2b_result": "Kodet som Unicode:",
-        "b2a_result": "Dekodet som binærtall:",
-        "a2b_title": "Binærtall til Unicode",
-        "b2a_title": "Unicode til binærtall"
+        "b2a_result": "Dekodet som binær:",
+        "a2b_title": "Binær til Unicode",
+        "b2a_title": "Unicode til binær"
       }
     },
     "color": {
@@ -135,16 +135,16 @@
         "title": "Hex til HSL",
         "description": "Konverterer en hex-farge til HSL-format.",
         "options": {
-          "valuesOnly": "Ta med i hsl(...)"
+          "valuesOnly": "Inkluder i hsl(...)"
         }
       }
     },
     "pdf": {
       "split": {
-        "title": "Del opp PDF",
-        "description": "Del en PDF-fil opp i flere filer.",
+        "title": "Splitt PDF",
+        "description": "Splitt en PDF-fil i flere filer.",
         "actions": {
-          "downloadAll": "Last ned alle oppdelte sider",
+          "downloadAll": "Last ned alle splittede sider",
           "dropFiles": "Dra og slipp filer her, eller klikk for å velge"
         }
       }
@@ -163,11 +163,12 @@
       "divideByZero": "Divisjon med null er ikke tillatt."
     },
     "types": {
-      "any": "vilkårlig",
+      "any": "valgfri",
       "numeric": {
         "any": "Tall",
         "int": "Heltall"
       },
+      "arrayOf": "Matrise av {type}",
       "text": {
         "any": "Tekst",
         "base64": "Tekst (Base64)",
@@ -178,8 +179,9 @@
       "input": "Inndata",
       "output": "Utdata",
       "strings": "Strenger",
-      "math": "Matematikk",
+      "math": "Matte",
       "cryptography": "Kryptografi",
+      "arrays": "Matriser",
       "extra": "Ekstra"
     },
     "nodes": {
@@ -198,7 +200,7 @@
       },
       "operation": {
         "waitAndForward": {
-          "name": "Vent og videresend"
+          "name": "Vent og fremsend"
         },
         "math": {
           "addition": {
@@ -242,7 +244,7 @@
             }
           },
           "abs": {
-            "name": "Absoluttverdi",
+            "name": "Absolutt verdi",
             "inputs": {
               "number": "Tall"
             },
@@ -251,25 +253,25 @@
             }
           },
           "ceil": {
-            "name": "Avrund oppover",
+            "name": "Tak",
             "inputs": {
               "number": "Tall"
             },
             "outputs": {
-              "result": "Avrundet oppover"
+              "result": "Tak"
             }
           },
           "floor": {
-            "name": "Avrund nedover",
+            "name": "Gulv",
             "inputs": {
               "number": "Tall"
             },
             "outputs": {
-              "result": "Avrundet nedover"
+              "result": "Gulvet"
             }
           },
           "round": {
-            "name": "Avrund",
+            "name": "Avrunding",
             "inputs": {
               "number": "Tall"
             },
@@ -295,7 +297,7 @@
             }
           },
           "concatenateStrings": {
-            "name": "Sett sammen strenger",
+            "name": "Koble sammen strenger",
             "inputs": {
               "stringA": "Tekst A",
               "stringB": "Tekst B"
@@ -306,25 +308,37 @@
           "randomUUID": {
             "name": "Tilfeldig UUID"
           }
+        },
+        "array": {
+          "createArray": {
+            "name": "Opprett array"
+          },
+          "getElementAtPosition": {
+            "name": "Hent element på posisjon",
+            "inputs": {
+              "array": "Array",
+              "index": "Indeks"
+            }
+          }
         }
       },
       "settings": {
         "UI_LABEL_TEXT": {
-          "name": "Etikettnavn for UI"
+          "name": "Ui-etikett-navn"
         }
       }
     },
     "addNodeDialog": {
       "title": "Legg til node",
       "searchbar": {
-        "placeholder": "Søk etter noder ...",
+        "placeholder": "Søk etter noder...",
         "noResultsFound": "Ingen resultater funnet."
       },
       "category": {
         "title": "Kategori",
         "subItem": {
-          "title": "Underelement",
-          "description": "Dette er en beskrivelse av underelementet.",
+          "title": "Underpunkt",
+          "description": "Dette er en beskrivelse av underpunktet.",
           "shortcut": "Ctrl+N"
         }
       }
