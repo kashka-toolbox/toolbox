@@ -1,4 +1,4 @@
-import { isArrayType, getArrayInnerType } from "./TypeDefinitions";
+import { getArrayInnerType, isArrayType, TYPE_DEFINITION_KEY } from "./TypeDefinitions";
 
 const areTypesCompatibleCache: Record<string, CompatibilityVariant> = {};
 
@@ -26,7 +26,7 @@ export type CompatibilityVariant = "compatible" | "incompatible" | "warning";
  * @param targetType The target type.
  * @returns True if the types are compatible, false otherwise.
  */
-export function areTypesCompatible(sourceType: string, targetType: string): CompatibilityVariant {
+export function areTypesCompatible(sourceType: string | TYPE_DEFINITION_KEY, targetType: string | TYPE_DEFINITION_KEY): CompatibilityVariant {
     const cacheKey = `${sourceType}:${targetType}`;
     if (areTypesCompatibleCache[cacheKey] !== undefined) {
         return areTypesCompatibleCache[cacheKey];
@@ -56,7 +56,7 @@ export function areTypesCompatible(sourceType: string, targetType: string): Comp
         // text.base64:text.any is compatible
 
         // check if the rest of the parts are the same
-        for(let i = 0; i < maxLength - 1; i++) {
+        for(let i = 0; i < maxLength; i++) {
             if(sourceParts[i] !== targetParts[i] && (targetParts[i] !== "any" && sourceParts[i] !== "any")) {
                 variant = "incompatible";
                 break;

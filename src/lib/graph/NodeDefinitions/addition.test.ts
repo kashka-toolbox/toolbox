@@ -7,7 +7,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 3, numberB: 4 });
+        const result = await node.execute({ numberA: 3, numberB: 4 }, node);
 
         // THEN
         expect(result.result).toBe(7);
@@ -18,7 +18,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 5, numberB: -3 });
+        const result = await node.execute({ numberA: 5, numberB: -3 }, node);
 
         // THEN
         expect(result.result).toBe(2);
@@ -29,7 +29,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: -2, numberB: -3 });
+        const result = await node.execute({ numberA: -2, numberB: -3 }, node);
 
         // THEN
         expect(result.result).toBe(-5);
@@ -40,7 +40,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 0, numberB: 5 });
+        const result = await node.execute({ numberA: 0, numberB: 5 }, node);
 
         // THEN
         expect(result.result).toBe(5);
@@ -51,7 +51,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 5, numberB: 0 });
+        const result = await node.execute({ numberA: 5, numberB: 0 }, node);
 
         // THEN
         expect(result.result).toBe(5);
@@ -62,7 +62,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 0, numberB: 0 });
+        const result = await node.execute({ numberA: 0, numberB: 0 }, node);
 
         // THEN
         expect(result.result).toBe(0);
@@ -73,7 +73,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 0.1, numberB: 0.2 });
+        const result = await node.execute({ numberA: 0.1, numberB: 0.2 }, node);
 
         // THEN
         expect(result.result).toBeCloseTo(0.3, 10);
@@ -84,7 +84,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: 1e10, numberB: 1e10 });
+        const result = await node.execute({ numberA: 1e10, numberB: 1e10 }, node);
 
         // THEN
         expect(result.result).toBe(2e10);
@@ -95,7 +95,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: Infinity, numberB: 1 });
+        const result = await node.execute({ numberA: Infinity, numberB: 1 }, node);
 
         // THEN
         expect(result.result).toBe(Infinity);
@@ -106,7 +106,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: NaN, numberB: 1 });
+        const result = await node.execute({ numberA: NaN, numberB: 1 }, node);
 
         // THEN
         expect(result.result).toBeNaN();
@@ -117,7 +117,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: -Infinity, numberB: -1 });
+        const result = await node.execute({ numberA: -Infinity, numberB: -1 }, node);
 
         // THEN
         expect(result.result).toBe(-Infinity);
@@ -128,7 +128,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const result = await node.execute({ numberA: "3", numberB: "4" } as any);
+        const result = await node.execute({ numberA: "3", numberB: "4" }, node);
 
         // THEN
         expect(result.result).toBe(7);
@@ -139,7 +139,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const promise = node.execute({ numberA: true, numberB: 1 } as any);
+        const promise = node.execute({ numberA: true, numberB: 1 }, node);
 
         // THEN
         await expect(promise).rejects.toThrow(NodeExecutionError.translationKeys.INVALID_INPUT_TYPE);
@@ -150,7 +150,7 @@ describe("addition node", () => {
         const node = createNode("addition", "n1", { x: 0, y: 0 });
 
         // WHEN
-        const promise = node.execute({ numberA: "hello", numberB: 1 } as any);
+        const promise = node.execute({ numberA: "hello", numberB: 1 }, node);
 
         // THEN
         await expect(promise).rejects.toThrow(NodeExecutionError.translationKeys.INVALID_INPUT_TYPE);
